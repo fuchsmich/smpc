@@ -199,7 +199,11 @@ QList<MpdArtist*> *NetworkAccess::getArtists_prv()
     if (connected()) {
         //Start getting list from mpd
         //Send request
-        sendMPDCommand("list artist\n");
+        if (mUseAlbumArtist) {
+            sendMPDCommand("list albumartist\n");
+        } else {
+            sendMPDCommand("list artist\n");
+        }
 
         //Read & parse all artists until OK send from mpd
         QString response ="";
@@ -215,9 +219,15 @@ QList<MpdArtist*> *NetworkAccess::getArtists_prv()
                 response = QString::fromUtf8(mTCPSocket->readLine());
                 response.chop(1);
                 /* Parse mpd output */
-                if (response.startsWith("Artist: "))
+                QString artistString;
+                if (mUseAlbumArtist) {
+                    artistString = "AlbumArtist: ";
+                } else {
+                    artistString  = "Artist: ";
+                }
+                if (response.startsWith(artistString))
                 {
-                    name = response.right(response.length()-8);
+                    name = response.right(response.length() - artistString.length());
                     tempartist = new MpdArtist(NULL,name);
                     /* This helps with qml Q_PROPERTY accesses */
                     tempartist->moveToThread(mQMLThread);
@@ -284,7 +294,13 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         //Send request
         artist = artist.replace('\"',"\\\"");
         if ( mServerInfo->getListFilterSupported() && mServerInfo->getListGroupSupported() ) {
-            sendMPDCommand(QString("list album artist \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID\n");
+            QString artistString;
+            if (mUseAlbumArtist) {
+                artistString = "albumartist";
+            } else {
+                artistString  = "artist";
+            }
+            sendMPDCommand(QString("list album ") + artistString + (" \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID\n");
         } else {
             sendMPDCommand(QString("list album \"") + artist + "\"\n");
         }
@@ -1662,7 +1678,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
                     if (temptrack!=NULL)
                     {
                         // Discard track if artist filter mismatches
-                        if (artist==cartist||cartist=="") {
+                        if (albumartist==cartist||artist==cartist||cartist=="") {
                             temptracks->append(temptrack);
                             artistMBID = "";
                             temptrack->moveToThread(mQMLThread);
@@ -1738,7 +1754,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
         }
         if (temptrack!=NULL)
         {
-            if (artist==cartist||cartist=="") {
+            if (albumartist==cartist||artist==cartist||cartist=="") {
                 temptrack->setPlaying(false);
                 temptracks->append(temptrack);
                 temptrack->moveToThread(mQMLThread);
@@ -1892,6 +1908,16 @@ void NetworkAccess::checkServerCapabilities() {
 
 MPDPlaybackStatus *NetworkAccess::getMPDPlaybackStatus() {
     return mPlaybackStatus;
+}
+
+void NetworkAccess::setUseAlbumArtist(int state)
+{
+    mUseAlbumArtist = (state == 1);
+}
+
+int NetworkAccess::useAlbumArtist()
+{
+    return mUseAlbumArtist*1;
 }
 
 MPD_PLAYBACK_STATE NetworkAccess::getPlaybackState()

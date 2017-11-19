@@ -116,6 +116,19 @@ Page {
                 }
             }
             TextSwitch{
+                id: albumArtistSwitch
+                text: qsTr("use albumartist in artists view")
+                checked: artistsViewUseAlbumArtist
+                onClicked: {
+                    if ( checked ) {
+                        newSettingKey(["artistsViewUseAlbumArtist","1"]);
+                    } else {
+                        newSettingKey(["artistsViewUseAlbumArtist","0"]);
+                    }
+//                    mCurrentSongPage = null;
+                }
+            }
+            TextSwitch{
                 id: coverNowPlayingSwitch
                 text: qsTr("show cover in now playing")
                 checked: showCoverNowPlaying

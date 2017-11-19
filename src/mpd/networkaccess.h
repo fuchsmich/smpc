@@ -82,6 +82,9 @@ public:
      */
     MPDPlaybackStatus *getMPDPlaybackStatus();
 
+    void setUseAlbumArtist(int state);
+    int useAlbumArtist();
+
 
 signals:
     /* Connection signals */
@@ -697,6 +700,8 @@ private:
      * @return
      */
     bool authenticate(QString passwort);
+
+    bool mUseAlbumArtist;
 };
 
 #endif // NETWORKACCESS_H

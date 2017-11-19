@@ -141,6 +141,7 @@ private:
     int mListImageSize;
     int mSectionsInSearch;
     int mSectionsInPlaylist;
+    int mArtistsViewUseAlbumArtist;
     int mCoverInNowPlaying;
     int mShowModeLandscape;
 
