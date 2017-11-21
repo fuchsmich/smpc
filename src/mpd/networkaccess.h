@@ -82,6 +82,9 @@ public:
      */
     MPDPlaybackStatus *getMPDPlaybackStatus();
 
+    void setSortAlbumsByYear(int state);
+    int sortAlbumsByYear();
+
     void setUseAlbumArtist(int state);
     int useAlbumArtist();
 
@@ -701,6 +704,7 @@ private:
      */
     bool authenticate(QString passwort);
 
+    bool mSortAlbumsByYear;
     bool mUseAlbumArtist;
 };
 

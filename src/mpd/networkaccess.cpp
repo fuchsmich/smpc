@@ -294,13 +294,13 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         //Send request
         artist = artist.replace('\"',"\\\"");
         if ( mServerInfo->getListFilterSupported() && mServerInfo->getListGroupSupported() ) {
-            QString artistString;
+            QString tag;
             if (mUseAlbumArtist) {
-                artistString = "albumartist";
+                tag = "albumartist";
             } else {
-                artistString  = "artist";
+                tag  = "artist";
             }
-            sendMPDCommand(QString("list album ") + artistString + (" \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID\n");
+            sendMPDCommand(QString("list album ") + tag + (" \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID group date\n");
         } else {
             sendMPDCommand(QString("list album \"") + artist + "\"\n");
         }
@@ -310,6 +310,7 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         MpdAlbum *tempalbum;
         QString name;
         QString mbid;
+        QString date;
         bool emptyAlbum = false;
 
         MPD_WHILE_PARSE_LOOP
@@ -320,11 +321,12 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
                 response = QString::fromUtf8(mTCPSocket->readLine());
                 /* Remove newline at the end */
                 response.chop(1);
+                qDebug() << response;
                 if ( response.startsWith("Album: ") ) {
                     // Append album if name is already set(last album)
                     if ( name != "" || emptyAlbum ) {
-                        tempalbum = new MpdAlbum(NULL,name,artist,mbid);
-                        qDebug() << "Album: " << name;
+                        tempalbum = new MpdAlbum(NULL,name,artist,mbid,date);
+                        qDebug() << "Album: " << name << artist << date;
                         tempalbum->moveToThread(mQMLThread);
                         QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
                         albums->append(tempalbum);
@@ -336,13 +338,15 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
                     }
                 }  else if ( response.startsWith("MUSICBRAINZ_ALBUMID:") ) {
                     mbid = response.right(response.length() - 21);
+                } else if ( response.startsWith("Date:") ) {
+                    date = response.right(response.length() - 6);
                 }
             }
         }
         /* Append last album also */
         if ( name != "" || emptyAlbum) {
             qDebug() << "Album: " << name;
-            tempalbum = new MpdAlbum(NULL,name,artist,mbid);
+            tempalbum = new MpdAlbum(NULL,name,artist,mbid,date);
             tempalbum->moveToThread(mQMLThread);
             QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
             albums->append(tempalbum);
@@ -351,7 +355,8 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
     }
 
     //Get album tracks
-    qSort(albums->begin(),albums->end(),MpdAlbum::lessThan);
+    if (mSortAlbumsByYear) qSort(albums->begin(),albums->end(),MpdAlbum::lessThanDate);
+    else qSort(albums->begin(),albums->end(),MpdAlbum::lessThan);
     return albums;
 
 }
@@ -1908,6 +1913,16 @@ void NetworkAccess::checkServerCapabilities() {
 
 MPDPlaybackStatus *NetworkAccess::getMPDPlaybackStatus() {
     return mPlaybackStatus;
+}
+
+void NetworkAccess::setSortAlbumsByYear(int state)
+{
+    mSortAlbumsByYear = (state == 1);
+}
+
+int NetworkAccess::sortAlbumsByYear()
+{
+    return mSortAlbumsByYear*1;
 }
 
 void NetworkAccess::setUseAlbumArtist(int state)

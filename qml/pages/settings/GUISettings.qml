@@ -116,6 +116,18 @@ Page {
                 }
             }
             TextSwitch{
+                id: sortAlbumsByYearSwitch
+                text: qsTr("sort albums of one artist by year")
+                checked: sortAlbumsByYear
+                onClicked: {
+                    if ( checked ) {
+                        newSettingKey(["sortAlbumsByYear","1"]);
+                    } else {
+                        newSettingKey(["sortAlbumsByYear","0"]);
+                    }
+                }
+            }
+            TextSwitch{
                 id: albumArtistSwitch
                 text: qsTr("use albumartist in artists view")
                 checked: artistsViewUseAlbumArtist
@@ -125,7 +137,6 @@ Page {
                     } else {
                         newSettingKey(["artistsViewUseAlbumArtist","0"]);
                     }
-//                    mCurrentSongPage = null;
                 }
             }
             TextSwitch{

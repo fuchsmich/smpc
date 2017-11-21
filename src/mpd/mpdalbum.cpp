@@ -5,11 +5,12 @@ MpdAlbum::MpdAlbum(QObject *parent) :
 {
 }
 
-MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString mbid) : QObject(parent)
+MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString mbid, QString date) : QObject(parent)
 {
     mTitle = title;
     mArtist = artist;
     mMBID = mbid;
+    mDate = date;
 }
 
 MpdAlbum::MpdAlbum(const MpdAlbum &copyObject,QObject *parent) : QObject(parent)  {
@@ -27,6 +28,11 @@ QString MpdAlbum::getArtist() const {
 
 QString MpdAlbum::getMBID() const {
     return mMBID;
+}
+
+QString MpdAlbum::getDate() const
+{
+    return mDate;
 }
 
 void MpdAlbum::operator =(MpdAlbum &rhs)
@@ -50,6 +56,10 @@ bool MpdAlbum::lessThan(const MpdAlbum *lhs, const MpdAlbum* rhs)
     return *lhs<*rhs;
 }
 
+bool MpdAlbum::lessThanDate(const MpdAlbum *lhs, const MpdAlbum *rhs)
+{
+    return (lhs->mDate.compare(rhs->mDate,Qt::CaseInsensitive)<0 ? 1 : 0);
+}
 
 // Return first letter as section
 QString MpdAlbum::getSection() const

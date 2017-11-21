@@ -511,6 +511,7 @@ void Controller::readSettings()
     mSectionsInSearch = settings.value("sections_in_search",1).toInt();
     mSectionsInPlaylist = settings.value("sections_in_playlist",1).toInt();
     mDownloadEnabled = settings.value("lastfm_download",1).toInt();
+    mNetAccess->setSortAlbumsByYear(settings.value("sort_album_by_year",0).toInt());
     mNetAccess->setUseAlbumArtist(settings.value("artist_view_albumartist",0).toInt());
     mCoverInNowPlaying = settings.value("show_covernowplaying",1).toInt();
     mShowModeLandscape = settings.value("useShowView",1).toInt();
@@ -524,6 +525,7 @@ void Controller::readSettings()
     mQuickView->rootContext()->setContextProperty("sectionsInPlaylist", mSectionsInPlaylist);
     mQuickView->rootContext()->setContextProperty("lastfmEnabled", mDownloadEnabled);
     mQuickView->rootContext()->setContextProperty("artistsViewUseAlbumArtist", mNetAccess->useAlbumArtist());
+    mQuickView->rootContext()->setContextProperty("sortAlbumsByYear", mNetAccess->sortAlbumsByYear());
     mQuickView->rootContext()->setContextProperty("showCoverNowPlaying", mCoverInNowPlaying);
 
     mQuickView->rootContext()->setContextProperty("useShowView", mShowModeLandscape);
@@ -567,6 +569,7 @@ void Controller::writeSettings()
     settings.setValue("sections_in_search",mSectionsInSearch);
     settings.setValue("sections_in_playlist",mSectionsInPlaylist);
     settings.setValue("lastfm_download",mDownloadEnabled);
+    settings.setValue("sort_album_by_year",mNetAccess->sortAlbumsByYear());
     settings.setValue("artist_view_albumartist",mNetAccess->useAlbumArtist());
     settings.setValue("show_covernowplaying",mCoverInNowPlaying);
     settings.setValue("useShowView",mShowModeLandscape);
@@ -873,6 +876,9 @@ void Controller::receiveSettingKey(QVariant setting)
             mDownloadEnabled = settings.at(1).toInt();
             mQuickView->rootContext()->setContextProperty("lastfmEnabled", mDownloadEnabled);
             emit newDownloadEnabled(mDownloadEnabled);
+        } else if ( settings.at(0) == "sortAlbumsByYear" ) {
+            mNetAccess->setSortAlbumsByYear(settings.at(1).toInt());
+            mQuickView->rootContext()->setContextProperty("sortAlbumsByYear", mNetAccess->sortAlbumsByYear());
         } else if ( settings.at(0) == "artistsViewUseAlbumArtist" ) {
             mNetAccess->setUseAlbumArtist(settings.at(1).toInt());
             mQuickView->rootContext()->setContextProperty("artistsViewUseAlbumArtist", mNetAccess->useAlbumArtist());
