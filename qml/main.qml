@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import org.nemomobile.mpris 1.0
 
 // FIXME to harbour.smpc.components.whatever import
 import "components"
@@ -288,6 +289,77 @@ ApplicationWindow
         anchors.fill: parent
         preventStealing: true
         enabled: false
+    }
+
+
+    MprisPlayer {
+        id: mprisPlayer
+
+        property string artist: mpd_status.artist
+        property string song: mpd_status.title
+
+        property string message: ""
+        onMessageChanged: console.log("MPRIS Message: ", message);
+
+        serviceName: "smpc" //??
+
+        // Mpris2 Root Interface
+        identity: "SMPC"
+//        supportedUriSchemes: ["file"]
+//        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
+
+        canControl: true
+
+        canGoNext: true
+        canGoPrevious: true
+        canPause: playbackStatus === Mpris.Playing
+        canPlay: playbackStatus !== Mpris.Playing
+        canSeek: false
+
+        playbackStatus:
+            (mpd_status.playbackStatus === 0 ? Mpris.Paused
+                                             : mpd_status.playbackStatus === 1 ? Mpris.Playing
+                                                                               : Mpris.Stopped)
+        onPlaybackStatusChanged: console.log(">>>>>>>>>>>>>>>> MPRPB:", mpd_status.playbackStatus, playbackStatus)
+
+        loopStatus: (mpd_status.repeat ? 1 : 0)
+        shuffle: mpd_status.shuffle
+        volume: 1
+
+        onPauseRequested: {
+            message = "Pause requested"
+            stop();
+        }
+        onPlayRequested: {
+            message = "Play requested"
+            pause();
+        }
+        onPlayPauseRequested: message.lastMessage = "Play/Pause requested"
+        onStopRequested: message.lastMessage = "Stop requested"
+        onNextRequested: {
+            message = "Next requested"
+            next();
+        }
+        onPreviousRequested: {
+            message = "Previous requested"
+            prev();
+        }
+
+        onArtistChanged: {
+            var metadata = mprisPlayer.metadata
+
+            metadata[Mpris.metadataToString(Mpris.Artist)] = [artist] // List of strings
+
+            mprisPlayer.metadata = metadata
+        }
+
+        onSongChanged: {
+            var metadata = mprisPlayer.metadata
+
+            metadata[Mpris.metadataToString(Mpris.Title)] = song // String
+
+            mprisPlayer.metadata = metadata
+        }
     }
 
 
