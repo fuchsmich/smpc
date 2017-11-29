@@ -72,6 +72,7 @@ public:
     void setArtist(QString artist);
     void setURI(QString uri);
 
+    Q_ENUMS(MPD_PLAYBACK_STATE)
     void setPlaybackStatus(quint8 playbackStatus);
     void setRepeat(bool repeat);
     void setShuffle(bool shuffle);
