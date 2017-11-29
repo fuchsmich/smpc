@@ -172,6 +172,8 @@ ApplicationWindow
     {
         profilename = profile;
         connected = true;
+        mprisLoader.sourceComponent = mprisComp;
+
     }
 
     function slotDisconnected()
@@ -179,6 +181,7 @@ ApplicationWindow
         connected = false;
         profilename = "";
         playing = false;
+        mprisLoader.sourceComponent = null;
     }
 
     function busy()
@@ -291,76 +294,93 @@ ApplicationWindow
         enabled: false
     }
 
+    Connections {
+        target: mpd_status
+        onPlaybackStatusChanged:
+            console.log("#################### PB-status", mpd_status.playbackStatus)
+//        onConnected
+    }
 
-    MprisPlayer {
-        id: mprisPlayer
 
-        property string artist: mpd_status.artist
-        property string song: mpd_status.title
 
-        property string message: ""
-        onMessageChanged: console.log("MPRIS Message: ", message);
 
-        serviceName: "smpc" //??
+    Loader {
+        id: mprisLoader
+    }
 
-        // Mpris2 Root Interface
-        identity: "SMPC"
-//        supportedUriSchemes: ["file"]
-//        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
+    Component {
+        id: mprisComp
+        MprisPlayer {
+            id: mprisPlayer
 
-        canControl: true
+            property string artist: mpd_status.artist
+            property string song: mpd_status.title
 
-        canGoNext: true
-        canGoPrevious: true
-        canPause: playbackStatus === Mpris.Playing
-        canPlay: playbackStatus !== Mpris.Playing
-        canSeek: false
+            property string message: ""
+            onMessageChanged: console.log("MPRIS Message: ", message);
 
-        playbackStatus:
-            (mpd_status.playbackStatus === 0 ? Mpris.Paused
-                                             : mpd_status.playbackStatus === 1 ? Mpris.Playing
-                                                                               : Mpris.Stopped)
-        onPlaybackStatusChanged: console.log(">>>>>>>>>>>>>>>> MPRPB:", mpd_status.playbackStatus, playbackStatus)
+            serviceName: "smpc" //??
 
-        loopStatus: (mpd_status.repeat ? 1 : 0)
-        shuffle: mpd_status.shuffle
-        volume: 1
+            // Mpris2 Root Interface
+            identity: "SMPC"
+    //        supportedUriSchemes: ["file"]
+    //        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
 
-        onPauseRequested: {
-            message = "Pause requested"
-            stop();
-        }
-        onPlayRequested: {
-            message = "Play requested"
-            pause();
-        }
-        onPlayPauseRequested: message.lastMessage = "Play/Pause requested"
-        onStopRequested: message.lastMessage = "Stop requested"
-        onNextRequested: {
-            message = "Next requested"
-            next();
-        }
-        onPreviousRequested: {
-            message = "Previous requested"
-            prev();
-        }
+            canControl: true
 
-        onArtistChanged: {
-            var metadata = mprisPlayer.metadata
+            canGoNext: true
+            canGoPrevious: true
+            canPause: playbackStatus === Mpris.Playing
+            canPlay: playbackStatus !== Mpris.Playing
+            canSeek: false
 
-            metadata[Mpris.metadataToString(Mpris.Artist)] = [artist] // List of strings
+            playbackStatus:
+                (mpd_status.playbackStatus === 0 ? Mpris.Paused :
+                                                   (mpd_status.playbackStatus === 1 ? Mpris.Playing
+                                                                                   : Mpris.Stopped))
+            onPlaybackStatusChanged: console.log(">>>>>>>>>>>>>>>> MPRPB:", mpd_status.playbackStatus, playbackStatus)
 
-            mprisPlayer.metadata = metadata
-        }
+            loopStatus: (mpd_status.repeat ? 1 : 0)
+            shuffle: mpd_status.shuffle
+            volume: 1
 
-        onSongChanged: {
-            var metadata = mprisPlayer.metadata
+            onPauseRequested: {
+                message = "Pause requested"
+                play();
+            }
+            onPlayRequested: {
+                message = "Play requested"
+                play();
+            }
+            onPlayPauseRequested: message = "Play/Pause requested"
+            onStopRequested: message = "Stop requested"
+            onNextRequested: {
+                message = "Next requested"
+                next();
+            }
+            onPreviousRequested: {
+                message = "Previous requested"
+                prev();
+            }
 
-            metadata[Mpris.metadataToString(Mpris.Title)] = song // String
+            onArtistChanged: {
+                var metadata = mprisPlayer.metadata
 
-            mprisPlayer.metadata = metadata
+                metadata[Mpris.metadataToString(Mpris.Artist)] = [artist] // List of strings
+
+                mprisPlayer.metadata = metadata
+            }
+
+            onSongChanged: {
+                var metadata = mprisPlayer.metadata
+
+                metadata[Mpris.metadataToString(Mpris.Title)] = song // String
+
+                mprisPlayer.metadata = metadata
+            }
         }
     }
+
 
 
     ControlPanel {
@@ -371,4 +391,5 @@ ApplicationWindow
 
     initialPage: Qt.resolvedUrl("pages/MainPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
 }

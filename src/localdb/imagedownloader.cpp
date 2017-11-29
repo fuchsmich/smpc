@@ -40,13 +40,13 @@ ImageDownloader::~ImageDownloader()
 
 void ImageDownloader::requestAlbumArt(MpdAlbum albumObj)
 {
-    qDebug() << "Art requested for: " << albumObj.getTitle();
+    // qDebug() << "Art requested for: " << albumObj.getTitle();
     // No running download, start downloading right away
     mDownloadCounterMutex.lock();
     int running = mRunningAlbumDownloads;
     mDownloadCounterMutex.unlock();
     if( running == 0 ) {
-        qDebug() << "No download running, start now";
+        // qDebug() << "No download running, start now";
         mDownloadCounterMutex.lock();
         mRunningAlbumDownloads++;
         mAlbumProvider->requestDownload(albumObj);
@@ -59,13 +59,13 @@ void ImageDownloader::requestAlbumArt(MpdAlbum albumObj)
 
 void ImageDownloader::requestArtistArt(MpdArtist artistObj)
 {
-    qDebug() << "Art requested for: " << artistObj.getName();
+//    qDebug() << "Art requested for: " << artistObj.getName();
     // No running download, start downloading right away
     mDownloadCounterMutex.lock();
     int running = mRunningArtistDownloads;
     mDownloadCounterMutex.unlock();
     if( running == 0 ) {
-        qDebug() << "No download running, start now";
+//        qDebug() << "No download running, start now";
         mDownloadCounterMutex.lock();
         mRunningArtistDownloads++;
         mArtistProvider->requestDownload(artistObj);
@@ -78,7 +78,7 @@ void ImageDownloader::requestArtistArt(MpdArtist artistObj)
 
 void ImageDownloader::albumInformationReceiver(AlbumInformation *info)
 {
-    qDebug() << "Album: " << info->getName() << " downloaded";
+//    qDebug() << "Album: " << info->getName() << " downloaded";
     mDownloadCounterMutex.lock();
     mRunningAlbumDownloads--;
     int running = mRunningAlbumDownloads;
@@ -87,17 +87,17 @@ void ImageDownloader::albumInformationReceiver(AlbumInformation *info)
         mDownloadCounterMutex.lock();
         mRunningAlbumDownloads++;
         MpdAlbum albumObj = mAlbumQueue->dequeue();
-        qDebug() << "Start downloading from queue item: " << albumObj.getTitle();
+//        qDebug() << "Start downloading from queue item: " << albumObj.getTitle();
         mAlbumProvider->requestDownload(albumObj);
         mDownloadCounterMutex.unlock();
     } else {
-        qDebug() << "finished";
+//        qDebug() << "finished";
     }
 }
 
 void ImageDownloader::albumDownloadFailure()
 {
-    qDebug() << "Album download failure";
+//    qDebug() << "Album download failure";
     mDownloadCounterMutex.lock();
     mRunningAlbumDownloads--;
     int running = mRunningAlbumDownloads;
@@ -106,18 +106,18 @@ void ImageDownloader::albumDownloadFailure()
         mDownloadCounterMutex.lock();
         mRunningAlbumDownloads++;
         MpdAlbum albumObj = mAlbumQueue->dequeue();
-        qDebug() << "Start downloading from queue item: " << albumObj.getTitle();
+//        qDebug() << "Start downloading from queue item: " << albumObj.getTitle();
         mAlbumProvider->requestDownload(albumObj);
         mDownloadCounterMutex.unlock();
     } else {
-        qDebug() << "finished";
+//        qDebug() << "finished";
     }
 }
 
 
 void ImageDownloader::artistInformationReceiver(ArtistInformation *info)
 {
-    qDebug() << "Artist: " << info->getArtist() << " downloaded";
+//    qDebug() << "Artist: " << info->getArtist() << " downloaded";
     mDownloadCounterMutex.lock();
     mRunningArtistDownloads--;
     int running = mRunningArtistDownloads;
@@ -126,17 +126,17 @@ void ImageDownloader::artistInformationReceiver(ArtistInformation *info)
         mDownloadCounterMutex.lock();
         mRunningArtistDownloads++;
         MpdArtist artistObj = mArtistQueue->dequeue();
-        qDebug() << "Start downloading from queue item: " << artistObj.getName();
+        // qDebug() << "Start downloading from queue item: " << artistObj.getName();
         mArtistProvider->requestDownload(artistObj);
         mDownloadCounterMutex.unlock();
     } else {
-        qDebug() << "finished";
+        // qDebug() << "finished";
     }
 }
 
 void ImageDownloader::artistDownloadFailure()
 {
-    qDebug() << "Artist download failed";
+    // qDebug() << "Artist download failed";
     mDownloadCounterMutex.lock();
     mRunningArtistDownloads--;
     int running = mRunningArtistDownloads;
@@ -145,11 +145,11 @@ void ImageDownloader::artistDownloadFailure()
         mDownloadCounterMutex.lock();
         mRunningArtistDownloads++;
         MpdArtist artistObj = mArtistQueue->dequeue();
-        qDebug() << "Start downloading from queue item: " << artistObj.getName();
+        // qDebug() << "Start downloading from queue item: " << artistObj.getName();
         mArtistProvider->requestDownload(artistObj);
         mDownloadCounterMutex.unlock();
     } else {
-        qDebug() << "finished";
+        // qDebug() << "finished";
     }
 }
 

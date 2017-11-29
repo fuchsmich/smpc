@@ -45,7 +45,7 @@ void LastFMArtistProvider::xmlDownloaded(QNetworkReply *reply) {
         emit failed();
         return;
     }
-    qDebug() << "XML received";
+    // qDebug() << "XML received";
 
     // netaccess not needed anymore
     //    delete(mXMLNetAccess);
@@ -140,7 +140,7 @@ void LastFMArtistProvider::parseArtist(QXmlStreamReader &xmlReader) {
 
 void LastFMArtistProvider::parseWikiInformation(QXmlStreamReader &xmlReader) {
     // Security check
-    qDebug() << "Found wiki information";
+    // qDebug() << "Found wiki information";
     if ( ( xmlReader.tokenType() != QXmlStreamReader::StartElement &&
            xmlReader.name() == "bio" )) {
         return;
@@ -154,9 +154,9 @@ void LastFMArtistProvider::parseWikiInformation(QXmlStreamReader &xmlReader) {
                     return;
                 }
                 if ( xmlReader.tokenType() == QXmlStreamReader::Characters ) {
-                    qDebug() << "Reached content block";
+                    // qDebug() << "Reached content block";
                     mArtistInfo.append(xmlReader.text().toString());
-                    qDebug() << mArtistInfo;
+                    // qDebug() << mArtistInfo;
                 }
                 xmlReader.readNext();
             }
@@ -179,7 +179,7 @@ void LastFMArtistProvider::startDownload() {
     QString lastfmXMLURL = QString("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=")
             + LASTFMAPIKEY + QString("&artist=") + artistNameClean;
     QUrl requestURL(lastfmXMLURL);
-    qDebug() << "Start downloading artist: " << requestURL.toString();
+    // qDebug() << "Start downloading artist: " << requestURL.toString();
 
     QNetworkRequest downloadRequest(requestURL);
     if( !mXMLNetAccess )
@@ -193,7 +193,7 @@ void LastFMArtistProvider::startDownload() {
     }
 
     mXMLNetAccess->get(downloadRequest);
-    qDebug() << "Netreply get send";
+    // qDebug() << "Netreply get send";
 }
 
 void LastFMArtistProvider::imageDownloaded(QNetworkReply *reply) {
@@ -202,7 +202,7 @@ void LastFMArtistProvider::imageDownloaded(QNetworkReply *reply) {
         emit failed();
         return;
     }
-    qDebug() << "Artwork downloaded" << mArtistName;
+    // qDebug() << "Artwork downloaded" << mArtistName;
     if ( mLastInformation ) {
         delete ( mLastInformation );
         mLastInformation = 0;
@@ -228,7 +228,7 @@ void LastFMArtistProvider::setArtist(QString artist)
 void LastFMArtistProvider::requestDownload(MpdArtist artist)
 {
     mArtistName = artist.getName();
-    qDebug() << "Download requested: " << mArtistName;
+    // qDebug() << "Download requested: " << mArtistName;
     if ( mImageData ) {
         delete (mImageData);
         mImageData = 0;
