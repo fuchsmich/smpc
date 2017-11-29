@@ -172,8 +172,6 @@ ApplicationWindow
     {
         profilename = profile;
         connected = true;
-        mprisLoader.sourceComponent = mprisComp;
-
     }
 
     function slotDisconnected()
@@ -181,7 +179,6 @@ ApplicationWindow
         connected = false;
         profilename = "";
         playing = false;
-        mprisLoader.sourceComponent = null;
     }
 
     function busy()
@@ -297,19 +294,19 @@ ApplicationWindow
     Connections {
         target: mpd_status
         onPlaybackStatusChanged:
-            console.log("#################### PB-status", mpd_status.playbackStatus)
+            console.log("mpd_status.playbackStatus", mpd_status.playbackStatus)
 //        onConnected
     }
 
 
 
 
-    Loader {
-        id: mprisLoader
-    }
+//    Loader {
+//        id: mprisLoader
+//    }
 
-    Component {
-        id: mprisComp
+//    Component {
+//        id: mprisComp
         MprisPlayer {
             id: mprisPlayer
 
@@ -317,28 +314,31 @@ ApplicationWindow
             property string song: mpd_status.title
 
             property string message: ""
-            onMessageChanged: console.log("MPRIS Message: ", message);
+            onMessageChanged: console.debug("MPRIS Message: ", message);
 
-            serviceName: "smpc" //??
+            serviceName: (connected ? "smpc" : "") //this (un)registers the service due to connection to mpd_server
+//            serviceName: "smpc"
 
-            // Mpris2 Root Interface
+            //Mpris2 Root Interface
             identity: "SMPC"
     //        supportedUriSchemes: ["file"]
     //        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
 
+            //Mpris2 Player Interface
             canControl: true
-
-            canGoNext: true
+            canGoNext: true //FIXME
             canGoPrevious: true
-            canPause: playbackStatus === Mpris.Playing
+            canPause: true //got to be always true for MprisController::playPause to work!
             canPlay: playbackStatus !== Mpris.Playing
+            onCanPlayChanged: console.debug("canPlay", canPlay)
             canSeek: false
 
             playbackStatus:
                 (mpd_status.playbackStatus === 0 ? Mpris.Paused :
                                                    (mpd_status.playbackStatus === 1 ? Mpris.Playing
                                                                                    : Mpris.Stopped))
-            onPlaybackStatusChanged: console.log(">>>>>>>>>>>>>>>> MPRPB:", mpd_status.playbackStatus, playbackStatus)
+            onPlaybackStatusChanged: console.debug("mpd_status.playbackStatus", mpd_status.playbackStatus, playbackStatus
+                                                 ,"canPlay", canPlay, "canPause", canPause)
 
             loopStatus: (mpd_status.repeat ? 1 : 0)
             shuffle: mpd_status.shuffle
@@ -378,8 +378,9 @@ ApplicationWindow
 
                 mprisPlayer.metadata = metadata
             }
+
         }
-    }
+//    }
 
 
 
