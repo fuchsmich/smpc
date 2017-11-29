@@ -78,7 +78,7 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
 
 Controller::~Controller()
 {
-    qDebug() << "clearing controller";
+    // qDebug() << "clearing controller";
     // Clear up the mess
     mNetworkThread->quit();
     mNetworkThread->wait();
@@ -115,7 +115,7 @@ Controller::~Controller()
     if(mDBStatistic)
         delete(mDBStatistic);
 
-    qDebug() << "everything cleared up nicely";
+    // qDebug() << "everything cleared up nicely";
 }
 
 
@@ -439,7 +439,7 @@ void Controller::onNewAlbum()
     if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
         // Request cover/artist art if song has changed
         MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
         emit requestCoverArt(tmpAlbum);
     } else {
         // Clear cover/artist image by requesting empty images
@@ -453,11 +453,11 @@ void Controller::onNewArtist()
     if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
         // Request cover/artist art if song has changed
         MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
         emit requestCoverArt(tmpAlbum);
 
         MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
-        qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
+        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
         emit requestCoverArtistArt(tmpArtist);
     } else {
         MpdArtist tmpArtist(this,"");
@@ -802,7 +802,7 @@ void Controller::fillArtistImages()
     disconnect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
     connect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
 
-    qDebug() << "Requested artist list for image bulk downloader";
+    // qDebug() << "Requested artist list for image bulk downloader";
     emit requestArtists();
 }
 
@@ -811,7 +811,7 @@ void Controller::fillArtistImages(QList<QObject *> *artistList)
     // Reconnect signal
     disconnect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
     connect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
-    qDebug() << "Received artist list for image bulk downloader";
+    // qDebug() << "Received artist list for image bulk downloader";
 
     emit requestArtistImageFill((QList<MpdArtist*>*)artistList);
 }
@@ -827,7 +827,7 @@ void Controller::newDBStatisticReceiver(DatabaseStatistic *statistic)
 
 void Controller::fillAlbumImages()
 {
-    qDebug() << "Bulk download of albums requested";
+    // qDebug() << "Bulk download of albums requested";
     emit requestArtistAlbumMap();
 }
 
@@ -942,7 +942,7 @@ void Controller::wakeUpHost(int index)
     }
 
     qint64 bytesSend = udpSocket.writeDatagram(dataGram,QHostAddress::Broadcast,9);
-    qDebug() << "Send WoL: " << bytesSend << " bytes, content: " << dataGram.toHex() << endl;
+    // qDebug() << "Send WoL: " << bytesSend << " bytes, content: " << dataGram.toHex() << endl;
 }
 
 /*

@@ -179,7 +179,7 @@ void MpdTrack::setTitle(QString title)
 
 void MpdTrack::setPlaying(bool playing)
 {
-    qDebug() << mTitle << playing;
+    // qDebug() << mTitle << playing;
     this->mPlaying = playing;
     emit playingchanged();
 }
