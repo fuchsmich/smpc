@@ -291,96 +291,80 @@ ApplicationWindow
         enabled: false
     }
 
-    Connections {
-        target: mpd_status
-        onPlaybackStatusChanged:
-            console.log("mpd_status.playbackStatus", mpd_status.playbackStatus)
-//        onConnected
-    }
+    MprisPlayer {
+        id: mprisPlayer
 
+        property string artist: mpd_status.artist
+        property string song: mpd_status.title
 
+        property string message: ""
+        onMessageChanged: console.debug("MPRIS Message: ", message);
 
+        serviceName: (connected ? "smpc" : "") //this (un)registers the service due to connection to mpd_server
+        //            serviceName: "smpc"
 
-//    Loader {
-//        id: mprisLoader
-//    }
+        //Mpris2 Root Interface
+        identity: "SMPC"
+        //        supportedUriSchemes: ["file"]
+        //        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
 
-//    Component {
-//        id: mprisComp
-        MprisPlayer {
-            id: mprisPlayer
+        //Mpris2 Player Interface
+        canControl: true
+        canGoNext: mTrackNr < mPlaylistlength
+        canGoPrevious: true
+        canPause: true //got to be always true for MprisController::playPause to work!
+        canPlay: playbackStatus !== Mpris.Playing
+        onCanPlayChanged: console.debug("canPlay", canPlay)
+        canSeek: false
 
-            property string artist: mpd_status.artist
-            property string song: mpd_status.title
+        playbackStatus:
+            (mpd_status.playbackStatus === 0 ? Mpris.Paused :
+                                               (mpd_status.playbackStatus === 1 ? Mpris.Playing
+                                                                                : Mpris.Stopped))
+        onPlaybackStatusChanged: console.debug("mpd_status.playbackStatus", mpd_status.playbackStatus, playbackStatus
+                                               ,"canPlay", canPlay, "canPause", canPause)
 
-            property string message: ""
-            onMessageChanged: console.debug("MPRIS Message: ", message);
+        loopStatus: (mpd_status.repeat ? 1 : 0)
+        shuffle: mpd_status.shuffle
+        volume: 1
 
-            serviceName: (connected ? "smpc" : "") //this (un)registers the service due to connection to mpd_server
-//            serviceName: "smpc"
-
-            //Mpris2 Root Interface
-            identity: "SMPC"
-    //        supportedUriSchemes: ["file"]
-    //        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
-
-            //Mpris2 Player Interface
-            canControl: true
-            canGoNext: true //FIXME
-            canGoPrevious: true
-            canPause: true //got to be always true for MprisController::playPause to work!
-            canPlay: playbackStatus !== Mpris.Playing
-            onCanPlayChanged: console.debug("canPlay", canPlay)
-            canSeek: false
-
-            playbackStatus:
-                (mpd_status.playbackStatus === 0 ? Mpris.Paused :
-                                                   (mpd_status.playbackStatus === 1 ? Mpris.Playing
-                                                                                   : Mpris.Stopped))
-            onPlaybackStatusChanged: console.debug("mpd_status.playbackStatus", mpd_status.playbackStatus, playbackStatus
-                                                 ,"canPlay", canPlay, "canPause", canPause)
-
-            loopStatus: (mpd_status.repeat ? 1 : 0)
-            shuffle: mpd_status.shuffle
-            volume: 1
-
-            onPauseRequested: {
-                message = "Pause requested"
-                play();
-            }
-            onPlayRequested: {
-                message = "Play requested"
-                play();
-            }
-            onPlayPauseRequested: message = "Play/Pause requested"
-            onStopRequested: message = "Stop requested"
-            onNextRequested: {
-                message = "Next requested"
-                next();
-            }
-            onPreviousRequested: {
-                message = "Previous requested"
-                prev();
-            }
-
-            onArtistChanged: {
-                var metadata = mprisPlayer.metadata
-
-                metadata[Mpris.metadataToString(Mpris.Artist)] = [artist] // List of strings
-
-                mprisPlayer.metadata = metadata
-            }
-
-            onSongChanged: {
-                var metadata = mprisPlayer.metadata
-
-                metadata[Mpris.metadataToString(Mpris.Title)] = song // String
-
-                mprisPlayer.metadata = metadata
-            }
-
+        onPauseRequested: {
+            message = "Pause requested"
+            play();
         }
-//    }
+        onPlayRequested: {
+            message = "Play requested"
+            play();
+        }
+        onPlayPauseRequested: message = "Play/Pause requested"
+        onStopRequested: message = "Stop requested"
+        onNextRequested: {
+            message = "Next requested"
+            next();
+            console.debug(canGoNext, mTrackNr, mPlaylistlength)
+        }
+        onPreviousRequested: {
+            message = "Previous requested"
+            prev();
+        }
+
+        onArtistChanged: {
+            var metadata = mprisPlayer.metadata
+
+            metadata[Mpris.metadataToString(Mpris.Artist)] = [artist] // List of strings
+
+            mprisPlayer.metadata = metadata
+        }
+
+        onSongChanged: {
+            var metadata = mprisPlayer.metadata
+
+            metadata[Mpris.metadataToString(Mpris.Title)] = song // String
+
+            mprisPlayer.metadata = metadata
+        }
+
+    }
 
 
 
