@@ -132,66 +132,68 @@ TRANSLATIONS += $${TARGET}_fr.ts
 
 INCLUDEPATH += src
 
-lupdate_only {
-SOURCES += \
-    qml/pages/database/SongPage.qml \
-    qml/pages/database/SearchPage.qml \
-    qml/pages/database/SavedPlaylistsPage.qml \
-    qml/pages/database/PlaylistTracksPage.qml \
-    qml/pages/database/FileBrowserPage.qml \
-    qml/pages/database/CurrentSong.qml \
-    qml/pages/database/CurrentPlaylistPage.qml \
-    qml/pages/database/CurrentPlaylistPage_large.qml \
-    qml/pages/database/ArtistListPage.qml \
-    qml/pages/database/ArtistInformationPage.qml \
-    qml/pages/database/ArtistInfoPage.qml \
-    qml/pages/database/AlbumTracksPage.qml \
-    qml/pages/database/AlbumListPage.qml \
-    qml/pages/database/AlbumInfoPage.qml \
-    qml/pages/settings/SettingsPage.qml \
-    qml/pages/settings/ServerListPage.qml \
-    qml/pages/settings/ServerEditPage.qml \
-    qml/pages/settings/OutputsPage.qml \
-    qml/pages/settings/DatabaseSettings.qml \
-    qml/pages/settings/ConnectServerPage.qml \
-    qml/pages/settings/AboutPage.qml \
-    qml/main.qml \
-    qml/pages/MainPage.qml \
-    qml/components/SpeedScroller.js \
-    qml/components/SectionScroller.js \
-    qml/components/ToggleImage.qml \
-    qml/components/SpeedScroller.qml \
-    qml/components/SongDialog.qml \
-    qml/components/SectionScroller.qml \
-    qml/components/ScrollLabel.qml \
-    qml/components/MainGridItem.qml \
-    qml/components/Heading.qml \
-    qml/components/FileDelegate.qml \
-    qml/components/ControlPanel.qml \
-    qml/components/ArtistDelegate.qml \
-    qml/components/AlbumDelegate.qml \
-    qml/cover/CoverPage.qml \
-    qml/components/AlbumShowDelegate.qml \
-    qml/components/ArtistShowDelegate.qml \
-    qml/pages/settings/GUISettings.qml \
-    qml/components/AlbumListDelegate.qml \
-    qml/components/ArtistListDelegate.qml \
-    qml/pages/database/AddToPlaylistDialog.qml
-}
+#lupdate_only {
+#SOURCES += \
+#    qml/pages/database/SongPage.qml \
+#    qml/pages/database/SearchPage.qml \
+#    qml/pages/database/SavedPlaylistsPage.qml \
+#    qml/pages/database/PlaylistTracksPage.qml \
+#    qml/pages/database/FileBrowserPage.qml \
+#    qml/pages/database/CurrentSong.qml \
+#    qml/pages/database/CurrentPlaylistPage.qml \
+#    qml/pages/database/CurrentPlaylistPage_large.qml \
+#    qml/pages/database/ArtistListPage.qml \
+#    qml/pages/database/ArtistInformationPage.qml \
+#    qml/pages/database/ArtistInfoPage.qml \
+#    qml/pages/database/AlbumTracksPage.qml \
+#    qml/pages/database/AlbumListPage.qml \
+#    qml/pages/database/AlbumInfoPage.qml \
+#    qml/pages/settings/SettingsPage.qml \
+#    qml/pages/settings/ServerListPage.qml \
+#    qml/pages/settings/ServerEditPage.qml \
+#    qml/pages/settings/OutputsPage.qml \
+#    qml/pages/settings/DatabaseSettings.qml \
+#    qml/pages/settings/ConnectServerPage.qml \
+#    qml/pages/settings/AboutPage.qml \
+#    qml/main.qml \
+#    qml/pages/MainPage.qml \
+#    qml/components/SpeedScroller.js \
+#    qml/components/SectionScroller.js \
+#    qml/components/ToggleImage.qml \
+#    qml/components/SpeedScroller.qml \
+#    qml/components/SongDialog.qml \
+#    qml/components/SectionScroller.qml \
+#    qml/components/ScrollLabel.qml \
+#    qml/components/MainGridItem.qml \
+#    qml/components/Heading.qml \
+#    qml/components/FileDelegate.qml \
+#    qml/components/ControlPanel.qml \
+#    qml/components/ArtistDelegate.qml \
+#    qml/components/AlbumDelegate.qml \
+#    qml/cover/CoverPage.qml \
+#    qml/components/AlbumShowDelegate.qml \
+#    qml/components/ArtistShowDelegate.qml \
+#    qml/pages/settings/GUISettings.qml \
+#    qml/components/AlbumListDelegate.qml \
+#    qml/components/ArtistListDelegate.qml \
+#    qml/pages/database/AddToPlaylistDialog.qml
+#}
 
-icon86.files += icons/86x86/harbour-smpc.png
-icon86.path = /usr/share/icons/hicolor/86x86/apps
+SAILFISHAPP_ICONS = 86x86 108x108 128x128
 
-icon108.files += icons/108x108/harbour-smpc.png
-icon108.path = /usr/share/icons/hicolor/108x108/apps
+#icon86.files += icons/86x86/harbour-smpc.png
+#icon86.path = /usr/share/icons/hicolor/86x86/apps
 
-icon128.files += icons/128x128/harbour-smpc.png
-icon128.path = /usr/share/icons/hicolor/128x128/apps
+#icon108.files += icons/108x108/harbour-smpc.png
+#icon108.path = /usr/share/icons/hicolor/108x108/apps
 
-icon256.files += icons/256x256/harbour-smpc.png
-icon256.path = /usr/share/icons/hicolor/256x256/apps
+#icon128.files += icons/128x128/harbour-smpc.png
+#icon128.path = /usr/share/icons/hicolor/128x128/apps
 
-#iconsvg.files += icons/scalable/harbour-smpc.svgz
-#iconsvg.path = /usr/share/icons/hicolor/scalable/apps
+#icon256.files += icons/256x256/harbour-smpc.png
+#icon256.path = /usr/share/icons/hicolor/256x256/apps
 
-INSTALLS += icon86 icon108 icon128 icon256
+##iconsvg.files += icons/scalable/harbour-smpc.svgz
+##iconsvg.path = /usr/share/icons/hicolor/scalable/apps
+
+#INSTALLS += icon86 icon108 icon128 icon256
