@@ -1,41 +1,39 @@
-import QtQuick 2.0
+import QtQuick 2.1
 import Sailfish.Silica 1.0
 
-Component {
-    ListItem {
+ListItem {
+
+        property string destination
+//        width: albumGridView.cellWidth
+//        contentHeight: albumGridView.cellHeight
+
         layer.enabled: true
         layer.effect: ShaderEffect {
             blending: highlighted
         }
-
-        width: GridView.view.cellWidth
-        height: width
-        contentHeight: width
 
         Rectangle {
             anchors.fill: parent
             anchors.margins: Theme.paddingSmall
             color: Theme.rgba(Theme.highlightBackgroundColor, 0.2)
             Image {
-                id: artistImage
+                id: albumImage
                 anchors.fill: parent
-                source: (artistGridView.scrolling) ? "" : imageURL
+                source: albumGridView.scrolling ? "" : coverURL
                 cache: false
                 asynchronous: true
-                fillMode: Image.PreserveAspectFit
-                onSourceSizeChanged: {
-                    console.debug("Source size: " + sourceSize.width + ":" + sourceSize.height)
-                }
+                fillMode: Image.PreserveAspectCrop
             }
             Rectangle {
                 id: gradientRect
-                visible: true //artistImage.source!=""
+                visible: true
                 anchors {
                     bottom: parent.bottom
                     top: parent.top
                     horizontalCenter: parent.horizontalCenter
                 }
                 width: parent.width
+
                 gradient: Gradient {
                     GradientStop {
                         position: 0.5
@@ -49,8 +47,8 @@ Component {
             }
             Label {
                 anchors {
-                    bottom: artistImage.bottom
-                    horizontalCenter: artistImage.horizontalCenter
+                    bottom: albumImage.bottom
+                    horizontalCenter: albumImage.horizontalCenter
                 }
                 height: parent.height * 0.5
                 width: parent.width
@@ -61,17 +59,16 @@ Component {
                 styleColor: Theme.secondaryColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignBottom
-                text: artist === "" ? qsTr("No Artist Tag") : artist
+                text: title === "" ? qsTr("No Album Tag") : title
             }
         }
 
+
         onClicked: {
-            artistGridView.currentIndex = index
-            artistClicked(artist)
-            pageStack.push(Qt.resolvedUrl(
-                               "../pages/database/AlbumListPage.qml"), {
-                               artistname: artistname
-                           })
+            albumGridView.currentIndex = index
+            albumClicked(artist, title)
+            console.log(destination)
+            pageStack.push(destination,{artistname:artist,albumname:title});
         }
+
     }
-}

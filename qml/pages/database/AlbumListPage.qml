@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 //import harbour.smpc.components 1.0
-import "../../components"
+import "../../../common/qml/components"
 
 Page {
     id: albumslistPage
@@ -61,6 +61,7 @@ Page {
                     }
                 }
                 delegate: AlbumDelegate {
+                    destination: Qt.resolvedUrl("./AlbumTracksPage.qml")
                 }
             }
         }

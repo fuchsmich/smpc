@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../../components"
+import "../../../common/qml/components"
 
 Page {
     id: artistlistPage
@@ -50,6 +50,16 @@ Page {
                 }
 
                 delegate: ArtistDelegate {
+
+                    artist: model.artist
+                    imgSource: (artistGridView.scrolling) ? "" : model.imageURL
+                    onClicked: {
+                        artistGridView.currentIndex = index
+                        artistClicked(artist)
+                        pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"), {
+                                           artistname: artistname
+                                       })
+                    }
                 }
             }
         }
