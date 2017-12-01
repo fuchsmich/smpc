@@ -52,7 +52,8 @@ common_qml.files = $${COMMON_PATH}/qml/components/*
 common_qml.path = /usr/share/$$TARGET/common/qml/components
 
 INSTALLS += common_qml
-DISTFILES += $${COMMON_PATH}/qml/components/*
+DISTFILES += $${COMMON_PATH}/qml/components/* \
+    $$PWD/qml/components/qmldir
 #    $${COMMON_PATH}/qml/components/qmldir \
 #    $${COMMON_PATH}/qml/components/SpeedScroller.js \
 #    $${COMMON_PATH}/qml/components/SectionScroller.js \
