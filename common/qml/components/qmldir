@@ -1,4 +1,7 @@
 module components
+AlbumArtistGridView 1.0 AlbumArtistGridView.qml
+AlbumArtistListView 1.0 AlbumArtistListView.qml
+AlbumArtistPathView 1.0 AlbumArtistPathView.qml
 AlbumDelegate 1.0 AlbumDelegate.qml
 AlbumListDelegate 1.0 AlbumListDelegate.qml
 AlbumShowDelegate 1.0 AlbumShowDelegate.qml

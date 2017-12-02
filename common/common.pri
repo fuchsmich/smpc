@@ -56,7 +56,9 @@ DISTFILES += $${COMMON_PATH}/qml/components/* \
     $$PWD/qml/components/qmldir \
     $$PWD/qml/components/AlbumArtistPathView.qml \
     $$PWD/qml/components/AlbumArtistGridView.qml \
-    $$PWD/qml/components/AlbumArtistListView.qml
+    $$PWD/qml/components/AlbumArtistListView.qml \
+    $$PWD/qml/components/AlbumArtistListPage.qml \
+    $$PWD/qml/components/MenuGrid.qml
 #    $${COMMON_PATH}/qml/components/qmldir \
 #    $${COMMON_PATH}/qml/components/SpeedScroller.js \
 #    $${COMMON_PATH}/qml/components/SectionScroller.js \

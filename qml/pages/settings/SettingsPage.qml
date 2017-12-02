@@ -2,45 +2,61 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "../../../common/qml/components"
 
-Page
-{
+Page {
     id: settingsPage;
     allowedOrientations: Orientation.All
-    SilicaListView {
+    SilicaFlickable {
         id: settingsListView
         anchors.fill: parent
 //        anchors.bottomMargin: quickControlPanel.visibleSize
         clip: true
-        contentWidth: width
-        header: PageHeader {
-            title: qsTr("settings");
-        }
-        model: settingsMenuModel
-        delegate: BackgroundItem {
-            Label {
-                clip: true
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    verticalCenter: parent.verticalCenter
-                    leftMargin: listPadding
-                    rightMargin: listPadding
-                }
-                text: name
+//        contentWidth: width
+        contentHeight: column.height
+        Column {
+            id: column
+            width: settingsPage.width
+            PageHeader {
+                title: qsTr("settings");
             }
-            onClicked: {
-                parseClickedSettings(ident);
+            MenuGrid {
+                menuModel: settingsMenuModel
+                onItemClicked: parseClickedSettings(ident)
             }
         }
     }
 
 
     Component.onCompleted: {
-        settingsMenuModel.append({"name":qsTr("server settings"), "ident":"servers"})
-        settingsMenuModel.append({"name":qsTr("database settings"), "ident":"database"})
-        settingsMenuModel.append({"name":qsTr("gui settings"), "ident":"guisettings"})
-        settingsMenuModel.append({"name":qsTr("outputs"), "ident":"outputs"})
-        settingsMenuModel.append({"name":qsTr("update database"), "ident":"updatedb"})
-        settingsMenuModel.append({"name":qsTr("about"), "ident":"about"})
+        settingsMenuModel.append({
+                                     name:qsTr("server settings"),
+                                     ident:"servers",
+                                     icon: "image://theme/icon-m-document"
+                                 })
+        settingsMenuModel.append({
+                                     name:qsTr("database settings"),
+                                     ident:"database",
+                                     icon: "image://theme/icon-m-document"
+                                 })
+        settingsMenuModel.append({
+                                     name:qsTr("gui settings"),
+                                     ident:"guisettings",
+                                     icon: "image://theme/icon-m-document"
+                                 })
+        settingsMenuModel.append({
+                                     name:qsTr("outputs"),
+                                     ident:"outputs",
+                                     icon: "image://theme/icon-m-document"
+                                 })
+        settingsMenuModel.append({
+                                     name:qsTr("update database"),
+                                     ident:"updatedb",
+                                     icon: "image://theme/icon-m-document"
+                                 })
+        settingsMenuModel.append({
+                                     name:qsTr("about"),
+                                     ident:"about",
+                                     icon: "image://theme/icon-m-document"
+                                 })
         // Debug-only
         if(mDebugEnabled) {
             settingsMenuModel.append({"name":qsTr("garbage collection"), "ident":"gc"})
