@@ -189,7 +189,6 @@ void NetworkAccess::getArtists()
     /* Requests all artists of the mpd database and send them back with a ready signal */
     emit artistsReady((QList<QObject*>*)getArtists_prv());
     emit ready();
-
 }
 
 /* Private function to fetch and parse artists from mpd */

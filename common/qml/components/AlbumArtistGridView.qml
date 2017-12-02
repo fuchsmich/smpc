@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 SilicaGridView {
-    id: artistGridView
+    id: gridView
     quickScrollEnabled: jollaQuickscroll
     model: artistsModel
     cellWidth: Screen.sizeCategory >= Screen.Large ? ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)
@@ -14,14 +14,14 @@ SilicaGridView {
     populate: Transition {
         NumberAnimation {
             properties: "x"
-            from: artistGridView.width * 2
+            from: gridView.width * 2
             duration: populateDuration
         }
     }
 
     SectionScroller {
         id: sectionScroller
-        gridView: artistGridView
+        gridView: gridView
         landscape: false
         sectionPropertyName: "sectionprop"
     }
@@ -37,9 +37,9 @@ SilicaGridView {
     delegate: ArtistDelegate {
 
         artist: model.artist
-        imgSource: (artistGridView.scrolling) ? "" : model.imageURL
+        imgSource: (gridView.scrolling) ? "" : model.imageURL
         onClicked: {
-            artistGridView.currentIndex = index
+            gridView.currentIndex = index
             artistClicked(artist)
             pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"), {
                                artistname: artistname

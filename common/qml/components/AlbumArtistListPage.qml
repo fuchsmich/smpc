@@ -4,10 +4,17 @@ import "../../../common/qml/components"
 //import components 1.0
 
 Page {
-    id: artistlistPage
+    id: page
+    property string category: "artists"
+    property var model
+    property string title: ""
     property int lastIndex
     property int lastOrientation
+
+    onModelChanged: console.log(model.count)
+
     allowedOrientations: Orientation.All
+
     state: "ListView"
 
     Loader {
@@ -16,25 +23,55 @@ Page {
     }
 
     Component {
-        id: listView
-        AlbumArtistListView { }
+        id: listViewComp
+        AlbumArtistListView {
+            id: listView
+            model: page.model
+            title: page.title
+            delegate: AlbumArtistListDelegate {
+                state: page.category
+            }
+        }
     }
     Component {
         id: gridView
-        AlbumArtistGridView { }
+        AlbumArtistGridView {
+            model: page.model
+        }
     }
     Component {
         id: showView
-        AlbumArtistPathView { }
+        AlbumArtistPathView {
+            model: page.model
+        }
     }
 
     states: [
         State {
-            name: "ListView"
-            when: ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) && artistView === 1
+            name: "ArtistsListView"
+            when: ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted))
+                  && artistView === 1
+                  && category === "artists"
             PropertyChanges {
                 target: contentLoader
-                sourceComponent: listView
+                sourceComponent: listViewComp
+            }
+            PropertyChanges {
+                target: page
+                model: artistsModel
+                title: qsTr("artists")
+            }
+        },
+        State {
+            name: "AlbumsListView"
+            when: ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted))
+                  && artistView === 1
+                  && category === "albums"
+            extend: "ArtistsListView"
+            PropertyChanges {
+                target: page
+                model: albumsModel
+                title: qsTr("albums")
             }
         },
         State {
@@ -56,6 +93,7 @@ Page {
     ]
 
     Component.onDestruction: {
-        clearArtistList()
+        lastIndex = contentLoader.item.currentIndex
+//        clearArtistList() //??
     }
 }

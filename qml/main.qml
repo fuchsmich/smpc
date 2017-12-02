@@ -3,8 +3,8 @@ import Sailfish.Silica 1.0
 import "pages"
 import org.nemomobile.mpris 1.0
 
-// FIXME to harbour.smpc.components.whatever import
-import "components"
+import "../common/qml/components"
+//import "components"
 
 
 
@@ -187,10 +187,15 @@ ApplicationWindow
         inputBlock.enabled = true
     }
 
+//    property var onReadyFunction
+
     function ready()
     {
         busyIndicator.running = false;
         inputBlock.enabled = false
+//        console.log(typeof onReadyFunction)
+//        if (typeof onReadyFunction === "function")  onReadyFunction();
+//        onReadyFunction = null;
     }
 
     function savedPlaylistClicked(modelData)

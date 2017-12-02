@@ -2,20 +2,21 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 SilicaListView {
-    id: artistListView
+    id: listView
+    property string title: ""
     quickScrollEnabled: jollaQuickscroll
-    model: artistsModel
+//    model: artistsModel
     clip: true
     populate: Transition {
         NumberAnimation {
             properties: "x"
-            from: artistListView.width * 2
+            from: listView.width * 2
             duration: populateDuration
         }
     }
 
     SectionScroller {
-        listview: artistListView
+        listview: listView
         landscape: false
         sectionPropertyName: "sectionprop"
     }
@@ -23,7 +24,7 @@ SilicaListView {
     }
 
     header: PageHeader {
-        title: qsTr("artists")
+        title: listView.title
         width: parent.width
         height: Theme.itemSizeMedium
     }

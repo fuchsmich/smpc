@@ -5,6 +5,11 @@ import "../../common/qml/components"
 
 Page {
     id: mainPage
+//    property var onReadyFunction: function() {}
+    Connections {
+
+    }
+
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
@@ -100,14 +105,17 @@ Page {
             artistname = ""
             if (connected) {
                 requestAlbums()
-                pageStack.push(Qt.resolvedUrl("database/AlbumListPage.qml"), {
-                                   artistname: artistname
+                console.log(artistname)
+                pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"), {
+                                   category: "albums"
                                })
             }
         } else if (ident === "artists") {
             if (connected) {
                 requestArtists()
-                pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"))
+                pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"), {
+                                   category: "artists"
+                               })
             }
         } else if (ident === "files") {
             if (connected)
