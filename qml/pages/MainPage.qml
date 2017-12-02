@@ -6,40 +6,28 @@ import "../../common/qml/components"
 Page {
     id: mainPage
     allowedOrientations: Orientation.All
-    PageHeader {
-        id: mainHeader
-        title: "SMPC"
-        anchors {
-            top: parent.top
-            right: parent.right
-            left: parent.left
-        }
-    }
-    Label {
-        id: connectedLabel
-        anchors {
-            top: mainHeader.bottom
-            right: parent.right
-            left: parent.left
-        }
-        horizontalAlignment: Text.AlignHCenter
-        color: Theme.highlightColor
-        text: connected ? qsTr("connected to: %1").arg(profilename) : qsTr(
-                              "disconnected")
-    }
     SilicaFlickable {
-        anchors {
-            top: connectedLabel.bottom
-            bottom: parent.bottom
-            right: parent.right
-            left: parent.left
-        }
-        contentHeight: mainGrid.height
+        anchors.fill: parent
+        contentHeight: column.height
         clip: true
-        MenuGrid {
-            id: mainGrid
-            menuModel: mainMenuModel
-            onItemClicked: parseClickedMainMenu(ident)
+        Column {
+            id: column
+            width: mainPage.width
+            PageHeader {
+                title: "SMPC"
+            }
+            Label {
+                width: column.width
+                horizontalAlignment: Text.AlignHCenter
+                color: Theme.highlightColor
+                text: connected ? qsTr("connected to: %1").arg(profilename) : qsTr(
+                                      "disconnected")
+            }
+            MenuGrid {
+                id: mainGrid
+                menuModel: mainMenuModel
+                onItemClicked: parseClickedMainMenu(ident)
+            }
         }
     }
 

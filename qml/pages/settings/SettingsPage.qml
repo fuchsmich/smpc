@@ -8,9 +8,9 @@ Page {
     SilicaFlickable {
         id: settingsListView
         anchors.fill: parent
-//        anchors.bottomMargin: quickControlPanel.visibleSize
+        //        anchors.bottomMargin: quickControlPanel.visibleSize
         clip: true
-//        contentWidth: width
+        //        contentWidth: width
         contentHeight: column.height
         Column {
             id: column
