@@ -1,10 +1,9 @@
 <RCC>
-    <qresource prefix="">
+    <qresource prefix="/">
         <file>images/smpc.svg</file>
         <file>images/smpc-big.png</file>
         <file>images/smpc.png</file>
         <file>images/pictogram.png</file>
-        <file>images/icon-m-stop.png</file>
         <file>images/pictogram.svg</file>
     </qresource>
 </RCC>
