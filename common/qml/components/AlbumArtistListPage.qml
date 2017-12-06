@@ -7,7 +7,7 @@ Page {
     id: page
     property string category: "artists"
     property var model
-    property string title: ""
+    property string pageTitle: ""
     property int lastIndex
     property int lastOrientation
 
@@ -27,9 +27,14 @@ Page {
         AlbumArtistListView {
             id: listView
             model: page.model
-            title: page.title
+            pageTitle: page.pageTitle
             delegate: AlbumArtistListDelegate {
                 state: page.category
+                albumTitle: (typeof model.title !== "undefined" ? model.title : "")
+                artist: model.artist
+                imageUrl: (typeof model.coverURL !== "undefined" ? model.coverURL :
+                                                                   typeof model.imageURL !== "undefined"? model.imageURL : "")
+                onClicked: listView.currentIndex = model.index
             }
         }
     }
@@ -59,7 +64,7 @@ Page {
             PropertyChanges {
                 target: page
                 model: artistsModel
-                title: qsTr("artists")
+                pageTitle: qsTr("artists")
             }
         },
         State {
@@ -71,7 +76,7 @@ Page {
             PropertyChanges {
                 target: page
                 model: albumsModel
-                title: qsTr("albums")
+                pageTitle: qsTr("albums")
             }
         },
         State {

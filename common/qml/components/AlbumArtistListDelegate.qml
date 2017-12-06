@@ -3,9 +3,14 @@ import Sailfish.Silica 1.0
 
 ListItem {
     id: listItem
+    property string albumTitle: ""
+    property string artist: ""
+    property string imageUrl: ""
+
     state: "artists"
 //    menu: contextMenu
-    contentHeight: ((listImageSize  === 1) || (listImageSize  === 0)  ? Theme.itemSizeSmall : (listImageSize  === 2 ? Theme.itemSizeMedium : Theme.itemSizeLarge) )
+    contentHeight: ((listImageSize  === 1) || (listImageSize  === 0)  ? Theme.itemSizeSmall :
+                                                                        (listImageSize  === 2 ? Theme.itemSizeMedium : Theme.itemSizeLarge) )
     Row {
         id: mainRow
         height: parent.height
@@ -30,7 +35,7 @@ ListItem {
                 asynchronous: true
                 /*sourceSize.width: width
                     sourceSize.height: height*/
-//                source: ( listImageSize === 0 ) ? "" : imageURL
+                source: ( listImageSize === 0 ) ? "" : imageUrl
             }
         }
         Column {
@@ -38,7 +43,7 @@ ListItem {
             Label {
                 id: albumLabel
                 visible: false
-                text: (title === "" ? qsTr("no album tag") : title)
+                text: albumTitle
             }
             Label {
                 id: artistLabel
@@ -135,7 +140,7 @@ ListItem {
             }
             PropertyChanges {
                 target: image
-                source: ( listImageSize === 0 ) ? "" : imageURL
+                source: ( listImageSize === 0 ) ? "" : imageUrl
             }
         },
         State {
@@ -143,10 +148,11 @@ ListItem {
             PropertyChanges {
                 target: listItem
                 menu: albumContextMenu
-            }
-            PropertyChanges {
-                target: image
-                source: ( listImageSize === 0 ) ? "" : coverURL
+                onClicked: {
+                    listView.currentIndex = index;
+                    albumClicked(artist, title);
+                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),{artistname:artist,albumname:title}); //?????
+                }
             }
             PropertyChanges {
                 target: albumLabel
