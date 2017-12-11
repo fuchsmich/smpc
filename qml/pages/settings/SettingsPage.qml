@@ -30,32 +30,32 @@ Page {
         settingsMenuModel.append({
                                      name:qsTr("server settings"),
                                      ident:"servers",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         settingsMenuModel.append({
                                      name:qsTr("database settings"),
                                      ident:"database",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         settingsMenuModel.append({
                                      name:qsTr("gui settings"),
                                      ident:"guisettings",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         settingsMenuModel.append({
                                      name:qsTr("outputs"),
                                      ident:"outputs",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         settingsMenuModel.append({
                                      name:qsTr("update database"),
                                      ident:"updatedb",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         settingsMenuModel.append({
                                      name:qsTr("about"),
                                      ident:"about",
-                                     icon: "image://theme/icon-m-document"
+                                     icon: "image://theme/icon-m-developer-mode"
                                  })
         // Debug-only
         if(mDebugEnabled) {

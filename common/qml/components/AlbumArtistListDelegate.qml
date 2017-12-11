@@ -151,7 +151,8 @@ ListItem {
                 onClicked: {
                     listView.currentIndex = index;
                     albumClicked(artist, title);
-                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),{artistname:artist,albumname:title}); //?????
+                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
+                                   {artistname:artist,albumname:albumTitle}); //?????
                 }
             }
             PropertyChanges {

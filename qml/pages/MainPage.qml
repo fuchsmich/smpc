@@ -105,7 +105,6 @@ Page {
             artistname = ""
             if (connected) {
                 requestAlbums()
-                console.log(artistname)
                 pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"), {
                                    category: "albums"
                                })

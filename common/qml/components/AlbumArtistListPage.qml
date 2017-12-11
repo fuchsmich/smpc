@@ -32,9 +32,12 @@ Page {
                 state: page.category
                 albumTitle: (typeof model.title !== "undefined" ? model.title : "")
                 artist: model.artist
-                imageUrl: (typeof model.coverURL !== "undefined" ? model.coverURL :
-                                                                   typeof model.imageURL !== "undefined"? model.imageURL : "")
-                onClicked: listView.currentIndex = model.index
+                imageUrl: (typeof model.coverURL !== "undefined"
+                           ? model.coverURL : typeof model.imageURL !== "undefined"
+                             ? model.imageURL : "")
+
+                //TODO how to deal with this?
+//                onClicked: listView.currentIndex = model.index
             }
         }
     }
@@ -42,6 +45,14 @@ Page {
         id: gridView
         AlbumArtistGridView {
             model: page.model
+            delegate: AlbumArtistGridDelegate {
+                state: page.category
+                albumTitle: (typeof model.title !== "undefined" ? model.title : "")
+                artist: model.artist
+                imageUrl: (typeof model.coverURL !== "undefined"
+                           ? model.coverURL : typeof model.imageURL !== "undefined"
+                             ? model.imageURL : "")
+            }
         }
     }
     Component {
@@ -81,10 +92,17 @@ Page {
         },
         State {
             name: "GridView"
-            when: ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) && artistView === 0
+            when: ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted))
+                  && artistView === 0
+                  && category === "artists"
             PropertyChanges {
                 target: contentLoader
                 sourceComponent: gridView
+            }
+            PropertyChanges {
+                target: page
+                model: artistsModel
+                pageTitle: qsTr("artists")
             }
         },
         State {

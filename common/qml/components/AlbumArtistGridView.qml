@@ -3,8 +3,9 @@ import Sailfish.Silica 1.0
 
 SilicaGridView {
     id: gridView
+    property string pageTitle: ""
     quickScrollEnabled: jollaQuickscroll
-    model: artistsModel
+//    model: artistsModel
     cellWidth: Screen.sizeCategory >= Screen.Large ? ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)
                                                       ? (width / 6) : width / 4) :
                                                      ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width/4) : (width / 2))
@@ -29,21 +30,21 @@ SilicaGridView {
     }
 
     header: PageHeader {
-        title: qsTr("artists")
+        title: gridView.pageTitle
         width: parent.width
         height: Theme.itemSizeMedium
     }
 
-    delegate: ArtistDelegate {
+//    delegate: ArtistDelegate {
 
-        artist: model.artist
-        imgSource: (gridView.scrolling) ? "" : model.imageURL
-        onClicked: {
-            gridView.currentIndex = index
-            artistClicked(artist)
-            pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"), {
-                               artistname: artistname
-                           })
-        }
-    }
+//        artist: model.artist
+//        imgSource: (gridView.scrolling) ? "" : model.imageURL
+//        onClicked: {
+//            gridView.currentIndex = index
+//            artistClicked(artist)
+//            pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"), {
+//                               artistname: artistname
+//                           })
+//        }
+//    }
 }
