@@ -28,7 +28,7 @@ Page {
             id: listView
             model: page.model
             pageTitle: page.pageTitle
-            delegate: AlbumArtistListDelegate {
+            delegate: AlbumArtistListItem {
                 state: page.category
                 albumTitle: (typeof model.title !== "undefined" ? model.title : "")
                 artist: model.artist
@@ -45,7 +45,7 @@ Page {
         id: gridView
         AlbumArtistGridView {
             model: page.model
-            delegate: AlbumArtistGridDelegate {
+            delegate: AlbumArtistGridItem {
                 state: page.category
                 albumTitle: (typeof model.title !== "undefined" ? model.title : "")
                 artist: model.artist
