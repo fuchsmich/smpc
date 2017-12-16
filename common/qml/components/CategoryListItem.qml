@@ -130,13 +130,13 @@ ListItem {
             PropertyChanges {
                 target: listItem
                 menu: artistContextMenu
-                onClicked: {
-                    listView.currentIndex = index;
-                    artistClicked(artist)
-                    pageStack.push(Qt.resolvedUrl("AlbumArtistListPage.qml"),{
-                                       category: "albums"
-                                   });
-                }
+//                onClicked: {
+//                    listView.currentIndex = index;
+//                    artistClicked(artist)
+//                    pageStack.push(Qt.resolvedUrl("AlbumArtistListPage.qml"),{
+//                                       category: "albums"
+//                                   });
+//                }
             }
             PropertyChanges {
                 target: image
@@ -148,12 +148,12 @@ ListItem {
             PropertyChanges {
                 target: listItem
                 menu: albumContextMenu
-                onClicked: {
-                    listView.currentIndex = index;
-                    albumClicked(artist, title);
-                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
-                                   {artistname:artist,albumname:albumTitle}); //?????
-                }
+//                onClicked: {
+//                    listView.currentIndex = index;
+//                    albumClicked(artist, title);
+//                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
+//                                   {artistname:artist,albumname:albumTitle}); //?????
+//                }
             }
             PropertyChanges {
                 target: albumLabel

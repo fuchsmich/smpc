@@ -67,10 +67,10 @@ Item {
 
     onListviewChanged: {
         if(listview && listview.model) {
-            Sections.fillSections(listview,scroller.sectionPropertyName);
+            Sections.fillSections(listview, scroller.sectionPropertyName);
         } else if(listview) {
             listview.modelChanged.connect( function() {
-                Sections.fillSections(listview,scroller.sectionPropertyName);
+                Sections.fillSections(listview, scroller.sectionPropertyName);
             });
 
         }

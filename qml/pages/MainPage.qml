@@ -1,16 +1,14 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../../common/qml/pages"
 import "../../common/qml/components"
 //import components 1.0
 
 Page {
     id: mainPage
-//    property var onReadyFunction: function() {}
-    Connections {
-
-    }
 
     allowedOrientations: Orientation.All
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -105,14 +103,14 @@ Page {
             artistname = ""
             if (connected) {
                 requestAlbums()
-                pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"), {
+                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/CategoryListPage.qml"), {
                                    category: "albums"
                                })
             }
         } else if (ident === "artists") {
             if (connected) {
                 requestArtists()
-                pageStack.push(Qt.resolvedUrl("../../common/qml/components/AlbumArtistListPage.qml"), {
+                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/CategoryListPage.qml"), {
                                    category: "artists"
                                })
             }
@@ -140,13 +138,13 @@ Page {
                 if (Screen.sizeCategory >= Screen.Large) {
                     var playlistComponent = Qt.createComponent(
                                 Qt.resolvedUrl(
-                                    "database/CurrentPlaylistPage_large.qml"))
+                                    "../../common/qml/pages/CurrentPlaylistPage_large.qml"))
                     var playlistPage = playlistComponent.createObject(
                                 mainWindow)
                 } else {
                     var playlistComponent = Qt.createComponent(
                                 Qt.resolvedUrl(
-                                    "database/CurrentPlaylistPage.qml"))
+                                    "../../common/qml/pages/CurrentPlaylistPage.qml"))
                     var playlistPage = playlistComponent.createObject(
                                 mainWindow)
                 }

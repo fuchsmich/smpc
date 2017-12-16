@@ -16,7 +16,7 @@ PathView {
 
     cacheItemCount: pathItemCount + 2
     pathItemCount: 12 // width/itemWidth
-    delegate: ArtistShowDelegate {
+    delegate: CategoryShowDelegate {
     }
     snapMode: PathView.NoSnap
     preferredHighlightBegin: 0.5

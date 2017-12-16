@@ -6,6 +6,7 @@ ListItem {
     //    property string destination
     property string albumTitle: ""
     property string artist: ""
+    property alias labelText: label.text
     property string imageUrl: ""
     property bool scrolling: false
 
@@ -66,53 +67,31 @@ ListItem {
             styleColor: Theme.secondaryColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
-            text: albumTitle === "" ? qsTr("No Album Tag") : albumTitle
         }
     }
 
-
-    onClicked: {
-//        albumGridView.currentIndex = index
-//        albumClicked(artist, title)
-//        console.log(destination)
-//        pageStack.push(destination,{artistname:artist,albumname:title});
-    }
-
-    states: [
-        State {
-            name: "artists"
-            PropertyChanges {
-                target: listItem
-//                menu: artistContextMenu
-                onClicked: {
-                    listView.currentIndex = index;
-                    artistClicked(artist)
-                    pageStack.push(Qt.resolvedUrl("AlbumArtistListPage.qml"),{
-                                       category: "albums"
-                                   });
-                }
-            }
-            PropertyChanges {
-                target: label
-                text: artist
-            }
-        },
-        State {
-            name: "albums"
-            PropertyChanges {
-                target: listItem
-//                menu: albumContextMenu
-                onClicked: {
-                    listView.currentIndex = index;
-                    albumClicked(artist, albumTitle);
-                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
-                                   {artistname:artist,albumname:albumTitle});
-                }
-            }
-            PropertyChanges {
-                target: label
-                text: albumTitle
-            }
-        }
-    ]
+//    states: [
+//        State {
+//            name: "artists"
+//            PropertyChanges {
+//                target: listItem
+////                menu: artistContextMenu
+//            }
+//            PropertyChanges {
+//                target: label
+//                text: artist === "" ? qsTr("No Artist Tag") : artist
+//            }
+//        },
+//        State {
+//            name: "albums"
+//            PropertyChanges {
+//                target: listItem
+////                menu: albumContextMenu
+//            }
+//            PropertyChanges {
+//                target: label
+//                text: albumTitle === "" ? qsTr("No Album Tag") : albumTitle
+//            }
+//        }
+//    ]
 }

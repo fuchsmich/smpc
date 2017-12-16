@@ -25,9 +25,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 
     qDebug() << view->engine()->importPathList();
-    foreach (QString path, view->engine()->importPathList()) {
-        qDebug() << path;
-    }
+//    foreach (QString path, view->engine()->importPathList()) {
+//        qDebug() << path;
+//    }
 
     Controller *control = new Controller(view,0);
     view->show();
