@@ -4,8 +4,9 @@ import Sailfish.Silica 1.0
 SilicaListView {
     id: lv
     property string pageTitle: ""
+//    property string artistname: ""
+
     quickScrollEnabled: jollaQuickscroll
-//    model: artistsModel
     clip: true
     populate: Transition {
         NumberAnimation {
@@ -18,8 +19,9 @@ SilicaListView {
     SectionScroller {
         listview: lv
         landscape: false
-        sectionPropertyName: "sectionprop"
+        sectionPropertyName: section.property //"sectionprop"
     }
+
     ScrollDecorator {
     }
 

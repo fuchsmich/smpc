@@ -59,7 +59,10 @@ Page {
                                  })
         // Debug-only
         if(mDebugEnabled) {
-            settingsMenuModel.append({"name":qsTr("garbage collection"), "ident":"gc"})
+            settingsMenuModel.append({"name":qsTr("garbage collection"),
+                                         "ident":"gc",
+                                         icon: "image://theme/icon-m-developer-mode"
+                                     })
         }
     }
 

@@ -4,20 +4,20 @@ import "SectionScroller.js" as Sections
 
 Item {
     id: scroller
-    property ListView listview;
-    property GridView gridView;
-    property PathView pathview;
-    property bool interactive:true
+    property Item listview
+//    property GridView gridView
+//    property PathView pathview
+    property bool interactive: true
     property string sectionPropertyName
-    property bool landscape:false
+    property bool landscape: false
 
-    property bool scrolling;
-    property var lastItem;
+    property bool scrolling
+    property var lastItem
 
-    property bool listviewScrolling : ( listview && (listview.flicking || listview.dragging))
-    property bool gridviewScrolling : ( gridView && (gridView.flicking || gridView.dragging))
-    property bool pathviewScrolling : ( pathview && (pathview.flicking || pathview.dragging))
-    property bool inputAreaScrolling : inputArea.pressed
+    property bool listviewScrolling: ( listview && (listview.flicking || listview.dragging))
+//    property bool gridviewScrolling: ( gridView && (gridView.flicking || gridView.dragging))
+//    property bool pathviewScrolling: ( pathview && (pathview.flicking || pathview.dragging))
+    property bool inputAreaScrolling: inputArea.pressed
 
     Rectangle {
         id: testrect
@@ -30,9 +30,10 @@ Item {
     Rectangle {
         id: sectionScrollIndicator
 
-        opacity: ( (listviewScrolling || gridviewScrolling || pathviewScrolling || inputAreaScrolling) && !landscape ? 1.0 : 0.0 )
+//        opacity: ( (listviewScrolling || gridviewScrolling || pathviewScrolling || inputAreaScrolling) && !landscape ? 1.0 : 0.0 )
+        opacity: ( (listviewScrolling || inputAreaScrolling) && !landscape ? 1.0 : 0.0 )
         visible: opacity > 0
-        anchors.fill:parent
+        anchors.fill: parent
 
         gradient: Gradient {
 
@@ -56,7 +57,8 @@ Item {
 
     Rectangle {
         id: sectionScrollIndicatorLandscape
-        opacity: ( (listviewScrolling || gridviewScrolling || pathviewScrolling || inputAreaScrolling) && landscape ? 1.0 : 0.0 )
+//        opacity: ( (listviewScrolling || gridviewScrolling || pathviewScrolling || inputAreaScrolling) && landscape ? 1.0 : 0.0 )
+        opacity: ( (listviewScrolling || inputAreaScrolling) && landscape ? 1.0 : 0.0 )
         visible: opacity > 0
         anchors.fill:parent
         color: Theme.rgba(Theme.highlightBackgroundColor,0.4)
@@ -76,27 +78,27 @@ Item {
         }
     }
 
-    onPathviewChanged: {
-        if(pathview && pathview.model) {
-            Sections.fillSections(pathview,scroller.sectionPropertyName);
-        } else if(pathview) {
-            pathview.modelChanged.connect( function() {
-                Sections.fillSections(pathview,scroller.sectionPropertyName);
-            });
+//    onPathviewChanged: {
+//        if(pathview && pathview.model) {
+//            Sections.fillSections(pathview,scroller.sectionPropertyName);
+//        } else if(pathview) {
+//            pathview.modelChanged.connect( function() {
+//                Sections.fillSections(pathview,scroller.sectionPropertyName);
+//            });
 
-        }
-    }
+//        }
+//    }
 
-    onGridViewChanged: {
-        if(gridView && gridView.model) {
-            Sections.fillSections(gridView,scroller.sectionPropertyName);
-        } else if(gridView) {
-            gridView.modelChanged.connect( function() {
-                Sections.fillSections(gridView,scroller.sectionPropertyName);
-            });
+//    onGridViewChanged: {
+//        if(gridView && gridView.model) {
+//            Sections.fillSections(gridView,scroller.sectionPropertyName);
+//        } else if(gridView) {
+//            gridView.modelChanged.connect( function() {
+//                Sections.fillSections(gridView,scroller.sectionPropertyName);
+//            });
 
-        }
-    }
+//        }
+//    }
 
     Rectangle {
         id: secDialog
@@ -143,7 +145,7 @@ Item {
         onPositionChanged: {
             var relPos;
             var item;
-            if(interactive && pressed && !landscape) {
+            if (interactive && pressed && !landscape) {
                // secDialog.color = Theme.rgba(Theme.highlightColor,0.5);
 
                 relPos = (mouseY/height)*100;
@@ -155,10 +157,10 @@ Item {
                         secDialog.text = item.value;
                         if ( listview )
                             listview.positionViewAtIndex(item.index,ListView.Beginning);
-                        else if ( pathview )
-                            pathview.positionViewAtIndex(item.index,PathView.Center);
-                        else if ( gridView )
-                            gridView.positionViewAtIndex(item.index,GridView.Beginning);
+//                        else if ( pathview )
+//                            pathview.positionViewAtIndex(item.index,PathView.Center);
+//                        else if ( gridView )
+//                            gridView.positionViewAtIndex(item.index,GridView.Beginning);
                     }
                 }
                 lastItem = item;
@@ -175,10 +177,10 @@ Item {
                         secDialog.text = item.value;
                         if ( listview )
                             listview.positionViewAtIndex(item.index,ListView.Beginning);
-                        else if ( pathview )
-                            pathview.positionViewAtIndex(item.index,PathView.Center);
-                        else if ( gridView )
-                            gridView.positionViewAtIndex(item.index,GridView.Beginning);
+//                        else if ( pathview )
+//                            pathview.positionViewAtIndex(item.index,PathView.Center);
+//                        else if ( gridView )
+//                            gridView.positionViewAtIndex(item.index,GridView.Beginning);
                     }
                 }
                 lastItem = item;

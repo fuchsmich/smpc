@@ -6,7 +6,6 @@ ListItem {
     //    property string destination
     property string albumTitle: ""
     property string artist: ""
-    property alias labelText: label.text
     property string imageUrl: ""
     property bool scrolling: false
 

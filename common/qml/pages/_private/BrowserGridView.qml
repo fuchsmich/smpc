@@ -24,7 +24,7 @@ SilicaGridView {
 
     SectionScroller {
         id: sectionScroller
-        gridView: gridView
+        listview: gridView
         landscape: false
         sectionPropertyName: "sectionprop"
     }

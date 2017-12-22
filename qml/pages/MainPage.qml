@@ -35,6 +35,7 @@ Page {
     }
 
     Component.onCompleted: {
+        console.debug("hier!!")
         mainMenuModel.append({
                                  name: qsTr("playlist"),
                                  ident: "playlist",
@@ -103,14 +104,14 @@ Page {
             artistname = ""
             if (connected) {
                 requestAlbums()
-                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/CategoryListPage.qml"), {
+                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/BrowseItemsPage.qml"), {
                                    category: "albums"
                                })
             }
         } else if (ident === "artists") {
             if (connected) {
                 requestArtists()
-                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/CategoryListPage.qml"), {
+                pageStack.push(Qt.resolvedUrl("../../common/qml/pages/BrowseItemsPage.qml"), {
                                    category: "artists"
                                })
             }

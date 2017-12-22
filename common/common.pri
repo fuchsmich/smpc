@@ -30,6 +30,8 @@ common_qml.path = /usr/share/$$TARGET/common/qml
 INSTALLS += common_qml
 DISTFILES += $${COMMON_PATH}/qml/components/*
 DISTFILES += $${COMMON_PATH}/qml/pages/*
+DISTFILES += $${COMMON_PATH}/qml/pages/_private/*
+
 
 #pages_qml.files = $${COMMON_PATH}/qml/pages/*
 #pages_qml.path = /usr/share/$$TARGET/common/qml/pages

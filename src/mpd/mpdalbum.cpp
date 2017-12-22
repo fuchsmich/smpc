@@ -16,6 +16,7 @@ MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString mbid,
 MpdAlbum::MpdAlbum(const MpdAlbum &copyObject,QObject *parent) : QObject(parent)  {
     mTitle = copyObject.mTitle;
     mArtist = copyObject.mArtist;
+    mDate = copyObject.mDate;
 }
 
 QString MpdAlbum::getTitle() const {
@@ -39,6 +40,7 @@ void MpdAlbum::operator =(MpdAlbum &rhs)
 {
     mTitle = rhs.mTitle;
     mArtist = rhs.mArtist;
+    mDate = rhs.mDate;
 }
 
 bool MpdAlbum::operator ==(MpdAlbum &rhs) const

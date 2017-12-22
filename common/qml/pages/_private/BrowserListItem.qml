@@ -8,7 +8,7 @@ ListItem {
     property string imageUrl: ""
 
     state: "artists"
-//    menu: contextMenu
+    //    menu: contextMenu
     contentHeight: ((listImageSize  === 1) || (listImageSize  === 0)  ? Theme.itemSizeSmall :
                                                                         (listImageSize  === 2 ? Theme.itemSizeMedium : Theme.itemSizeLarge) )
     Row {
@@ -22,6 +22,7 @@ ListItem {
             rightMargin: listPadding
         }
         spacing: Theme.paddingSmall
+
         Rectangle {
             id: imageRectangle
             color: Theme.rgba(Theme.highlightBackgroundColor,0.2)
@@ -38,6 +39,7 @@ ListItem {
                 source: ( listImageSize === 0 ) ? "" : imageUrl
             }
         }
+
         Column {
             anchors.verticalCenter: parent.verticalCenter
             Label {
@@ -130,30 +132,30 @@ ListItem {
             PropertyChanges {
                 target: listItem
                 menu: artistContextMenu
-//                onClicked: {
-//                    listView.currentIndex = index;
-//                    artistClicked(artist)
-//                    pageStack.push(Qt.resolvedUrl("AlbumArtistListPage.qml"),{
-//                                       category: "albums"
-//                                   });
-//                }
+                //                onClicked: {
+                //                    listView.currentIndex = index;
+                //                    artistClicked(artist)
+                //                    pageStack.push(Qt.resolvedUrl("AlbumArtistListPage.qml"),{
+                //                                       category: "albums"
+                //                                   });
+                //                }
             }
-            PropertyChanges {
-                target: image
-                source: ( listImageSize === 0 ) ? "" : imageUrl
-            }
+            //            PropertyChanges {
+            //                target: image
+            //                source: ( listImageSize === 0 ) ? "" : imageUrl
+            //            }
         },
         State {
             name: "albums"
             PropertyChanges {
                 target: listItem
                 menu: albumContextMenu
-//                onClicked: {
-//                    listView.currentIndex = index;
-//                    albumClicked(artist, title);
-//                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
-//                                   {artistname:artist,albumname:albumTitle}); //?????
-//                }
+                //                onClicked: {
+                //                    listView.currentIndex = index;
+                //                    albumClicked(artist, title);
+                //                    pageStack.push(Qt.resolvedUrl("./AlbumTracksPage.qml"),
+                //                                   {artistname:artist,albumname:albumTitle}); //?????
+                //                }
             }
             PropertyChanges {
                 target: albumLabel

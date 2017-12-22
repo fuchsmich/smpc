@@ -7,7 +7,7 @@ PathView {
     model: artistsModel
 
     SectionScroller {
-        pathview: showView
+        listview: showView
         sectionPropertyName: "sectionprop"
         landscape: true
         z: 120

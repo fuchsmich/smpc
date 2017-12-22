@@ -43,15 +43,15 @@ QVariant ArtistModel::data(const QModelIndex &index, int role) const
         // No image found return dummy url
         if ( imageID == -1 ) {
             // Start image retrieval
-            qDebug() << "returning dummy image for artist: " << tmpArtist->getName();
+//            qDebug() << "returning dummy image for artist: " << tmpArtist->getName();
             //emit requestAlbumInformation(*album);
             // Return dummy for the time being
             return DUMMY_ARTISTIMAGE;
         } else if (imageID == -2 ) {
-            qDebug() << "returning dummy image for blacklisted artist: " << tmpArtist->getName();
+//            qDebug() << "returning dummy image for blacklisted artist: " << tmpArtist->getName();
             return DUMMY_ARTISTIMAGE;
         } else {
-            qDebug() << "returning database image for album: " << tmpArtist->getName();
+//            qDebug() << "returning database image for album: " << tmpArtist->getName();
             QString url = "image://imagedbprovider/artistid/" + QString::number(imageID);
             return url;
         }

@@ -38,6 +38,10 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
     {
         return mEntries->at(index.row())->getTitle();
     }
+    else if(role==DateRole)
+    {
+        return mEntries->at(index.row())->getDate();
+    }
     else if(role==SectionRole)
     {
         return mEntries->at(index.row())->getSection();
@@ -61,7 +65,7 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
             // No image found return dummy url
             if ( imageID == -1 ) {
                 // Start image retrieval
-                qDebug() << "returning dummy image for album: " << album->getTitle();
+//                qDebug() << "returning dummy image for album: " << album->getTitle();
                 if ( mDownloadEnabled ) {
                     emit requestAlbumInformation(*album);
                 }
@@ -74,10 +78,10 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
                     QString url = "image://imagedbprovider/albumid/" + QString::number(imageID);
                     return url;
                 }
-                qDebug() << "returning dummy image for blacklisted album: " << album->getTitle();
+//                qDebug() << "returning dummy image for blacklisted album: " << album->getTitle();
                 return DUMMY_ALBUMIMAGE;
             } else {
-                qDebug() << "returning database image for album: " << album->getTitle();
+//                qDebug() << "returning database image for album: " << album->getTitle();
                 QString url = "image://imagedbprovider/albumid/" + QString::number(imageID);
                 return url;
             }
@@ -88,15 +92,15 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
             // No image found return dummy url
             if ( imageID == -1 ) {
                 // Start image retrieval
-                qDebug() << "returning dummy image for album: " << album->getTitle();
+//                qDebug() << "returning dummy image for album: " << album->getTitle();
                 // Return dummy for the time being
                 return DUMMY_ALBUMIMAGE;
             } else if (imageID == -2 ) {
-                qDebug() << "returning dummy image for blacklisted album: " << album->getTitle();
+//                qDebug() << "returning dummy image for blacklisted album: " << album->getTitle();
                 return DUMMY_ALBUMIMAGE;
             }
             else {
-                qDebug() << "returning database image for album: " << album->getTitle();
+//                qDebug() << "returning database image for album: " << album->getTitle();
                 QString url = "image://imagedbprovider/albumid/" + QString::number(imageID);
                 return url;
             }
@@ -116,6 +120,7 @@ QHash<int, QByteArray> AlbumModel::roleNames() const {
     QHash<int,QByteArray> roles;
 
     roles[AlbumRole] = "title";
+    roles[DateRole] = "date";
     roles[SectionRole] = "sectionprop";
     roles[ArtistRole] = "artist";
     roles[AlbumCleandRole] = "titleClean";

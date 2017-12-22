@@ -151,7 +151,7 @@ ApplicationWindow
     property int mPlaylistlength : mpd_status.playlistSize
     property bool mRepeat: mpd_status.repeat
     property bool mShuffle: mpd_status.shuffle
-    property bool mDebugEnabled: true
+    property bool mDebugEnabled: false
     property bool mPositionSliderActive:false;
     property string mAudioProperties: mpd_status.samplerate + " Hz " + mpd_status.bitDepth + " " + qsTr("bits") + " " + mpd_status.channelCount + " " + qsTr("channels") ;
     property string mTrackNr: mpd_status.trackNo
@@ -218,7 +218,7 @@ ApplicationWindow
 
     function receiveFilesPage()
     {
-        pageStack.push("pages/database/FileBrowserPage.qml",{listmodel: filesModel,filepath :lastpath});
+        pageStack.push("../common/qml/pages/FileBrowserPage.qml",{listmodel: filesModel,filepath :lastpath});
         fastscrollenabled = true;
     }
 

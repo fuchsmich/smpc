@@ -325,7 +325,7 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
                     // Append album if name is already set(last album)
                     if ( name != "" || emptyAlbum ) {
                         tempalbum = new MpdAlbum(NULL,name,artist,mbid,date);
-                        // qDebug() << "Album: " << name << artist << date;
+                        qDebug() << "Album: " << name << artist << date;
                         tempalbum->moveToThread(mQMLThread);
                         QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
                         albums->append(tempalbum);
@@ -345,7 +345,7 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         /* Append last album also */
         if ( name != "" || emptyAlbum) {
             // qDebug() << "Album: " << name;
-            tempalbum = new MpdAlbum(NULL,name,artist,mbid,date);
+            tempalbum = new MpdAlbum(NULL, name, artist, mbid, date);
             tempalbum->moveToThread(mQMLThread);
             QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
             albums->append(tempalbum);
