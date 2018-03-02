@@ -16,6 +16,8 @@ PkgConfigBR:
 - sailfishapp >= 0.0.10
 - Qt5Qml
 - Qt5Core
+- Qt5Multimedia
+- Qt5Svg
 Requires:
 - qt5-qtdeclarative-import-xmllistmodel
 - sailfishsilica-qt5
