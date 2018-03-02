@@ -21,8 +21,6 @@ PkgConfigBR:
 Requires:
 - qt5-qtdeclarative-import-xmllistmodel
 - sailfishsilica-qt5
-- qt5-qtmultimedia
-- qt5-qtsvg
 Files:
 - '%{_bindir}'
 - '%{_datadir}/harbour-smpc'
