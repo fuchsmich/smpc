@@ -13,7 +13,7 @@ Name:       harbour-smpc
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailfishOS Port of qmobilempd client
-Version:    1.3.99
+Version:    1.3.4
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
@@ -22,8 +22,6 @@ Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-smpc.yaml
 Requires:   qt5-qtdeclarative-import-xmllistmodel
 Requires:   sailfishsilica-qt5
-Requires:   qt5-qtmultimedia
-Requires:   qt5-qtsvg
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  pkgconfig(Qt5Qml)
