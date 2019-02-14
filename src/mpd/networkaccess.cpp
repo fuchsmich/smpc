@@ -300,7 +300,11 @@ QList<MpdAlbum*> *NetworkAccess::getArtistsAlbums_prv(QString artist)
             } else {
                 tag  = "artist";
             }
-            sendMPDCommand(QString("list album ") + tag + (" \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID group date\n");
+            if (mServerInfo->getListMultiGroupSupported()) {
+                sendMPDCommand(QString("list album ") + tag + (" \"")  + artist + "\"" + " group MUSICBRAINZ_ALBUMID group date\n");
+            } else {
+                sendMPDCommand(QString("list album ") + tag + (" \"")  + artist + "\"" + " group date\n");
+            }
         } else {
             sendMPDCommand(QString("list album \"") + artist + "\"\n");
         }
@@ -1874,10 +1878,14 @@ QMap<MpdArtist*, QList<MpdAlbum*>* > *NetworkAccess::getArtistsAlbumsMap_prv()
 void NetworkAccess::checkServerCapabilities() {
     MPD_version_t *version = mServerInfo->getVersion();
     /* Check server version */
+
     if ( (version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0) ) {
         /* Enable new list command features */
         /* Disabled until database support is finished as well */
         mServerInfo->setListGroupSupported(true);
+        if ( version->mpdMinor >= 22 && version->mpdMajor2 >= 20 && version->mpdMajor1 == 0 ) {
+            mServerInfo->setListMultiGroupSupported(false);
+        } else mServerInfo->setListMultiGroupSupported(true);
         mServerInfo->setListFilterSupported(true);
 
         // FIXME check with tags command

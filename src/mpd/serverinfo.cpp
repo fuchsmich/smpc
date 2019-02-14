@@ -20,6 +20,11 @@ void ServerInfo::setListFilterSupported(bool filter) {
 void ServerInfo::setListGroupSupported(bool groupSupported) {
     pListGroupSupported = groupSupported;
 }
+
+void ServerInfo::setListMultiGroupSupported(bool multiGroupSupported) {
+    pListMultiGroupSupported = multiGroupSupported;
+}
+
 void ServerInfo::setMBIDTagsSupported(bool MBIDSupported) {
     pMBIDTagsSupported = MBIDSupported;
 }
@@ -27,6 +32,7 @@ void ServerInfo::setMBIDTagsSupported(bool MBIDSupported) {
 MPD_version_t *ServerInfo::getVersion() {
     return &pVersion;
 }
+
 bool ServerInfo::getIdleSupported() {
     return pIdleSupported;
 }
@@ -38,6 +44,11 @@ bool ServerInfo::getListFilterSupported() {
 bool ServerInfo::getListGroupSupported() {
     return pListGroupSupported;
 }
+
+bool ServerInfo::getListMultiGroupSupported() {
+    return pListMultiGroupSupported;
+}
+
 bool ServerInfo::getMBIDTagsSupported() {
     return pMBIDTagsSupported;
 }

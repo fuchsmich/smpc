@@ -11,12 +11,14 @@ public:
     void setVersion(MPD_version_t version);
     void setIdleSupported(bool idle);
     void setListGroupSupported(bool groupSupported);
+    void setListMultiGroupSupported(bool multiGroupSupported);
     void setListFilterSupported(bool filter);
     void setMBIDTagsSupported(bool MBIDSupported);
 
     MPD_version_t *getVersion();
     bool getIdleSupported();
     bool getListGroupSupported();
+    bool getListMultiGroupSupported();
     bool getListFilterSupported();
     bool getMBIDTagsSupported();
 private:
@@ -31,9 +33,14 @@ private:
     bool pIdleSupported;
 
     /**
-     * @brief pListGroupSupportedTrue if grouping is available on queries
+     * @brief pListGroupSupported True if grouping is available on queries
      */
     bool pListGroupSupported;
+
+    /**
+     * @brief pListMultiGroupSupported True if multiple grouping is available on queries
+     */
+    bool pListMultiGroupSupported;
 
     /**
      * @brief pListFilterSupported True if filtering lists is possible (Artist albums)
