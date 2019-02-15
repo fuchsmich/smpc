@@ -118,8 +118,15 @@ void NetworkAccess::getAlbums()
          * This helps with albums that have the same name as others (e.g. "Greatest Hits").
          * Not fully implemented yet */
 
+        qDebug() << "Getting albums";
         if ( mServerInfo->getListGroupSupported() ) {
-            sendMPDCommand(QString("list album group albumartist group MUSICBRAINZ_ALBUMID group date \n"));
+            if ( mServerInfo->getListMultiGroupSupported() ) {
+                qDebug() << "Getting albums multigroup";
+                sendMPDCommand(QString("list album group albumartist group MUSICBRAINZ_ALBUMID group date \n"));
+            } else {
+                qDebug() << "Getting albums grouped";
+                sendMPDCommand(QString("list album group albumartist\n"));
+            }
         } else {
             sendMPDCommand(QString("list album\n"));
         }
@@ -1878,12 +1885,14 @@ QMap<MpdArtist*, QList<MpdAlbum*>* > *NetworkAccess::getArtistsAlbumsMap_prv()
 void NetworkAccess::checkServerCapabilities() {
     MPD_version_t *version = mServerInfo->getVersion();
     /* Check server version */
-
+    qDebug() << version->mpdMajor2 << version->mpdMajor1;
     if ( (version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0) ) {
         /* Enable new list command features */
         /* Disabled until database support is finished as well */
         mServerInfo->setListGroupSupported(true);
-        if ( version->mpdMinor >= 22 && version->mpdMajor2 >= 20 && version->mpdMajor1 == 0 ) {
+        //multiple groups dont work since 0.20.22 https://github.com/MusicPlayerDaemon/MPD/issues/408
+        if (version->mpdMajor1 == 0 && ((version->mpdMajor2 >= 20 && version->mpdMinor >= 22) || version->mpdMajor2 > 20) ||
+             version->mpdMajor1 > 0 )  {
             mServerInfo->setListMultiGroupSupported(false);
         } else mServerInfo->setListMultiGroupSupported(true);
         mServerInfo->setListFilterSupported(true);
