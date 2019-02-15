@@ -122,22 +122,21 @@ DockedPanel {
             stepSize: 1
             maximumValue: 100
             minimumValue: 0
-            value: mVolume
+            value: ctl.volume
             valueText: value + "%"
             label: qsTr("volume")
             onPressedChanged: {
                 if (!pressed) {
                     volumeChanging = false
-                    setVolume(value)
-                    value  = Qt.binding(function() {return mVolume;});
+                    ctl.volume = value
+                    value  = Qt.binding(function() {return ctl.volume;});
                 } else {
                     volumeChanging = true
                 }
             }
             onValueChanged: {
                 if(pressed)
-                    setVolume(value)
-                // valueText = value+"%";
+                    ctl.volume = value
             }
         }
 

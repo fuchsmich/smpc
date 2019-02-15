@@ -45,7 +45,6 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mWasConnected = false;
     mFileModels = new QStack<FileModel*>();
     // Set empty qml properties for later usage
-    mQuickView->rootContext()->setContextProperty("versionstring",QVariant::fromValue(QString(VERSION)));
     mQuickView->rootContext()->setContextProperty("coverstring","");
     mQuickView->rootContext()->setContextProperty("artistInfoText","");
     mQuickView->rootContext()->setContextProperty("albumInfoText","");
@@ -211,10 +210,10 @@ void Controller::connectSignals()
     qRegisterMetaType<MPD_PLAYBACK_STATE>("MPD_PLAYBACK_STATE");
 
 
-    connect(item,SIGNAL(setHostname(QString)),this,SLOT(setHostname(QString)));
-    connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
-    connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
-    connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
+//    connect(item,SIGNAL(setHostname(QString)),this,SLOT(setHostname(QString)));
+//    connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
+//    connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
+//    connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
     connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
     connect(item,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
 
@@ -240,7 +239,7 @@ void Controller::connectSignals()
 
     connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
     connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
-    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
+    //connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
     connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
     connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
@@ -277,7 +276,7 @@ void Controller::connectSignals()
     //connect(QApplication::instance(),SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(focusChanged(QWidget*,QWidget*)));
 
     connect(this,SIGNAL(getFiles(QString)),mNetAccess,SLOT(getDirectory(QString)));
-    connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
+    //connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(this,SIGNAL(requestConnect()),mNetAccess,SLOT(connectToHost()));
     connect(this,SIGNAL(requestDisconnect()),mNetAccess,SLOT(disconnectFromServer()));
 //    connect(this,SIGNAL(serverProfilesUpdated()),item,SLOT(settingsModelUpdated()));
@@ -682,21 +681,24 @@ void Controller::connectProfile(int index)
     connectToServer();
 }
 
+void Controller::setVolume(int volume) {
+    if (volume >= 0 && volume <= 100) {
+        mVolume = volume;
+        mNetAccess->setVolume(mVolume);
+        emit volumeChanged(mVolume);
+        QString popup = "Volume: "+ QString::number(mVolume)+"%";
+        emit sendPopup(popup);
+    }
+}
+
 void Controller::incVolume()
 {
-    emit setVolume((mVolume+3>100 ? 100 : mVolume+3));
-    mVolume =(mVolume+3>100 ? 100 : mVolume+3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
+    setVolume(std::min(mVolume+3, 100));
 }
 
 void Controller::decVolume()
 {
-    emit setVolume((mVolume-3<0 ? 0 : mVolume-3));
-    mVolume = (mVolume-3<0 ? 0 : mVolume-3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
-
+    setVolume(std::max(mVolume - 3, 0));
 }
 
 

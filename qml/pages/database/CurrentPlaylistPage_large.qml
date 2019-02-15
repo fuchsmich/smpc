@@ -542,15 +542,15 @@ Page {
                             stepSize: 1
                             maximumValue: 100
                             minimumValue: 0
-                            value: mVolume
+                            value: ctl.volume
                             valueText: value + "%"
                             label: qsTr("volume")
                             onPressedChanged: {
                                 if (!pressed) {
                                     volumeChanging = false
-                                    setVolume(value)
+                                    ctl.volume = value
                                     value = Qt.binding(function () {
-                                        return mVolume
+                                        return ctl.volume
                                     })
                                     volumeControl.state = "sliderInvisible"
                                 } else {
@@ -560,8 +560,7 @@ Page {
                             }
                             onValueChanged: {
                                 if (pressed)
-                                    setVolume(value)
-                                // valueText = value+"%";
+                                    ctl.volume = value
                             }
                         }
 

@@ -18,7 +18,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->installTranslator(&translator);
 //    QScopedPointer<QQuickView> view(SailfishApp::createView());
     QQuickView *view = SailfishApp::createView();
-    view->engine()->addImportPath("/usr/share/harbour-smpc/qml/");
+    //view->engine()->addImportPath("/usr/share/harbour-smpc/qml/");
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
     view->setDefaultAlphaBuffer(true);
 
@@ -27,6 +27,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 
     Controller *control = new Controller(view,0);
+    view->rootContext()->setContextProperty("ctl", control);
+    view->rootContext()->setContextProperty("versionstring",QVariant::fromValue(QString(VERSION)));
+
     view->show();
     return app->exec();
 }

@@ -13,12 +13,12 @@ ApplicationWindow
     id: mainWindow
 
     // Signals for c++<->qml communication
-    signal setHostname(string hostname);
-    signal setPort(int port);
-    signal setPassword(string password);
-    signal setVolume(int volume);
+//    signal setHostname(string hostname);
+//    signal setPort(int port);
+//    signal setPassword(string password);
+//    signal connectToServer();
+    //signal setVolume(int volume);
     signal setCurrentArtist(string artist);
-    signal connectToServer();
 
     // Signals for database requests to networkaccess
     //Variant in format [artistname,albumname]

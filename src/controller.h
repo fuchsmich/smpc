@@ -43,14 +43,26 @@ class Controller : public QObject
     };
 
     Q_OBJECT
+
+    Q_PROPERTY(int volume READ getVolume WRITE setVolume  NOTIFY volumeChanged )
+
 public:
     explicit Controller(QObject *parent = 0);
     Controller(QQuickView *mQuickView,QObject *parent = 0);
     ~Controller();
     void connectSignals();
+
+    int getVolume() {
+        return mVolume;
+    }
+    void setVolume(int volume);
+
+
 public slots:
+    void setHostname(QString mHostname);
 
 signals:
+    void volumeChanged(int volume);
     void sendPopup(QVariant text);
     void sendStatus(QVariant status);
     void playlistUpdated();
@@ -66,7 +78,7 @@ signals:
     void savedPlaylistReady();
     void outputsReady();
     void serverProfilesUpdated();
-    void setVolume(int);
+    //void setVolume(int);
     void setUpdateInterval(int);
     void showWelcome();
     void requestExit();
@@ -166,7 +178,6 @@ private slots:
 //    void updateArtistAlbumsModel(QList<QObject*>* list);
     void updateFilesModel(QList<QObject*>* list);
     void updateOutputsModel(QList<QObject*>* list);
-    void setHostname(QString mHostname);
     void setPassword(QString mPassword);
     void setPort(int mPort);
     void connectToServer();
