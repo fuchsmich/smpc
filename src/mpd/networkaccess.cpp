@@ -1891,7 +1891,7 @@ void NetworkAccess::checkServerCapabilities() {
         /* Disabled until database support is finished as well */
         mServerInfo->setListGroupSupported(true);
         //multiple groups dont work since 0.20.22 https://github.com/MusicPlayerDaemon/MPD/issues/408
-        if (version->mpdMajor1 == 0 && ((version->mpdMajor2 >= 20 && version->mpdMinor >= 22) || version->mpdMajor2 > 20) ||
+        if (version->mpdMajor1 == 0 && ((version->mpdMajor2 >= 20 && version->mpdMinor >= 18) || version->mpdMajor2 > 20) ||
              version->mpdMajor1 > 0 )  {
             mServerInfo->setListMultiGroupSupported(false);
         } else mServerInfo->setListMultiGroupSupported(true);
