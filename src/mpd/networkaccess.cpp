@@ -136,7 +136,7 @@ void NetworkAccess::getAlbums()
         MpdAlbum *tempalbum;
         QString name;
         QString mbid;
-        QString albumartist;
+        QString albumartist, nextalbumartist;
         bool emptyAlbum = false;
         MPD_WHILE_PARSE_LOOP
         {
@@ -144,13 +144,14 @@ void NetworkAccess::getAlbums()
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
+                qDebug() << response << albumartist << name;
                 /* Remove newline at the end */
                 response.chop(1);
                 /* Parse album name and if server is new enough parse mbid */
                 if ( response.startsWith("Album: ") ) {
                     // Append album if name is already set(last album)
                     if ( name != "" || emptyAlbum ) {
-                        tempalbum = new MpdAlbum(NULL,name,albumartist,mbid);
+                        tempalbum = new MpdAlbum(NULL, name, albumartist, mbid);
 
                         /* This helps with qml Q_PROPERTY accesses */
                         tempalbum->moveToThread(mQMLThread);
@@ -158,6 +159,7 @@ void NetworkAccess::getAlbums()
                         QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
                         albums->append(tempalbum);
                         emptyAlbum = false;
+                        albumartist = nextalbumartist;
                     }
                     name = response.right(response.length() - 7);
                     if ( name == "" ) {
@@ -166,7 +168,7 @@ void NetworkAccess::getAlbums()
                 }  else if ( response.startsWith("MUSICBRAINZ_ALBUMID: ") ) {
                     mbid = response.right(response.length() - 21);
                 }  else if ( response.startsWith("AlbumArtist: ") ) {
-                    albumartist = response.right(response.length() - 13);
+                    nextalbumartist = response.right(response.length() - 13);
                 }
             }
         }
