@@ -528,6 +528,7 @@ Page {
                 IconButton {
                     id: stopButton
                     icon.source: "qrc:images/icon-m-stop.png"
+                    icon.scale: Screen.width > 540 ? 2.2 : 1
                     onClicked: stop()
                 }
                 IconButton {

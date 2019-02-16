@@ -181,6 +181,8 @@ Page {
                             elide: Text.ElideRight
                             text: (title === "" ? filename + " " : title + " ")
                             font.italic: (playing) ? true : false
+                            font.bold: (playing) ? true : false
+                            color: playing ? Theme.highlightColor : Theme.primaryColor
                             anchors {
                                 verticalCenter: parent.verticalCenter
                             }
@@ -205,15 +207,15 @@ Page {
                     offset: 0.65
                 }
 //                 Disabled until offically supported
-                GlassItem {
-                    anchors.fill: parent
-                    color: Theme.highlightColor
-                    visible: opacity != 0.0
-                    scale: 0.8
-                    opacity: playing ? 1.0 : 0.0
-                    Behavior on opacity { PropertyAnimation {duration: 750} }
+                // GlassItem {
+                //     anchors.fill: parent
+                //     color: Theme.highlightColor
+                //     visible: opacity != 0.0
+                //     scale: 0.8
+                //     opacity: playing ? 1.0 : 0.0
+                //     Behavior on opacity { PropertyAnimation {duration: 750} }
 
-                }
+                // }
                 onClicked: {
                     playlistView.currentIndex = index
                     if (!playing) {

@@ -18,7 +18,6 @@ Page {
             bottom: parent.bottom
             right:  parent.right
             left: parent.left
-//            bottomMargin: quickControlPanel.visibleSize
         }
         contentHeight: artistText.implicitHeight
 
@@ -26,9 +25,11 @@ Page {
         clip:true
         Label {
             id: artistText
-            width: parent.width
+            x: Theme.paddingMedium
+            y: Theme.paddingMedium
+            width: parent.width - 2 * Theme.paddingMedium
             height: implicitHeight
-            text: artistInfoText
+            text: artistInfoText + "\n"
             wrapMode: "WordWrap"
         }
     }
