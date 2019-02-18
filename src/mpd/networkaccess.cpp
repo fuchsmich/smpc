@@ -119,17 +119,17 @@ void NetworkAccess::getAlbums()
          * Not fully implemented yet */
 
         qDebug() << "Getting albums";
-        if ( mServerInfo->getListGroupSupported() ) {
-            if ( mServerInfo->getListMultiGroupSupported() ) {
-                qDebug() << "Getting albums multigroup";
-                sendMPDCommand(QString("list album group albumartist group MUSICBRAINZ_ALBUMID group date \n"));
-            } else {
-                qDebug() << "Getting albums grouped";
-                sendMPDCommand(QString("list album group albumartist\n"));
-            }
-        } else {
+//        if ( mServerInfo->getListGroupSupported() ) {
+//            if ( mServerInfo->getListMultiGroupSupported() ) {
+//                qDebug() << "Getting albums multigroup";
+//                sendMPDCommand(QString("list album group albumartist group MUSICBRAINZ_ALBUMID group date \n"));
+//            } else {
+//                qDebug() << "Getting albums grouped";
+//                sendMPDCommand(QString("list album group albumartist\n"));
+//            }
+//        } else {
             sendMPDCommand(QString("list album\n"));
-        }
+//        }
 
         //Read all albums until OK send from mpd
         QString response ="";
@@ -146,11 +146,12 @@ void NetworkAccess::getAlbums()
                 response = QString::fromUtf8(mTCPSocket->readLine());
                 /* Remove newline at the end */
                 response.chop(1);
+                qDebug() << "**response: " << response;
                 /* Parse album name and if server is new enough parse mbid */
                 if ( response.startsWith("Album: ") ) {
                     // Append album if name is already set
                     if ( name != "" || emptyAlbum ) {
-                        qDebug() << "**adding: " << albumartist << name << mbid;
+                        qDebug() << "adding: " << albumartist << name << mbid << date;
                         tempalbum = new MpdAlbum(NULL, name, albumartist, mbid);
 
                         /* This helps with qml Q_PROPERTY accesses */
@@ -160,6 +161,7 @@ void NetworkAccess::getAlbums()
                         albums->append(tempalbum);
                         emptyAlbum = false;
                         albumartist = nextalbumartist;
+                        mbid = "";
                     }
                     name = response.right(response.length() - 7);
                     if ( name == "" ) {
@@ -177,7 +179,7 @@ void NetworkAccess::getAlbums()
                 } else if ( response.startsWith("Date: ") ) {
                     date = response.right(response.length() - 6);
                 }
-                qDebug() << response << albumartist << name << date;
+                //qDebug() << "albumartist, name, mbid, date" << albumartist << name << mbid << date;
             }
         }
         /* Make sure the last album isn't missed because of loop structure */
@@ -1895,7 +1897,7 @@ QMap<MpdArtist*, QList<MpdAlbum*>* > *NetworkAccess::getArtistsAlbumsMap_prv()
 void NetworkAccess::checkServerCapabilities() {
     MPD_version_t *version = mServerInfo->getVersion();
     /* Check server version */
-    qDebug() << version->mpdMajor2 << version->mpdMajor1;
+    qDebug() << version->mpdMajor1 << version->mpdMajor2 << version->mpdMinor;
     if ( (version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0) ) {
         /* Enable new list command features */
         /* Disabled until database support is finished as well */
