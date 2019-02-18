@@ -136,7 +136,7 @@ void NetworkAccess::getAlbums()
         MpdAlbum *tempalbum;
         QString name;
         QString mbid;
-        QString albumartist, nextalbumartist;
+        QString albumartist, nextalbumartist, date;
         bool emptyAlbum = false;
         MPD_WHILE_PARSE_LOOP
         {
@@ -144,13 +144,13 @@ void NetworkAccess::getAlbums()
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-                qDebug() << response << albumartist << name;
                 /* Remove newline at the end */
                 response.chop(1);
                 /* Parse album name and if server is new enough parse mbid */
                 if ( response.startsWith("Album: ") ) {
-                    // Append album if name is already set(last album)
+                    // Append album if name is already set
                     if ( name != "" || emptyAlbum ) {
+                        qDebug() << "**adding: " << albumartist << name << mbid;
                         tempalbum = new MpdAlbum(NULL, name, albumartist, mbid);
 
                         /* This helps with qml Q_PROPERTY accesses */
@@ -168,8 +168,16 @@ void NetworkAccess::getAlbums()
                 }  else if ( response.startsWith("MUSICBRAINZ_ALBUMID: ") ) {
                     mbid = response.right(response.length() - 21);
                 }  else if ( response.startsWith("AlbumArtist: ") ) {
-                    nextalbumartist = response.right(response.length() - 13);
+                    // First AlbumArtist??
+                    if (name == "" && !emptyAlbum) {
+                        albumartist = nextalbumartist = response.right(response.length() - 13);
+                    } else {
+                        nextalbumartist = response.right(response.length() - 13);
+                    }
+                } else if ( response.startsWith("Date: ") ) {
+                    date = response.right(response.length() - 6);
                 }
+                qDebug() << response << albumartist << name << date;
             }
         }
         /* Make sure the last album isn't missed because of loop structure */
@@ -1893,7 +1901,7 @@ void NetworkAccess::checkServerCapabilities() {
         /* Disabled until database support is finished as well */
         mServerInfo->setListGroupSupported(true);
         //multiple groups dont work since 0.20.22 https://github.com/MusicPlayerDaemon/MPD/issues/408
-        if (version->mpdMajor1 == 0 && ((version->mpdMajor2 >= 20 && version->mpdMinor >= 18) || version->mpdMajor2 > 20) ||
+        if (version->mpdMajor1 == 0 && ((version->mpdMajor2 >= 20 && version->mpdMinor >= 22) || version->mpdMajor2 > 20) ||
              version->mpdMajor1 > 0 )  {
             mServerInfo->setListMultiGroupSupported(false);
         } else mServerInfo->setListMultiGroupSupported(true);
