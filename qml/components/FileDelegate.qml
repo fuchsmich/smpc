@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Component {
@@ -16,7 +16,7 @@ Component {
                 left: parent.left
             }
             id: fileicon
-            source: (isDirectory ? "image://theme/icon-m-folder" : (isPlaylist ? "image://theme/icon-m-document" : imageURL ) )
+            source: (isDirectory ? "image://theme/icon-m-folder" : (isPlaylist ? "image://theme/icon-m-document" : imageURL))
             width: height
         }
         Label {
@@ -28,7 +28,7 @@ Component {
                 verticalCenter: isFile ? undefined : parent.verticalCenter
                 top: isFile ? parent.top : undefined
                 left: fileicon.right
-                right:parent.right
+                right: parent.right
                 rightMargin: listPadding
             }
         }
@@ -42,7 +42,7 @@ Component {
             anchors {
                 top: filenametext.bottom
                 left: fileicon.right
-                right:parent.right
+                right: parent.right
                 rightMargin: listPadding
             }
         }
@@ -62,13 +62,17 @@ Component {
                 filesClicked((prepath == "/" ? "" : prepath + "/") + name)
             }
             if (isFile) {
-                albumTrackClicked(title, album, artist, length, path,
-                                  year, tracknr,trackmbid,artistmbid,albummbid)
+                albumTrackClicked(title, album, artist, length, path, year,
+                                  tracknr, trackmbid, artistmbid, albummbid)
             }
             if (isPlaylist) {
                 savedPlaylistClicked(
                             (prepath == "/" ? "" : prepath + "/") + name)
-                pageStack.push(Qt.resolvedUrl("../pages/database/PlaylistTracksPage.qml"),{playlistname:name})
+                pageStack.push(Qt.resolvedUrl(
+                                   "../pages/database/PlaylistTracksPage.qml"),
+                               {
+                                   "playlistname": name
+                               })
             }
         }
 
@@ -112,8 +116,8 @@ Component {
             ContextMenu {
                 MenuItem {
                     text: isFile ? qsTr(
-                                       "play file") : (isDirectory ? qsTr("play directory") : qsTr(
-                                                                         "play playlist"))
+                                       "Play file") : (isDirectory ? qsTr("Play directory") : qsTr(
+                                                                         "Play playlist"))
                     onClicked: {
                         if (isFile) {
                             playTrackRemorse()
@@ -127,8 +131,8 @@ Component {
 
                 MenuItem {
                     text: isFile ? qsTr(
-                                       "add file") : (isDirectory ? qsTr("add directory") : qsTr(
-                                                                        "add playlist"))
+                                       "Add file") : (isDirectory ? qsTr("Add directory") : qsTr(
+                                                                        "Add playlist"))
                     onClicked: {
                         if (isFile) {
                             addTrackRemorse()
@@ -142,18 +146,23 @@ Component {
                 MenuItem {
                     enabled: isFile
                     visible: isFile
-                    text: qsTr("play after current")
+                    text: qsTr("Play after current")
                     onClicked: {
-                        addTrackAfterCurrentRemorse();
+                        addTrackAfterCurrentRemorse()
                     }
                 }
                 MenuItem {
                     enabled: isFile
                     visible: isFile
-                    text: qsTr("add to saved list")
+                    text: qsTr("Add to saved list")
                     onClicked: {
                         requestSavedPlaylists()
-                        pageStack.push(Qt.resolvedUrl("../pages/database/AddToPlaylistDialog.qml"),{url:path});
+                        pageStack.push(
+                                    Qt.resolvedUrl(
+                                        "../pages/database/AddToPlaylistDialog.qml"),
+                                    {
+                                        "url": path
+                                    })
                     }
                 }
             }

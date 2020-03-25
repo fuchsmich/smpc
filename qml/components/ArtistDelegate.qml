@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Component {
@@ -24,7 +24,8 @@ Component {
                 asynchronous: true
                 fillMode: Image.PreserveAspectFit
                 onSourceSizeChanged: {
-                    console.debug("Source size: " + sourceSize.width + ":" + sourceSize.height)
+                    console.debug(
+                                "Source size: " + sourceSize.width + ":" + sourceSize.height)
                 }
             }
             Rectangle {
@@ -70,7 +71,7 @@ Component {
             artistClicked(artist)
             pageStack.push(Qt.resolvedUrl(
                                "../pages/database/AlbumListPage.qml"), {
-                               artistname: artistname
+                               "artistname": artistname
                            })
         }
     }

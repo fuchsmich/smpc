@@ -1,6 +1,5 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
-
 
 DockedPanel {
     id: controlPanel
@@ -14,23 +13,47 @@ DockedPanel {
 
     flickableDirection: Flickable.VerticalFlick
 
+    Item {
+        id: progressBarItem
+
+        height: Theme.paddingSmall
+        width: parent.width
+        visible: (mTitle !== "" && mArtist !== "")
+
+        Rectangle {
+            id: progressBar
+            height: parent.height
+            width: parent.width * (mPosition / mLength)
+            color: Theme.highlightColor
+            opacity: 0.5
+        }
+
+        Rectangle {
+            anchors {
+                left: progressBar.right
+                right: parent.right
+            }
+            height: parent.height
+            color: "black"
+            opacity: Theme.highlightBackgroundOpacity
+        }
+    }
 
     Image {
-            width: parent.width
-            fillMode: Image.PreserveAspectFit
-            source: "image://theme/graphic-gradient-edge"
-        }
+        width: parent.width
+        fillMode: Image.PreserveAspectFit
+        source: "image://theme/graphic-gradient-edge"
+    }
 
     Label {
         id: notPlayingLabel
-        visible: (mTitle=="" && mArtist=="")
-        text: qsTr("not playing")
+        visible: (mTitle == "" && mArtist == "")
+        text: qsTr("Not playing")
         anchors.centerIn: parent
         color: Theme.primaryColor
         font.pixelSize: Theme.fontSizeLarge
         font.bold: false
         font.family: Theme.fontFamily
-
     }
 
     Column {
@@ -52,7 +75,7 @@ DockedPanel {
                 left: parent.left
                 right: parent.right
             }
-             active: controlPanel.open && Qt.application.active
+            active: controlPanel.open && Qt.application.active
         }
         ScrollLabel {
             id: artistText
@@ -72,7 +95,7 @@ DockedPanel {
     PushUpMenu {
         id: pushUp
         Row {
-            id:buttonRow
+            id: buttonRow
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.paddingMedium
             height: shuffleButton.height
@@ -98,16 +121,16 @@ DockedPanel {
                 layer.effect: ShaderEffect {
                     property color color: Theme.primaryColor
 
-                    fragmentShader: "
-                    varying mediump vec2 qt_TexCoord0;
-                    uniform highp float qt_Opacity;
-                    uniform lowp sampler2D source;
-                    uniform highp vec4 color;
-                    void main() {
+                        fragmentShader: "
+                        varying mediump vec2 qt_TexCoord0;
+                        uniform highp float qt_Opacity;
+                        uniform lowp sampler2D source;
+                        uniform highp vec4 color;
+                        void main() {
                         highp vec4 pixelColor = texture2D(source, qt_TexCoord0);
                         gl_FragColor = vec4(mix(pixelColor.rgb/max(pixelColor.a, 0.00390625), color.rgb/max(color.a, 0.00390625), color.a) * pixelColor.a, pixelColor.a) * qt_Opacity;
-                    }
-                    "
+                        }
+                        "
                 }
                 layer.enabled: true
                 layer.samplerName: "source"
@@ -135,30 +158,29 @@ DockedPanel {
 
         Slider {
             id: volumeSlider
-            width:parent.width
+            width: parent.width
             stepSize: 1
             maximumValue: 100
             minimumValue: 0
             value: mVolume
             valueText: value + "%"
-            label: qsTr("volume")
+            label: qsTr("Volume")
             onPressedChanged: {
                 if (!pressed) {
                     volumeChanging = false
                     setVolume(value)
-                    value  = Qt.binding(function() {return mVolume;});
+                    value = Qt.binding(function () {
+                        return mVolume
+                    })
                 } else {
                     volumeChanging = true
                 }
             }
             onValueChanged: {
-                if(pressed)
+                if (pressed)
                     setVolume(value)
                 // valueText = value+"%";
             }
         }
-
     }
-
-
 }

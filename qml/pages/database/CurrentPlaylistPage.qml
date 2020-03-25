@@ -48,37 +48,37 @@ Page {
         highlightFollowsCurrentItem: true
         highlightMoveDuration: 0
         header: PageHeader {
-            title: qsTr("playlist")
+            title: qsTr("Playlist")
         }
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("add url")
+                text: qsTr("Add url")
                 onClicked: {
                     pageStack.push(urlInputDialog)
                 }
             }
             MenuItem {
-                text: qsTr("delete playlist")
+                text: qsTr("Delete playlist")
                 onClicked: {
                     pageStack.push(deleteQuestionDialog)
                 }
             }
             MenuItem {
-                text: qsTr("save playlist")
+                text: qsTr("Save playlist")
                 onClicked: {
                     pageStack.push(saveplaylistDialog)
                 }
             }
             MenuItem {
-                text: qsTr("open playlist")
+                text: qsTr("Open playlist")
                 onClicked: {
                     requestSavedPlaylists()
                     pageStack.push(Qt.resolvedUrl("SavedPlaylistsPage.qml"))
                 }
             }
             MenuItem {
-                text: qsTr("jump to playing song")
+                text: qsTr("Jump to playing song")
                 onClicked: {
                     playlistView.currentIndex = -1
                     playlistView.currentIndex = lastsongid
@@ -105,7 +105,7 @@ Page {
 //                            onClicked: playPlaylistTrack(index)
 //                        }
                         MenuItem {
-                            text: qsTr("remove song")
+                            text: qsTr("Remove song")
                             visible: !mDeleteRemorseRunning
                             enabled: !mDeleteRemorseRunning
                             onClicked: {
@@ -115,7 +115,7 @@ Page {
                         }
 
                         MenuItem {
-                            text: qsTr("show artist")
+                            text: qsTr("Show artist")
                             onClicked: {
                                 artistClicked(artist)
                                 pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"),{artistname:artist});
@@ -123,7 +123,7 @@ Page {
                         }
 
                         MenuItem {
-                            text: qsTr("show album")
+                            text: qsTr("Show album")
                             onClicked: {
                                     albumClicked("", album)
                                     pageStack.push(Qt.resolvedUrl("AlbumTracksPage.qml"),{artistname:"",albumname:album});
@@ -131,7 +131,7 @@ Page {
                         }
                         MenuItem {
                             visible: !playing
-                            text: qsTr("play as next")
+                            text: qsTr("Play as next")
                             onClicked: {
                                 /* Workaround for to fast model change, seems to segfault */
                                 playNextWOTimer.windUp(index);
@@ -140,12 +140,12 @@ Page {
 
                         MenuItem {
                             visible: playing
-                            text: qsTr("show information")
+                            text: qsTr("Show information")
                             onClicked: pageStack.navigateForward(PageStackAction.Animated)
                         }
 
                         MenuItem {
-                            text: qsTr("add to saved list")
+                            text: qsTr("Add to saved list")
                             onClicked: {
                                 requestSavedPlaylists()
                                 pageStack.push(Qt.resolvedUrl("AddToPlaylistDialog.qml"),{url:path});
@@ -296,7 +296,7 @@ Page {
         interval: 250
         repeat: false
         onTriggered: {
-            console.debug("send signal: " + index);
+            console.debug("Send signal: " + index);
             playPlaylistSongNext(index);
         }
 

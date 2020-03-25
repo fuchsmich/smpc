@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../components"
 
@@ -23,8 +23,8 @@ Page {
         }
         horizontalAlignment: Text.AlignHCenter
         color: Theme.highlightColor
-        text: connected ? qsTr("connected to: %1").arg(profilename) : qsTr(
-                              "disconnected")
+        text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
+                              "Disconnected")
     }
     SilicaFlickable {
         anchors {
@@ -75,8 +75,9 @@ Page {
                                     font.pixelSize: Theme.fontSizeMedium
                                     width: gridItem.width - (2 * Theme.paddingSmall)
                                     horizontalAlignment: "AlignHCenter"
-                                     scale: paintedWidth > width ? (width / paintedWidth) : 1
-                               /*     transform: [
+                                    scale: paintedWidth > width ? (width / paintedWidth) : 1
+
+                                    /*     transform: [
                                         Scale {
                                             id: scale
                                             xScale: yScale
@@ -103,39 +104,39 @@ Page {
 
     Component.onCompleted: {
         mainMenuModel.append({
-                                 name: qsTr("playlist"),
-                                 ident: "playlist",
-                                 icon: "image://theme/icon-m-document"
+                                 "name": qsTr("Playlist"),
+                                 "ident": "playlist",
+                                 "icon": "image://theme/icon-m-document"
                              })
         mainMenuModel.append({
-                                 name: qsTr("artists"),
-                                 ident: "artists",
-                                 icon: "image://theme/icon-m-mic"
+                                 "name": qsTr("Artists"),
+                                 "ident": "artists",
+                                 "icon": "image://theme/icon-m-mic"
                              })
         mainMenuModel.append({
-                                 name: qsTr("albums"),
-                                 ident: "albums",
-                                 icon: "image://theme/icon-m-music"
+                                 "name": qsTr("Albums"),
+                                 "ident": "albums",
+                                 "icon": "image://theme/icon-m-music"
                              })
         mainMenuModel.append({
-                                 name: qsTr("files"),
-                                 ident: "files",
-                                 icon: "image://theme/icon-m-folder"
+                                 "name": qsTr("Files"),
+                                 "ident": "files",
+                                 "icon": "image://theme/icon-m-folder"
                              })
         mainMenuModel.append({
-                                 name: qsTr("search"),
-                                 ident: "search",
-                                 icon: "image://theme/icon-m-search"
+                                 "name": qsTr("Search"),
+                                 "ident": "search",
+                                 "icon": "image://theme/icon-m-search"
                              })
         mainMenuModel.append({
-                                 name: qsTr("connect"),
-                                 ident: "connectto",
-                                 icon: "image://theme/icon-m-computer"
+                                 "name": qsTr("Connect"),
+                                 "ident": "connectto",
+                                 "icon": "image://theme/icon-m-computer"
                              })
         mainMenuModel.append({
-                                 name: qsTr("settings"),
-                                 ident: "settings",
-                                 icon: "image://theme/icon-m-developer-mode"
+                                 "name": qsTr("Settings"),
+                                 "ident": "settings",
+                                 "icon": "image://theme/icon-m-developer-mode"
                              })
     }
 
@@ -164,14 +165,12 @@ Page {
         } else if (ident === "currentsong") {
             if (connected)
                 pageStack.push(currentsongpage)
-            //                        if(connected)
-            //                            pageStack.push(Qt.resolvedUrl("CurrentSong.qml"));
         } else if (ident === "albums") {
             artistname = ""
             if (connected) {
                 requestAlbums()
                 pageStack.push(Qt.resolvedUrl("database/AlbumListPage.qml"), {
-                                   artistname: artistname
+                                   "artistname": artistname
                                })
             }
         } else if (ident === "artists") {
@@ -197,7 +196,6 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            //            pageStack.pushAttached(Qt.resolvedUrl("database/CurrentPlaylistPage.qml"));
             if (mPlaylistPage == undefined) {
                 /* Check if running on large device and load corresponding page */
                 if (Screen.sizeCategory >= Screen.Large) {

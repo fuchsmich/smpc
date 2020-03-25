@@ -1,12 +1,12 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
 Page {
     id: currentsong_page
-    property string title:mTitle
-    property string album:mAlbum
-    property string artist:mArtist
+    property string title: mTitle
+    property string album: mAlbum
+    property string artist: mArtist
     //property int lengthtextcurrent:lengthTextcurrent.text;
     property bool shuffle
     property bool repeat
@@ -17,14 +17,15 @@ Page {
     property bool pageactive: false
 
     Component.onDestruction: {
-        mCurrentSongPage = null;
+        mCurrentSongPage = null
     }
 
     allowedOrientations: Orientation.All
 
     Drawer {
         id: mainDrawer
-        dock: (orientation === Orientation.Portrait || orientation === Orientation.PortraitInverted) ? Dock.Bottom : Dock.Right
+        dock: (orientation === Orientation.Portrait
+               || orientation === Orientation.PortraitInverted) ? Dock.Bottom : Dock.Right
         anchors.fill: parent
         open: true
 
@@ -35,31 +36,37 @@ Page {
                 id: drawerOpenBackgroundItem
                 anchors.fill: parent
                 onClicked: {
-                    if ( currentsong_page.state=="landscape" && mainDrawer.open) {
+                    if (currentsong_page.state == "landscape"
+                            && mainDrawer.open) {
                         mainDrawer.hide()
-                    } else if ( currentsong_page.state=="landscape" && !mainDrawer.open )  {
+                    } else if (currentsong_page.state == "landscape"
+                               && !mainDrawer.open) {
                         mainDrawer.show()
-//                        volumeControl.state = "slideVisible"
+                        // volumeControl.state = "slideVisible"
                         drawerCloseTimer.start()
                     }
                 }
             }
             PullDownMenu {
                 MenuItem {
-                    text: qsTr("show all tracks from album")
+                    text: qsTr("Show all tracks from album")
                     visible: album === "" ? false : true
                     onClicked: {
                         albumClicked("", album)
-                        pageStack.push(Qt.resolvedUrl("AlbumTracksPage.qml"),{artistname:"",albumname:mAlbum});
-
+                        pageStack.push(Qt.resolvedUrl("AlbumTracksPage.qml"), {
+                                           "artistname": "",
+                                           "albumname": mAlbum
+                                       })
                     }
                 }
                 MenuItem {
-                    text: qsTr("show albums from artist")
+                    text: qsTr("Show albums from artist")
                     visible: artist === "" ? false : true
                     onClicked: {
                         artistClicked(artist)
-                        pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"),{artistname:mArtist});
+                        pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"), {
+                                           "artistname": mArtist
+                                       })
                     }
                 }
             }
@@ -75,11 +82,10 @@ Page {
                 }
 
                 // Spacing hack
-                Rectangle
-                {
-                    opacity:0.0
+                Rectangle {
+                    opacity: 0.0
                     // Center landscapeimages
-                    height: (currentsong_page.height-landscapeImageRow.height)/2
+                    height: (currentsong_page.height - landscapeImageRow.height) / 2
                     width: parent.width
                     visible: landscapeImageRow.visible
                 }
@@ -103,21 +109,17 @@ Page {
                         property int calcheight: (infoFlickable.height
                                                   - (titleText.height + albumText.height
                                                      + artistText.height))
-                        height: showCoverNowPlaying ? (calcheight > (contentColumn.width - listPadding
-                                               * 2) ? (contentColumn.width
-                                                       - listPadding * 2) : calcheight) : 0
+                        height: showCoverNowPlaying ? (calcheight > (contentColumn.width - listPadding * 2) ? (contentColumn.width - listPadding * 2) : calcheight) : 0
                         width: height
                         fillMode: Image.PreserveAspectFit
                         sourceprimary: coverimageurl
                         sourcesecondary: artistimageurl
                         active: visible
                         Rectangle {
-                            color: Theme.rgba(
-                                       Theme.highlightBackgroundColor,
-                                       Theme.highlightBackgroundOpacity)
+                            color: Theme.rgba(Theme.highlightBackgroundColor,
+                                              Theme.highlightBackgroundOpacity)
                             anchors.fill: parent
-                            visible: (!coverImage.ready
-                                      && showCoverNowPlaying)
+                            visible: (!coverImage.ready && showCoverNowPlaying)
                             Image {
                                 anchors.fill: parent
                                 source: "qrc:images/pictogram.svg"
@@ -126,18 +128,16 @@ Page {
                             }
                         }
                     }
-                    Item
-                    {
+                    Item {
                         id: landscapeImageRow
                         width: parent.width
                         height: albumImgLandscape.height
                         anchors.horizontalCenter: parent.horizontalCenter
-                        clip:true
-                        Image
-                        {
+                        clip: true
+                        Image {
                             id: albumImgLandscape
                             source: coverimageurl
-                            width : (parent.width/2)
+                            width: (parent.width / 2)
                             height: width
                             anchors {
                                 top: parent.top
@@ -159,11 +159,10 @@ Page {
                                 }
                             }
                         }
-                        Image
-                        {
+                        Image {
                             id: artistImgLandscape
                             source: artistimageurl
-                            width : (parent.width/2)
+                            width: (parent.width / 2)
                             height: width
                             anchors {
                                 top: parent.top
@@ -186,8 +185,7 @@ Page {
                                 }
                             }
                         }
-                        Rectangle
-                        {
+                        Rectangle {
                             anchors.fill: parent
                             gradient: Gradient {
                                 GradientStop {
@@ -205,20 +203,17 @@ Page {
                             }
                         }
 
-
-                        Column
-                        {
+                        Column {
                             id: landscapeTextScrollColumn
                             anchors {
                                 bottom: parent.bottom
                             }
                             width: landscapeImageRow.width
 
-
                             ScrollLabel {
                                 id: titleTextLC
                                 text: title
-                                color: Theme.primaryColor
+                                color: Theme.highlightColor
                                 font.pixelSize: fontsize
                                 width: parent.width
                                 anchors {
@@ -249,15 +244,12 @@ Page {
                                 }
                             }
                         }
-
-
                     }
                     // Spacing hack
-                    Rectangle
-                    {
-                        opacity:0.0
+                    Rectangle {
+                        opacity: 0.0
                         // Center landscapeimages
-                        height: (currentsong_page.height-landscapeImageRow.height)/2
+                        height: (currentsong_page.height - landscapeImageRow.height) / 2
                         width: parent.width
                         visible: landscapeImageRow.visible
                     }
@@ -265,7 +257,7 @@ Page {
                     ScrollLabel {
                         id: titleText
                         text: title
-                        color: Theme.primaryColor
+                        color: Theme.highlightColor
                         font.pixelSize: fontsize
                         anchors {
                             left: parent.left
@@ -293,75 +285,50 @@ Page {
                         }
                     }
 
-                    Label {
-                        text: qsTr("track no.:")
-                        color: Theme.secondaryColor
-                        font.pixelSize: fontsizegrey
-                        anchors {
-                            left: parent.left
+                    Row {
+                        anchors.right: parent.right
+                        anchors.left: parent.left
+                        spacing: (width / 2) * 0.1
+                        Label {
+                            id: nrText
+                            width: (parent.width / 2) * 0.95
+                            text: qsTr("Track nr: " + mTrackNr)
+                            color: Theme.primaryColor
+                            font.pixelSize: fontsize
+                            wrapMode: "WordWrap"
+                        }
+
+                        Label {
+                            id: playlistnrText
+                            width: (parent.width / 2) * 0.95
+                            text: "Playlist nr: " + (lastsongid + 1) + "/" + mPlaylistlength
+                            color: Theme.primaryColor
+                            font.pixelSize: fontsize
+                            wrapMode: "WordWrap"
+                            horizontalAlignment: Text.AlignRight
                         }
                     }
-                    Label {
-                        id: nrText
-                        text: mTrackNr
-                        color: Theme.primaryColor
-                        font.pixelSize: fontsize
-                        wrapMode: "WordWrap"
-//                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
 
-
-                    Label {
-                        text: qsTr("playlist no.:")
-                        color: Theme.secondaryColor
-                        font.pixelSize: fontsizegrey
-                        anchors {
-                            left: parent.left
-                        }
-                    }
-                    Label {
-                        id: playlistnrText
-                        text: (lastsongid+1) + " / " + mPlaylistlength
-                        color: Theme.primaryColor
-                        font.pixelSize: fontsize
-                        wrapMode: "WordWrap"
-//                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-
-                    Label {
-                        text: qsTr("bitrate:")
-                        color: Theme.secondaryColor
-                        font.pixelSize: fontsizegrey
-                    }
-                    Label {
+                    ScrollLabel {
                         id: bitrateText
-                        text: mBitrate
-                        color: Theme.primaryColor
-                        font.pixelSize: fontsize
-                        wrapMode: "WordWrap"
-//                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-                    Label {
-                        text: qsTr("properties:")
+                        text: mBitrate + ", " + mAudioProperties
                         color: Theme.secondaryColor
-                        font.pixelSize: fontsizegrey
-                    }
-                    Label {
-                        id: audiopropertiesText
-                        text: mAudioProperties
-                        color: Theme.primaryColor
                         font.pixelSize: fontsize
-                        wrapMode: "WordWrap"
-//                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
                     }
-                    Label {
-                        text: qsTr("uri:")
-                        color: Theme.secondaryColor
-                        font.pixelSize: fontsizegrey
-                    }
+                    // Label {
+                    //     id: audiopropertiesText
+                    //     text: qsTr("Properties: " + mAudioProperties)
+                    //     color: Theme.primaryColor
+                    //     font.pixelSize: fontsize
+                    //     wrapMode: "WordWrap"
+                    // }
                     Label {
                         id: fileText
-                        text: mUri
+                        text: qsTr("URI: " + mUri)
                         color: Theme.primaryColor
                         font.pixelSize: fontsize
                         wrapMode: "WrapAnywhere"
@@ -374,8 +341,6 @@ Page {
                 }
             }
         }
-
-
 
         backgroundSize: volumeControl.height + positionSlider.height + buttonRow.height
         background: Column {
@@ -433,7 +398,7 @@ Page {
                         volumeSliderFadeOutTimer.start()
                     }
                     icon.onStatusChanged: {
-                        if ( icon.status == Image.Error) {
+                        if (icon.status == Image.Error) {
                             // Try old icon name before Sailfish 2.0
                             icon.source = "image://theme/icon-status-volume-max"
                         }
@@ -449,12 +414,14 @@ Page {
                     minimumValue: 0
                     value: mVolume
                     valueText: value + "%"
-                    label: qsTr("volume")
+                    label: qsTr("Volume")
                     onPressedChanged: {
                         if (!pressed) {
                             volumeChanging = false
                             setVolume(value)
-                            value  = Qt.binding(function() {return mVolume;});
+                            value = Qt.binding(function () {
+                                return mVolume
+                            })
                             volumeControl.state = "sliderInvisible"
                         } else {
                             volumeChanging = true
@@ -462,7 +429,7 @@ Page {
                         }
                     }
                     onValueChanged: {
-                        if(pressed)
+                        if (pressed)
                             setVolume(value)
                         // valueText = value+"%";
                     }
@@ -482,11 +449,11 @@ Page {
                 id: positionSlider
                 width: parent.width
                 stepSize: 1.0
-                maximumValue: ( mLength > 0 ) ? mLength : 1.0
+                maximumValue: (mLength > 0) ? mLength : 1.0
                 minimumValue: 0.0
                 value: mPosition
                 valueText: formatLength(value)
-                label: qsTr("position")
+                label: qsTr("Position")
                 Label {
                     id: lengthTextcomplete
                     text: mLengthText
@@ -503,7 +470,9 @@ Page {
                     mPositionSliderActive = pressed
                     if (!pressed) {
                         seek(value)
-                        value  = Qt.binding(function() {return mPosition;});
+                        value = Qt.binding(function () {
+                            return mPosition
+                        })
                     }
                 }
             }
@@ -554,15 +523,13 @@ Page {
         }
     }
 
-
-
     onStatusChanged: {
         if ((status === PageStatus.Activating)
                 || (status === PageStatus.Active)) {
             pageactive = true
-//            positionSlider.handleVisible = false;
-//            positionSlider.handleVisible = true;
-//            positionSlider.valueText = Qt.binding(function () {return formatLength(positionSlider.value);})
+            //            positionSlider.handleVisible = false;
+            //            positionSlider.handleVisible = true;
+            //            positionSlider.valueText = Qt.binding(function () {return formatLength(positionSlider.value);})
             quickControlPanel.hideControl = true
         } else {
             quickControlPanel.hideControl = false
@@ -571,8 +538,7 @@ Page {
     }
 
     states: [
-        State
-        {
+        State {
             name: "portrait"
             PropertyChanges {
                 target: coverImage
@@ -615,8 +581,7 @@ Page {
                 visible: true
             }
         },
-        State
-        {
+        State {
             name: "landscape"
             PropertyChanges {
                 target: coverImage
@@ -656,9 +621,10 @@ Page {
             }
         }
     ]
-    state : ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted) ) ? "portrait" : "landscape"
+    state: ((orientation === Orientation.Portrait)
+            || (orientation === Orientation.PortraitInverted)) ? "portrait" : "landscape"
 
-    Timer{
+    Timer {
         id: drawerCloseTimer
         interval: 5000
         repeat: false
@@ -666,7 +632,4 @@ Page {
             mainDrawer.hide()
         }
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -8,20 +8,21 @@ Page {
     PageHeader {
         id: header
         title: albumname
-        clip:true
+        clip: true
     }
-    SilicaFlickable{
+    SilicaFlickable {
         id: textFlickable
-        anchors{
+        anchors {
             top: header.bottom
             bottom: parent.bottom
-            right:  parent.right
+            right: parent.right
             left: parent.left
         }
         contentHeight: albumText.implicitHeight
         clip: true
 
-        ScrollDecorator{}
+        ScrollDecorator {
+        }
         Label {
             id: albumText
             x: Theme.paddingMedium

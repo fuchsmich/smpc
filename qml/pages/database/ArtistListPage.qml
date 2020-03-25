@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
@@ -8,11 +8,9 @@ Page {
     property int lastOrientation
     allowedOrientations: Orientation.All
 
-
     Loader {
         id: gridViewLoader
         anchors.fill: parent
-        //        anchors.bottomMargin: quickControlPanel.visibleSize
         active: false
 
         sourceComponent: Component {
@@ -20,11 +18,11 @@ Page {
                 id: artistGridView
                 quickScrollEnabled: jollaQuickscroll
                 model: artistsModel
-                cellWidth: Screen.sizeCategory >= Screen.Large ? ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)
-                                                                  ? (width / 6) : width / 4) :
-                                                                 ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width/4) : (width / 2))
+                cellWidth: Screen.sizeCategory
+                           >= Screen.Large ? ((orientation === Orientation.Landscape)
+                                              || (orientation === Orientation.LandscapeInverted) ? (width / 6) : width / 4) : ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width / 4) : (width / 2))
                 cellHeight: cellWidth
-                cacheBuffer:0
+                cacheBuffer: 0
                 property bool scrolling: sectionScroller.scrolling
                 populate: Transition {
                     NumberAnimation {
@@ -44,7 +42,7 @@ Page {
                 }
 
                 header: PageHeader {
-                    title: qsTr("artists")
+                    title: qsTr("Artists")
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
@@ -58,7 +56,6 @@ Page {
     Loader {
         id: listViewLoader
         anchors.fill: parent
-        //        anchors.bottomMargin: quickControlPanel.visibleSize
         active: false
 
         sourceComponent: Component {
@@ -221,14 +218,16 @@ Page {
                     && orientation != lastOrientation) {
                 gridViewLoader.active = false
                 showViewLoader.active = false
-                if ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) {
+                if ((orientation === Orientation.Portrait)
+                        || (orientation === Orientation.PortraitInverted)) {
                     if (artistView === 0) {
                         gridViewLoader.active = true
                     } else if (artistView === 1) {
                         listViewLoader.active = true
                     }
-                } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)) {
-                    if ( useShowView) {
+                } else if ((orientation === Orientation.Landscape)
+                           || (orientation === Orientation.LandscapeInverted)) {
+                    if (useShowView) {
                         showViewLoader.active = true
                     } else {
                         gridViewLoader.active = true
@@ -251,14 +250,16 @@ Page {
 
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {
-            if ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) {
+            if ((orientation === Orientation.Portrait)
+                    || (orientation === Orientation.PortraitInverted)) {
                 if (artistView === 0) {
                     gridViewLoader.active = true
                 } else if (artistView === 1) {
                     listViewLoader.active = true
                 }
-            } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)) {
-                if ( useShowView) {
+            } else if ((orientation === Orientation.Landscape)
+                       || (orientation === Orientation.LandscapeInverted)) {
+                if (useShowView) {
                     showViewLoader.active = true
                 } else {
                     gridViewLoader.active = true

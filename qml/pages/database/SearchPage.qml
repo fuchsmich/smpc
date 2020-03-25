@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
@@ -8,11 +8,10 @@ Page {
     property string selectedsearch
     allowedOrientations: Orientation.All
 
-
     Drawer {
         id: mainDrawer
         anchors.fill: parent
-//        anchors.bottomMargin: quickControlPanel.visibleSize
+        //        anchors.bottomMargin: quickControlPanel.visibleSize
         open: true
         dock: Dock.Bottom
         backgroundSize: searchhead.height
@@ -30,7 +29,7 @@ Page {
                     left: parent.left
                     right: parent.right
                 }
-                placeholderText: qsTr("search value")
+                placeholderText: qsTr("Search value")
                 text: ""
                 //inputMethodHints: Qt.ImhNoPredictiveText
                 EnterKey.onClicked: {
@@ -47,16 +46,16 @@ Page {
                 }
                 menu: ContextMenu {
                     MenuItem {
-                        text: qsTr("titles")
+                        text: qsTr("Titles")
                     }
                     MenuItem {
-                        text: qsTr("albums")
+                        text: qsTr("Albums")
                     }
                     MenuItem {
-                        text: qsTr("artists")
+                        text: qsTr("Artists")
                     }
                     MenuItem {
-                        text: qsTr("files")
+                        text: qsTr("Files")
                     }
                 }
             }
@@ -64,37 +63,38 @@ Page {
 
         SilicaListView {
             id: searchsongListView
-            anchors{
+            anchors {
                 fill: parent
                 //bottomMargin: mainDrawer.open ? undefined : quickControlPanel.visibleSize
             }
-            ScrollDecorator {}
+            ScrollDecorator {
+            }
             quickScrollEnabled: jollaQuickscroll
             SpeedScroller {
                 listview: searchsongListView
             }
 
             header: PageHeader {
-                title: qsTr("search")
+                title: qsTr("Search")
                 width: searchsongListView.width
             }
-//            populate: Transition {
-//                NumberAnimation { properties: "x"; from:albumsongs_list_view.width*2 ;duration: populateDuration }
-//            }
+            //            populate: Transition {
+            //                NumberAnimation { properties: "x"; from:albumsongs_list_view.width*2 ;duration: populateDuration }
+            //            }
             clip: true
             model: tracksModel
 
             PullDownMenu {
                 enabled: searchsongListView.model !== undefined
                 MenuItem {
-                    text: qsTr("new search")
+                    text: qsTr("New search")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
                         newSearch()
                     }
                 }
                 MenuItem {
-                    text: qsTr("add all results")
+                    text: qsTr("Add all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
                         deletePlaylist()
@@ -102,7 +102,7 @@ Page {
                     }
                 }
                 MenuItem {
-                    text: qsTr("play all results")
+                    text: qsTr("Play all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
                         deletePlaylist()
@@ -117,8 +117,8 @@ Page {
                     active: sectionsInSearch && visible
                     height: sectionsInSearch ? Theme.itemSizeMedium : 0
                     width: parent.width
-                    sourceComponent: PlaylistSectionDelegate{
-                        width:undefined
+                    sourceComponent: PlaylistSectionDelegate {
+                        width: undefined
                     }
                 }
                 property: "section"
@@ -170,32 +170,33 @@ Page {
                     }
                 }
                 onClicked: {
-                    albumTrackClicked(title, album, artist, lengthformated, path,
-                                      year, tracknr,trackmbid,artistmbid,albummbid);
+                    albumTrackClicked(title, album, artist, lengthformated,
+                                      path, year, tracknr, trackmbid,
+                                      artistmbid, albummbid)
                 }
                 function playTrackRemorse() {
-                    remorseAction(qsTr("playing track"), function () {
+                    remorseAction(qsTr("Playing track"), function () {
                         playSong(path)
                     }, 3000)
                 }
                 function addTrackRemorse() {
-                    remorseAction(qsTr("adding track"), function () {
+                    remorseAction(qsTr("Adding track"), function () {
                         addSong(path)
                     }, 3000)
                 }
 
                 function playAlbumRemorse() {
-                    remorseAction(qsTr("playing album"), function () {
+                    remorseAction(qsTr("Playing album"), function () {
                         playAlbum(["", album])
                     }, 3000)
                 }
                 function addAlbumRemorse() {
-                    remorseAction(qsTr("adding album"), function () {
+                    remorseAction(qsTr("Adding album"), function () {
                         addAlbum(["", album])
                     }, 3000)
                 }
                 function addTrackAfterCurrentRemorse() {
-                    remorseAction(qsTr("adding track"), function () {
+                    remorseAction(qsTr("Adding track"), function () {
                         addSongAfterCurrent(path)
                     }, 3000)
                 }
@@ -204,42 +205,45 @@ Page {
                     ContextMenu {
                         property int lastHeight: 0
                         MenuItem {
-                            text: qsTr("play track")
+                            text: qsTr("Play track")
                             onClicked: {
                                 playTrackRemorse()
                             }
                         }
 
                         MenuItem {
-                            text: qsTr("add track to list")
+                            text: qsTr("Add track to list")
                             onClicked: {
                                 addTrackRemorse()
                             }
                         }
                         MenuItem {
-                            text: qsTr("play after current")
+                            text: qsTr("Play after current")
                             onClicked: {
-                                addTrackAfterCurrentRemorse();
+                                addTrackAfterCurrentRemorse()
                             }
                         }
                         MenuItem {
-                            text: qsTr("add album to list")
+                            text: qsTr("Add album to list")
                             onClicked: {
                                 addAlbumRemorse()
                             }
                         }
                         MenuItem {
-                            text: qsTr("play album")
+                            text: qsTr("Play album")
                             onClicked: {
                                 playAlbumRemorse()
                             }
                         }
 
                         MenuItem {
-                            text: qsTr("add to saved list")
+                            text: qsTr("Add to saved list")
                             onClicked: {
                                 requestSavedPlaylists()
-                                pageStack.push(Qt.resolvedUrl("AddToPlaylistDialog.qml"),{url:path});
+                                pageStack.push(Qt.resolvedUrl(
+                                                   "AddToPlaylistDialog.qml"), {
+                                                   "url": path
+                                               })
                             }
                         }
                     }
@@ -270,12 +274,12 @@ Page {
     }
 
     function newSearch() {
-        searchfield.text=""
-        clearTrackList();
+        searchfield.text = ""
+        clearTrackList()
         mainDrawer.show()
     }
 
     Component.onDestruction: {
-        clearTrackList();
+        clearTrackList()
     }
 }

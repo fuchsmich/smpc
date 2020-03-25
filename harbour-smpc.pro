@@ -64,7 +64,7 @@ HEADERS += \
     src/mpd/serverinfo.h
 
 OTHER_FILES = rpm/harbour-smpc.yaml \
-    icon-m-stop.png \ 
+    icon-m-stop.png \
     qml/components/qmldir \
     qml/pages/database/SongPage.qml \
     qml/pages/database/SearchPage.qml \
@@ -188,10 +188,13 @@ icon108.path = /usr/share/icons/hicolor/108x108/apps
 icon128.files += icons/128x128/harbour-smpc.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
 
+icon172.files += icons/172x172/harbour-smpc.png
+icon172.path = /usr/share/icons/hicolor/172x172/apps
+
 icon256.files += icons/256x256/harbour-smpc.png
 icon256.path = /usr/share/icons/hicolor/256x256/apps
 
 #iconsvg.files += icons/scalable/harbour-smpc.svgz
 #iconsvg.path = /usr/share/icons/hicolor/scalable/apps
 
-INSTALLS += icon86 icon108 icon128 icon256
+INSTALLS += icon86 icon108 icon128 icon172 icon256

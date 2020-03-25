@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
@@ -14,7 +14,7 @@ Page {
             id: contentColumn
             PageHeader {
                 id: pageHeading
-                title: qsTr("about")
+                title: qsTr("About")
             }
             Image {
                 id: logo
@@ -23,7 +23,7 @@ Page {
                 sourceSize.width: parent.width
                 smooth: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: (orientation === Orientation.Portrait ? aboutPage.width - Theme.paddingLarge * 5 : (aboutPage.height-pageHeading.height-nameText.height-versionText.height))
+                width: (orientation === Orientation.Portrait ? aboutPage.width - Theme.paddingLarge * 5 : (aboutPage.height - pageHeading.height - nameText.height - versionText.height))
                 height: width
                 cache: false
                 BackgroundItem {
@@ -105,8 +105,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Fetches metadata from last.fm")
                 font.pixelSize: Theme.fontSizeTiny
-                MouseArea
-                {
+                MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         Qt.openUrlExternally('https://www.last.fm')

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 //import harbour.smpc.components 1.0
 import "../../components"
@@ -18,9 +18,9 @@ Page {
                 id: albumGridView
                 property bool scrolling: sectionScroller.scrolling
                 model: albumsModel
-                cellWidth: Screen.sizeCategory >= Screen.Large ? ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)
-                                                                  ? (width / 6) : width / 5) :
-                                                                 ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width/4) : (width / 2))
+                cellWidth: Screen.sizeCategory
+                           >= Screen.Large ? ((orientation === Orientation.Landscape)
+                                              || (orientation === Orientation.LandscapeInverted) ? (width / 6) : width / 5) : ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width / 4) : (width / 2))
                 cellHeight: cellWidth
                 cacheBuffer: 0
                 SectionScroller {
@@ -41,20 +41,20 @@ Page {
 
                 quickScrollEnabled: jollaQuickscroll
                 header: PageHeader {
-                    title: artistname !== "" ? artistname : qsTr("albums")
+                    title: artistname !== "" ? artistname : qsTr("Albums")
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
                 PullDownMenu {
                     visible: artistname !== ""
                     MenuItem {
-                        text: qsTr("add albums")
+                        text: qsTr("Add albums")
                         onClicked: {
                             addArtist(artistname)
                         }
                     }
                     MenuItem {
-                        text: qsTr("play albums")
+                        text: qsTr("Play albums")
                         onClicked: {
                             playArtist(artistname)
                         }
@@ -94,20 +94,20 @@ Page {
                 }
 
                 header: PageHeader {
-                    title: artistname !== "" ? artistname : qsTr("albums")
+                    title: artistname !== "" ? artistname : qsTr("Albums")
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
                 PullDownMenu {
                     enabled: artistname !== ""
                     MenuItem {
-                        text: qsTr("add albums")
+                        text: qsTr("Add albums")
                         onClicked: {
                             addArtist(artistname)
                         }
                     }
                     MenuItem {
-                        text: qsTr("play albums")
+                        text: qsTr("Play albums")
                         onClicked: {
                             playArtist(artistname)
                         }
@@ -246,14 +246,16 @@ Page {
                 gridViewLoader.active = false
                 listviewLoader.active = false
                 showViewLoader.active = false
-                if ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) {
+                if ((orientation === Orientation.Portrait)
+                        || (orientation === Orientation.PortraitInverted)) {
                     if (albumView === 0) {
                         gridViewLoader.active = true
                     } else if (albumView === 1) {
                         listviewLoader.active = true
                     }
-                } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)) {
-                    if ( useShowView) {
+                } else if ((orientation === Orientation.Landscape)
+                           || (orientation === Orientation.LandscapeInverted)) {
+                    if (useShowView) {
                         showViewLoader.active = true
                     } else {
                         gridViewLoader.active = true
@@ -279,21 +281,23 @@ Page {
         } else if (status === PageStatus.Active) {
             if (artistname != "")
                 pageStack.pushAttached(Qt.resolvedUrl("ArtistInfoPage.qml"), {
-                                           artistname: artistname
+                                           "artistname": artistname
                                        })
         }
     }
 
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {
-            if ( (orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted) ){
+            if ((orientation === Orientation.Portrait)
+                    || (orientation === Orientation.PortraitInverted)) {
                 if (albumView === 0) {
                     gridViewLoader.active = true
                 } else if (albumView === 1) {
                     listviewLoader.active = true
                 }
-            } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ) {
-                if ( useShowView) {
+            } else if ((orientation === Orientation.Landscape)
+                       || (orientation === Orientation.LandscapeInverted)) {
+                if (useShowView) {
                     showViewLoader.active = true
                 } else {
                     gridViewLoader.active = true

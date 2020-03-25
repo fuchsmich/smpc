@@ -1,13 +1,14 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Item {
     id: mainItm
-    width: (orientation === Orientation.Portrait || orientation === Orientation.PortraitInverted) ? ( parent ? parent.width : 0) : Theme.itemSizeMedium
-    height: (orientation === Orientation.Portrait || orientation === Orientation.PortraitInverted ) ? Theme.itemSizeMedium : ( parent ? parent.height : 0)
+    width: (orientation === Orientation.Portrait || orientation
+            === Orientation.PortraitInverted) ? (parent ? parent.width : 0) : Theme.itemSizeMedium
+    height: (orientation === Orientation.Portrait || orientation
+             === Orientation.PortraitInverted) ? Theme.itemSizeMedium : (parent ? parent.height : 0)
     property string text
-    Label
-    {
+    Label {
         id: headerLabel
         text: mainItm.text
         anchors {
@@ -81,5 +82,6 @@ Item {
             }
         }
     ]
-    state: (orientation === Orientation.Portrait || orientation === Orientation.PortraitInverted ) ? "portrait" : "landscape"
+    state: (orientation === Orientation.Portrait
+            || orientation === Orientation.PortraitInverted) ? "portrait" : "landscape"
 }

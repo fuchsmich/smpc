@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../components"
 
@@ -34,7 +34,7 @@ CoverBackground {
     }
 
     Rectangle {
-        visible: ( coverimg.ready  )
+        visible: (coverimg.ready)
         anchors.fill: parent
         color: Theme.highlightBackgroundColor
         gradient: Gradient {
@@ -56,7 +56,7 @@ CoverBackground {
     }
     Image {
         id: logo
-        visible: ( (!coverimg.ready) && (mTitle == ""))
+        visible: ((!coverimg.ready) && (mTitle == ""))
         source: "qrc:images/pictogram.png"
         anchors.centerIn: parent
     }
@@ -65,15 +65,6 @@ CoverBackground {
         recheckActive()
     }
 
-    //    Image{
-    //        visible: (stopped||(coverimg.sourceprimary==""&&coverimg.sourcesecondary==""))
-    //        anchors.centerIn: coverrpage
-    //        source: "qrc:/images/smpc-big.png"
-    //        width: coverpage.width-(coverpage.width/3)
-    //        height: width
-    //        smooth: true
-    //        opacity: 0.8
-    //    }
     Label {
         id: textLabel
         anchors.centerIn: coverpage

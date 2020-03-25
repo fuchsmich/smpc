@@ -127,9 +127,15 @@ void ImageDatabase::fillDatabase(QMap<MpdArtist*, QList<MpdAlbum*>* > *map)
 bool ImageDatabase::hasAlbumArt(QString album,QString artist)
 {
     QSqlQuery query;
+    if (artist.indexOf('"') == -1) {
     query.prepare("SELECT * FROM albums WHERE "
                   "albumname=\"" + album + "\" AND "
                   "artistname=\"" + artist + "\"");
+    } else {
+        query.prepare("SELECT * FROM albums WHERE "
+                "albumname=\"" + album + "\" AND "
+                "artistname=\'" + artist + "\'");
+    }
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
 
@@ -332,10 +338,17 @@ int ImageDatabase::imageIDFromHash(QString hashValue)
 
 int ImageDatabase::imageIDFromAlbumArtist(QString album, QString artist)
 {
+    artist = artist.replace("\\", "");
     QSqlQuery query;
-    query.prepare("SELECT * FROM albums WHERE "
-                  "albumname=\"" + album + "\" AND "
-                  "artistname=\"" + artist + "\"");
+    if (artist.indexOf('"') == -1) {
+        query.prepare("SELECT * FROM albums WHERE "
+                "albumname=\"" + album + "\" AND "
+                "artistname=\"" + artist + "\"");
+    } else {
+        query.prepare("SELECT * FROM albums WHERE "
+                "albumname=\"" + album + "\" AND "
+                "artistname=\'" + artist + "\'");
+    }
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
 
@@ -374,7 +387,7 @@ int ImageDatabase::imageIDFromAlbum(QString album)
 int ImageDatabase::imageIDFromArtist(QString artist)
 {
     QSqlQuery query;
-    artist = artist.replace('\"',"\\\"");
+    artist = artist.replace('\"', "\\\"");
     query.prepare("SELECT * FROM artists WHERE "
                   "name=\"" + artist + "\"");
     // qDebug() << "Check for image: " << query.lastQuery();

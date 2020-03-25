@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
@@ -12,7 +12,6 @@ Page {
         width: parent.width
         height: width / 2
         clip: true
-//        color: "red"
         Image {
             id: albumImgLandscape
             source: coverimageurl
@@ -25,9 +24,8 @@ Page {
             cache: false
             fillMode: Image.PreserveAspectCrop
             Rectangle {
-                color: Theme.rgba(
-                           Theme.highlightBackgroundColor,
-                           Theme.highlightBackgroundOpacity)
+                color: Theme.rgba(Theme.highlightBackgroundColor,
+                                  Theme.highlightBackgroundOpacity)
                 anchors.fill: parent
                 visible: albumImgLandscape.status != Image.Ready
                 Image {
@@ -51,9 +49,8 @@ Page {
             cache: false
             fillMode: Image.PreserveAspectCrop
             Rectangle {
-                color: Theme.rgba(
-                           Theme.highlightBackgroundColor,
-                           Theme.highlightBackgroundOpacity)
+                color: Theme.rgba(Theme.highlightBackgroundColor,
+                                  Theme.highlightBackgroundOpacity)
                 anchors.fill: parent
                 visible: artistImgLandscape.status != Image.Ready
                 Image {
@@ -64,25 +61,6 @@ Page {
                 }
             }
         }
-//        Rectangle {
-//            anchors.fill: landscapeImageRow
-//            gradient: Gradient {
-//                GradientStop {
-//                    position: 0.5
-//                    color: Qt.rgba(0.0, 0.0, 0.0, 0.0)
-//                }
-//                GradientStop {
-//                    position: 0.7
-//                    color: Qt.rgba(0.0, 0.0, 0.0, 0.3)
-//                }
-//                GradientStop {
-//                    position: 1.0
-//                    color: Qt.rgba(0.0, 0.0, 0.0, 1.0)
-//                }
-//            }
-//        }
-
-
     }
     Column {
         id: landscapeTextScrollColumn
@@ -128,9 +106,8 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Activating || status === PageStatus.Active) {
             quickControlPanel.hideControl = true
-        } else if ( status === PageStatus.Deactivating ){
+        } else if (status === PageStatus.Deactivating) {
             quickControlPanel.hideControl = false
         }
     }
-
 }

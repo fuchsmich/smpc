@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -13,23 +13,21 @@ Page {
         }
     }
 
-    SilicaFlickable
-    {
+    SilicaFlickable {
         id: mainFlickable
         anchors.fill: parent
         contentHeight: mainColumn.height
         anchors.topMargin: header.height
         Column {
-            id:mainColumn
+            id: mainColumn
             anchors {
-                left:parent.left
+                left: parent.left
                 right: parent.right
             }
 
-
             ComboBox {
                 id: albumViewCB
-                label: qsTr("album view:")
+                label: qsTr("Album view:")
                 anchors {
                     right: parent.right
                     left: parent.left
@@ -45,17 +43,17 @@ Page {
                 }
 
                 onValueChanged: {
-                    if ( currentIndex == 0) {
-                        newSettingKey(["albumView","0"]);
-                    } else if ( currentIndex == 1 ) {
-                        newSettingKey(["albumView","1"]);
+                    if (currentIndex == 0) {
+                        newSettingKey(["albumView", "0"])
+                    } else if (currentIndex == 1) {
+                        newSettingKey(["albumView", "1"])
                     }
                 }
             }
 
             ComboBox {
                 id: artistviewCB
-                label: qsTr("artist view:")
+                label: qsTr("Artist view:")
                 anchors {
                     right: parent.right
                     left: parent.left
@@ -71,17 +69,17 @@ Page {
                 }
 
                 onValueChanged: {
-                    if ( currentIndex == 0) {
-                        newSettingKey(["artistView","0"]);
-                    } else if ( currentIndex == 1 ) {
-                        newSettingKey(["artistView","1"]);
+                    if (currentIndex == 0) {
+                        newSettingKey(["artistView", "0"])
+                    } else if (currentIndex == 1) {
+                        newSettingKey(["artistView", "1"])
                     }
                 }
             }
 
             ComboBox {
                 id: imageSizeCB
-                label: qsTr("list image size:")
+                label: qsTr("List image size:")
                 anchors {
                     right: parent.right
                     left: parent.left
@@ -89,103 +87,102 @@ Page {
                 currentIndex: listImageSize
                 menu: ContextMenu {
                     MenuItem {
-                        text: qsTr("disabled")
+                        text: qsTr("Disabled")
                     }
                     MenuItem {
-                        text: qsTr("small")
+                        text: qsTr("Small")
                     }
                     MenuItem {
-                        text: qsTr("medium")
+                        text: qsTr("Medium")
                     }
                     MenuItem {
-                        text: qsTr("large")
+                        text: qsTr("Large")
                     }
                 }
 
                 onValueChanged: {
-                    if ( currentIndex == 0) {
-                        newSettingKey(["listImageSize","0"]);
-                    } else if ( currentIndex == 1 ) {
-                        newSettingKey(["listImageSize","1"]);
-                    } else if ( currentIndex == 2 ) {
-                        newSettingKey(["listImageSize","2"]);
-                    }
-                    else if ( currentIndex == 3 ) {
-                        newSettingKey(["listImageSize","3"]);
+                    if (currentIndex == 0) {
+                        newSettingKey(["listImageSize", "0"])
+                    } else if (currentIndex == 1) {
+                        newSettingKey(["listImageSize", "1"])
+                    } else if (currentIndex == 2) {
+                        newSettingKey(["listImageSize", "2"])
+                    } else if (currentIndex == 3) {
+                        newSettingKey(["listImageSize", "3"])
                     }
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: sortAlbumsByYearSwitch
-                text: qsTr("sort albums of one artist by year")
+                text: qsTr("Sort albums of one artist by year")
                 checked: sortAlbumsByYear
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["sortAlbumsByYear","1"]);
+                    if (checked) {
+                        newSettingKey(["sortAlbumsByYear", "1"])
                     } else {
-                        newSettingKey(["sortAlbumsByYear","0"]);
+                        newSettingKey(["sortAlbumsByYear", "0"])
                     }
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: albumArtistSwitch
-                text: qsTr("use albumartist in artists view")
+                text: qsTr("Use albumartist in artists view")
                 checked: artistsViewUseAlbumArtist
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["artistsViewUseAlbumArtist","1"]);
+                    if (checked) {
+                        newSettingKey(["artistsViewUseAlbumArtist", "1"])
                     } else {
-                        newSettingKey(["artistsViewUseAlbumArtist","0"]);
+                        newSettingKey(["artistsViewUseAlbumArtist", "0"])
                     }
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: coverNowPlayingSwitch
-                text: qsTr("show cover in now playing")
+                text: qsTr("Show cover in now playing")
                 checked: showCoverNowPlaying
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["showCoverNowPlaying","1"]);
+                    if (checked) {
+                        newSettingKey(["showCoverNowPlaying", "1"])
                     } else {
-                        newSettingKey(["showCoverNowPlaying","0"]);
+                        newSettingKey(["showCoverNowPlaying", "0"])
                     }
-                    mCurrentSongPage = null;
+                    mCurrentSongPage = null
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: sectionInPlaylistSwitch
-                text: qsTr("show sections in playlists")
+                text: qsTr("Show sections in playlists")
                 checked: sectionsInPlaylist
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["sectionsInPlaylist","1"]);
+                    if (checked) {
+                        newSettingKey(["sectionsInPlaylist", "1"])
                     } else {
-                        newSettingKey(["sectionsInPlaylist","0"]);
+                        newSettingKey(["sectionsInPlaylist", "0"])
                     }
-                    mPlaylistPage = null;
+                    mPlaylistPage = null
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: sectionInSearchSwitch
-                text: qsTr("show sections in search")
+                text: qsTr("Show sections in search")
                 checked: sectionsInSearch
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["sectionsInSearch","1"]);
+                    if (checked) {
+                        newSettingKey(["sectionsInSearch", "1"])
                     } else {
-                        newSettingKey(["sectionsInSearch","0"]);
+                        newSettingKey(["sectionsInSearch", "0"])
                     }
                 }
             }
-            TextSwitch{
+            TextSwitch {
                 id: showViewModeLandscapeSwitch
-                text: qsTr("use show mode in landscape")
+                text: qsTr("Use show mode in landscape")
                 checked: useShowView
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["showModeLandscape","1"]);
+                    if (checked) {
+                        newSettingKey(["showModeLandscape", "1"])
                     } else {
-                        newSettingKey(["showModeLandscape","0"]);
+                        newSettingKey(["showModeLandscape", "0"])
                     }
                 }
             }

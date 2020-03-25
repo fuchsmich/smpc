@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 BackgroundItem {
@@ -27,8 +27,6 @@ BackgroundItem {
             id: albumImage
             antialiasing: true
             anchors.fill: parent
-            /*sourceSize.width: width
-            sourceSize.height: height*/
             source: coverURL
             cache: false
             asynchronous: true
@@ -80,7 +78,7 @@ BackgroundItem {
         sourceComponent: Component {
             Rectangle {
                 id: delegateBackside
-                color: Qt.rgba(0,0,0, 0.5)
+                color: Qt.rgba(0, 0, 0, 0.5)
                 opacity: 0.0
                 anchors {
                     fill: parent
@@ -114,7 +112,7 @@ BackgroundItem {
 
                 PropertyAnimation {
                     id: blendcolumnOut
-                    targets: [delegateButtons,delegateBackside,albumTracksListView]
+                    targets: [delegateButtons, delegateBackside, albumTracksListView]
                     property: "opacity"
                     running: rotateOut.running
                     from: 1.0
@@ -141,7 +139,7 @@ BackgroundItem {
                 }
                 PropertyAnimation {
                     id: blendcolumnIn
-                    targets: [delegateButtons,delegateBackside,albumTracksListView]
+                    targets: [delegateButtons, delegateBackside, albumTracksListView]
                     property: "opacity"
                     running: rotateIn.running
                     from: 0.0
@@ -153,169 +151,173 @@ BackgroundItem {
                     }
                 }
 
-
-
-                    Row {
-                        id: delegateButtons
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        visible: false
-                        opacity: 0.0
-                        anchors {
-                            top: parent.top
-                        }
-                        IconButton {
-                            id: backButton
-                            icon.source: "image://theme/icon-m-back"
-                            onClicked: {
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: playButton
-                            icon.source: "image://theme/icon-m-play"
-                            onClicked: {
-                                playAlbum(["", title])
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: addButton
-                            icon.source: "image://theme/icon-m-add"
-                            onClicked: {
-                                addAlbum([artist, title])
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: moreButton
-                            icon.source: "image://theme/icon-m-other"
-                            onClicked: {
-                                albumClicked(artist, title)
-                                pageStack.push(Qt.resolvedUrl("../pages/database/AlbumTracksPage.qml"),{artistname:artist,albumname:title});
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
+                Row {
+                    id: delegateButtons
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: false
+                    opacity: 0.0
+                    anchors {
+                        top: parent.top
+                    }
+                    IconButton {
+                        id: backButton
+                        icon.source: "image://theme/icon-m-back"
+                        onClicked: {
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
                             }
                         }
                     }
-                    SilicaListView
-                    {
-                        id: albumTracksListView
-                        clip: true
-                        visible: false
-                        opacity: 0.0
-                        anchors {
-                            left:parent.left
-                            right: parent.right
-                            top: delegateButtons.bottom
-                            bottom: parent.bottom
+                    IconButton {
+                        id: playButton
+                        icon.source: "image://theme/icon-m-play"
+                        onClicked: {
+                            playAlbum(["", title])
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
                         }
-                        model: albumTracksModel
-                        delegate: ListItem {
-                            menu: contextMenu
-                            contentHeight: mainColumn.height
-                            Column {
-                                id: mainColumn
-                                clip: true
-                                height: (titleRow.height + artistLabel.height)
-                                anchors {
-                                    right: parent.right
-                                    left: parent.left
-                                    verticalCenter: parent.verticalCenter
-                                    leftMargin: Theme.paddingSmall
-                                    rightMargin: Theme.paddingSmall
-                                }
+                    }
+                    IconButton {
+                        id: addButton
+                        icon.source: "image://theme/icon-m-add"
+                        onClicked: {
+                            addAlbum([artist, title])
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
+                        }
+                    }
+                    IconButton {
+                        id: moreButton
+                        icon.source: "image://theme/icon-m-other"
+                        onClicked: {
+                            albumClicked(artist, title)
+                            pageStack.push(
+                                        Qt.resolvedUrl(
+                                            "../pages/database/AlbumTracksPage.qml"),
+                                        {
+                                            "artistname": artist,
+                                            "albumname": title
+                                        })
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
+                        }
+                    }
+                }
+                SilicaListView {
+                    id: albumTracksListView
+                    clip: true
+                    visible: false
+                    opacity: 0.0
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: delegateButtons.bottom
+                        bottom: parent.bottom
+                    }
+                    model: albumTracksModel
+                    delegate: ListItem {
+                        menu: contextMenu
+                        contentHeight: mainColumn.height
+                        Column {
+                            id: mainColumn
+                            clip: true
+                            height: (titleRow.height + artistLabel.height)
+                            anchors {
+                                right: parent.right
+                                left: parent.left
+                                verticalCenter: parent.verticalCenter
+                                leftMargin: Theme.paddingSmall
+                                rightMargin: Theme.paddingSmall
+                            }
 
-                                Row {
-                                    id: titleRow
-                                    Label {
-                                        text: (index + 1) + ". "
-                                        anchors {
-                                            verticalCenter: parent.verticalCenter
-                                        }
-                                        font.pixelSize: Theme.fontSizeSmall
+                            Row {
+                                id: titleRow
+                                Label {
+                                    text: (index + 1) + ". "
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
                                     }
-                                    Label {
-                                        clip: true
-                                        wrapMode: Text.WrapAnywhere
-                                        elide: Text.ElideRight
-                                        text: (title === "" ? filename : title)
-                                        anchors {
-                                            verticalCenter: parent.verticalCenter
-                                        }
-                                        font.pixelSize: Theme.fontSizeSmall
-                                    }
-                                    Label {
-                                        text: (length === 0 ? "" : " (" + lengthformated + ")")
-                                        anchors {
-                                            verticalCenter: parent.verticalCenter
-                                        }
-                                        font.pixelSize: Theme.fontSizeSmall
-                                    }
+                                    font.pixelSize: Theme.fontSizeSmall
                                 }
                                 Label {
-                                    id: artistLabel
-                                    text: (artist !== "" ? artist + " - " : "") + (album !== "" ? album : "")
-                                    color: Theme.secondaryColor
-                                    font.pixelSize: Theme.fontSizeTiny
+                                    clip: true
+                                    wrapMode: Text.WrapAnywhere
+                                    elide: Text.ElideRight
+                                    text: (title === "" ? filename : title)
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
+                                    }
+                                    font.pixelSize: Theme.fontSizeSmall
+                                }
+                                Label {
+                                    text: (length === 0 ? "" : " (" + lengthformated + ")")
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
+                                    }
+                                    font.pixelSize: Theme.fontSizeSmall
                                 }
                             }
+                            Label {
+                                id: artistLabel
+                                text: (artist !== "" ? artist + " - " : "")
+                                      + (album !== "" ? album : "")
+                                color: Theme.secondaryColor
+                                font.pixelSize: Theme.fontSizeTiny
+                            }
+                        }
 
-                            onClicked: {
-                                playAlbum([artist, album]);
-                                playPlaylistTrack(index);
-                            }
-                            function playTrackRemorse() {
-                                remorseAction(qsTr("playing track"), function () {
-                                    playSong(path)
-                                }, 3000)
-                            }
-                            function addTrackRemorse() {
-                                remorseAction(qsTr("adding track"), function () {
-                                    addSong(path)
-                                }, 3000)
-                            }
-                            Component {
-                                id: contextMenu
-                                ContextMenu {
-                                    anchors{
-                                        right: (parent != null ) ? parent.right : undefined
-                                        left: (parent != null ) ? parent.left : undefined
+                        onClicked: {
+                            playAlbum([artist, album])
+                            playPlaylistTrack(index)
+                        }
+                        function playTrackRemorse() {
+                            remorseAction(qsTr("playing track"), function () {
+                                playSong(path)
+                            }, 3000)
+                        }
+                        function addTrackRemorse() {
+                            remorseAction(qsTr("adding track"), function () {
+                                addSong(path)
+                            }, 3000)
+                        }
+                        Component {
+                            id: contextMenu
+                            ContextMenu {
+                                anchors {
+                                    right: (parent != null) ? parent.right : undefined
+                                    left: (parent != null) ? parent.left : undefined
+                                }
+
+                                MenuItem {
+                                    text: qsTr("play track")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    onClicked: {
+                                        playTrackRemorse()
                                     }
+                                }
 
-                                    MenuItem {
-                                        text: qsTr("play track")
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        onClicked: {
-                                            playTrackRemorse()
-                                        }
-                                    }
-
-                                    MenuItem {
-                                        text: qsTr("add track to list")
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        onClicked: {
-                                            addTrackRemorse()
-                                        }
+                                MenuItem {
+                                    text: qsTr("add track to list")
+                                    font.pixelSize: Theme.fontSizeSmall
+                                    onClicked: {
+                                        addTrackRemorse()
                                     }
                                 }
                             }
                         }
                     }
+                }
 
                 Component.onCompleted: {
                     clearTrackList()
@@ -334,7 +336,7 @@ BackgroundItem {
 
     onClicked: {
         // Only flip front cover
-        if ( coverRotation == 0 ) {
+        if (coverRotation == 0) {
             albumClicked(artist, title)
             if (!flipped) {
                 backsideLoader.active = true

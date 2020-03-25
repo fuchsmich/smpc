@@ -1,9 +1,8 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
-Dialog
-{
+Dialog {
     id: serverEditPage
     allowedOrientations: Orientation.All
     property alias name: profilenameInputField.text
@@ -15,27 +14,25 @@ Dialog
     property alias macaddress: macAddressField.text
     property int index
     property bool newprofile
-    SilicaFlickable
-    {
+    SilicaFlickable {
         id: serverSettingFlickable
         anchors.fill: parent
         clip: true
-        contentHeight: settingsContent.height + 20;
-        VerticalScrollDecorator {}
+        contentHeight: settingsContent.height + 20
+        VerticalScrollDecorator {
+        }
         PullDownMenu {
             MenuItem {
-                text: qsTr("remove server profile")
+                text: qsTr("Remove server profile")
                 onClicked: {
-                    pageStack.pop();
-                    deleteProfile(index);
-
+                    pageStack.pop()
+                    deleteProfile(index)
                 }
             }
         }
 
-        Column
-        {
-            id: settingsContent;
+        Column {
+            id: settingsContent
             clip: true
             anchors {
                 right: parent.right
@@ -45,44 +42,39 @@ Dialog
                 rightMargin: listPadding
             }
             DialogHeader {
-                title: qsTr("edit profile");
+                title: qsTr("Edit profile")
             }
-            Label
-            {
+            Label {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text: qsTr("profilename:")
+                text: qsTr("Profilename:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: profilenameInputField
-                placeholderText:  qsTr("input profilename")
+                placeholderText: qsTr("Input profilename")
                 inputMethodHints: Qt.ImhNoPredictiveText
             }
 
-            Label
-            {
+            Label {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text: qsTr("hostname:")
+                text: qsTr("Hostname:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: hostnameInputField
-                placeholderText: qsTr("input hostname or ip")
+                placeholderText: qsTr("Input hostname or IP")
                 inputMethodHints: Qt.ImhNoPredictiveText
             }
-            Label{
+            Label {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text:qsTr("port:")
+                text: qsTr("Port:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: portInputField
@@ -91,28 +83,25 @@ Dialog
                 validator: portvalidator
             }
 
-            Label
-            {
+            Label {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text: qsTr("password:")
+                text: qsTr("Password:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: passwordInputField
                 inputMethodHints: Qt.ImhNoPredictiveText
                 echoMode: TextInput.Password
             }
-            Label{
+            Label {
                 visible: false
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text:qsTr("streaming port:")
+                text: qsTr("Streaming port:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: streamingPortInputField
@@ -121,51 +110,46 @@ Dialog
                 validator: portvalidator
                 visible: false
             }
-            Label{
+            Label {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                text:qsTr("mac address:")
+                text: qsTr("MAC Address:")
             }
-            TextField
-            {
+            TextField {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 id: macAddressField
-                placeholderText: "optional for wake on lan"
+                placeholderText: "Optional for wake on lan"
                 labelVisible: true
                 inputMethodHints: Qt.ImhPreferLowercase | Qt.ImhNoPredictiveText
                 validator: macValidator
                 visible: true
             }
-            TextSwitch
-            {
+            TextSwitch {
                 anchors.right: parent.right
                 anchors.left: parent.left
-                id: autoconnectSwitch;
-                text: qsTr("autoconnect");
+                id: autoconnectSwitch
+                text: qsTr("Autoconnect")
             }
         }
     }
 
-
     onAccepted: {
-        if(newprofile) {
-            newProfile([index,name,hostname,password,port,autoconnect?1:0,macAddressField.text]);
+        if (newprofile) {
+            newProfile([index, name, hostname, password, port, autoconnect ? 1 : 0, macAddressField.text])
+        } else {
+            changeProfile(
+                        [index, name, hostname, password, port, autoconnect ? 1 : 0, macAddressField.text])
         }
-        else {
-            changeProfile([index,name,hostname,password,port,autoconnect?1:0,macAddressField.text]);
-        }
-
     }
 
-    IntValidator{
-            id:portvalidator
-            top: 65536
-            bottom: 1
+    IntValidator {
+        id: portvalidator
+        top: 65536
+        bottom: 1
     }
 
-    RegExpValidator
-    {
+    RegExpValidator {
         id: macValidator
         regExp: /[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}/
     }

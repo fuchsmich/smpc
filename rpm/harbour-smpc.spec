@@ -13,7 +13,7 @@ Name:       harbour-smpc
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailfishOS Port of qmobilempd client
-Version:    1.3.5
+Version:    1.3.6
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
@@ -43,7 +43,7 @@ This is a port the symbian based mpd-client qmobilempd to SailfishOS
 # >> build pre
 # << build pre
 
-%qtc_qmake5 
+%qtc_qmake5
 
 %qtc_make %{?_smp_mflags}
 
@@ -60,13 +60,14 @@ rm -rf %{buildroot}
 # << install post
 
 %files
-%defattr(-,root,root,-)
-%{_bindir}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}
 %{_datadir}/harbour-smpc
 %{_datadir}/applications
 %{_datadir}/icons/hicolor/86x86/apps
 %{_datadir}/icons/hicolor/108x108/apps
 %{_datadir}/icons/hicolor/128x128/apps
+%{_datadir}/icons/hicolor/172x172/apps
 %{_datadir}/icons/hicolor/256x256/apps
 # >> files
 # << files

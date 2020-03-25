@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Item {
@@ -20,7 +20,6 @@ Item {
             }
             GradientStop {
                 position: 1.0
-                //color: Theme.rgba(Theme.highlightBackgroundColor, 0.6)
                 color: Theme.rgba(Theme.highlightBackgroundColor, 0.3)
             }
         }

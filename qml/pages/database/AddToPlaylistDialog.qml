@@ -1,26 +1,22 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
-Dialog
-{
+Dialog {
     id: saveToList
-    property string url;
+    property string url
     allowedOrientations: Orientation.All
     canAccept: false
 
-
-
-    SilicaListView
-    {
+    SilicaListView {
         id: savedListView
         model: savedPlaylistsModel
         anchors.fill: parent
         header: DialogHeader {
-            acceptText: qsTr("select playlist")
-            title: qsTr("select playlist")
+            acceptText: qsTr("Select playlist")
+            title: qsTr("Select playlist")
         }
         delegate: ListItem {
-            Column{
+            Column {
                 id: mainColumn
                 anchors {
                     right: parent.right
@@ -29,22 +25,22 @@ Dialog
                     leftMargin: listPadding
                     rightMargin: listPadding
                 }
-                     Label{
-                         text: modelData
-                    }
+                Label {
+                    text: modelData
                 }
+            }
             OpacityRampEffect {
                 sourceItem: mainColumn
                 slope: 3
                 offset: 0.65
             }
             onClicked: {
-                addSongToSaved([url,modelData]);
-                pageStack.pop();
+                addSongToSaved([url, modelData])
+                pageStack.pop()
             }
         }
     }
     Component.onDestruction: {
-        clearPlaylists();
+        clearPlaylists()
     }
 }

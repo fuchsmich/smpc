@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Item {
@@ -49,11 +49,11 @@ Item {
         anchors.fill: parent
         onStatusChanged: {
             if (status == Image.Ready) {
-                setActiveImage();
-                tglImg.ready = true;
+                setActiveImage()
+                tglImg.ready = true
             } else {
-                if ( secondaryImg.status != Image.Ready ) {
-                    ready = false;
+                if (secondaryImg.status != Image.Ready) {
+                    ready = false
                 }
             }
         }
@@ -67,22 +67,15 @@ Item {
         onStatusChanged: {
             if (status == Image.Ready) {
                 setActiveImage()
-                tglImg.ready = true;
+                tglImg.ready = true
             } else {
-                if ( primaryImg.status != Image.Ready ) {
-                    ready = false;
+                if (primaryImg.status != Image.Ready) {
+                    ready = false
                 }
             }
         }
     }
 
-    /*BusyIndicator {
-        id: busyIndicator
-        anchors.centerIn: parent
-        size: BusyIndicatorSize.Medium
-        running: (primaryImg.status === Image.Loading
-                  || secondaryImg.status === Image.Loading)
-    }*/
 
     Timer {
         id: waitTimer
@@ -94,10 +87,9 @@ Item {
     }
     onActiveChanged: {
         // Start timer again
-        if(active) {
+        if (active) {
             waitTimer.start()
-        }
-        else {
+        } else {
             waitTimer.stop()
         }
     }

@@ -1,14 +1,12 @@
-import QtQuick 2.1
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 BackgroundItem {
     id: artistShowDelegate
-    //menu: contextMenu
     antialiasing: true
     width: showView.itemWidth
     height: showView.itemHeight
     z: PathView.z
-    //        scale: PathView.delegateScale
     property int coverRotation: PathView.delegateRotation
     property bool flipped: false
     transform: Rotation {
@@ -79,7 +77,7 @@ BackgroundItem {
         sourceComponent: Component {
             Rectangle {
                 id: delegateBackside
-                color: Qt.rgba(0,0,0, 0.5)
+                color: Qt.rgba(0, 0, 0, 0.5)
                 opacity: 0.0
                 anchors {
                     fill: parent
@@ -112,7 +110,7 @@ BackgroundItem {
                 }
                 PropertyAnimation {
                     id: blendcolumnOut
-                    targets: [delegateButtons,delegateBackside]
+                    targets: [delegateButtons, delegateBackside]
                     property: "opacity"
                     running: rotateOut.running
                     from: 1.0
@@ -123,7 +121,6 @@ BackgroundItem {
 
                     }
                 }
-
 
                 // Rotate IN
                 PropertyAnimation {
@@ -140,7 +137,7 @@ BackgroundItem {
                 }
                 PropertyAnimation {
                     id: blendcolumnIn
-                    targets: [delegateButtons,delegateBackside]
+                    targets: [delegateButtons, delegateBackside]
                     property: "opacity"
                     running: rotateIn.running
                     from: 0.0
@@ -152,73 +149,76 @@ BackgroundItem {
                     }
                 }
 
-
-                    Column {
-                        id: delegateButtons
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        visible: false
-                        opacity: 0.0
-                        anchors {
-                            top: parent.top
-                        }
-                        IconButton {
-                            id: backButton
-                            icon.source: "image://theme/icon-m-back"
-                            height: backsideLoader.height / 4
-                            width: height
-                            onClicked: {
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: playButton
-                            icon.source: "image://theme/icon-m-play"
-                            height: backsideLoader.height / 4
-                            width: height
-                            onClicked: {
-                                playArtist(artist)
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: addButton
-                            icon.source: "image://theme/icon-m-add"
-                            height: backsideLoader.height / 4
-                            width: height
-                            onClicked: {
-                                addArtist(artist)
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
-                            }
-                        }
-                        IconButton {
-                            id: moreButton
-                            icon.source: "image://theme/icon-m-other"
-                            height: backsideLoader.height / 4
-                            width: height
-                            onClicked: {
-                                artistClicked(artist)
-                                pageStack.push(Qt.resolvedUrl("../pages/database/AlbumListPage.qml"),{artistname:artistname});
-                                if ( flipped ) {
-                                    rotateOut.running = true
-                                    flipped = false
-                                    showView.interactive = true
-                                }
+                Column {
+                    id: delegateButtons
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: false
+                    opacity: 0.0
+                    anchors {
+                        top: parent.top
+                    }
+                    IconButton {
+                        id: backButton
+                        icon.source: "image://theme/icon-m-back"
+                        height: backsideLoader.height / 4
+                        width: height
+                        onClicked: {
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
                             }
                         }
                     }
-
+                    IconButton {
+                        id: playButton
+                        icon.source: "image://theme/icon-m-play"
+                        height: backsideLoader.height / 4
+                        width: height
+                        onClicked: {
+                            playArtist(artist)
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
+                        }
+                    }
+                    IconButton {
+                        id: addButton
+                        icon.source: "image://theme/icon-m-add"
+                        height: backsideLoader.height / 4
+                        width: height
+                        onClicked: {
+                            addArtist(artist)
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
+                        }
+                    }
+                    IconButton {
+                        id: moreButton
+                        icon.source: "image://theme/icon-m-other"
+                        height: backsideLoader.height / 4
+                        width: height
+                        onClicked: {
+                            artistClicked(artist)
+                            pageStack.push(
+                                        Qt.resolvedUrl(
+                                            "../pages/database/AlbumListPage.qml"),
+                                        {
+                                            "artistname": artistname
+                                        })
+                            if (flipped) {
+                                rotateOut.running = true
+                                flipped = false
+                                showView.interactive = true
+                            }
+                        }
+                    }
+                }
 
                 Component.onCompleted: {
                     rotateIn.running = true
@@ -235,12 +235,11 @@ BackgroundItem {
 
     onClicked: {
         // Only flip front cover
-        if ( coverRotation == 0 ) {
+        if (coverRotation == 0) {
             if (!flipped) {
                 backsideLoader.active = true
                 flipped = true
             }
         }
     }
-
 }

@@ -1,13 +1,13 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
     allowedOrientations: Orientation.All
     PageHeader {
         id: header
-        title: qsTr("database")
+        title: qsTr("Database")
         anchors {
-            right:parent.right
+            right: parent.right
             left: parent.left
         }
     }
@@ -40,8 +40,10 @@ Page {
             }
             Label {
                 text: qsTr("images: ") + dbStatistic.getImageCount()
-            }Label {
-                text: qsTr("filesize: ") + dbStatistic.getDatabaseSize()/(1048576)+ " MB"
+            }
+            Label {
+                text: qsTr("filesize: ") + dbStatistic.getDatabaseSize(
+                          ) / (1048576) + " MB"
             }
             Label {
                 text: qsTr("artist downloads remaining: ") + dbStatistic.getArtistQueueSize()
@@ -49,16 +51,15 @@ Page {
             Label {
                 text: qsTr("album downloads remaining: ") + dbStatistic.getAlbumQueueSize()
             }
-            TextSwitch
-            {
+            TextSwitch {
                 id: lastfmEnabledSwitch
-                text: qsTr("Last.fm Metadata download");
+                text: qsTr("Last.fm Metadata download")
                 checked: lastfmEnabled
                 onClicked: {
-                    if ( checked ) {
-                        newSettingKey(["lastfmEnabled","1"]);
+                    if (checked) {
+                        newSettingKey(["lastfmEnabled", "1"])
                     } else {
-                        newSettingKey(["lastfmEnabled","0"]);
+                        newSettingKey(["lastfmEnabled", "0"])
                     }
                 }
             }
@@ -103,10 +104,11 @@ Page {
                 text: qsTr("download artist images")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 4
+                                       "confirmationRole": 4
                                    })
                 }
-                enabled: ( (dbStatistic.getArtistQueueSize() === 0) && lastfmEnabled )
+                enabled: ((dbStatistic.getArtistQueueSize() === 0)
+                          && lastfmEnabled)
             }
             Button {
                 id: downloadAlbumImagesBtn
@@ -114,10 +116,11 @@ Page {
                 text: qsTr("download album images")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 5
+                                       "confirmationRole": 5
                                    })
                 }
-                enabled: ( (dbStatistic.getAlbumQueueSize() === 0) && lastfmEnabled )
+                enabled: ((dbStatistic.getAlbumQueueSize() === 0)
+                          && lastfmEnabled)
             }
             Button {
                 id: clearBlacklistBtn
@@ -125,10 +128,11 @@ Page {
                 text: qsTr("clear blacklisted albums")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 0
+                                       "confirmationRole": 0
                                    })
                 }
-                enabled : ( dbStatistic.getArtistQueueSize() === 0 && dbStatistic.getAlbumQueueSize() === 0)
+                enabled: (dbStatistic.getArtistQueueSize() === 0
+                          && dbStatistic.getAlbumQueueSize() === 0)
             }
             Button {
                 id: clearArtistBtn
@@ -136,10 +140,11 @@ Page {
                 text: qsTr("clear artist images")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 1
+                                       "confirmationRole": 1
                                    })
                 }
-                enabled : ( dbStatistic.getArtistQueueSize() === 0 && dbStatistic.getAlbumQueueSize() === 0)
+                enabled: (dbStatistic.getArtistQueueSize() === 0
+                          && dbStatistic.getAlbumQueueSize() === 0)
             }
             Button {
                 id: clearAlbumBtn
@@ -147,7 +152,7 @@ Page {
                 text: qsTr("clear album images")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 2
+                                       "confirmationRole": 2
                                    })
                 }
             }
@@ -157,10 +162,11 @@ Page {
                 text: qsTr("clear complete database")
                 onClicked: {
                     pageStack.push(dialogComponent, {
-                                       confirmationRole: 3
+                                       "confirmationRole": 3
                                    })
                 }
-                enabled : ( dbStatistic.getArtistQueueSize() === 0 && dbStatistic.getAlbumQueueSize() === 0)
+                enabled: (dbStatistic.getArtistQueueSize() === 0
+                          && dbStatistic.getAlbumQueueSize() === 0)
             }
         }
     }
@@ -182,7 +188,7 @@ Page {
             Label {
                 id: questionLabel
                 text: questionText
-                width: parent.width-(2*listPadding)
+                width: parent.width - (2 * listPadding)
                 wrapMode: Text.WordWrap
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -195,45 +201,45 @@ Page {
                     // Clear blacklisted albums
                 case 0:
                     confirmationDialog.headerText = qsTr(
-                                "clear blacklist albums")
+                                "Clear blacklist albums")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all albums which are blacklisted from local database cache? There is no turning back!")
                     break
                     // Clear artists
                 case 1:
-                    confirmationDialog.headerText = qsTr("clear artists")
+                    confirmationDialog.headerText = qsTr("Clear artists")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all artists from local database cache? There is no turning back!")
                     break
                     // Clear albums
                 case 2:
-                    confirmationDialog.headerText = qsTr("clear albums")
+                    confirmationDialog.headerText = qsTr("Clear albums")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all albums from local database cache? There is no turning back!")
                     break
                     // Clear all
                 case 3:
-                    confirmationDialog.headerText = qsTr("clear database")
+                    confirmationDialog.headerText = qsTr("Clear database")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete the complete local database cache? There is no turning back!")
                     break
                 case 4:
-                    confirmationDialog.headerText = qsTr("download artists")
+                    confirmationDialog.headerText = qsTr("Download artists")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
-                                "This will download metadata information for all your artists in your MPD database. " +
-                                "This action will run in the background but take some time.");
+                                "This will download metadata information for all your artists in your MPD database. "
+                                + "This action will run in the background but take some time.")
                     break
                 case 5:
-                    confirmationDialog.headerText = qsTr("download albums")
+                    confirmationDialog.headerText = qsTr("Download albums")
                     confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
-                                "This will download metadata information for all your albums in your MPD database. " +
-                                "This action will run in the background but take some time.");
+                                "This will download metadata information for all your albums in your MPD database. "
+                                + "This action will run in the background but take some time.")
                     break
                 }
             }
@@ -258,7 +264,6 @@ Page {
                     bulkDownloadAlbums()
                     break
                 }
-
             }
         }
     }

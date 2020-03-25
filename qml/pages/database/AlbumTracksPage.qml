@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.2
 
 import Sailfish.Silica 1.0
 import "../../components"
@@ -14,7 +14,6 @@ Page {
         id: portraitLoader
         active: false
         anchors.fill: parent
-//        anchors.bottomMargin: quickControlPanel.visibleSize
         sourceComponent: Component {
 
             SilicaListView {
@@ -100,22 +99,22 @@ Page {
                 }
                 PullDownMenu {
                     MenuItem {
-                        enabled: (artistname!=="")
+                        enabled: (artistname !== "")
                         visible: enabled
-                        text: qsTr("show all tracks")
+                        text: qsTr("Show all tracks")
                         onClicked: {
-                            albumClicked("", albumname);
-                            artistname = "";
+                            albumClicked("", albumname)
+                            artistname = ""
                         }
                     }
                     MenuItem {
-                        text: qsTr("add album")
+                        text: qsTr("Add album")
                         onClicked: {
                             addAlbum([artistname, albumname])
                         }
                     }
                     MenuItem {
-                        text: qsTr("play album")
+                        text: qsTr("Play album")
                         onClicked: {
                             playAlbum([artistname, albumname])
                         }
@@ -130,7 +129,6 @@ Page {
         id: landscapeLoader
         anchors {
             fill: parent
-//            rightMargin: quickControlPanel.visibleSize
         }
         active: false
         sourceComponent: Component {
@@ -198,33 +196,32 @@ Page {
                         right: parent.right
                         left: pictureColumn.right
                     }
-                    header: PageHeader{
+                    header: PageHeader {
                         title: albumname
                     }
                     quickScrollEnabled: jollaQuickscroll
                     PullDownMenu {
                         MenuItem {
-                            enabled: (artistname!=="")
+                            enabled: (artistname !== "")
                             visible: enabled
-                            text: qsTr("show all tracks")
+                            text: qsTr("Show all tracks")
                             onClicked: {
-                                albumClicked("", albumname);
-                                artistname = "";
+                                albumClicked("", albumname)
+                                artistname = ""
                             }
                         }
                         MenuItem {
-                            text: qsTr("add album")
+                            text: qsTr("Add album")
                             onClicked: {
                                 addAlbum([artistname, albumname])
                             }
                         }
                         MenuItem {
-                            text: qsTr("play album")
+                            text: qsTr("Play album")
                             onClicked: {
                                 playAlbum([artistname, albumname])
                             }
                         }
-
                     }
 
                     model: tracksModel
@@ -252,14 +249,16 @@ Page {
         } else if (status === PageStatus.Activating) {
             if (!orientationTransitionRunning) {
                 // Activate correct loader
-                if ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) {
-                    if ( landscapeLoader.active ) {
-                        landscapeLoader.active = false;
+                if ((orientation === Orientation.Portrait)
+                        || (orientation === Orientation.PortraitInverted)) {
+                    if (landscapeLoader.active) {
+                        landscapeLoader.active = false
                     }
                     portraitLoader.active = true
-                } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)) {
-                    if ( portraitLoader.active ) {
-                        portraitLoader.active = false;
+                } else if ((orientation === Orientation.Landscape)
+                           || (orientation === Orientation.LandscapeInverted)) {
+                    if (portraitLoader.active) {
+                        portraitLoader.active = false
                     }
                     landscapeLoader.active = true
                 }
@@ -272,18 +271,19 @@ Page {
 
             requestAlbumInfo([albumname, artistname])
             pageStack.pushAttached(Qt.resolvedUrl("AlbumInfoPage.qml"), {
-                                       albumname: albumname
+                                       "albumname": albumname
                                    })
         }
     }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {
             // Activate correct loader
-            if ((orientation === Orientation.Portrait) || (orientation === Orientation.PortraitInverted)) {
-
+            if ((orientation === Orientation.Portrait)
+                    || (orientation === Orientation.PortraitInverted)) {
 
                 portraitLoader.active = true
-            } else if ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted)) {
+            } else if ((orientation === Orientation.Landscape)
+                       || (orientation === Orientation.LandscapeInverted)) {
                 landscapeLoader.active = true
             }
         } else {
@@ -294,7 +294,7 @@ Page {
     }
 
     Component.onDestruction: {
-        clearTrackList();
+        clearTrackList()
     }
 
     Component {
@@ -356,54 +356,58 @@ Page {
             onClicked: {
                 //albumTracksListView.currentIndex = index
                 albumTrackClicked(title, album, artist, lengthformated, path,
-                                  year, tracknr,trackmbid,artistmbid,albummbid);
+                                  year, tracknr, trackmbid, artistmbid,
+                                  albummbid)
             }
             function playTrackRemorse() {
-                remorseAction(qsTr("playing track"), function () {
+                remorseAction(qsTr("Playing track"), function () {
                     playSong(path)
                 }, 3000)
             }
             function addTrackRemorse() {
-                remorseAction(qsTr("adding track"), function () {
+                remorseAction(qsTr("Adding track"), function () {
                     addSong(path)
                 }, 3000)
             }
             function addTrackAfterCurrentRemorse() {
-                remorseAction(qsTr("adding track"), function () {
+                remorseAction(qsTr("Adding track"), function () {
                     addSongAfterCurrent(path)
                 }, 3000)
             }
             Component {
                 id: contextMenu
                 ContextMenu {
-                    anchors{
-                        right: (parent != null ) ? parent.right : undefined
-                        left: (parent != null ) ? parent.left : undefined
+                    anchors {
+                        right: (parent != null) ? parent.right : undefined
+                        left: (parent != null) ? parent.left : undefined
                     }
                     MenuItem {
-                        text: qsTr("play track")
+                        text: qsTr("Play track")
                         onClicked: {
                             playTrackRemorse()
                         }
                     }
 
                     MenuItem {
-                        text: qsTr("add track to list")
+                        text: qsTr("Add track to list")
                         onClicked: {
                             addTrackRemorse()
                         }
                     }
                     MenuItem {
-                        text: qsTr("play after current")
+                        text: qsTr("Play after current")
                         onClicked: {
-                            addTrackAfterCurrentRemorse();
+                            addTrackAfterCurrentRemorse()
                         }
                     }
                     MenuItem {
-                        text: qsTr("add to saved list")
+                        text: qsTr("Add to saved list")
                         onClicked: {
                             requestSavedPlaylists()
-                            pageStack.push(Qt.resolvedUrl("AddToPlaylistDialog.qml"),{url:path});
+                            pageStack.push(Qt.resolvedUrl(
+                                               "AddToPlaylistDialog.qml"), {
+                                               "url": path
+                                           })
                         }
                     }
                 }

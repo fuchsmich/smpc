@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "../../components"
 
@@ -26,22 +26,20 @@ Page {
                 bottom: parent.bottom
             }
 
-
-//            Connections {
-//                target: playlistModel
-//                onClearModel: {
-//                    console.debug("Clear model requested");
-//                    playlistView.currentIndex = -1;
-//                    playlistView.model = dummyModel
-//                    playlistView.forceLayout();
-//                }
-//                onModelReset: {
-//                    playlistView.model = Qt.binding(function() { return playlistModel;})
-//                    playlistView.currentIndex = -1
-//                    playlistView.currentIndex = lastsongid
-//                }
-//            }
-
+            //            Connections {
+            //                target: playlistModel
+            //                onClearModel: {
+            //                    console.debug("Clear model requested");
+            //                    playlistView.currentIndex = -1;
+            //                    playlistView.model = dummyModel
+            //                    playlistView.forceLayout();
+            //                }
+            //                onModelReset: {
+            //                    playlistView.model = Qt.binding(function() { return playlistModel;})
+            //                    playlistView.currentIndex = -1
+            //                    playlistView.currentIndex = lastsongid
+            //                }
+            //            }
             width: parent.width / 2
 
             model: playlistModel
@@ -49,42 +47,41 @@ Page {
                 id: dummyModel
             }
 
-
             quickScrollEnabled: jollaQuickscroll
             highlightFollowsCurrentItem: true
             highlightMoveDuration: 0
             header: PageHeader {
-                title: qsTr("playlist")
+                title: qsTr("Playlist")
             }
 
             PullDownMenu {
                 MenuItem {
-                    text: qsTr("add url")
+                    text: qsTr("Add url")
                     onClicked: {
                         pageStack.push(urlInputDialog)
                     }
                 }
                 MenuItem {
-                    text: qsTr("delete playlist")
+                    text: qsTr("Delete playlist")
                     onClicked: {
                         pageStack.push(deleteQuestionDialog)
                     }
                 }
                 MenuItem {
-                    text: qsTr("save playlist")
+                    text: qsTr("Save playlist")
                     onClicked: {
                         pageStack.push(saveplaylistDialog)
                     }
                 }
                 MenuItem {
-                    text: qsTr("open playlist")
+                    text: qsTr("Open playlist")
                     onClicked: {
                         requestSavedPlaylists()
                         pageStack.push(Qt.resolvedUrl("SavedPlaylistsPage.qml"))
                     }
                 }
                 MenuItem {
-                    text: qsTr("jump to playing song")
+                    text: qsTr("Jump to playing song")
                     onClicked: {
                         playlistView.currentIndex = -1
                         playlistView.currentIndex = lastsongid
@@ -106,7 +103,7 @@ Page {
                         id: contextMenu
                         ContextMenu {
                             MenuItem {
-                                text: qsTr("remove song")
+                                text: qsTr("Remove song")
                                 visible: !mDeleteRemorseRunning
                                 enabled: !mDeleteRemorseRunning
                                 onClicked: {
@@ -116,53 +113,51 @@ Page {
                             }
 
                             MenuItem {
-                                text: qsTr("show artist")
+                                text: qsTr("Show artist")
                                 onClicked: {
                                     artistClicked(artist)
                                     pageStack.push(Qt.resolvedUrl(
                                                        "AlbumListPage.qml"), {
-                                                       artistname: artist
+                                                       "artistname": artist
                                                    })
                                 }
                             }
 
                             MenuItem {
-                                text: qsTr("show album")
+                                text: qsTr("Show album")
                                 onClicked: {
-                                        albumClicked("", album)
-                                        pageStack.push(
-                                                    Qt.resolvedUrl(
-                                                        "AlbumTracksPage.qml"),
-                                                    {
-                                                        artistname: "",
-                                                        albumname: album
-                                                    })
+                                    albumClicked("", album)
+                                    pageStack.push(Qt.resolvedUrl(
+                                                       "AlbumTracksPage.qml"), {
+                                                       "artistname": "",
+                                                       "albumname": album
+                                                   })
                                 }
                             }
                             MenuItem {
                                 visible: !playing
-                                text: qsTr("play as next")
+                                text: qsTr("Play as next")
                                 onClicked: {
-                                    playNextWOTimer.windUp(index);
+                                    playNextWOTimer.windUp(index)
                                 }
                             }
 
                             MenuItem {
                                 visible: playing
-                                text: qsTr("show information")
+                                text: qsTr("Show information")
                                 onClicked: pageStack.navigateForward(
                                                PageStackAction.Animated)
                             }
 
                             MenuItem {
-                                text: qsTr("add to saved list")
+                                text: qsTr("Add to saved list")
                                 onClicked: {
                                     requestSavedPlaylists()
                                     pageStack.push(
                                                 Qt.resolvedUrl(
                                                     "AddToPlaylistDialog.qml"),
                                                 {
-                                                    url: path
+                                                    "url": path
                                                 })
                                 }
                             }
@@ -286,25 +281,25 @@ Page {
                     anchors.fill: parent
                     PullDownMenu {
                         MenuItem {
-                            text: qsTr("show all tracks from album")
+                            text: qsTr("Show all tracks from album")
                             visible: mAlbum === "" ? false : true
                             onClicked: {
                                 albumClicked("", mAlbum)
                                 pageStack.push(Qt.resolvedUrl(
                                                    "AlbumTracksPage.qml"), {
-                                                   artistname: "",
-                                                   albumname: mAlbum
+                                                   "artistname": "",
+                                                   "albumname": mAlbum
                                                })
                             }
                         }
                         MenuItem {
-                            text: qsTr("show albums from artist")
+                            text: qsTr("Show albums from artist")
                             visible: mArtist === "" ? false : true
                             onClicked: {
                                 artistClicked(mArtist)
                                 pageStack.push(Qt.resolvedUrl(
                                                    "AlbumListPage.qml"), {
-                                                   artistname: mArtist
+                                                   "artistname": mArtist
                                                })
                             }
                         }
@@ -393,7 +388,7 @@ Page {
                             }
 
                             Label {
-                                text: qsTr("track no.:")
+                                text: qsTr("Track nr:")
                                 color: Theme.secondaryColor
                                 font.pixelSize: Theme.fontSizeSmall
                                 anchors {
@@ -406,11 +401,11 @@ Page {
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 wrapMode: "WordWrap"
-//                                anchors.horizontalCenter: parent.horizontalCenter
+                                //                                anchors.horizontalCenter: parent.horizontalCenter
                             }
 
                             Label {
-                                text: qsTr("playlist no.:")
+                                text: qsTr("Playlist nr:")
                                 color: Theme.secondaryColor
                                 font.pixelSize: Theme.fontSizeSmall
                                 anchors {
@@ -423,11 +418,11 @@ Page {
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 wrapMode: "WordWrap"
-//                                anchors.horizontalCenter: parent.horizontalCenter
+                                //                                anchors.horizontalCenter: parent.horizontalCenter
                             }
 
                             Label {
-                                text: qsTr("bitrate:")
+                                text: qsTr("Bitrate:")
                                 color: Theme.secondaryColor
                                 font.pixelSize: Theme.fontSizeSmall
                             }
@@ -437,10 +432,10 @@ Page {
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 wrapMode: "WordWrap"
-//                                anchors.horizontalCenter: parent.horizontalCenter
+                                //                                anchors.horizontalCenter: parent.horizontalCenter
                             }
                             Label {
-                                text: qsTr("properties:")
+                                text: qsTr("Properties:")
                                 color: Theme.secondaryColor
                                 font.pixelSize: Theme.fontSizeSmall
                             }
@@ -450,10 +445,10 @@ Page {
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 wrapMode: "WordWrap"
-//                                anchors.horizontalCenter: parent.horizontalCenter
+                                //                                anchors.horizontalCenter: parent.horizontalCenter
                             }
                             Label {
-                                text: qsTr("uri:")
+                                text: qsTr("URI:")
                                 color: Theme.secondaryColor
                                 font.pixelSize: Theme.fontSizeSmall
                             }
@@ -473,7 +468,7 @@ Page {
                     }
                 }
 
-               //backgroundSize: volumeControl.height + positionSlider.height + buttonRow.height
+                //backgroundSize: volumeControl.height + positionSlider.height + buttonRow.height
                 backgroundSize: backgroundColumn.height
                 background: Column {
                     id: backgroundColumn
@@ -546,7 +541,7 @@ Page {
                             minimumValue: 0
                             value: mVolume
                             valueText: value + "%"
-                            label: qsTr("volume")
+                            label: qsTr("Volume")
                             onPressedChanged: {
                                 if (!pressed) {
                                     volumeChanging = false
@@ -660,7 +655,6 @@ Page {
     // Delete question
     DeletePlaylistDialog {
         id: deleteQuestionDialog
-
     }
 
     SavePlaylistDialog {
@@ -703,22 +697,23 @@ Page {
         playlistView.currentIndex = lastIndex
     }
 
+
     /* FIXME really bad workaround for segmentation fault.
        Otherwise QML/Qt seems to crash if model changes significantly on contextmenu actions*/
     Timer {
         id: playNextWOTimer
-        property int index;
+        property int index
         interval: 250
         repeat: false
         onTriggered: {
-            console.debug("send signal: " + index);
-            playPlaylistSongNext(index);
+            console.debug("Send signal: " + index)
+            playPlaylistSongNext(index)
         }
 
         function windUp(pIndex) {
-            console.debug("Workaround timer windup");
-            index = pIndex;
-            start();
+            console.debug("Workaround timer windup")
+            index = pIndex
+            start()
         }
     }
 }

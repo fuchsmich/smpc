@@ -136,7 +136,7 @@ void NetworkAccess::getAlbums()
         MpdAlbum *tempalbum;
         QString name;
         QString mbid;
-        QString albumartist;
+        QString albumartist, nextalbumartist, date;
         bool emptyAlbum = false;
         MPD_WHILE_PARSE_LOOP
         {
@@ -148,9 +148,10 @@ void NetworkAccess::getAlbums()
                 response.chop(1);
                 /* Parse album name and if server is new enough parse mbid */
                 if ( response.startsWith("Album: ") ) {
-                    // Append album if name is already set(last album)
+                    // Append album if name is already set
                     if ( name != "" || emptyAlbum ) {
-                        tempalbum = new MpdAlbum(NULL,name,albumartist,mbid);
+                        qDebug() << "**adding: " << albumartist << name << mbid;
+                        tempalbum = new MpdAlbum(NULL, name, albumartist, mbid);
 
                         /* This helps with qml Q_PROPERTY accesses */
                         tempalbum->moveToThread(mQMLThread);
@@ -158,6 +159,7 @@ void NetworkAccess::getAlbums()
                         QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
                         albums->append(tempalbum);
                         emptyAlbum = false;
+                        albumartist = nextalbumartist;
                     }
                     name = response.right(response.length() - 7);
                     if ( name == "" ) {
@@ -166,8 +168,16 @@ void NetworkAccess::getAlbums()
                 }  else if ( response.startsWith("MUSICBRAINZ_ALBUMID: ") ) {
                     mbid = response.right(response.length() - 21);
                 }  else if ( response.startsWith("AlbumArtist: ") ) {
-                    albumartist = response.right(response.length() - 13);
+                    // First AlbumArtist??
+                    if (name == "" && !emptyAlbum) {
+                        albumartist = nextalbumartist = response.right(response.length() - 13);
+                    } else {
+                        nextalbumartist = response.right(response.length() - 13);
+                    }
+                } else if ( response.startsWith("Date: ") ) {
+                    date = response.right(response.length() - 6);
                 }
+                qDebug() << response << albumartist << name << date;
             }
         }
         /* Make sure the last album isn't missed because of loop structure */
@@ -631,7 +641,7 @@ void NetworkAccess::pause()
             playTrackByNumber(getPlaybackID());
         }
     }
-    
+
 }
 
 void NetworkAccess::stop()
@@ -751,7 +761,8 @@ void NetworkAccess::addAlbumToPlaylist(QString album)
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri() + "\"\n");
+        // fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
+            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri().toUtf8().replace("\\", "\\\\").replace("\"", "\\\"") + "\"\n");
         }
         sendMPDCommand("command_list_end\n");
         MPD_WHILE_PARSE_LOOP
@@ -775,13 +786,16 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
         QList<MpdTrack*> *temptracks = new QList<MpdTrack*>();
         //album.replace(QString("\""),QString("\\\""));
         QString response ="";
+        artist = artist.replace("\\", "");
         temptracks = getAlbumTracks_prv(album,artist);
+        qDebug() << "artiest" << artist;
 
         //Add Tracks to Playlist
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri() + "\"\n");
+            // sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri() + "\"\n");
+            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri().toUtf8().replace("\\", "\\\\").replace("\"", "\\\"") + "\"\n");
         }
         sendMPDCommand("command_list_end\n");
         MPD_WHILE_PARSE_LOOP
@@ -846,6 +860,8 @@ void NetworkAccess::playAlbum(QString album)
 void NetworkAccess::addTrackToPlaylist(QString fileuri)
 {
     if (connected()) {
+        fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
+        // qDebug() << fileuri + "\"\n";
         sendMPDCommand(QString("add \"") + fileuri + "\"\n");
         QString response ="";
         //Clear read buffer
@@ -949,6 +965,7 @@ void NetworkAccess::addTrackAfterCurrent(QString fileuri)
 {
     quint32 currentPosition = getPlaybackID();
     if (connected()) {
+        fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
         sendMPDCommand(QString("addid \"") + fileuri + "\" " + QString::number(currentPosition+1) + "\n");
         QString response ="";
         //Clear read buffer
@@ -970,6 +987,7 @@ void NetworkAccess::playFiles(QString fileuri)
 {
     clearPlaylist();
     if (connected()) {
+        fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
         sendMPDCommand(QString("add \"") + fileuri + "\"\n");
         QString response ="";
         //Clear read buffer
@@ -995,6 +1013,7 @@ void NetworkAccess::playFiles(QString fileuri)
 void NetworkAccess::playTrack(QString fileuri)
 {
     if (connected()) {
+        fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
         sendMPDCommand(QString("add \"") + fileuri + "\"\n");
         QString response ="";
         //Clear read buffer
@@ -1009,7 +1028,7 @@ void NetworkAccess::playTrack(QString fileuri)
         }
         //Get song id in playlist
 
-        
+
         playTrackByNumber(getPlaylistLength() - 1);
     }
     getStatus();
