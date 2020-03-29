@@ -19,4 +19,3 @@ struct serverprofile { QString profilename; QString hostname; QString password; 
 
 
 #endif // COMMON_H
-
