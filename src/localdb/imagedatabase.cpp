@@ -388,8 +388,14 @@ int ImageDatabase::imageIDFromArtist(QString artist)
 {
     QSqlQuery query;
     artist = artist.replace('\"', "\\\"");
-    query.prepare("SELECT * FROM artists WHERE "
-                  "name=\"" + artist + "\"");
+    if (artist.indexOf('"') == -1) {
+        query.prepare("SELECT * FROM artists WHERE "
+                "name=\"" + artist + "\"");
+    } else {
+        artist = artist.replace("\\", "");
+        query.prepare("SELECT * FROM artists WHERE "
+                "name=\'" + artist + "\'");
+    }
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
 

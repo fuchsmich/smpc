@@ -761,7 +761,6 @@ void NetworkAccess::addAlbumToPlaylist(QString album)
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-        // fileuri = fileuri.toUtf8().replace("\\", "\\\\").replace("\"", "\\\"");
             sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri().toUtf8().replace("\\", "\\\\").replace("\"", "\\\"") + "\"\n");
         }
         sendMPDCommand("command_list_end\n");
@@ -788,7 +787,6 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
         QString response ="";
         artist = artist.replace("\\", "");
         temptracks = getAlbumTracks_prv(album,artist);
-        qDebug() << "artiest" << artist;
 
         //Add Tracks to Playlist
         sendMPDCommand("command_list_begin\n");
