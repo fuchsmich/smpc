@@ -45,7 +45,6 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mWasConnected = false;
     mFileModels = new QStack<FileModel*>();
     // Set empty qml properties for later usage
-    mQuickView->rootContext()->setContextProperty("versionstring",QVariant::fromValue(QString(VERSION)));
     mQuickView->rootContext()->setContextProperty("coverstring","");
     mQuickView->rootContext()->setContextProperty("artistInfoText","");
     mQuickView->rootContext()->setContextProperty("albumInfoText","");

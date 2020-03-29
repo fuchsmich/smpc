@@ -185,7 +185,6 @@ Page {
             pageStack.push(Qt.resolvedUrl("settings/ConnectServerPage.qml"))
         } else if (ident === "about") {
             aboutdialog.visible = true
-            aboutdialog.version = versionstring
             aboutdialog.open()
         } else if (ident === "updatedb") {
             updateDB()

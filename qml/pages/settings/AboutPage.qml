@@ -47,7 +47,7 @@ Page {
             Label {
                 id: versionText
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Version:") + " " + versionstring
+                text: qsTr("Version:") + " " + version
                 font.pixelSize: Theme.fontSizeLarge
             }
             Button {
