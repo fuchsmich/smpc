@@ -4,6 +4,7 @@ TARGET = harbour-smpc
 QT += network gui sql multimedia svg
 
 CONFIG += sailfishapp
+DEPLOYMENT_PATH = /usr/share/$${TARGET}
 
 
 # C++ sources
@@ -120,15 +121,17 @@ OTHER_FILES = rpm/harbour-smpc.yaml \
 
 
 RESOURCES += \
-    translations.qrc \
     miscresources.qrc
 
 
 #DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS QT_NO_DEBUG_OUTPUT
 DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
-TRANSLATIONS += $${TARGET}_de.ts
-TRANSLATIONS += $${TARGET}_fr.ts
+INSTALLS += translations
+
+TRANSLATIONS = translations/harbour-smpc-fr.ts \
+               translations/harbour-smpc-de.ts \
+               translations/harbour-smpc-es.ts
 
 INCLUDEPATH += src
 
@@ -197,4 +200,11 @@ icon256.path = /usr/share/icons/hicolor/256x256/apps
 #iconsvg.files += icons/scalable/harbour-smpc.svgz
 #iconsvg.path = /usr/share/icons/hicolor/scalable/apps
 
+translations.files = translations
+translations.path = $${DEPLOYMENT_PATH}
+
 INSTALLS += icon86 icon108 icon128 icon172 icon256
+
+# to disable building translations every time, comment out the
+# following CONFIG line
+CONFIG += sailfishapp_i18n

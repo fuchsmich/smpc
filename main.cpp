@@ -13,11 +13,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     app->setOrganizationName("harbour-smpc");
     app->setApplicationName("harbour-smpc");
-    QString locale = QLocale::system().name();
-    QString translationFile = QString(":translations/harbour-smpc_") + locale;
-    QTranslator translator;
-    translator.load(translationFile);
-    app->installTranslator(&translator);
+    // QString locale = QLocale::system().name();
+    // QString translationFile = QString(":translations/harbour-smpc_") + locale;
+    // QTranslator translator;
+    // translator.load(translationFile);
+    // app->installTranslator(&translator);
 //    QScopedPointer<QQuickView> view(SailfishApp::createView());
     appinfo.start("/bin/rpm", QStringList() << "-qa"
                                             << "--queryformat"
@@ -27,6 +27,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (appinfo.bytesAvailable() > 0) {
         appversion = appinfo.readAll();
     }
+    QLocale::setDefault(QLocale::c());
     QQuickView *view = SailfishApp::createView();
     view->engine()->addImportPath("/usr/share/harbour-smpc/qml/");
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
@@ -41,5 +42,3 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->show();
     return app->exec();
 }
-
-
