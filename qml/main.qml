@@ -116,7 +116,6 @@ ApplicationWindow {
     property int listfontsize: 12
     property int liststretch: 20
     property int lastsongid: mpd_status.id
-    property string playbuttoniconsource: mpd_status.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
     property string playbuttoniconsourcecover: mpd_status.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
     property string volumebuttoniconsource
     property string lastpath
@@ -145,8 +144,6 @@ ApplicationWindow {
     property int mLength: mpd_status.length
     property int mPosition: mpd_status.currentTime
     property int mPlaylistlength: mpd_status.playlistSize
-    property bool mRepeat: mpd_status.repeat
-    property bool mShuffle: mpd_status.shuffle
     property bool mDebugEnabled
     property bool mPositionSliderActive: false
     property string mAudioProperties: mpd_status.samplerate + " Hz "

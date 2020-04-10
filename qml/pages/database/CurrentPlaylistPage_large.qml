@@ -603,50 +603,8 @@ Page {
                             }
                         }
                     }
-                    Row {
-                        id: buttonRow
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        height: shuffleButton.height
-                        Switch {
-                            id: shuffleButton
-                            icon.source: "image://theme/icon-m-shuffle"
-                            automaticCheck: false
-                            checked: mpd_status.shuffle
-                            onClicked: {
-                                setShuffle(!checked)
-                            }
-                        }
-                        IconButton {
-                            id: prevButton
-                            icon.source: "image://theme/icon-m-previous"
-                            onClicked: prev()
-                        }
-                        IconButton {
-                            id: stopButton
-                            icon.source: "qrc:images/icon-m-stop.png"
-                            icon.scale: Screen.width > 540 ? 2.2 : 1
-                            onClicked: stop()
-                        }
-                        IconButton {
-                            id: playButton
-                            icon.source: playbuttoniconsource
-                            onClicked: play()
-                        }
-                        IconButton {
-                            id: nextButton
-                            icon.source: "image://theme/icon-m-next"
-                            onClicked: next()
-                        }
-                        Switch {
-                            id: repeatButton
-                            automaticCheck: false
-                            checked: mpd_status.repeat
-                            icon.source: "image://theme/icon-m-repeat"
-                            onClicked: {
-                                setRepeat(!checked)
-                            }
-                        }
-                    }
+
+                    PlaybackControls {}
                 }
             }
         }
