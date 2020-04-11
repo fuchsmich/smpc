@@ -4,7 +4,7 @@
         <file>smpc-big.png</file>
         <file>smpc.png</file>
         <file>pictogram.png</file>
-        <file>icon-m-stop.png</file>
         <file>pictogram.svg</file>
+        <file alias="icon-l-stop.svg">icons/scalable/icon-l-stop.svg</file>
     </qresource>
 </RCC>

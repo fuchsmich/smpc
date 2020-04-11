@@ -342,7 +342,7 @@ Page {
             }
         }
 
-        backgroundSize: volumeControl.height + positionSlider.height + buttonRow.height
+        backgroundSize: volumeControl.height + positionSlider.height + playbackControls.height
         background: Column {
             id: backgroundColumn
             anchors.fill: parent
@@ -476,49 +476,9 @@ Page {
                     }
                 }
             }
-            Row {
-                id: buttonRow
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: shuffleButton.height
-                Switch {
-                    id: shuffleButton
-                    icon.source: "image://theme/icon-m-shuffle"
-                    automaticCheck: false
-                    checked: mShuffle
-                    onClicked: {
-                        setShuffle(!checked)
-                    }
-                }
-                IconButton {
-                    id: prevButton
-                    icon.source: "image://theme/icon-m-previous"
-                    onClicked: prev()
-                }
-                IconButton {
-                    id: stopButton
-                    icon.source: "qrc:images/icon-m-stop.png"
-                    icon.scale: Screen.width > 540 ? 2.2 : 1
-                    onClicked: stop()
-                }
-                IconButton {
-                    id: playButton
-                    icon.source: playbuttoniconsource
-                    onClicked: play()
-                }
-                IconButton {
-                    id: nextButton
-                    icon.source: "image://theme/icon-m-next"
-                    onClicked: next()
-                }
-                Switch {
-                    id: repeatButton
-                    automaticCheck: false
-                    checked: mRepeat
-                    icon.source: "image://theme/icon-m-repeat"
-                    onClicked: {
-                        setRepeat(!checked)
-                    }
-                }
+
+            PlaybackControls {
+                id: playbackControls
             }
         }
     }
@@ -573,11 +533,11 @@ Page {
                 enabled: false
             }
             PropertyChanges {
-                target: shuffleButton
+                target: playbackControls.shuffleButton
                 visible: true
             }
             PropertyChanges {
-                target: repeatButton
+                target: playbackControls.repeatButton
                 visible: true
             }
         },
@@ -612,11 +572,11 @@ Page {
                 enabled: true
             }
             PropertyChanges {
-                target: shuffleButton
+                target: playbackControls.shuffleButton
                 visible: false
             }
             PropertyChanges {
-                target: repeatButton
+                target: playbackControls.repeatButton
                 visible: false
             }
         }

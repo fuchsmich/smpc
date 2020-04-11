@@ -4,8 +4,10 @@ TARGET = harbour-smpc
 QT += network gui sql multimedia svg
 
 CONFIG += sailfishapp
-DEPLOYMENT_PATH = /usr/share/$${TARGET}
 
+INCLUDEPATH += src
+QML_IMPORT_PATH += qml
+DEPLOYMENT_PATH = /usr/share/$${TARGET}
 
 # C++ sources
 SOURCES += main.cpp \
@@ -64,65 +66,13 @@ HEADERS += \
     src/mpd/mpdcommon.h \
     src/mpd/serverinfo.h
 
-OTHER_FILES = rpm/harbour-smpc.yaml \
-    icon-m-stop.png \
-    qml/components/qmldir \
-    qml/pages/database/SongPage.qml \
-    qml/pages/database/SearchPage.qml \
-    qml/pages/database/SavedPlaylistsPage.qml \
-    qml/pages/database/PlaylistTracksPage.qml \
-    qml/pages/database/FileBrowserPage.qml \
-    qml/pages/database/CurrentSong.qml \
-    qml/pages/database/CurrentPlaylistPage.qml \
-    qml/pages/database/CurrentPlaylistPage_large.qml \
-    qml/pages/database/ArtistListPage.qml \
-    qml/pages/database/ArtistInformationPage.qml \
-    qml/pages/database/ArtistInfoPage.qml \
-    qml/pages/database/AlbumTracksPage.qml \
-    qml/pages/database/AlbumListPage.qml \
-    qml/pages/database/AlbumInfoPage.qml \
-    qml/pages/settings/SettingsPage.qml \
-    qml/pages/settings/ServerListPage.qml \
-    qml/pages/settings/ServerEditPage.qml \
-    qml/pages/settings/OutputsPage.qml \
-    qml/pages/settings/DatabaseSettings.qml \
-    qml/pages/settings/ConnectServerPage.qml \
-    qml/pages/settings/AboutPage.qml \
-    qml/main.qml \
-    qml/pages/MainPage.qml \
-    qml/components/SpeedScroller.js \
-    qml/components/SectionScroller.js \
-    qml/components/ToggleImage.qml \
-    qml/components/SpeedScroller.qml \
-    qml/components/SongDialog.qml \
-    qml/components/SectionScroller.qml \
-    qml/components/ScrollLabel.qml \
-    qml/components/MainGridItem.qml \
-    qml/components/Heading.qml \
-    qml/components/FileDelegate.qml \
-    qml/components/ControlPanel.qml \
-    qml/components/ArtistDelegate.qml \
-    qml/components/AlbumDelegate.qml \
-    qml/cover/CoverPage.qml \
-    qml/components/AlbumShowDelegate.qml \
-    qml/components/ArtistShowDelegate.qml \
-    qml/pages/settings/GUISettings.qml \
-    qml/components/AlbumListDelegate.qml \
-    qml/components/ArtistListDelegate.qml \
-    qml/components/PlaylistSectionDelegate.qml \
-    qml/pages/database/AddToPlaylistDialog.qml \
-    qml/pages/database/CurrentPlaylistPage_large.qml \
-    qml/pages/database/CurrentSong_large.qml \
-    qml/components/URLInputDialog.qml \
-    qml/components/SavePlaylistDialog.qml \
-    qml/components/DeletePlaylistDialog.qml \
-    qml/components/InfoBanner.qml
-
-
+DISTFILES += \
+    harbour-smpc.desktop \
+    rpm/harbour-smpc.changes \
+    rpm/harbour-smpc.spec
 
 RESOURCES += \
     miscresources.qrc
-
 
 #DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS QT_NO_DEBUG_OUTPUT
 DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
@@ -132,8 +82,6 @@ INSTALLS += translations
 TRANSLATIONS = translations/harbour-smpc-fr.ts \
                translations/harbour-smpc-de.ts \
                translations/harbour-smpc-es.ts
-
-INCLUDEPATH += src
 
 lupdate_only {
 SOURCES += \
