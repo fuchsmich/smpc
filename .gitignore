@@ -9,7 +9,6 @@
 *.so
 *.dll
 *.dylib
-rpm/*.yaml
 
 # Qt-es
 
