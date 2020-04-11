@@ -65,7 +65,7 @@ BackgroundItem {
             styleColor: Theme.secondaryColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
-            text: title === "" ? qsTr("No Album Tag") : title
+            text: title === "" ? qsTr("No album tag") : title
         }
     }
 
