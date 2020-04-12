@@ -72,7 +72,6 @@ DISTFILES += \
     harbour-smpc.desktop \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
-    rpm/harbour-smpc.yaml \
     translations/*.ts
 
 RESOURCES += \
