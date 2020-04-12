@@ -1136,52 +1136,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="45"/>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="38"/>
         <source>Edit profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="43"/>
+        <source>Profile name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="50"/>
-        <source>Profilename:</source>
+        <source>Hostname or IP address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="56"/>
-        <source>Input profilename</source>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="57"/>
+        <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="63"/>
-        <source>Hostname:</source>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="66"/>
+        <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="69"/>
-        <source>Input hostname or IP</source>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="74"/>
+        <source>Streaming port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="75"/>
-        <source>Port:</source>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="85"/>
+        <source>MAC address for WOL (optional)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="89"/>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="102"/>
-        <source>Streaming port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="116"/>
-        <source>MAC Address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="132"/>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="96"/>
         <source>Autoconnect</source>
         <translation type="unfinished"></translation>
     </message>

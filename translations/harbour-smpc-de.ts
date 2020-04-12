@@ -1139,52 +1139,42 @@
         <translation>Serverprofil entfernen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="45"/>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="38"/>
         <source>Edit profile</source>
         <translation>Serverprofil bearbeiten</translation>
     </message>
     <message>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="43"/>
+        <source>Profile name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="50"/>
-        <source>Profilename:</source>
-        <translation>Serverprofilname:</translation>
+        <source>Hostname or IP address</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="56"/>
-        <source>Input profilename</source>
-        <translation>Profilnamen eingeben</translation>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="57"/>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="63"/>
-        <source>Hostname:</source>
-        <translation>Hostname:</translation>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="66"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="69"/>
-        <source>Input hostname or IP</source>
-        <translation>Hostname oder IP-Adresse eingeben</translation>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="74"/>
+        <source>Streaming port</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="75"/>
-        <source>Port:</source>
-        <translation>Port:</translation>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="85"/>
+        <source>MAC address for WOL (optional)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="89"/>
-        <source>Password:</source>
-        <translation>Passwort:</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="102"/>
-        <source>Streaming port:</source>
-        <translation>Wiedergabe-Port:</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="116"/>
-        <source>MAC Address:</source>
-        <translation>MAC-Adresse:</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ServerEditPage.qml" line="132"/>
+        <location filename="../qml/pages/settings/ServerEditPage.qml" line="96"/>
         <source>Autoconnect</source>
         <translation>Automatisch verbinden</translation>
     </message>
