@@ -5,7 +5,7 @@ AlbumModel::AlbumModel(QObject *parent) :
 {
 }
 
-AlbumModel::AlbumModel(QList<MpdAlbum *> *list, ImageDatabase *db, QString lastfmartsize, bool downloading,QObject *parent) : QAbstractListModel(parent)
+AlbumModel::AlbumModel(QList<MpdAlbum *> *list, ImageDatabase *db, QString lastfmartsize, bool downloading, QObject *parent) : QAbstractListModel(parent)
 {
     mEntries = list;
     mDB = db;
@@ -31,22 +31,26 @@ AlbumModel::~AlbumModel()
 
 QVariant AlbumModel::data(const QModelIndex &index, int role) const
 {
-    if ( Q_UNLIKELY(index.row() < 0 || index.row() > rowCount())) {
+    if (Q_UNLIKELY(index.row() < 0 || index.row() > rowCount())) {
         return QVariant(QVariant::Invalid);
     }
-    if(role==AlbumRole)
+    if (role==AlbumRole)
     {
         return mEntries->at(index.row())->getTitle();
     }
-    else if(role==SectionRole)
-    {
-        return mEntries->at(index.row())->getSection();
-    }
-    else if(role==ArtistRole)
+    else if (role==ArtistRole)
     {
         return mEntries->at(index.row())->getArtist();
     }
-    else if(role==AlbumCleandRole)
+    else if (role==DateRole)
+    {
+        return mEntries->at(index.row())->getDate();
+    }
+    else if (role==SectionRole)
+    {
+        return getSection(index.row());
+    }
+    else if (role==AlbumCleandRole)
     {
         QString cleanedAlbum = mEntries->at(index.row())->getTitle();
         cleanedAlbum = cleanedAlbum.replace('/',"");
@@ -106,21 +110,30 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
 }
 
 int AlbumModel::rowCount(const QModelIndex &parent) const{
-    if ( parent.isValid() ) {
+    if (parent.isValid()) {
         return 0;
     }
     return mEntries->length();
 }
 
-QHash<int, QByteArray> AlbumModel::roleNames() const {
-    QHash<int,QByteArray> roles;
+QHash<int, QByteArray> AlbumModel::roleNames() const
+{
+    QHash<int, QByteArray> roles;
 
     roles[AlbumRole] = "title";
-    roles[SectionRole] = "sectionprop";
     roles[ArtistRole] = "artist";
+    roles[DateRole] = "artist";
+    roles[SectionRole] = "sectionprop";
     roles[AlbumCleandRole] = "titleClean";
     roles[AlbumImageRole] = "coverURL";
     return roles;
+}
+
+QString AlbumModel::getSection(int row) const
+{
+    //FIXME depend on sortorder
+    QString s = mEntries->at(row)->getTitle();
+    return QString(s.toUpper()[0]);
 }
 
 void AlbumModel::albumInformationReady(AlbumInformation *info)

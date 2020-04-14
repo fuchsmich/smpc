@@ -267,6 +267,7 @@ public slots:
      * If successful the signal artistAlbumsReady() is emitted.
      * @param artist to filter with.
      */
+
     void getArtistsAlbums(QString artist);
     /**
      * @brief getAlbumTracks Requests all album tracks of album.
@@ -619,11 +620,23 @@ private:
 
     /* Private methods */
     /**
+     * @brief parseMPDAlbums Function parses mpd response and returns MPDs returned tracks
+     * @return Albumlist of parsed MPD albums
+     */
+    QList<MpdAlbum *> *parseMPDAlbums();
+
+    /**
      * @brief parseMPDTracks Functions parses and returns MPDs returned tracks
      * @param cartist Filter criteria. Only tracks with cartist as artist are returned.
      * @return Tracklist of parsed MPD tracks
      */
     QList<MpdTrack*>* parseMPDTracks(QString cartist);
+
+    /**
+     * @brief getAlbums_prv fetches a list of MPDAlbums
+     * @return List of fetched MPDAlbums
+     */
+    QList<MpdAlbum*>* getAlbums_prv();
 
     /**
      * @brief getArtists_prv Fetches a list of MPDArtists

@@ -13,7 +13,7 @@ class MpdAlbum : public QObject
     Q_PROPERTY(QString date READ getDate NOTIFY changed )
 public:
     explicit MpdAlbum(QObject *parent = 0);
-    MpdAlbum(QObject *parent,QString mTitle,QString artist="", QString mbid="", QString date="");
+    MpdAlbum(QObject *parent, QString mTitle, QString artist="", QString date="", QString mbid="");
 
     MpdAlbum(const MpdAlbum &copyObject, QObject *parent = 0);
 
@@ -23,7 +23,7 @@ public:
     QString getMBID() const;
     QString getDate() const;
 
-    bool operator< (const MpdAlbum& rhs) const;
+    bool operator<(const MpdAlbum& rhs) const;
     bool operator==(MpdAlbum & rhs) const ;
     void operator=(MpdAlbum &rhs);
 

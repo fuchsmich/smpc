@@ -13,6 +13,11 @@ void ServerInfo::setIdleSupported(bool idle) {
     pIdleSupported = idle;
 }
 
+void ServerInfo::setAlbumartSupported(bool value)
+{
+    pAlbumartSupported = value;
+}
+
 void ServerInfo::setListFilterSupported(bool filter) {
     pListFilterSupported = filter;
 }
@@ -21,9 +26,14 @@ void ServerInfo::setListGroupSupported(bool groupSupported) {
     pListGroupSupported = groupSupported;
 }
 
-void ServerInfo::setListMultiGroupSupported(bool multiGroupSupported) {
-    pListMultiGroupSupported = multiGroupSupported;
-}
+//void ServerInfo::setListMultiGroupSupported(bool multiGroupSupported) {
+//    pListMultiGroupSupported = multiGroupSupported;
+//}
+
+//void ServerInfo::setListGroupFormatOld(bool value)
+//{
+//    pListGroupFormatOld = value;
+//}
 
 void ServerInfo::setMBIDTagsSupported(bool MBIDSupported) {
     pMBIDTagsSupported = MBIDSupported;
@@ -45,9 +55,9 @@ bool ServerInfo::getListGroupSupported() {
     return pListGroupSupported;
 }
 
-bool ServerInfo::getListMultiGroupSupported() {
-    return pListMultiGroupSupported;
-}
+//bool ServerInfo::getListMultiGroupSupported() {
+//    return pListMultiGroupSupported;
+//}
 
 bool ServerInfo::getMBIDTagsSupported() {
     return pMBIDTagsSupported;

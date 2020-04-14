@@ -25,8 +25,9 @@ public:
 
     enum EntryRoles {
         AlbumRole = Qt::UserRole + 1,
-        SectionRole,
         ArtistRole,
+        DateRole,
+        SectionRole,
         AlbumCleandRole,
         AlbumImageRole
     };
@@ -41,6 +42,7 @@ private:
 
     // Settings
     bool mDownloadEnabled;
+    QString getSection(int row) const;
 
 signals:
     void requestAlbumInformation(MpdAlbum album) const;
