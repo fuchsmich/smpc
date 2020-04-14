@@ -621,9 +621,12 @@ private:
     /* Private methods */
     /**
      * @brief parseMPDAlbums Function parses mpd response and returns MPDs returned tracks
+     * @param artist default artist string
      * @return Albumlist of parsed MPD albums
      */
     QList<MpdAlbum *> *parseMPDAlbums();
+    QList<MpdAlbum *> *parseMPDAlbums(QString artist);
+
 
     /**
      * @brief parseMPDTracks Functions parses and returns MPDs returned tracks

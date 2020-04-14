@@ -119,11 +119,16 @@ void NetworkAccess::getAlbums()
 
 QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums()
 {
+    return parseMPDAlbums("");
+}
+
+QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString artist)
+{
     QList<MpdAlbum *> *albums = new QList<MpdAlbum*>();
 
     QString response = "";
     MpdAlbum *tempalbum;
-    QString name = "", mbid = "", date = "", artist = "";
+    QString name = "", mbid = "", date = "";
     QString tagName;
 
     MPD_WHILE_PARSE_LOOP
@@ -294,7 +299,7 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         //qDebug() << command.arg(artist);
         sendMPDCommand(command.arg(artist));
         //FIXME artist missing in albums
-        albums = parseMPDAlbums();
+        albums = parseMPDAlbums(artist);
     }
 
     //Get album tracks
