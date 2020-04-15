@@ -117,18 +117,20 @@ void NetworkAccess::getAlbums()
     emit ready();
 }
 
-QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums()
-{
-    return parseMPDAlbums("");
-}
+//QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums()
+//{
+//    return parseMPDAlbums("");
+//}
 
-QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString artist)
+QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
 {
+
     QList<MpdAlbum *> *albums = new QList<MpdAlbum*>();
 
     QString response = "";
     MpdAlbum *tempalbum;
-    QString name = "", mbid = "", date = "";
+    QString artist = listedArtist;
+    QString name = "", mbid = "", date = "", section = "";
     QString tagName;
 
     MPD_WHILE_PARSE_LOOP
@@ -148,7 +150,14 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString artist)
             } else if (response.startsWith(tagName = "Album:")) {
                 name = response.right(response.length() - (tagName.length() + 1));
                 //qDebug() << "adding album" << name << artist << date << mbid;
-                tempalbum = new MpdAlbum(NULL, name, artist, date, mbid);
+                section = name.toUpper()[0];
+                if (mUseAlbumArtist && !listedArtist.isEmpty()) {
+                    section = artist.toUpper()[0];
+                }
+                if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
+                    section = date;
+                }
+                tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
                 /* This helps with qml Q_PROPERTY accesses */
                 tempalbum->moveToThread(mQMLThread);
                 /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
@@ -184,7 +193,7 @@ QList<MpdAlbum*> *NetworkAccess::getAlbums_prv()
     }
 
     /* Sort list */
-    qSort(albums->begin(), albums->end(), MpdAlbum::lessThan);
+    std::sort(albums->begin(), albums->end(), MpdAlbum::lessThan);
 
     return albums;
 }
@@ -237,7 +246,7 @@ QList<MpdArtist *> *NetworkAccess::getArtists_prv()
         }
     }
     /* Sort the created list */
-    qSort(artists->begin(), artists->end(), MpdArtist::lessThan);
+    std::sort(artists->begin(), artists->end(), MpdArtist::lessThan);
     /* Return the list directly, this will later be send further via signals for multithreading. */
     return artists;
 }
@@ -290,7 +299,7 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
         //Send request
         artist = artist.replace('\"',"\\\"");
         QString command;
-        if (mServerInfo->getListFilterSupported() && mServerInfo->getListGroupSupported()) {
+        if (mServerInfo->getListGroupSupported()) {
             command = "list album %1 \"%2\" group MUSICBRAINZ_ALBUMID group date\n";
             command = command.arg(mUseAlbumArtist ? "albumartist" : "artist");
         } else {
@@ -303,8 +312,8 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
     }
 
     //Get album tracks
-    if (mSortAlbumsByYear) qSort(albums->begin(),albums->end(),MpdAlbum::lessThanDate);
-    else qSort(albums->begin(),albums->end(),MpdAlbum::lessThan);
+    if (mSortAlbumsByYear) std::sort(albums->begin(),albums->end(),MpdAlbum::lessThanDate);
+    else std::sort(albums->begin(),albums->end(),MpdAlbum::lessThan);
     return albums;
 }
 
@@ -1529,7 +1538,7 @@ void NetworkAccess::getDirectory(QString path)
             }
         }
     }
-    qSort(tempfiles->begin(),tempfiles->end(),MpdFileEntry::lessThan);
+    std::sort(tempfiles->begin(),tempfiles->end(),MpdFileEntry::lessThan);
     emit ready();
     emit filesReady((QList<QObject*>*)tempfiles);
     //    return tempfiles;

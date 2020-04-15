@@ -42,7 +42,8 @@ private:
 
     // Settings
     bool mDownloadEnabled;
-    QString getSection(int row) const;
+
+    //QString getSection(int row) const;
 
 signals:
     void requestAlbumInformation(MpdAlbum album) const;

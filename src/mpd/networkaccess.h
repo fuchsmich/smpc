@@ -624,7 +624,7 @@ private:
      * @param artist default artist string
      * @return Albumlist of parsed MPD albums
      */
-    QList<MpdAlbum *> *parseMPDAlbums();
+//    QList<MpdAlbum *> *parseMPDAlbums();
     QList<MpdAlbum *> *parseMPDAlbums(QString artist);
 
 

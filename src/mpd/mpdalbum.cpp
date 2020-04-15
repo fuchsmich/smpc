@@ -5,12 +5,14 @@ MpdAlbum::MpdAlbum(QObject *parent) :
 {
 }
 
-MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString mbid, QString date) : QObject(parent)
+MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString date, QString mbid, QString section) :
+    QObject(parent)
 {
     mTitle = title;
     mArtist = artist;
-    mMBID = mbid;
     mDate = date;
+    mMBID = mbid;
+    mSection = section;
 }
 
 MpdAlbum::MpdAlbum(const MpdAlbum &copyObject,QObject *parent) : QObject(parent)  {
@@ -38,7 +40,7 @@ QString MpdAlbum::getDate() const
 //FIXME: depends on sorting -> should be in model?
 QString MpdAlbum::getSection() const
 {
-    return (mTitle == "" ? "" : QString(mTitle.toUpper()[0]));
+    return  mSection;//(mTitle == "" ? "" : QString(mTitle.toUpper()[0]));
 }
 
 void MpdAlbum::operator=(MpdAlbum &rhs)

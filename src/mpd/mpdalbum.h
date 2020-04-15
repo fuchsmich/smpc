@@ -6,14 +6,16 @@
 class MpdAlbum : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString title READ getTitle NOTIFY changed )
-    Q_PROPERTY(QString sectionprop READ getSection NOTIFY changed )
-    Q_PROPERTY(QString mbid READ getMBID NOTIFY changed )
-    Q_PROPERTY(QString artist READ getArtist NOTIFY changed )
-    Q_PROPERTY(QString date READ getDate NOTIFY changed )
+    Q_PROPERTY(QString title READ getTitle CONSTANT)
+    Q_PROPERTY(QString sectionprop READ getSection CONSTANT)
+    Q_PROPERTY(QString mbid READ getMBID CONSTANT)
+    Q_PROPERTY(QString artist READ getArtist CONSTANT)
+    Q_PROPERTY(QString date READ getDate CONSTANT)
+    Q_PROPERTY(QString section READ getSection CONSTANT)
 public:
     explicit MpdAlbum(QObject *parent = 0);
-    MpdAlbum(QObject *parent, QString mTitle, QString artist="", QString date="", QString mbid="");
+
+    MpdAlbum(QObject *parent, QString title, QString artist = "", QString date = "", QString mbid = "", QString section = "");
 
     MpdAlbum(const MpdAlbum &copyObject, QObject *parent = 0);
 
@@ -35,10 +37,11 @@ private:
     QString mArtist;
     QString mMBID;
     QString mDate;
+    QString mSection;
 
-signals:
+//signals:
     // Dummy signal, so qml shuts up
-    void changed();
+    //void changed();
 
 public slots:
 

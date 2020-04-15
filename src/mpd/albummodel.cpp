@@ -48,7 +48,7 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const
     }
     else if (role==SectionRole)
     {
-        return getSection(index.row());
+        return mEntries->at(index.row())->getSection();
     }
     else if (role==AlbumCleandRole)
     {
@@ -122,19 +122,19 @@ QHash<int, QByteArray> AlbumModel::roleNames() const
 
     roles[AlbumRole] = "title";
     roles[ArtistRole] = "artist";
-    roles[DateRole] = "artist";
+    roles[DateRole] = "date";
     roles[SectionRole] = "sectionprop";
     roles[AlbumCleandRole] = "titleClean";
     roles[AlbumImageRole] = "coverURL";
     return roles;
 }
 
-QString AlbumModel::getSection(int row) const
-{
-    //FIXME depend on sortorder
-    QString s = mEntries->at(row)->getTitle();
-    return QString(s.toUpper()[0]);
-}
+//QString AlbumModel::getSection(int row) const
+//{
+//    //FIXME depend on sortorder
+//    QString s = mEntries->at(row)->getTitle();
+//    return QString(s.toUpper()[0]);
+//}
 
 void AlbumModel::albumInformationReady(AlbumInformation *info)
 {
