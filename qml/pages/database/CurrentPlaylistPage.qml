@@ -9,8 +9,12 @@ Page {
     property int lastIndex: lastsongid
     property bool mDeleteRemorseRunning: false
 
+    RemorsePopup {
+        id: remorse
+    }
+
     Component.onDestruction: {
-        mPlaylistPage = null;
+        mPlaylistPage = null
     }
 
     SilicaListView {
@@ -21,7 +25,7 @@ Page {
         cacheBuffer: 0
         anchors {
             fill: parent
-//            bottomMargin: quickControlPanel.visibleSize
+            //            bottomMargin: quickControlPanel.visibleSize
         }
 
         model: playlistModel
@@ -29,21 +33,20 @@ Page {
             id: dummyModel
         }
 
-//        Connections {
-//            target: playlistModel
-//            onClearModel: {
-//                console.debug("Clear model requested");
-//                playlistView.currentIndex = -1;
-//                playlistView.model = dummyModel
-//                playlistView.forceLayout();
-//            }
-//            onModelReset: {
-//                playlistView.model = Qt.binding(function() { return playlistModel;})
-//                playlistView.currentIndex = -1
-//                playlistView.currentIndex = lastsongid
-//            }
-//        }
-
+        //        Connections {
+        //            target: playlistModel
+        //            onClearModel: {
+        //                console.debug("Clear model requested");
+        //                playlistView.currentIndex = -1;
+        //                playlistView.model = dummyModel
+        //                playlistView.forceLayout();
+        //            }
+        //            onModelReset: {
+        //                playlistView.model = Qt.binding(function() { return playlistModel;})
+        //                playlistView.currentIndex = -1
+        //                playlistView.currentIndex = lastsongid
+        //            }
+        //        }
         quickScrollEnabled: jollaQuickscroll
         highlightFollowsCurrentItem: true
         highlightMoveDuration: 0
@@ -61,7 +64,9 @@ Page {
             MenuItem {
                 text: qsTr("Delete playlist")
                 onClicked: {
-                    pageStack.push(deleteQuestionDialog)
+                    remorse.execute("Deleting playlist", function () {
+                        deletePlaylist()
+                    })
                 }
             }
             MenuItem {
@@ -94,22 +99,22 @@ Page {
         Component {
             id: trackDelegate
             ListItem {
-                contentHeight: mainColumn. height
+                contentHeight: mainColumn.height
                 menu: contextMenu
                 Component {
                     id: contextMenu
                     ContextMenu {
-//                        MenuItem {
-//                            visible: !playing
-//                            text: qsTr("play song")
-//                            onClicked: playPlaylistTrack(index)
-//                        }
+                        //                        MenuItem {
+                        //                            visible: !playing
+                        //                            text: qsTr("play song")
+                        //                            onClicked: playPlaylistTrack(index)
+                        //                        }
                         MenuItem {
                             text: qsTr("Remove song")
                             visible: !mDeleteRemorseRunning
                             enabled: !mDeleteRemorseRunning
                             onClicked: {
-                                mDeleteRemorseRunning = true;
+                                mDeleteRemorseRunning = true
                                 remove()
                             }
                         }
@@ -118,15 +123,22 @@ Page {
                             text: qsTr("Show artist")
                             onClicked: {
                                 artistClicked(artist)
-                                pageStack.push(Qt.resolvedUrl("AlbumListPage.qml"),{artistname:artist});
+                                pageStack.push(Qt.resolvedUrl(
+                                                   "AlbumListPage.qml"), {
+                                                   "artistname": artist
+                                               })
                             }
                         }
 
                         MenuItem {
                             text: qsTr("Show album")
                             onClicked: {
-                                    albumClicked("", album)
-                                    pageStack.push(Qt.resolvedUrl("AlbumTracksPage.qml"),{artistname:"",albumname:album});
+                                albumClicked("", album)
+                                pageStack.push(Qt.resolvedUrl(
+                                                   "AlbumTracksPage.qml"), {
+                                                   "artistname": "",
+                                                   "albumname": album
+                                               })
                             }
                         }
                         MenuItem {
@@ -134,24 +146,27 @@ Page {
                             text: qsTr("Play as next")
                             onClicked: {
                                 /* Workaround for to fast model change, seems to segfault */
-                                playNextWOTimer.windUp(index);
+                                playNextWOTimer.windUp(index)
                             }
                         }
 
                         MenuItem {
                             visible: playing
                             text: qsTr("Show information")
-                            onClicked: pageStack.navigateForward(PageStackAction.Animated)
+                            onClicked: pageStack.navigateForward(
+                                           PageStackAction.Animated)
                         }
 
                         MenuItem {
                             text: qsTr("Add to saved list")
                             onClicked: {
                                 requestSavedPlaylists()
-                                pageStack.push(Qt.resolvedUrl("AddToPlaylistDialog.qml"),{url:path});
+                                pageStack.push(Qt.resolvedUrl(
+                                                   "AddToPlaylistDialog.qml"), {
+                                                   "url": path
+                                               })
                             }
                         }
-
                     }
                 }
 
@@ -206,16 +221,7 @@ Page {
                     slope: 3
                     offset: 0.65
                 }
-//                 Disabled until offically supported
-                // GlassItem {
-                //     anchors.fill: parent
-                //     color: Theme.highlightColor
-                //     visible: opacity != 0.0
-                //     scale: 0.8
-                //     opacity: playing ? 1.0 : 0.0
-                //     Behavior on opacity { PropertyAnimation {duration: 750} }
 
-                // }
                 onClicked: {
                     playlistView.currentIndex = index
                     if (!playing) {
@@ -227,8 +233,8 @@ Page {
 
                 function remove() {
                     remorseAction(qsTr("Deleting"), function () {
-                        deletePlaylistTrack(index);
-                        mDeleteRemorseRunning = false;
+                        deletePlaylistTrack(index)
+                        mDeleteRemorseRunning = false
                     }, 3000)
                 }
             }
@@ -236,21 +242,15 @@ Page {
 
         section {
             delegate: Loader {
-                active:  sectionsInPlaylist && visible
+                active: sectionsInPlaylist && visible
                 height: sectionsInPlaylist ? Theme.itemSizeMedium : 0
                 width: parent.width
-                sourceComponent: PlaylistSectionDelegate{
-                    width:undefined
+                sourceComponent: PlaylistSectionDelegate {
+                    width: undefined
                 }
             }
             property: "section"
         }
-    }
-
-    // Delete question
-    DeletePlaylistDialog {
-        id: deleteQuestionDialog
-
     }
 
     SavePlaylistDialog {
@@ -265,12 +265,13 @@ Page {
         if (status === PageStatus.Activating) {
             playlistView.positionViewAtIndex(lastsongid, ListView.Center)
         } else if (status === PageStatus.Active) {
-//            pageStack.pushAttached(Qt.resolvedUrl("CurrentSong.qml"));
-            if ( mCurrentSongPage == undefined) {
-                var currentSongComponent = Qt.createComponent(Qt.resolvedUrl("CurrentSong.qml"));
-                mCurrentSongPage = currentSongComponent.createObject(mainWindow);
+            //            pageStack.pushAttached(Qt.resolvedUrl("CurrentSong.qml"));
+            if (mCurrentSongPage == undefined) {
+                var currentSongComponent = Qt.createComponent(
+                            Qt.resolvedUrl("CurrentSong.qml"))
+                mCurrentSongPage = currentSongComponent.createObject(mainWindow)
             }
-            pageStack.pushAttached(mCurrentSongPage);
+            pageStack.pushAttached(mCurrentSongPage)
         }
     }
 
@@ -278,7 +279,7 @@ Page {
         playPlaylistTrack(index)
     }
     onOrientationTransitionRunningChanged: {
-        if ( !orientationTransitionRunning ) {
+        if (!orientationTransitionRunning) {
             playlistView.currentIndex = -1
             playlistView.currentIndex = lastsongid
         }
@@ -288,22 +289,23 @@ Page {
         playlistView.currentIndex = lastIndex
     }
 
+
     /* FIXME really bad workaround for segmentation fault.
        Otherwise QML/Qt seems to crash if model changes significantly on contextmenu actions*/
     Timer {
         id: playNextWOTimer
-        property int index;
+        property int index
         interval: 250
         repeat: false
         onTriggered: {
-            console.debug("Send signal: " + index);
-            playPlaylistSongNext(index);
+            console.debug("Send signal: " + index)
+            playPlaylistSongNext(index)
         }
 
         function windUp(pIndex) {
-            console.debug("Workaround timer windup");
-            index = pIndex;
-            start();
+            console.debug("Workaround timer windup")
+            index = pIndex
+            start()
         }
     }
 }

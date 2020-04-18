@@ -12,6 +12,10 @@ Page {
         mPlaylistPage = null
     }
 
+    RemorsePopup {
+        id: remorse
+    }
+
     Row {
         anchors.fill: parent
         SilicaListView {
@@ -64,7 +68,9 @@ Page {
                 MenuItem {
                     text: qsTr("Delete playlist")
                     onClicked: {
-                        pageStack.push(deleteQuestionDialog)
+                        remorse.execute("Deleting playlist", function () {
+                            deletePlaylist()
+                        })
                     }
                 }
                 MenuItem {
@@ -215,19 +221,7 @@ Page {
                         slope: 3
                         offset: 0.65
                     }
-                    //                 Disabled until offically supported
-                    // GlassItem {
-                    //     anchors.fill: parent
-                    //     color: Theme.highlightColor
-                    //     visible: opacity != 0.0
-                    //     scale: 0.8
-                    //     opacity: playing ? 1.0 : 0.0
-                    //     Behavior on opacity {
-                    //         PropertyAnimation {
-                    //             duration: 750
-                    //         }
-                    //     }
-                    // }
+
                     onClicked: {
                         playlistView.currentIndex = index
                         if (!playing) {
@@ -608,11 +602,6 @@ Page {
                 }
             }
         }
-    }
-
-    // Delete question
-    DeletePlaylistDialog {
-        id: deleteQuestionDialog
     }
 
     SavePlaylistDialog {
