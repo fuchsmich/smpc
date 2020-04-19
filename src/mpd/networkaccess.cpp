@@ -139,36 +139,46 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
         while (mTCPSocket->canReadLine())
         {
             response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-            //qDebug() << response;
+            qDebug() << response;
             if (response.startsWith(tagName = "AlbumArtist:")) {
-                artist = response.right(response.length() - (tagName.length() + 1));
+                artist = response.split(tagName).takeLast().trimmed();
+                        //response.right(response.length() - (tagName.length() + 1));
             } else if (response.startsWith(tagName = "Date:")) {
                 date = response.split(tagName).takeLast().trimmed().left(4);
                         //response.right(response.length() - (tagName.length() + 1));
             } else if (response.startsWith(tagName = "MUSICBRAINZ_ALBUMID:")) {
                 mbid = response.split(tagName).takeLast().trimmed();
-            } else if (response.startsWith(tagName = "Album:")) {
-                QString _name = response.right(response.length() - (tagName.length() + 1));
+            } else if (response.startsWith(tagName = "Album:")
+                       //also add last album for old list format:
+                       || (response == "OK" && mServerInfo->getListGroupFormatOld()))
+            {
+                QString _name = response.split(tagName).takeLast().trimmed();
+                        //response.right(response.length() - (tagName.length()));
+
+                //add album (for old format, use previous albumname):
                 //qDebug() << "adding album" << name << artist << date << mbid;
                 if (!mServerInfo->getListGroupFormatOld()) {
                     name = _name;
                 }
-                section = name.toUpper()[0];
-                if (mUseAlbumArtist && !listedArtist.isEmpty()) {
-                    section = artist.toUpper()[0];
+                //skip albums with no albumname
+                if (name != "") {
+                    section = name.toUpper()[0];
+                    if (mUseAlbumArtist && !listedArtist.isEmpty()) {
+                        section = artist.toUpper()[0];
+                    }
+                    if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
+                        section = date;
+                    }
+                    tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
+                    /* This helps with qml Q_PROPERTY accesses */
+                    tempalbum->moveToThread(mQMLThread);
+                    /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
+                    QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
+                    albums->append(tempalbum);
                 }
-                if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
-                    section = date;
-                }
-                tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
-                /* This helps with qml Q_PROPERTY accesses */
-                tempalbum->moveToThread(mQMLThread);
-                /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
-                QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
-                albums->append(tempalbum);
-                if (mServerInfo->getListGroupFormatOld()) {
-                    name = _name;
-                }
+
+                //set new name for old list format
+                name = _name;
             }
         }
     }
@@ -1839,7 +1849,7 @@ void NetworkAccess::checkServerCapabilities() {
     //grouping reimplemented and format of response changed for grouped lists with reimplemenation as of >= 0.21.x
     //https://github.com/MusicPlayerDaemon/MPD/issues/408
     mServerInfo->setListGroupSupported((version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0));
-    mServerInfo->setMultiListGroupSupported((version->mpdMinor >= 11 && version->mpdMajor2 >= 21 && version->mpdMajor1 == 0)
+    mServerInfo->setListMultiGroupSupported((version->mpdMinor >= 11 && version->mpdMajor2 >= 21 && version->mpdMajor1 == 0)
                                             || (version->mpdMajor1 > 0));
     mServerInfo->setListGroupFormatOld(!(version->mpdMajor2 >= 21 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0));
 

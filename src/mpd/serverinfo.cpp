@@ -26,14 +26,14 @@ void ServerInfo::setListGroupSupported(bool groupSupported) {
     pListGroupSupported = groupSupported;
 }
 
-//void ServerInfo::setListMultiGroupSupported(bool multiGroupSupported) {
-//    pListMultiGroupSupported = multiGroupSupported;
-//}
+void ServerInfo::setListMultiGroupSupported(bool multiGroupSupported) {
+    pListMultiGroupSupported = multiGroupSupported;
+}
 
-//void ServerInfo::setListGroupFormatOld(bool value)
-//{
-//    pListGroupFormatOld = value;
-//}
+void ServerInfo::setListGroupFormatOld(bool value)
+{
+    pListGroupFormatOld = value;
+}
 
 void ServerInfo::setMBIDTagsSupported(bool MBIDSupported) {
     pMBIDTagsSupported = MBIDSupported;
@@ -57,6 +57,11 @@ bool ServerInfo::getListGroupSupported() {
 
 bool ServerInfo::getListMultiGroupSupported() {
     return pListMultiGroupSupported;
+}
+
+bool ServerInfo::getListGroupFormatOld()
+{
+    return pListGroupFormatOld;
 }
 
 bool ServerInfo::getMBIDTagsSupported() {
