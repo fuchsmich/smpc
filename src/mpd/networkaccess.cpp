@@ -149,21 +149,21 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
             } else if (response.startsWith(tagName = "MUSICBRAINZ_ALBUMID:")) {
                 mbid = response.split(tagName).takeLast().trimmed();
             } else if (response.startsWith(tagName = "Album:")
-                       //also add last album for old list format:
+                       /* also add last album for old list format: */
                        || (response == "OK" && mServerInfo->getListGroupFormatOld()))
             {
                 QString _name = response.split(tagName).takeLast().trimmed();
                         //response.right(response.length() - (tagName.length()));
 
-                //add album (for old format, use previous albumname):
+                /* add album (for old format, use previous albumname): */
                 //qDebug() << "adding album" << name << artist << date << mbid;
                 if (!mServerInfo->getListGroupFormatOld()) {
                     name = _name;
                 }
-                //skip albums with no albumname
-                if (name != "") {
+                /* skip albums with no albumname when listing all albums*/
+                if (!(name.isEmpty() && listedArtist.isEmpty())) {
                     section = name.toUpper()[0];
-                    if (mUseAlbumArtist && !listedArtist.isEmpty()) {
+                    if (mUseAlbumArtist && listedArtist.isEmpty()) {
                         section = artist.toUpper()[0];
                     }
                     if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
@@ -177,7 +177,7 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
                     albums->append(tempalbum);
                 }
 
-                //set new name for old list format
+                /* set new name for old list format */
                 name = _name;
             }
         }
@@ -201,7 +201,12 @@ QList<MpdAlbum*> *NetworkAccess::getAlbums_prv()
         qDebug() << "Getting albums";
         if (mServerInfo->getListGroupSupported()) {
             qDebug() << "Getting albums multigroup";
-            sendMPDCommand(QString("list album group MUSICBRAINZ_ALBUMID group date group albumartist\n"));
+            if (mServerInfo->getListMultiGroupSupported()) {
+                //TODO do we need "group date" here?
+                sendMPDCommand(QString("list album group MUSICBRAINZ_ALBUMID group albumartist\n"));
+            } else {
+                sendMPDCommand(QString("list album group albumartist\n"));
+            }
         } else {
             sendMPDCommand(QString("list album\n"));
         }
@@ -314,22 +319,25 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
     if (connected()) {
         //Send request
         artist = artist.replace('\"',"\\\"");
-        QString command;
+        QString command = "list album %1 \"%2\" %3\n";
+        QString artistTagName = "", groupString = "";
         if (mServerInfo->getListGroupSupported()) {
-            command = "list album %1 \"%2\" group MUSICBRAINZ_ALBUMID group date\n";
-            command = command.arg(mUseAlbumArtist ? "albumartist" : "artist");
-        } else {
-            command = "list album \"%1\"\n";
+            if (mServerInfo->getListMultiGroupSupported()) {
+                groupString = "group MUSICBRAINZ_ALBUMID" + (mSortAlbumsByYear ? QString(" group date") : QString());
+            } else {
+                groupString = (mSortAlbumsByYear ? QString("group date") : QString("group MUSICBRAINZ_ALBUMID"));
+            }
+            artistTagName = (mUseAlbumArtist ? QString("albumartist") : QString("artist"));
         }
-        //qDebug() << command.arg(artist);
-        sendMPDCommand(command.arg(artist));
-        //FIXME artist missing in albums
+        qDebug() << command.arg(artistTagName).arg(artist).arg(groupString);
+        sendMPDCommand(command.arg(artistTagName).arg(artist).arg(groupString));
+
         albums = parseMPDAlbums(artist);
     }
 
     //Get album tracks
-    if (mSortAlbumsByYear) std::sort(albums->begin(),albums->end(),MpdAlbum::lessThanDate);
-    else std::sort(albums->begin(),albums->end(),MpdAlbum::lessThan);
+    if (mSortAlbumsByYear) std::sort(albums->begin(), albums->end(), MpdAlbum::lessThanDate);
+    else std::sort(albums->begin(), albums->end(), MpdAlbum::lessThan);
     return albums;
 }
 
