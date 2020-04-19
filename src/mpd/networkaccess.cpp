@@ -148,8 +148,11 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
             } else if (response.startsWith(tagName = "MUSICBRAINZ_ALBUMID:")) {
                 mbid = response.split(tagName).takeLast().trimmed();
             } else if (response.startsWith(tagName = "Album:")) {
-                name = response.right(response.length() - (tagName.length() + 1));
+                QString _name = response.right(response.length() - (tagName.length() + 1));
                 //qDebug() << "adding album" << name << artist << date << mbid;
+                if (!mServerInfo->getListGroupFormatOld()) {
+                    name = _name;
+                }
                 section = name.toUpper()[0];
                 if (mUseAlbumArtist && !listedArtist.isEmpty()) {
                     section = artist.toUpper()[0];
@@ -163,6 +166,9 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
                 /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
                 QQmlEngine::setObjectOwnership(tempalbum, QQmlEngine::CppOwnership);
                 albums->append(tempalbum);
+                if (mServerInfo->getListGroupFormatOld()) {
+                    name = _name;
+                }
             }
         }
     }
@@ -1832,16 +1838,12 @@ void NetworkAccess::checkServerCapabilities() {
     qDebug() << version->mpdMajor1 << version->mpdMajor2 << version->mpdMinor;
     //grouping reimplemented and format of response changed for grouped lists with reimplemenation as of >= 0.21.x
     //https://github.com/MusicPlayerDaemon/MPD/issues/408
-    if ((version->mpdMajor2 >= 21 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0)) {
-        /* Enable new list command features */
-        mServerInfo->setListGroupSupported(true);
+    mServerInfo->setListGroupSupported((version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0));
+    mServerInfo->setMultiListGroupSupported((version->mpdMinor >= 11 && version->mpdMajor2 >= 21 && version->mpdMajor1 == 0)
+                                            || (version->mpdMajor1 > 0));
+    mServerInfo->setListGroupFormatOld(!(version->mpdMajor2 >= 21 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0));
 
-        //FIXME since when?
-        mServerInfo->setListFilterSupported(true);
-    } else {
-        mServerInfo->setListGroupSupported(false);
-        mServerInfo->setListFilterSupported(false);
-    }
+
 
     /*
      * Get allowed commands
@@ -1890,11 +1892,7 @@ void NetworkAccess::checkServerCapabilities() {
                 }
             }
         }
-        if (mbTrackId && mbArtistId && mbAlbumId) {
-            mServerInfo->setMBIDTagsSupported(true);
-        } else {
-            mServerInfo->setMBIDTagsSupported(false);
-        }
+        mServerInfo->setMBIDTagsSupported(mbTrackId && mbArtistId && mbAlbumId);
     }
 }
 

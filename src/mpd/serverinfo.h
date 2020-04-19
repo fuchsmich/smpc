@@ -12,8 +12,8 @@ public:
     void setIdleSupported(bool idle);
     void setAlbumartSupported(bool value);
     void setListGroupSupported(bool groupSupported);
-//    void setListMultiGroupSupported(bool multiGroupSupported);
-//    void setListGroupFormatOld(bool value);
+    void setListMultiGroupSupported(bool multiGroupSupported);
+    void setListGroupFormatOld(bool value);
     void setListFilterSupported(bool filter);
     void setMBIDTagsSupported(bool MBIDSupported);
 
@@ -21,8 +21,8 @@ public:
     bool getIdleSupported();
     bool getAlbumartSupported();
     bool getListGroupSupported();
-//    bool getListMultiGroupSupported();
-//    bool getListGroupFormatOld();
+    bool getListMultiGroupSupported();
+    bool getListGroupFormatOld();
     bool getListFilterSupported();
     bool getMBIDTagsSupported();
 
@@ -51,12 +51,12 @@ private:
     /**
      * @brief pListMultiGroupSupported True if multiple grouping is available on queries
      */
-//    bool pListMultiGroupSupported;
+    bool pListMultiGroupSupported;
 
     /**
      * @brief pListGroupFormatOld True for old format of grouped list (v < 0.21.x)
      */
-//    bool pListGroupFormatOld;
+    bool pListGroupFormatOld;
 
     /**
      * @brief pListFilterSupported True if filtering lists is possible (Artist albums)

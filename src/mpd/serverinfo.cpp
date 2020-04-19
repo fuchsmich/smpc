@@ -55,9 +55,9 @@ bool ServerInfo::getListGroupSupported() {
     return pListGroupSupported;
 }
 
-//bool ServerInfo::getListMultiGroupSupported() {
-//    return pListMultiGroupSupported;
-//}
+bool ServerInfo::getListMultiGroupSupported() {
+    return pListMultiGroupSupported;
+}
 
 bool ServerInfo::getMBIDTagsSupported() {
     return pMBIDTagsSupported;
