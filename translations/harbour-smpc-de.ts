@@ -1133,32 +1133,32 @@
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="43"/>
         <source>Profile name</source>
-        <translation type="unfinished"></translation>
+        <translation>Profilname</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="50"/>
         <source>Hostname or IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostname oder IP-Adresse</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="57"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="66"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="74"/>
         <source>Streaming port</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabe-Port</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="85"/>
         <source>MAC address for WOL (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC-Adresse für WOL (optional)</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="96"/>
