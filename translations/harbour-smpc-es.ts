@@ -970,7 +970,7 @@
     <message>
         <location filename="../qml/components/SavePlaylistDialog.qml" line="11"/>
         <source>Save playlist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Guardar lista</translation>
     </message>
     <message>
         <location filename="../qml/components/SavePlaylistDialog.qml" line="14"/>
@@ -1008,7 +1008,7 @@
     <message>
         <location filename="../qml/pages/database/SavedPlaylistsPage.qml" line="71"/>
         <source>Add list</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Agregar lista</translation>
     </message>
 </context>
 <context>
@@ -1041,12 +1041,12 @@
     <message>
         <location filename="../qml/pages/database/SearchPage.qml" line="58"/>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Archivos</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/SearchPage.qml" line="78"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Buscar</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/SearchPage.qml" line="90"/>
@@ -1191,7 +1191,7 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="14"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ajustes</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="36"/>
@@ -1211,7 +1211,7 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="48"/>
         <source>Outputs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Salidas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="52"/>
