@@ -133,6 +133,8 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
     QString name = "", mbid = "", date = "", section = "";
     QString tagName;
 
+    bool skipFirstAlbum = mServerInfo->getListGroupFormatOld();
+
     MPD_WHILE_PARSE_LOOP
     {
         mTCPSocket->waitForReadyRead(READYREAD);
@@ -155,20 +157,24 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
                 QString _name = response.split(tagName).takeLast().trimmed();
                         //response.right(response.length() - (tagName.length()));
 
-                /* add album (for old format, use previous albumname): */
-                //qDebug() << "adding album" << name << artist << date << mbid;
+                /* add album
+                 * (for old format, use previous albumname): */
                 if (!mServerInfo->getListGroupFormatOld()) {
                     name = _name;
                 }
                 /* skip albums with no albumname when listing all albums*/
-                if (!(name.isEmpty() && listedArtist.isEmpty())) {
+                if (!((name.isEmpty() && listedArtist.isEmpty())
+                      /* skip first album entry for old list format */
+                      || skipFirstAlbum))
+                {
                     section = name.toUpper()[0];
-                    if (mUseAlbumArtist && listedArtist.isEmpty()) {
-                        section = artist.toUpper()[0];
-                    }
+                    //                    if (mUseAlbumArtist && listedArtist.isEmpty()) {
+                    //                        section = artist.toUpper()[0];
+                    //                    }
                     if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
                         section = date;
                     }
+                    qDebug() << "adding album" << name << artist << date << mbid << section << skipFirstAlbum << name.isEmpty();
                     tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
                     /* This helps with qml Q_PROPERTY accesses */
                     tempalbum->moveToThread(mQMLThread);
@@ -179,6 +185,8 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
 
                 /* set new name for old list format */
                 name = _name;
+                /* set new name for old list format */
+                skipFirstAlbum = false;
             }
         }
     }
