@@ -77,20 +77,20 @@
 <context>
     <name>AlbumListPage</name>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="44"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="97"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="47"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="100"/>
         <source>Albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="51"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="104"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="54"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="107"/>
         <source>Add albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="57"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="110"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="60"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="113"/>
         <source>Play albums</source>
         <translation type="unfinished"></translation>
     </message>
@@ -276,12 +276,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="410"/>
+        <location filename="../src/controller.cpp" line="412"/>
         <source>Connected to: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="428"/>
+        <location filename="../src/controller.cpp" line="430"/>
         <source>Disconnected from server</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
-//import harbour.smpc.components 1.0
+import smpc 1.0
+
 import "../../components"
 
 Page {
@@ -17,7 +18,9 @@ Page {
             SilicaGridView {
                 id: albumGridView
                 property bool scrolling: sectionScroller.scrolling
-                model: albumsModel
+                model: AlbumList {
+
+                }
                 cellWidth: Screen.sizeCategory
                            >= Screen.Large ? ((orientation === Orientation.Landscape)
                                               || (orientation === Orientation.LandscapeInverted) ? (width / 6) : width / 5) : ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width / 4) : (width / 2))

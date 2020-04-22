@@ -72,6 +72,8 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mDBStatistic = 0;
     mApplicationActive = true;
 
+    qmlRegisterType<AlbumList>("smpc", 1, 0, "AlbumList");
+
     emit requestDBStatistic();
 }
 

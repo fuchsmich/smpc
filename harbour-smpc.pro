@@ -33,6 +33,7 @@ SOURCES += main.cpp \
     src/mpd/artistmodel.cpp \
     src/mpd/albummodel.cpp \
     src/controller.cpp \
+    src/mpd/albumlist.cpp \
     src/streamplayer.cpp \
     src/mpd/serverprofilemodel.cpp \
     src/mpd/mpdplaybackstatus.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     src/mpd/artistmodel.h \
     src/mpd/albummodel.h \
     src/common.h \
+    src/mpd/albumlist.h \
     src/streamplayer.h \
     src/mpd/serverprofilemodel.h \
     src/mpd/mpdplaybackstatus.h \

@@ -27,6 +27,8 @@
 #include <mpd/serverprofilemodel.h>
 #include <mpd/mpdplaybackstatus.h>
 
+#include <mpd/albumlist.h>
+
 #include <streamplayer.h>
 
 
