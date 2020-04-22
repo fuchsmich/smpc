@@ -5,12 +5,14 @@ MpdAlbum::MpdAlbum(QObject *parent) :
 {
 }
 
-MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString mbid, QString date) : QObject(parent)
+MpdAlbum::MpdAlbum(QObject *parent, QString title, QString artist, QString date, QString mbid, QString section) :
+    QObject(parent)
 {
     mTitle = title;
     mArtist = artist;
-    mMBID = mbid;
     mDate = date;
+    mMBID = mbid;
+    mSection = section;
 }
 
 MpdAlbum::MpdAlbum(const MpdAlbum &copyObject,QObject *parent) : QObject(parent)  {
@@ -35,35 +37,35 @@ QString MpdAlbum::getDate() const
     return mDate;
 }
 
-void MpdAlbum::operator =(MpdAlbum &rhs)
+//FIXME: depends on sorting -> should be in model?
+QString MpdAlbum::getSection() const
+{
+    return  mSection;//(mTitle == "" ? "" : QString(mTitle.toUpper()[0]));
+}
+
+void MpdAlbum::operator=(MpdAlbum &rhs)
 {
     mTitle = rhs.mTitle;
     mArtist = rhs.mArtist;
 }
 
-bool MpdAlbum::operator ==(MpdAlbum &rhs) const
+bool MpdAlbum::operator==(MpdAlbum &rhs) const
 {
-    return mTitle==rhs.mTitle;
+    return mTitle == rhs.mTitle;
 }
 
-bool MpdAlbum::operator <(const MpdAlbum &rhs) const
+bool MpdAlbum::operator<(const MpdAlbum &rhs) const
 {
-    return (mTitle.compare(rhs.mTitle,Qt::CaseInsensitive)<0?1:0);
+    return (mTitle.compare(rhs.mTitle, Qt::CaseInsensitive) < 0 ? 1 : 0);
 }
 
 bool MpdAlbum::lessThan(const MpdAlbum *lhs, const MpdAlbum* rhs)
 {
-    return *lhs<*rhs;
+    return *lhs < *rhs;
 }
 
 bool MpdAlbum::lessThanDate(const MpdAlbum *lhs, const MpdAlbum *rhs)
 {
-    return (lhs->mDate.compare(rhs->mDate,Qt::CaseInsensitive)<0 ? 1 : 0);
-}
-
-// Return first letter as section
-QString MpdAlbum::getSection() const
-{
-    return (mTitle=="" ? "" : QString(mTitle.toUpper()[0]) );
+    return (lhs->mDate.compare(rhs->mDate, Qt::CaseInsensitive) < 0 ? 1 : 0);
 }
 
