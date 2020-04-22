@@ -141,7 +141,7 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
         while (mTCPSocket->canReadLine())
         {
             response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-            qDebug() << response;
+            //qDebug() << response;
             if (response.startsWith(tagName = "AlbumArtist:")) {
                 artist = response.split(tagName).takeLast().trimmed();
                         //response.right(response.length() - (tagName.length() + 1));
@@ -174,7 +174,7 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
                     if (mSortAlbumsByYear && !listedArtist.isEmpty()) {
                         section = date;
                     }
-                    qDebug() << "adding album" << name << artist << date << mbid << section << skipFirstAlbum << name.isEmpty();
+                    //qDebug() << "adding album" << name << artist << date << mbid << section << skipFirstAlbum << name.isEmpty();
                     tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
                     /* This helps with qml Q_PROPERTY accesses */
                     tempalbum->moveToThread(mQMLThread);
@@ -206,9 +206,9 @@ QList<MpdAlbum*> *NetworkAccess::getAlbums_prv()
          * Multiple use of grouping issue v>20.21 v<21.11: https://github.com/MusicPlayerDaemon/MPD/issues/408
          */
 
-        qDebug() << "Getting albums";
+        //qDebug() << "Getting albums";
         if (mServerInfo->getListGroupSupported()) {
-            qDebug() << "Getting albums multigroup";
+            //qDebug() << "Getting albums multigroup";
             if (mServerInfo->getListMultiGroupSupported()) {
                 //TODO do we need "group date" here?
                 sendMPDCommand(QString("list album group MUSICBRAINZ_ALBUMID group albumartist\n"));
@@ -342,7 +342,7 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
             }
             artistTagName = (mUseAlbumArtist ? QString("albumartist") : QString("artist"));
         }
-        qDebug() << command.arg(artistTagName).arg(escapeCommandArgument(artist)).arg(groupString);
+        //qDebug() << command.arg(artistTagName).arg(escapeCommandArgument(artist)).arg(groupString);
         sendMPDCommand(command.arg(artistTagName).arg(escapeCommandArgument(artist)).arg(groupString));
 
         albums = parseMPDAlbums(artist);
@@ -1310,12 +1310,7 @@ void NetworkAccess::onServerConnected() {
         {
             response += mTCPSocket->readLine();
         }
-        qDebug() << response;
-        //QString teststring = response;
-        //teststring.truncate(6);
-        //if (teststring == QString("OK MPD"))
         if (response.startsWith("OK MPD")) {
-            //QString versionString = response.remove("OK MPD ");
             QStringList versionParts = response.remove("OK MPD ").split(".");
             if (versionParts.length() == 3) {
                 MPD_version_t version;
@@ -1874,7 +1869,7 @@ QMap<MpdArtist*, QList<MpdAlbum*>* > *NetworkAccess::getArtistsAlbumsMap_prv()
 void NetworkAccess::checkServerCapabilities() {
     MPD_version_t *version = mServerInfo->getVersion();
     /* Check server version */
-    qDebug() << version->mpdMajor1 << version->mpdMajor2 << version->mpdMinor;
+    //qDebug() << version->mpdMajor1 << version->mpdMajor2 << version->mpdMinor;
     //grouping reimplemented and format of response changed for grouped lists with reimplemenation as of >= 0.21.x
     //https://github.com/MusicPlayerDaemon/MPD/issues/408
     mServerInfo->setListGroupSupported((version->mpdMajor2 >= 19 && version->mpdMajor1 == 0) || (version->mpdMajor1 > 0));
@@ -1919,7 +1914,7 @@ void NetworkAccess::checkServerCapabilities() {
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-                qDebug() << response;
+                //qDebug() << response;
                 if (response.contains("MUSICBRAINZ_TRACKID")) {
                     mbTrackId = true;
                 }
