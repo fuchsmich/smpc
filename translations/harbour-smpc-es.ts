@@ -855,7 +855,7 @@
     <message>
         <location filename="../qml/pages/MainPage.qml" line="26"/>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectado</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="107"/>
