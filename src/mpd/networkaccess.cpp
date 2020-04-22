@@ -311,6 +311,11 @@ bool NetworkAccess::authenticate(QString password)
     return false;
 }
 
+QString NetworkAccess::escapeCommandArgument(const QString arg)
+{
+    return QString(arg).replace("\"","\\\"").replace("\'","\\\'");
+}
+
 
 void NetworkAccess::getArtistsAlbums(QString artist)
 {
@@ -326,7 +331,7 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
     QList<MpdAlbum *> *albums = new QList<MpdAlbum *>();
     if (connected()) {
         //Send request
-        artist = artist.replace('\"',"\\\"");
+        /* command %1: tag albumartist/artist; %2: name of artist; %3: groups */
         QString command = "list album %1 \"%2\" %3\n";
         QString artistTagName = "", groupString = "";
         if (mServerInfo->getListGroupSupported()) {
@@ -337,8 +342,8 @@ QList<MpdAlbum *> *NetworkAccess::getArtistsAlbums_prv(QString artist)
             }
             artistTagName = (mUseAlbumArtist ? QString("albumartist") : QString("artist"));
         }
-        qDebug() << command.arg(artistTagName).arg(artist).arg(groupString);
-        sendMPDCommand(command.arg(artistTagName).arg(artist).arg(groupString));
+        qDebug() << command.arg(artistTagName).arg(escapeCommandArgument(artist)).arg(groupString);
+        sendMPDCommand(command.arg(artistTagName).arg(escapeCommandArgument(artist)).arg(groupString));
 
         albums = parseMPDAlbums(artist);
     }
@@ -359,8 +364,8 @@ void NetworkAccess::getAlbumTracks(QString album)
 QList<MpdTrack*>* NetworkAccess::getAlbumTracks_prv(QString album)
 {
     if (connected()) {
-        album.replace(QString("\""),QString("\\\""));
-        sendMPDCommand(QString("find album \"") + album + "\"\n");
+        //TODO new filter syntax (album == "album")
+        sendMPDCommand(QString("find album \"") + escapeCommandArgument(album) + "\"\n");
     }
     return parseMPDTracks("");
 }
@@ -393,8 +398,7 @@ QList<MpdTrack*>*  NetworkAccess::getAlbumTracks_prv(QString album, QString cart
         return getAlbumTracks_prv(album);
     }
     if (connected()) {
-        album.replace(QString("\""),QString("\\\""));
-        sendMPDCommand(QString("find album \"") + album + "\"\n");
+        sendMPDCommand(QString("find album \"") + escapeCommandArgument(album) + "\"\n");
     }
     return parseMPDTracks(cartist);
 }
@@ -728,7 +732,7 @@ void NetworkAccess::addAlbumToPlaylist(QString album)
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri() + "\"\n");
+            sendMPDCommand(QString("add \"") + escapeCommandArgument(temptracks->at(i)->getFileUri()) + "\"\n");
         }
         sendMPDCommand("command_list_end\n");
         MPD_WHILE_PARSE_LOOP
@@ -758,7 +762,7 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-            sendMPDCommand(QString("add \"") + temptracks->at(i)->getFileUri() + "\"\n");
+            sendMPDCommand(QString("add \"") + escapeCommandArgument(temptracks->at(i)->getFileUri()) + "\"\n");
         }
         sendMPDCommand("command_list_end\n");
         MPD_WHILE_PARSE_LOOP
@@ -823,7 +827,7 @@ void NetworkAccess::playAlbum(QString album)
 void NetworkAccess::addTrackToPlaylist(QString fileuri)
 {
     if (connected()) {
-        sendMPDCommand(QString("add \"") + fileuri + "\"\n");
+        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -852,6 +856,7 @@ void NetworkAccess::addTrackToSavedPlaylist(QVariant data)
         return;
     }
     if (connected()) {
+        //TODO escape URI??
         sendMPDCommand(QString("playlistadd \"") + inputStrings.at(1) + "\" \"" + inputStrings.at(0) + "\"\n");
         QString response ="";
         //Clear read buffer
@@ -880,6 +885,7 @@ void NetworkAccess::removeTrackFromSavedPlaylist(QVariant data)
         return;
     }
     if (connected()) {
+        //TODO escape URI??
         sendMPDCommand(QString("playlistdelete \"") + inputStrings.at(1) + "\" " + inputStrings.at(0) + "\n");
         QString response ="";
         //Clear read buffer
@@ -926,7 +932,7 @@ void NetworkAccess::addTrackAfterCurrent(QString fileuri)
 {
     quint32 currentPosition = getPlaybackID();
     if (connected()) {
-        sendMPDCommand(QString("addid \"") + fileuri + "\" " + QString::number(currentPosition+1) + "\n");
+        sendMPDCommand(QString("addid \"") + escapeCommandArgument(fileuri) + "\" " + QString::number(currentPosition+1) + "\n");
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -947,7 +953,7 @@ void NetworkAccess::playFiles(QString fileuri)
 {
     clearPlaylist();
     if (connected()) {
-        sendMPDCommand(QString("add \"") + fileuri + "\"\n");
+        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -972,7 +978,7 @@ void NetworkAccess::playFiles(QString fileuri)
 void NetworkAccess::playTrack(QString fileuri)
 {
     if (connected()) {
-        sendMPDCommand(QString("add \"") + fileuri + "\"\n");
+        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -1115,6 +1121,7 @@ void NetworkAccess::savePlaylist(QString name)
 {
     emit ready();
     if (connected()) {
+        //TODO escape name??
         sendMPDCommand(QString("save \"") + name + "\"\n");
         QString response ="";
         MPD_WHILE_PARSE_LOOP
@@ -1144,6 +1151,7 @@ void NetworkAccess::savePlaylist(QString name)
 void NetworkAccess::deletePlaylist(QString name)
 {
     if (connected()) {
+        //TODO escape name??
         sendMPDCommand(QString("rm \"") + name + "\"\n");
         QString response ="";
         MPD_WHILE_PARSE_LOOP
@@ -1201,6 +1209,7 @@ void NetworkAccess::addPlaylist(QString name)
 {
     emit busy();
     if (connected()) {
+        //TODO escape name??
         sendMPDCommand(QString("load \"") + name + "\"\n");
         QString response ="";
         MPD_WHILE_PARSE_LOOP
@@ -1221,6 +1230,7 @@ void NetworkAccess::playPlaylist(QString name)
     emit busy();
     clearPlaylist();
     if (connected()) {
+        //TODO escape name??
         sendMPDCommand(QString("load \"") + name + "\"\n");
         QString response ="";
         MPD_WHILE_PARSE_LOOP
@@ -1368,6 +1378,8 @@ void NetworkAccess::getDirectory(QString path)
     if (connected()) {
         path.replace(QString("\""),QString("\\\""));
 
+
+        //TODO escape path??
         sendMPDCommand(QString("lsinfo \"") + path + "\"\n");
         QString response ="";
 
@@ -1824,6 +1836,7 @@ void NetworkAccess::searchTracks(QVariant request)
     }
     QStringList searchrequest = request.toStringList();
     if (connected()) {
+        //TODO escape request.at(1)??
         sendMPDCommand(QString("search ") + searchrequest.at(0) + " \"" + searchrequest.at(1) + "\"\n");
     }
     emit trackListReady(parseMPDTracks(""));

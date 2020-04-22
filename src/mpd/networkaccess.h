@@ -722,6 +722,13 @@ private:
 
     bool mSortAlbumsByYear;
     bool mUseAlbumArtist;
+
+    /**
+     * @brief escape special chars in argument for use in command
+     * @param arg
+     * @return escaped arg
+     */
+    QString escapeCommandArgument(const QString arg);
 };
 
 #endif // NETWORKACCESS_H
