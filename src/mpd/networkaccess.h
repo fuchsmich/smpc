@@ -15,6 +15,7 @@
 #include <mpd/serverinfo.h>
 
 #include <common.h>
+#include <singleton.h>
 
 // Timeout value for network communication
 #define READYREAD 15000
@@ -30,6 +31,8 @@ class MpdAlbum;
 class MpdArtist;
 class MpdTrack;
 class MpdFileEntry;
+
+struct NetAccessSglt : public Singleton<NetworkAccess, NetAccessSglt> {};
 
 class NetworkAccess : public QThread
 {

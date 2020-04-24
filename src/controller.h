@@ -103,7 +103,8 @@ signals:
 
 private:
     QQuickView *mQuickView;
-    NetworkAccess *mNetAccess;
+    //NetworkAccess *mNetAccess;
+    NetAccessSglt mNetAccess;
     QString mHostname,mPassword,mProfilename;
     quint16 mPort;
     bool mWasConnected;

@@ -9,7 +9,7 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mImgDB = new ImageDatabase();
     mQMLImgProvider = new QMLImageProvider(mImgDB);
 
-    mNetAccess = new NetworkAccess(0);
+    //mNetAccess = new NetworkAccess(0);
     mNetAccess->setUpdateInterval(1000);
     mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
 
@@ -19,6 +19,7 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mNetAccess->moveToThread(mNetworkThread);
     mNetworkThread->start();
     mDBThread->start();
+
 
     mPlaylist = new PlaylistModel(mImgDB,this);
     mOtherTracks = new PlaylistModel(mImgDB,this);
@@ -82,7 +83,7 @@ Controller::~Controller()
     mNetworkThread->quit();
     mNetworkThread->wait();
     delete(mNetworkThread);
-    delete(mNetAccess);
+    //delete(mNetAccess);
 
     // Close local database
     mDBThread->quit();
@@ -210,11 +211,12 @@ void Controller::connectSignals()
     qRegisterMetaType<MPD_PLAYBACK_STATE>("MPD_PLAYBACK_STATE");
 
 
+    NetworkAccess *na = static_cast<NetworkAccess>(mNetAccess);
     connect(item,SIGNAL(setHostname(QString)),this,SLOT(setHostname(QString)));
     connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
     connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
     connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
-    connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
+    connect(item,SIGNAL(requestCurrentPlaylist()), na,SLOT(getCurrentPlaylistTracks()));
     connect(item,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
 
     connect(item,SIGNAL(requestArtistAlbums(QString)),mNetAccess,SLOT(getArtistsAlbums(QString)));
@@ -412,6 +414,12 @@ void Controller::connectedToServer()
     mWasConnected = true;
     emit sendPopup(popupString);
     emit connected(mProfilename);
+
+    NetAccessSglt netAccessSglt;
+    QString test = (netAccessSglt->connected()? "jo" : "na");
+    qDebug() << test;
+
+
 
 //    QUrl streamurl("http://"+mHostname + ":" + "8081");
 //    //QUrl streamurl("http://uwstream2.somafm.com:2666");
