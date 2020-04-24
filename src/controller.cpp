@@ -211,90 +211,90 @@ void Controller::connectSignals()
     qRegisterMetaType<MPD_PLAYBACK_STATE>("MPD_PLAYBACK_STATE");
 
 
-    NetworkAccess *na = static_cast<NetworkAccess>(mNetAccess);
+    NetworkAccess *netAccess = NetAccessSglt::getInstance();
     connect(item,SIGNAL(setHostname(QString)),this,SLOT(setHostname(QString)));
     connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
     connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
     connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
-    connect(item,SIGNAL(requestCurrentPlaylist()), na,SLOT(getCurrentPlaylistTracks()));
-    connect(item,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
+    connect(item,SIGNAL(requestCurrentPlaylist()), netAccess,SLOT(getCurrentPlaylistTracks()));
+    connect(item,SIGNAL(requestArtists()),netAccess,SLOT(getArtists()));
 
-    connect(item,SIGNAL(requestArtistAlbums(QString)),mNetAccess,SLOT(getArtistsAlbums(QString)));
-    connect(item,SIGNAL(requestAlbums()),mNetAccess,SLOT(getAlbums()));
+    connect(item,SIGNAL(requestArtistAlbums(QString)),netAccess,SLOT(getArtistsAlbums(QString)));
+    connect(item,SIGNAL(requestAlbums()),netAccess,SLOT(getAlbums()));
     connect(item,SIGNAL(requestFilesPage(QString)),this,SLOT(requestFilePage(QString)));
     //  connect(item,SIGNAL(requestCurrentPlaylist()),this,SLOT(requestCurrentPlaylist()));
-    connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
-    connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
+    connect(item,SIGNAL(playPlaylistTrack(int)),netAccess,SLOT(playTrackByNumber(int)));
+    connect(item,SIGNAL(deletePlaylistTrack(int)),netAccess,SLOT(deleteTrackByNumer(int)));
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
-    connect(this,SIGNAL(requestAlbum(QVariant)),mNetAccess,SLOT(getAlbumTracks(QVariant)));
-    connect(item,SIGNAL(stop()),mNetAccess,SLOT(stop()));
-    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
-    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
-    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
-    connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
+    connect(this,SIGNAL(requestAlbum(QVariant)),netAccess,SLOT(getAlbumTracks(QVariant)));
+    connect(item,SIGNAL(stop()),netAccess,SLOT(stop()));
+    connect(item,SIGNAL(play()),netAccess,SLOT(pause()));
+    connect(item,SIGNAL(next()),netAccess,SLOT(next()));
+    connect(item,SIGNAL(prev()),netAccess,SLOT(previous()));
+    connect(item,SIGNAL(deletePlaylist()),netAccess,SLOT(clearPlaylist()));
     // WORKAROUND
     connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
+    connect(this,SIGNAL(addAlbum(QVariant)),netAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
     connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
-    connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
+    connect(this,SIGNAL(playAlbum(QVariant)),netAccess,SLOT(playArtistAlbum(QVariant)));
 
-    connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
-    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
-    connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
-    connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
-    connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
-    connect(item,SIGNAL(deleteSavedPlaylist(QString)),mNetAccess,SLOT(deletePlaylist(QString)));
-    connect(item,SIGNAL(requestSavedPlaylists()),mNetAccess,SLOT(getSavedPlaylists()));
-    connect(mNetAccess,SIGNAL(savedPlaylistsReady(QStringList*)),this,SLOT(updateSavedPlaylistsModel(QStringList*)));
-    connect(mNetAccess,SIGNAL(albumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(artistAlbumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(filesReady(QList<QObject*>*)),this,SLOT(updateFilesModel(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(connectionEstablished()),this,SLOT(connectedToServer()));
-    connect(mNetAccess,SIGNAL(disconnected()),this,SLOT(disconnectedToServer()));
-    connect(mNetAccess,SIGNAL(busy()),item,SLOT(busy()));
-    connect(mNetAccess,SIGNAL(ready()),item,SLOT(ready()));
+    connect(item,SIGNAL(addFiles(QString)),netAccess,SLOT(addTrackToPlaylist(QString)));
+    connect(item,SIGNAL(seek(int)),netAccess,SLOT(seek(int)));
+    connect(item,SIGNAL(setVolume(int)),netAccess,SLOT(setVolume(int)));
+    connect(item,SIGNAL(addArtist(QString)),netAccess,SLOT(addArtist(QString)));
+    connect(item,SIGNAL(playArtist(QString)),netAccess,SLOT(playArtist(QString)));
+    connect(item,SIGNAL(savePlaylist(QString)),netAccess,SLOT(savePlaylist(QString)));
+    connect(item,SIGNAL(deleteSavedPlaylist(QString)),netAccess,SLOT(deletePlaylist(QString)));
+    connect(item,SIGNAL(requestSavedPlaylists()),netAccess,SLOT(getSavedPlaylists()));
+    connect(netAccess,SIGNAL(savedPlaylistsReady(QStringList*)),this,SLOT(updateSavedPlaylistsModel(QStringList*)));
+    connect(netAccess,SIGNAL(albumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(artistAlbumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(filesReady(QList<QObject*>*)),this,SLOT(updateFilesModel(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(connectionEstablished()),this,SLOT(connectedToServer()));
+    connect(netAccess,SIGNAL(disconnected()),this,SLOT(disconnectedToServer()));
+    connect(netAccess,SIGNAL(busy()),item,SLOT(busy()));
+    connect(netAccess,SIGNAL(ready()),item,SLOT(ready()));
     connect(item,SIGNAL(newProfile(QVariant)),this,SLOT(newProfile(QVariant)));
     connect(item,SIGNAL(changeProfile(QVariant)),this,SLOT(changeProfile(QVariant)));
     connect(item,SIGNAL(deleteProfile(int)),this,SLOT(deleteProfile(int)));
     connect(item,SIGNAL(connectProfile(int)),this,SLOT(connectProfile(int)));
-    connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
-    connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
-    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
-    connect(item,SIGNAL(playPlaylistSongNext(int)),mNetAccess,SLOT(playTrackNext(int)));
-    connect(item,SIGNAL(requestSavedPlaylist(QString)),mNetAccess,SLOT(getPlaylistTracks(QString)));
-    connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
-    connect(item,SIGNAL(playPlaylist(QString)),mNetAccess,SLOT(playPlaylist(QString)));
-    connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
-    connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
-    connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
+    connect(item,SIGNAL(playSong(QString)),netAccess,SLOT(playTrack(QString)));
+    connect(item,SIGNAL(playFiles(QString)),netAccess,SLOT(playFiles(QString)));
+    connect(item,SIGNAL(addSong(QString)),netAccess,SLOT(addTrackToPlaylist(QString)));
+    connect(item,SIGNAL(addSongAfterCurrent(QString)),netAccess,SLOT(addTrackAfterCurrent(QString)));
+    connect(item,SIGNAL(playPlaylistSongNext(int)),netAccess,SLOT(playTrackNext(int)));
+    connect(item,SIGNAL(requestSavedPlaylist(QString)),netAccess,SLOT(getPlaylistTracks(QString)));
+    connect(item,SIGNAL(addPlaylist(QString)),netAccess,SLOT(addPlaylist(QString)));
+    connect(item,SIGNAL(playPlaylist(QString)),netAccess,SLOT(playPlaylist(QString)));
+    connect(item,SIGNAL(setShuffle(bool)),netAccess,SLOT(setRandom(bool)));
+    connect(item,SIGNAL(setRepeat(bool)),netAccess,SLOT(setRepeat(bool)));
+    connect(item,SIGNAL(updateDB()),netAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));
     connect(item,SIGNAL(cleanFileStack()),this,SLOT(cleanFileStack()));
     connect(&volDecTimer,SIGNAL(timeout()),this,SLOT(decVolume()));
     connect(&volIncTimer,SIGNAL(timeout()),this,SLOT(incVolume()));
     //connect(QApplication::instance(),SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(focusChanged(QWidget*,QWidget*)));
 
-    connect(this,SIGNAL(getFiles(QString)),mNetAccess,SLOT(getDirectory(QString)));
-    connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
-    connect(this,SIGNAL(requestConnect()),mNetAccess,SLOT(connectToHost()));
-    connect(this,SIGNAL(requestDisconnect()),mNetAccess,SLOT(disconnectFromServer()));
+    connect(this,SIGNAL(getFiles(QString)),netAccess,SLOT(getDirectory(QString)));
+    connect(this,SIGNAL(setVolume(int)),netAccess,SLOT(setVolume(int)));
+    connect(this,SIGNAL(requestConnect()),netAccess,SLOT(connectToHost()));
+    connect(this,SIGNAL(requestDisconnect()),netAccess,SLOT(disconnectFromServer()));
 //    connect(this,SIGNAL(serverProfilesUpdated()),item,SLOT(settingsModelUpdated()));
-    connect(this,SIGNAL(setUpdateInterval(int)),mNetAccess,SLOT(setUpdateInterval(int)));
+    connect(this,SIGNAL(setUpdateInterval(int)),netAccess,SLOT(setUpdateInterval(int)));
 
-    connect(mNetAccess,SIGNAL(outputsReady(QList<QObject*>*)),this,SLOT(updateOutputsModel(QList<QObject*>*)));
-    connect(item,SIGNAL(requestOutputs()),mNetAccess,SLOT(getOutputs()));
-    connect(item,SIGNAL(enableOutput(int)),mNetAccess,SLOT(enableOutput(int)));
-    connect(item,SIGNAL(disableOutput(int)),mNetAccess,SLOT(disableOutput(int)));
+    connect(netAccess,SIGNAL(outputsReady(QList<QObject*>*)),this,SLOT(updateOutputsModel(QList<QObject*>*)));
+    connect(item,SIGNAL(requestOutputs()),netAccess,SLOT(getOutputs()));
+    connect(item,SIGNAL(enableOutput(int)),netAccess,SLOT(enableOutput(int)));
+    connect(item,SIGNAL(disableOutput(int)),netAccess,SLOT(disableOutput(int)));
 
     // WORKAROUND
     connect(item,SIGNAL(requestSearch(QVariant)),this,SLOT(searchTracks(QVariant)));
-    connect(this,SIGNAL(requestSearch(QVariant)),mNetAccess,SLOT(searchTracks(QVariant)));
+    connect(this,SIGNAL(requestSearch(QVariant)),netAccess,SLOT(searchTracks(QVariant)));
 
     connect(item,SIGNAL(addlastsearch()),this,SLOT(addlastsearchtoplaylist()));
-    connect(this,SIGNAL(addURIToPlaylist(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
+    connect(this,SIGNAL(addURIToPlaylist(QString)),netAccess,SLOT(addTrackToPlaylist(QString)));
 
     //connect(this,SIGNAL(requestPlaylistClear()),item,SLOT(clearPlaylist()));
     connect(this,SIGNAL(filesModelReady()),item,SLOT(receiveFilesPage()));
@@ -303,10 +303,10 @@ void Controller::connectSignals()
     connect(mQuickView,SIGNAL(focusObjectChanged(QObject*)),this,SLOT(focusChanged(QObject*)));
 
 
-    connect(this,SIGNAL(requestArtistAlbumMap()),mNetAccess,SLOT(getArtistAlbumMap()));
-    connect(this,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
+    connect(this,SIGNAL(requestArtistAlbumMap()),netAccess,SLOT(getArtistAlbumMap()));
+    connect(this,SIGNAL(requestArtists()),netAccess,SLOT(getArtists()));
 
-    connect(mNetAccess,SIGNAL(artistsAlbumsMapReady(QMap<MpdArtist*,QList<MpdAlbum*>*>*)),mImgDB,SLOT(fillDatabase(QMap<MpdArtist*,QList<MpdAlbum*>*>*)));
+    connect(netAccess,SIGNAL(artistsAlbumsMapReady(QMap<MpdArtist*,QList<MpdAlbum*>*>*)),mImgDB,SLOT(fillDatabase(QMap<MpdArtist*,QList<MpdAlbum*>*>*)));
     connect(item,SIGNAL(clearAlbumList()),this,SLOT(clearAlbumList()));
     connect(item,SIGNAL(clearArtistList()),this,SLOT(clearArtistList()));
     connect(item,SIGNAL(clearTrackList()),this,SLOT(clearTrackList()));
@@ -354,9 +354,9 @@ void Controller::connectSignals()
 
     // WORKAROUND
     connect(item,SIGNAL(addSongToSaved(QVariant)),this,SLOT(addTrackToSavedPlaylist(QVariant)));
-    connect(this,SIGNAL(addSongToSaved(QVariant)),mNetAccess,SLOT(addTrackToSavedPlaylist(QVariant)));
+    connect(this,SIGNAL(addSongToSaved(QVariant)),netAccess,SLOT(addTrackToSavedPlaylist(QVariant)));
     connect(item,SIGNAL(removeSongFromSaved(QVariant)),this,SLOT(removeTrackFromSavedPlaylist(QVariant)));
-    connect(this,SIGNAL(removeSongFromSaved(QVariant)),mNetAccess,SLOT(removeTrackFromSavedPlaylist(QVariant)));
+    connect(this,SIGNAL(removeSongFromSaved(QVariant)),netAccess,SLOT(removeTrackFromSavedPlaylist(QVariant)));
 
     // Set downloading enabled variable to imagedatabase
     connect(this,SIGNAL(newDownloadEnabled(bool)),mImgDB,SLOT(setDownloadEnabled(bool)));
@@ -368,12 +368,12 @@ void Controller::connectSignals()
     connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
 
     /* new playlist model connects */
-    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
+    connect(netAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
     connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
     connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
 
     /* new saved tracks model connects */
-    connect(mNetAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
+    connect(netAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
 }
 
 void Controller::setPassword(QString password)
@@ -586,8 +586,9 @@ void Controller::writeSettings()
 void Controller::quit()
 {
     writeSettings();
-    connect(this,SIGNAL(requestExit()),mNetAccess,SLOT(exitRequest()));
-    connect(mNetAccess,SIGNAL(requestExit()),this,SLOT(exitRequest()));
+    NetworkAccess *netAccess = NetAccessSglt::getInstance();
+    connect(this,SIGNAL(requestExit()),netAccess,SLOT(exitRequest()));
+    connect(netAccess,SIGNAL(requestExit()),this,SLOT(exitRequest()));
     QTimer *exittimer = new QTimer();
     exittimer->setInterval(10000);
     exittimer->setSingleShot(true);
@@ -806,8 +807,9 @@ void Controller::reconnectServer()
 void Controller::fillArtistImages()
 {
     // Disconnect artit list signal (prevent appearing of artist lists page to UI)
-    disconnect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
+    NetworkAccess *netAccess = NetAccessSglt::getInstance();
+    disconnect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
 
     // qDebug() << "Requested artist list for image bulk downloader";
     emit requestArtists();
@@ -816,8 +818,9 @@ void Controller::fillArtistImages()
 void Controller::fillArtistImages(QList<QObject *> *artistList)
 {
     // Reconnect signal
-    disconnect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
-    connect(mNetAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
+    NetworkAccess *netAccess = NetAccessSglt::getInstance();
+    disconnect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(fillArtistImages(QList<QObject*>*)));
+    connect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
     // qDebug() << "Received artist list for image bulk downloader";
 
     emit requestArtistImageFill((QList<MpdArtist*>*)artistList);
