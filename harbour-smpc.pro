@@ -86,4 +86,5 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += \
     translations/$${TARGET}-de.ts \
     translations/$${TARGET}-es.ts \
+    translations/$${TARGET}-sv.ts \
     translations/$${TARGET}-fr.ts
