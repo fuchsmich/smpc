@@ -1,4 +1,6 @@
 #include "controller.h"
+#include "mpd/albumprovider.h"
+
 Controller::Controller(QObject *parent) : QObject(parent)
 {
 
@@ -39,8 +41,11 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     qmlRegisterType<MpdArtist>();
     qmlRegisterType<MpdAlbum>();
     qmlRegisterType<ServerProfile>();
-    qRegisterMetaType<MpdAlbum>("MpdAlbum");
     qRegisterMetaType<MpdArtist>("MpdArtist");
+    qRegisterMetaType<MpdAlbum>("MpdAlbum");
+    qRegisterMetaType<QList<MpdAlbum>>("QList<MpdAlbum>");
+    qmlRegisterType<AlbumProvider>("smpc", 1, 0, "AlbumProvider");
+
     volIncTimer.setInterval(250);
     volDecTimer.setInterval(250);
     mWasConnected = false;
@@ -248,7 +253,7 @@ void Controller::connectSignals()
     connect(item,SIGNAL(deleteSavedPlaylist(QString)),netAccess,SLOT(deletePlaylist(QString)));
     connect(item,SIGNAL(requestSavedPlaylists()),netAccess,SLOT(getSavedPlaylists()));
     connect(netAccess,SIGNAL(savedPlaylistsReady(QStringList*)),this,SLOT(updateSavedPlaylistsModel(QStringList*)));
-    connect(netAccess,SIGNAL(albumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
+    //connect(netAccess,SIGNAL(albumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
     connect(netAccess,SIGNAL(artistsReady(QList<QObject*>*)),this,SLOT(updateArtistsModel(QList<QObject*>*)));
     connect(netAccess,SIGNAL(artistAlbumsReady(QList<QObject*>*)),this,SLOT(updateAlbumsModel(QList<QObject*>*)));
     connect(netAccess,SIGNAL(filesReady(QList<QObject*>*)),this,SLOT(updateFilesModel(QList<QObject*>*)));

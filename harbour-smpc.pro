@@ -21,6 +21,7 @@ SOURCES += main.cpp \
     src/localdb/databasefilljob.cpp \
     src/localdb/artistinformation.cpp \
     src/localdb/albuminformation.cpp \
+    src/mpd/albumprovider.cpp \
     src/mpd/serverprofile.cpp \
     src/mpd/playlistmodel.cpp \
     src/mpd/networkaccess.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     src/localdb/databasefilljob.h \
     src/localdb/artistinformation.h \
     src/localdb/albuminformation.h \
+    src/mpd/albumprovider.h \
     src/mpd/serverprofile.h \
     src/mpd/playlistmodel.h \
     src/mpd/networkaccess.h \

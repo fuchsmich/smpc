@@ -110,6 +110,7 @@ void NetworkAccess::disconnectFromServer()
   * empty list if not connected or no albums are availible */
 void NetworkAccess::getAlbums()
 {
+    qDebug() << "getAlbums";
     emit busy();
     /* Emit ready signal and send list with it */
     emit albumsReady((QList<QObject*>*)getAlbums_prv());

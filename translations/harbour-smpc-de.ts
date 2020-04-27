@@ -34,14 +34,6 @@
     </message>
 </context>
 <context>
-    <name>AlbumDelegate</name>
-    <message>
-        <location filename="../qml/components/AlbumDelegate.qml" line="60"/>
-        <source>No album tag</source>
-        <translation>Kein Album-Tag</translation>
-    </message>
-</context>
-<context>
     <name>AlbumListDelegate</name>
     <message>
         <location filename="../qml/components/AlbumListDelegate.qml" line="40"/>
@@ -77,22 +69,27 @@
 <context>
     <name>AlbumListPage</name>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="44"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="97"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="53"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="109"/>
         <source>Albums</source>
         <translation>Alben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="51"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="104"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="60"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="116"/>
         <source>Add albums</source>
         <translation>Alben hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="57"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="110"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="66"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="122"/>
         <source>Play albums</source>
         <translation>Alben abspielen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="74"/>
+        <source>No album tag</source>
+        <translation type="unfinished">Kein Album-Tag</translation>
     </message>
 </context>
 <context>
@@ -279,12 +276,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="412"/>
+        <location filename="../src/controller.cpp" line="417"/>
         <source>Connected to: </source>
         <translation>Verbunden zu: </translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="436"/>
+        <location filename="../src/controller.cpp" line="441"/>
         <source>Disconnected from server</source>
         <translation>Getrennt von Server</translation>
     </message>

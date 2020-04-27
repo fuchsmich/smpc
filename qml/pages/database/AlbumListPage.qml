@@ -1,6 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
-//import harbour.smpc.components 1.0
+import smpc 1.0
 import "../../components"
 
 Page {
@@ -9,6 +9,16 @@ Page {
     property string artistname
     property int lastIndex
     property int lastOrientation
+    AlbumProvider {
+        id: albumProvider
+        artistName: "asd"
+        onArtistNameChanged: console.log(artistName)
+        onAlbumCountChanged: console.log(albumCount)
+        onAlbumListChanged: console.log(albumList[0], testList[0])
+        onTestListChanged: console.log(testList)
+        Component.onCompleted: artistName = "fronz"
+    }
+
     Loader {
         id: gridViewLoader
         active: false
@@ -17,7 +27,6 @@ Page {
             SilicaGridView {
                 id: albumGridView
                 property bool scrolling: sectionScroller.scrolling
-                model: albumsModel
                 cellWidth: Screen.sizeCategory
                            >= Screen.Large ? ((orientation === Orientation.Landscape)
                                               || (orientation === Orientation.LandscapeInverted) ? (width / 6) : width / 5) : ((orientation === Orientation.Landscape) || (orientation === Orientation.LandscapeInverted) ? (width / 4) : (width / 2))
@@ -60,8 +69,11 @@ Page {
                         }
                     }
                 }
+                model: albumProvider.albumList
                 delegate: AlbumDelegate {
+                    albumName: model.modeldata.title === "" ? qsTr("No album tag") : model.modelData.title
                 }
+                onCountChanged: console.debug("count", count)
             }
         }
     }

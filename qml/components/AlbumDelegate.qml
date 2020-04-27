@@ -2,6 +2,8 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 ListItem {
+    property alias albumName: albumLbl.text
+
     width: albumGridView.cellWidth
     contentHeight: albumGridView.cellHeight
 
@@ -44,6 +46,7 @@ ListItem {
             }
         }
         Label {
+            id: albumLbl
             anchors {
                 bottom: albumImage.bottom
                 horizontalCenter: albumImage.horizontalCenter
@@ -57,7 +60,7 @@ ListItem {
             styleColor: Theme.secondaryColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
-            text: title === "" ? qsTr("No album tag") : title
+            //text: title === "" ? qsTr("No album tag") : title
         }
     }
 
