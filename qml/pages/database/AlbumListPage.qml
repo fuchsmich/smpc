@@ -14,7 +14,7 @@ Page {
         artistName: "asd"
         onArtistNameChanged: console.log(artistName)
         onAlbumCountChanged: console.log(albumCount)
-        onAlbumListChanged: console.log(albumList[0], testList[0])
+        onAlbumListChanged: console.log(albumList, testList)
         onTestListChanged: console.log(testList)
         Component.onCompleted: artistName = "fronz"
     }

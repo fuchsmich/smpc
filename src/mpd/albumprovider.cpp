@@ -23,11 +23,10 @@ QString AlbumProvider::artistName() const
     return m_artistName;
 }
 
-QList<MpdAlbum> AlbumProvider::albumList() const
-{
-    return m_albumList;
-}
-//QQmlListProperty<MpdAlbum *> albumList();
+//QList<MpdAlbum> AlbumProvider::albumList() const
+//{
+//    return m_albumList;
+//}
 
 
 void AlbumProvider::setUseAlbumArtist(bool useAlbumArtist)
@@ -49,27 +48,30 @@ void AlbumProvider::setArtistName(QString artistName)
 }
 
 
-void AlbumProvider::setAlbumList(QList<MpdAlbum> albumList)
+void AlbumProvider::setAlbumList(QList<MpdAlbum*> *albumList)
 {
 //    if (m_albumList == albumList)
 //        return;
-    qDebug() << albumList.length();
+//    qDebug() << albumList->length();
 
-    m_albumList = albumList;
-    qDebug() << m_albumList.count();
-    emit albumListChanged();
+//    m_albumList = albumList;
+//    qDebug() << m_albumList->count();
+//    emit albumListChanged();
 //    emit albumCountChanged(m_albumList.count());
 }
 
 void AlbumProvider::updateAlbumList(QList<QObject *> *albumList)
 {
     qDebug() << "updating albums" << albumList->length();
-    QList<MpdAlbum *> *mpdAlbumList = (QList<MpdAlbum *> *)albumList;
-    QList<MpdAlbum> tempList;
-    for (MpdAlbum *a : *mpdAlbumList) {
-        tempList.append(*a);
-    }
-    setAlbumList(tempList);
+    //QList<MpdAlbum *> *mpdAlbumList = (QList<MpdAlbum *> *)albumList;
+//    QList<MpdAlbum> tempList;
+//    for (MpdAlbum *a : *mpdAlbumList) {
+//        tempList.append(*a);
+//    }
+    //setAlbumList(mpdAlbumList);
+    m_albumList = *albumList;
+    qDebug() << m_albumList.count();
+    emit albumListChanged();
 }
 
 void AlbumProvider::stringSlot(QString str)
