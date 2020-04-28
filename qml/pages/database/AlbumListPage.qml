@@ -16,7 +16,7 @@ Page {
         onAlbumCountChanged: console.log(albumCount)
         onAlbumListChanged: console.log(albumList, testList)
         onTestListChanged: console.log(testList)
-        Component.onCompleted: artistName = "fronz"
+        //Component.onCompleted: artistName = "fronz"
     }
 
     Loader {

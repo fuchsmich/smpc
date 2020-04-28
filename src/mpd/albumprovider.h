@@ -45,6 +45,8 @@ public slots:
 
     void setArtistName(QString artistName);
 
+    void getAlbums(QString artist);
+
 signals:
 
     void useAlbumArtistChanged(bool useAlbumArtist);
@@ -66,6 +68,7 @@ private slots:
 
 private:
     //NetAccessSglt m_netAccess;
+    NetworkAccess *m_netAccess;
     bool m_useAlbumArtist;
     QString m_artistName;
     QList<QObject *> m_albumList;

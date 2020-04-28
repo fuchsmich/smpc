@@ -2,10 +2,11 @@
 
 AlbumProvider::AlbumProvider(QObject *parent) : QObject(parent), m_artistName("")
 {
-    NetworkAccess *netAccess = NetAccessSglt::getInstance();
-    connect(this, &AlbumProvider::artistNameChanged, netAccess, &NetworkAccess::getAlbums);
+    m_netAccess = NetAccessSglt::getInstance();
+    //connect(this, &AlbumProvider::artistNameChanged, m_netAccess, &NetworkAccess::getAlbums);
+    connect(this, &AlbumProvider::artistNameChanged, this, &AlbumProvider::getAlbums);
     connect(this, &AlbumProvider::artistNameChanged, this, &AlbumProvider::stringSlot);
-    connect(netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::updateAlbumList);
+    //connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::updateAlbumList);
     for (int i = 0; i < 8; ++i) {
         m_testList.append(QString("testList %1").arg(m_testList.count()));
     }
@@ -45,6 +46,17 @@ void AlbumProvider::setArtistName(QString artistName)
 
     m_artistName = artistName;
     emit artistNameChanged(m_artistName);
+}
+
+void AlbumProvider::getAlbums(QString artist)
+{
+    connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::updateAlbumList);
+    if (artist.isEmpty()) {
+        m_netAccess->getAlbums();
+    }
+    else {
+        m_netAccess->getArtistsAlbums(artist);
+    }
 }
 
 
