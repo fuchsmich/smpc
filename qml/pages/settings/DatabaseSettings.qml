@@ -25,7 +25,6 @@ Page {
         VerticalScrollDecorator {
         }
 
-
         Column {
             id: mainColumn
             anchors {
@@ -107,7 +106,9 @@ Page {
                 }
                 Label {
                     id: fileSizeMB
-                    text: Math.round((dbStatistic.getDatabaseSize() / 1048576) * 100) / 100 + qsTr(" MB")
+                    text: Math.round(
+                              (dbStatistic.getDatabaseSize(
+                                   ) / 1048576) * 100) / 100 + qsTr(" MB")
                     horizontalAlignment: Text.AlignRight
                     width: parent.width - (Theme.paddingLarge * 2)
                     color: Theme.secondaryColor
@@ -184,14 +185,21 @@ Page {
                     newDownloadSize(currentIndex)
                 }
             }
-            Label {
-                id: warningLabel
+            Row {
                 x: Theme.paddingLarge
-                y: Theme.paddingLarge
-                width: parent.width - (Theme.paddingLarge * 2)
-                color: "red"
-                text: qsTr("Although the setting \"mega\" will look the best, it will require huge amount of local data cached.")
-                wrapMode: "WordWrap"
+                width: parent.width
+                Image {
+                    id: infoIcon
+                    source: "image://theme/icon-s-warning"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                Label {
+                    id: warningLabel
+                    width: parent.width - (Theme.paddingLarge + infoIcon.width)
+                    font.bold: true
+                    text: qsTr("Although the setting \"mega\" will look the best, it will require huge amount of local data cached.")
+                    wrapMode: "WordWrap"
+                }
             }
 
             Column {
@@ -199,7 +207,8 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 Button {
                     id: downloadArtistImagesBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Download artist images")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 4
@@ -209,7 +218,8 @@ Page {
                 }
                 Button {
                     id: downloadAlbumImagesBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Download album images")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 5
@@ -219,7 +229,8 @@ Page {
                 }
                 Button {
                     id: clearBlacklistBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Clear blacklisted albums")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 0
@@ -229,7 +240,8 @@ Page {
                 }
                 Button {
                     id: clearArtistBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Clear artist images")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 1
@@ -239,7 +251,8 @@ Page {
                 }
                 Button {
                     id: clearAlbumBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Clear album images")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 2
@@ -247,7 +260,8 @@ Page {
                 }
                 Button {
                     id: clearDBBtn
-                    width: isPortrait ? mainColumn.width - Theme.paddingLarge * 2 : (mainColumn.width / 2) * 0.95
+                    width: isPortrait ? mainColumn.width - Theme.paddingLarge
+                                        * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Clear complete database")
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 3

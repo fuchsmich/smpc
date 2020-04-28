@@ -350,8 +350,8 @@ Page {
 
             OpacityRampEffect {
                 sourceItem: mainColumn
-                slope: 3
-                offset: 0.65
+                slope: 3.5
+                offset: 0.75
             }
             onClicked: {
                 //albumTracksListView.currentIndex = index
