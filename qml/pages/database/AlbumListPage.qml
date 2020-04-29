@@ -6,12 +6,12 @@ import "../../components"
 Page {
     id: albumslistPage
     allowedOrientations: Orientation.All
-    property string artistname
+    property alias artistname: albumProvider.artistName
     property int lastIndex
     property int lastOrientation
     AlbumProvider {
         id: albumProvider
-        artistName: "asd"
+        //artistName: "asd"
         onArtistNameChanged: console.log(artistName)
         onAlbumCountChanged: console.log(albumCount)
         onAlbumListChanged: console.log(albumList, testList)

@@ -3,14 +3,15 @@
 AlbumProvider::AlbumProvider(QObject *parent) : QObject(parent), m_artistName("")
 {
     m_netAccess = NetAccessSglt::getInstance();
+    qDebug() << &m_netAccess;
     //connect(this, &AlbumProvider::artistNameChanged, m_netAccess, &NetworkAccess::getAlbums);
-    connect(this, &AlbumProvider::artistNameChanged, this, &AlbumProvider::getAlbums);
+    connect(this, &AlbumProvider::artistNameChanged, this, &AlbumProvider::fetchAlbums);
     connect(this, &AlbumProvider::artistNameChanged, this, &AlbumProvider::stringSlot);
-    //connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::updateAlbumList);
+    connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::setAlbumList);
     for (int i = 0; i < 8; ++i) {
         m_testList.append(QString("testList %1").arg(m_testList.count()));
     }
-    emit testListChanged(m_testList);
+//    emit testListChanged(m_testList);
     emit artistNameChanged(m_artistName);
 }
 
@@ -48,9 +49,10 @@ void AlbumProvider::setArtistName(QString artistName)
     emit artistNameChanged(m_artistName);
 }
 
-void AlbumProvider::getAlbums(QString artist)
+void AlbumProvider::fetchAlbums(QString artist)
 {
-    connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::updateAlbumList);
+    qDebug() << &m_netAccess << artist;
+    connect(m_netAccess, &NetworkAccess::albumsReady, this, &AlbumProvider::setAlbumList);
     if (artist.isEmpty()) {
         m_netAccess->getAlbums();
     }
@@ -60,31 +62,31 @@ void AlbumProvider::getAlbums(QString artist)
 }
 
 
-void AlbumProvider::setAlbumList(QList<MpdAlbum*> *albumList)
+void AlbumProvider::setAlbumList(QList<QObject *> *albumList)
 {
-//    if (m_albumList == albumList)
-//        return;
-//    qDebug() << albumList->length();
+    if (m_albumList == *albumList)
+        return;
+    qDebug() << albumList->length();
 
-//    m_albumList = albumList;
-//    qDebug() << m_albumList->count();
-//    emit albumListChanged();
-//    emit albumCountChanged(m_albumList.count());
-}
-
-void AlbumProvider::updateAlbumList(QList<QObject *> *albumList)
-{
-    qDebug() << "updating albums" << albumList->length();
-    //QList<MpdAlbum *> *mpdAlbumList = (QList<MpdAlbum *> *)albumList;
-//    QList<MpdAlbum> tempList;
-//    for (MpdAlbum *a : *mpdAlbumList) {
-//        tempList.append(*a);
-//    }
-    //setAlbumList(mpdAlbumList);
     m_albumList = *albumList;
     qDebug() << m_albumList.count();
     emit albumListChanged();
+    emit albumCountChanged(m_albumList.count());
 }
+
+//void AlbumProvider::updateAlbumList(QList<QObject *> *albumList)
+//{
+//    qDebug() << "updating albums" << albumList->length();
+//    //QList<MpdAlbum *> *mpdAlbumList = (QList<MpdAlbum *> *)albumList;
+////    QList<MpdAlbum> tempList;
+////    for (MpdAlbum *a : *mpdAlbumList) {
+////        tempList.append(*a);
+////    }
+//    //setAlbumList(mpdAlbumList);
+//    m_albumList = *albumList;
+//    qDebug() << m_albumList.count();
+//    emit albumListChanged();
+//}
 
 void AlbumProvider::stringSlot(QString str)
 {

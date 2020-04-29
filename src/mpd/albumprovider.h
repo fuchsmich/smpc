@@ -45,7 +45,7 @@ public slots:
 
     void setArtistName(QString artistName);
 
-    void getAlbums(QString artist);
+    void fetchAlbums(QString artist);
 
 signals:
 
@@ -60,9 +60,9 @@ signals:
     void testListChanged(QVariantList testList);
 
 private slots:
-    void setAlbumList(QList<MpdAlbum *> *albumList);
+    void setAlbumList(QList<QObject *> *albumList);
 
-    void updateAlbumList(QList<QObject *> *albumList);
+//    void updateAlbumList(QList<QObject *> *albumList);
 
     void stringSlot(QString str);
 
