@@ -69,25 +69,25 @@
 <context>
     <name>AlbumListPage</name>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="53"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="109"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="58"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="116"/>
         <source>Albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="60"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="116"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="65"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="123"/>
         <source>Add albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="66"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="122"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="71"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="129"/>
         <source>Play albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="74"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="79"/>
         <source>No album tag</source>
         <translation type="unfinished"></translation>
     </message>

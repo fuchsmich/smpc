@@ -1,8 +1,10 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import smpc 1.0
 
 ListItem {
     property alias albumName: albumLbl.text
+    property alias coverUrl: albumImage.source
 
     width: albumGridView.cellWidth
     contentHeight: albumGridView.cellHeight
@@ -19,7 +21,7 @@ ListItem {
         Image {
             id: albumImage
             anchors.fill: parent
-            source: albumGridView.scrolling ? "" : coverURL
+            //source: albumGridView.scrolling ? "" : coverURL
             cache: false
             asynchronous: true
             fillMode: Image.PreserveAspectCrop

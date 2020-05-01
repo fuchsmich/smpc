@@ -11,12 +11,6 @@ Page {
     property int lastOrientation
     AlbumProvider {
         id: albumProvider
-        //artistName: "asd"
-        onArtistNameChanged: console.log(artistName)
-        onAlbumCountChanged: console.log(albumCount)
-        onAlbumListChanged: console.log(albumList, testList)
-        onTestListChanged: console.log(testList)
-        //Component.onCompleted: artistName = "fronz"
     }
 
     Loader {
@@ -71,7 +65,8 @@ Page {
                 }
                 model: albumProvider.albumList
                 delegate: AlbumDelegate {
-                    albumName: model.modeldata.title === "" ? qsTr("No album tag") : model.modelData.title
+                    albumName: model.modelData.title === "" ? qsTr("No album tag") : model.modelData.title
+                    coverUrl: albumGridView.scrolling ? "" : albumProvider.getCoverUrl(model.index)
                 }
                 onCountChanged: console.debug("count", count)
             }

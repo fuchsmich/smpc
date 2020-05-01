@@ -14,10 +14,8 @@ class AlbumProvider : public QObject
     Q_OBJECT
     Q_PROPERTY(QString artistName READ artistName WRITE setArtistName NOTIFY artistNameChanged)
     Q_PROPERTY(bool useAlbumArtist READ useAlbumArtist WRITE setUseAlbumArtist NOTIFY useAlbumArtistChanged)
-    //Q_PROPERTY(QQmlListProperty<MpdAlbum> albumList READ albumList)
     Q_PROPERTY(QList<QObject *> albumList MEMBER m_albumList NOTIFY albumListChanged)
     //Q_PROPERTY(QList<MpdAlbum *> albumList READ albumList NOTIFY albumListChanged)
-    Q_PROPERTY(QVariantList testList READ testList NOTIFY testListChanged)
     Q_PROPERTY(int albumCount READ albumCount NOTIFY albumCountChanged)
 
 public:
@@ -27,16 +25,15 @@ public:
 
     QString artistName() const;
 
-    //QList<MpdAlbum> albumList() const;
-
     int albumCount() const
     {
         return m_albumList.count();
     }
 
-    QVariantList testList() const
+    Q_INVOKABLE QString getCoverUrl(int index)
     {
-        return m_testList;
+        // Return dummy for the time being
+        return DUMMY_ALBUMIMAGE;
     }
 
 public slots:
@@ -45,7 +42,6 @@ public slots:
 
     void setArtistName(QString artistName);
 
-    void fetchAlbums(QString artist);
 
 signals:
 
@@ -57,22 +53,21 @@ signals:
 
     void albumCountChanged(int albumCount);
 
-    void testListChanged(QVariantList testList);
-
 private slots:
     void setAlbumList(QList<QObject *> *albumList);
 
-//    void updateAlbumList(QList<QObject *> *albumList);
-
     void stringSlot(QString str);
 
+    void fetchAlbums(QString artist);
+
 private:
-    //NetAccessSglt m_netAccess;
     NetworkAccess *m_netAccess;
+
     bool m_useAlbumArtist;
+
     QString m_artistName;
+
     QList<QObject *> m_albumList;
-    QVariantList m_testList;
 };
 
 #endif // ALBUMPROVIDER_H
