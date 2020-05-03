@@ -38,7 +38,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         qDebug() << path;
     }
 
-    Controller *control = new Controller(view,0);
+    Controller *control = ControllerSglt::getInstance(); //new Controller(view,0);
+    control->init(view);
     view->show();
     return app->exec();
 }

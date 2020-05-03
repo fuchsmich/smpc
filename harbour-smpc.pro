@@ -62,6 +62,7 @@ HEADERS += \
     src/mpd/artistmodel.h \
     src/mpd/albummodel.h \
     src/common.h \
+    src/singleton.h \
     src/streamplayer.h \
     src/mpd/serverprofilemodel.h \
     src/mpd/mpdplaybackstatus.h \

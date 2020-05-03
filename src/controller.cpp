@@ -1,11 +1,19 @@
 #include "controller.h"
-Controller::Controller(QObject *parent) : QObject(parent)
+Controller::Controller(QObject *parent) :
+    QObject(parent), mHostname(""), mPassword(""), mPort(6600)
 {
 
 }
 
-Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQuickView(viewer),mHostname(""),mPassword(""),mPort(6600)
+Controller::Controller(QQuickView *viewer, QObject *parent) :
+    QObject(parent), mQuickView(viewer), mHostname(""), mPassword(""), mPort(6600)
 {
+    init(viewer);
+}
+
+void Controller::init(QQuickView *viewer)
+{
+    mQuickView = viewer;
     mImgDB = new ImageDatabase();
     mQMLImgProvider = new QMLImageProvider(mImgDB);
 
@@ -74,6 +82,7 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
 
     emit requestDBStatistic();
 }
+
 
 Controller::~Controller()
 {
@@ -373,6 +382,7 @@ void Controller::connectSignals()
     /* new saved tracks model connects */
     connect(mNetAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
 }
+
 
 void Controller::setPassword(QString password)
 {

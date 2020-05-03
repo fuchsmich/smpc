@@ -29,7 +29,11 @@
 
 #include <streamplayer.h>
 
+#include <singleton.h>
 
+class Controller;
+
+struct ControllerSglt : public Singleton<Controller, ControllerSglt> {};
 
 class Controller : public QObject
 {
@@ -45,9 +49,11 @@ class Controller : public QObject
     Q_OBJECT
 public:
     explicit Controller(QObject *parent = 0);
-    Controller(QQuickView *mQuickView,QObject *parent = 0);
+    Controller(QQuickView *viewer, QObject *parent = 0);
     ~Controller();
     void connectSignals();
+    void init(QQuickView *viewer);
+
 public slots:
 
 signals:
