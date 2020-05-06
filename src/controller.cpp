@@ -1,15 +1,18 @@
 #include "controller.h"
-Controller::Controller(QObject *parent) : QObject(parent)
+Controller::Controller(QObject *parent) :
+    QObject(parent)
 {
 
 }
 
-Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQuickView(viewer),mHostname(""),mPassword(""),mPort(6600)
+Controller::Controller(QQuickView *viewer, QObject *parent) :
+    QObject(parent), mQuickView(viewer), mHostname(""), mPassword(""), mPort(6600)
 {
+
     mImgDB = new ImageDatabase();
     mQMLImgProvider = new QMLImageProvider(mImgDB);
 
-    mNetAccess = new NetworkAccess(0);
+    mNetAccess = new NetworkAccess(nullptr);
     mNetAccess->setUpdateInterval(1000);
     mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
 
@@ -19,9 +22,10 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mNetAccess->moveToThread(mNetworkThread);
     mNetworkThread->start();
     mDBThread->start();
+    m_player = new Player(mNetAccess, mImgDB);
 
-    mPlaylist = new PlaylistModel(mImgDB,this);
-    mOtherTracks = new PlaylistModel(mImgDB,this);
+    mPlaylist = new PlaylistModel(mImgDB, this);
+    mOtherTracks = new PlaylistModel(mImgDB, this);
 
 //    mStreamPlayer = new StreamPlayer(this);
 
@@ -266,7 +270,7 @@ void Controller::connectSignals()
     connect(item,SIGNAL(requestSavedPlaylist(QString)),mNetAccess,SLOT(getPlaylistTracks(QString)));
     connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
     connect(item,SIGNAL(playPlaylist(QString)),mNetAccess,SLOT(playPlaylist(QString)));
-    connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
+    //connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
     connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
     connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));

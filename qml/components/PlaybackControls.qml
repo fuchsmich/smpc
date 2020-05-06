@@ -12,15 +12,16 @@ Row {
         id: shuffleButton
         icon.source: "image://theme/icon-m-shuffle"
         automaticCheck: false
-        checked: mpd_status.shuffle
-        onClicked: setShuffle(!checked)
+        //checked: mpd_status.shuffle
+        checked: ctl.player.playbackStatus.shuffle
+        onClicked: ctl.player.setShuffle(!checked)
     }
 
     IconButton {
         id: prevButton
         icon.source: "image://theme/icon-m-previous"
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: prev()
+        onClicked: ctl.player.prev()
     }
 
     IconButton {
@@ -31,7 +32,7 @@ Row {
         width: Theme.iconSizeLarge
         height: Theme.iconSizeLarge
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: stop()
+        onClicked: ctl.player.stop()
     }
 
     IconButton {
@@ -40,14 +41,14 @@ Row {
         width: Theme.iconSizeLarge
         height: Theme.iconSizeLarge
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: play()
+        onClicked: ctl.player.play()
     }
 
     IconButton {
         id: nextButton
         icon.source: "image://theme/icon-m-next"
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: next()
+        onClicked: ctl.player.next()
     }
 
     Switch {
@@ -55,6 +56,6 @@ Row {
         icon.source: "image://theme/icon-m-repeat"
         automaticCheck: false
         checked: mpd_status.repeat
-        onClicked: setRepeat(!checked)
+        onClicked: ctl.player.setRepeat(!checked)
     }
 }

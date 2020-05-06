@@ -29,6 +29,7 @@
 
 #include <streamplayer.h>
 
+#include <player.h>
 
 
 class Controller : public QObject
@@ -43,11 +44,19 @@ class Controller : public QObject
     };
 
     Q_OBJECT
+    Q_PROPERTY(Player* player READ player CONSTANT)
+
 public:
-    explicit Controller(QObject *parent = 0);
-    Controller(QQuickView *mQuickView,QObject *parent = 0);
+    explicit Controller(QObject *parent = nullptr);
+    Controller(QQuickView *mQuickView, QObject *parent = nullptr);
     ~Controller();
     void connectSignals();
+
+    Player* player() const
+    {
+        return m_player;
+    }
+
 public slots:
 
 signals:
@@ -151,6 +160,8 @@ private:
 
     void readSettings();
     void writeSettings();
+
+    Player* m_player;
 
 private slots:
     void requestCurrentPlaylist();

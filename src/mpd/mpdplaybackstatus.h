@@ -32,6 +32,7 @@ class MPDPlaybackStatus : public QObject
     Q_PROPERTY(quint32 samplerate READ getSamplerate WRITE setSamplerate NOTIFY samplerateChanged)
     Q_PROPERTY(quint8 channelCount READ getChannelCount WRITE setChannelCount NOTIFY channelCountChanged)
     Q_PROPERTY(quint8 bitDepth READ getBitDepth WRITE setBitDepth NOTIFY bitDepthChanged)
+
 public:
     explicit MPDPlaybackStatus(QObject *parent = 0);
     MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent = 0);

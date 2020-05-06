@@ -276,12 +276,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="410"/>
+        <location filename="../src/controller.cpp" line="414"/>
         <source>Connected to: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="428"/>
+        <location filename="../src/controller.cpp" line="432"/>
         <source>Disconnected from server</source>
         <translation type="unfinished"></translation>
     </message>
