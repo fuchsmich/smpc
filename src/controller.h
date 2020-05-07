@@ -118,13 +118,14 @@ private:
     bool mWasConnected;
     QTimer mReconnectTimer;
     quint32 mPlaylistVersion;
-    int mCurrentSongID;
+    //int mCurrentSongID;
     int mVolume;
     int mLastPlaybackState;
     QThread *mNetworkThread;
     QThread *mDBThread;
     ServerProfileModel *mServerProfiles;
-    QTimer volDecTimer,volIncTimer;
+    //FIXME what are they for?:
+    //QTimer volDecTimer,volIncTimer;
     AlbumModel *mOldAlbumModel;
     ArtistModel *mOldArtistModel;
     PlaylistModel *mPlaylist;
@@ -166,9 +167,10 @@ private:
 private slots:
     void requestCurrentPlaylist();
     void requestFilePage(QString);
-    void seek(int);
-    void incVolume();
-    void decVolume();
+    //void seek(int);
+    //FIXME what are they for?:
+    //void incVolume();
+    //void decVolume();
     /*Privates*/
     void connectedToServer();
     void disconnectedToServer();

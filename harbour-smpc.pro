@@ -72,7 +72,9 @@ HEADERS += \
 
 DISTFILES += \
     harbour-smpc.desktop \
+    qml/components/PositionSlider.qml \
     qml/components/SMPCMprisPlayer.qml \
+    qml/components/VolumeSlider.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
     translations/*.ts

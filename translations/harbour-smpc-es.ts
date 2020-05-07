@@ -267,11 +267,6 @@
         <source>Not playing</source>
         <translation>No reproduciendo</translation>
     </message>
-    <message>
-        <location filename="../qml/components/ControlPanel.qml" line="108"/>
-        <source>Volume</source>
-        <translation>Volumen</translation>
-    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -456,16 +451,6 @@
         <source>URI:</source>
         <translation>IUR:</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage_large.qml" line="538"/>
-        <source>Volume</source>
-        <translation>Volumen</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage_large.qml" line="577"/>
-        <source>position</source>
-        <translation>posición</translation>
-    </message>
 </context>
 <context>
     <name>CurrentSong</name>
@@ -478,16 +463,6 @@
         <location filename="../qml/pages/database/CurrentSong.qml" line="63"/>
         <source>Show albums from artist</source>
         <translation>Mostrar álbumes del artista</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="417"/>
-        <source>Volume</source>
-        <translation>Volumen</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="456"/>
-        <source>Position</source>
-        <translation>Posición</translation>
     </message>
 </context>
 <context>
@@ -971,6 +946,14 @@
     </message>
 </context>
 <context>
+    <name>PositionSlider</name>
+    <message>
+        <location filename="../qml/components/PositionSlider.qml" line="10"/>
+        <source>position</source>
+        <translation type="unfinished">posición</translation>
+    </message>
+</context>
+<context>
     <name>SavePlaylistDialog</name>
     <message>
         <location filename="../qml/components/SavePlaylistDialog.qml" line="11"/>
@@ -1319,6 +1302,14 @@
         <location filename="../qml/components/URLInputDialog.qml" line="19"/>
         <source>Input url (http://, file://, etc)</source>
         <translation>Entrada de url (http: //, archivo: //, etc.)</translation>
+    </message>
+</context>
+<context>
+    <name>VolumeSlider</name>
+    <message>
+        <location filename="../qml/components/VolumeSlider.qml" line="10"/>
+        <source>Volume</source>
+        <translation type="unfinished">Volumen</translation>
     </message>
 </context>
 <context>

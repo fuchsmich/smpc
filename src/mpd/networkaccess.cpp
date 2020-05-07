@@ -1038,7 +1038,7 @@ void NetworkAccess::seekPosition(int id, int pos)
 {
     // qDebug() << "seek: " << id << ":" << pos;
     if (connected()) {
-        sendMPDCommand(QString("seek ") + QString::number(id).toUtf8() + " " +  QString::number(pos).toUtf8() + "\n");
+        sendMPDCommand(QString("seek %1 %2\n").arg(id).arg(pos));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1055,7 +1055,7 @@ void NetworkAccess::seekPosition(int id, int pos)
 
 void NetworkAccess::seek(int pos)
 {
-    seekPosition(getPlaybackID(),pos);
+    seekPosition(getPlaybackID(), pos);
 }
 
 

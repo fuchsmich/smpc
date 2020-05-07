@@ -29,7 +29,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
 
 //    mStreamPlayer = new StreamPlayer(this);
 
-    mCurrentSongID=0;
+    //mCurrentSongID=0;
     mPlaylistVersion = 0;
     mOutputs = 0;
     mOldArtistModel = 0;
@@ -44,8 +44,8 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     qmlRegisterType<ServerProfile>();
     qRegisterMetaType<MpdAlbum>("MpdAlbum");
     qRegisterMetaType<MpdArtist>("MpdArtist");
-    volIncTimer.setInterval(250);
-    volDecTimer.setInterval(250);
+    //volIncTimer.setInterval(250);
+    //volDecTimer.setInterval(250);
     mWasConnected = false;
     mFileModels = new QStack<FileModel*>();
     // Set empty qml properties for later usage
@@ -275,12 +275,12 @@ void Controller::connectSignals()
     connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));
     connect(item,SIGNAL(cleanFileStack()),this,SLOT(cleanFileStack()));
-    connect(&volDecTimer,SIGNAL(timeout()),this,SLOT(decVolume()));
-    connect(&volIncTimer,SIGNAL(timeout()),this,SLOT(incVolume()));
+    //connect(&volDecTimer,SIGNAL(timeout()),this,SLOT(decVolume()));
+    //connect(&volIncTimer,SIGNAL(timeout()),this,SLOT(incVolume()));
     //connect(QApplication::instance(),SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(focusChanged(QWidget*,QWidget*)));
 
     connect(this,SIGNAL(getFiles(QString)),mNetAccess,SLOT(getDirectory(QString)));
-    connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
+    //connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(this,SIGNAL(requestConnect()),mNetAccess,SLOT(connectToHost()));
     connect(this,SIGNAL(requestDisconnect()),mNetAccess,SLOT(disconnectFromServer()));
 //    connect(this,SIGNAL(serverProfilesUpdated()),item,SLOT(settingsModelUpdated()));
@@ -468,10 +468,11 @@ void Controller::onNewArtist()
     }
 }
 
-void Controller::seek(int pos)
-{
-    mNetAccess->seekPosition(mCurrentSongID,pos);
-}
+//void Controller::seek(int pos)
+//{
+//    //FIXME wo wird mCurrentSongID gesetzt??
+//    mNetAccess->seekPosition(mCurrentSongID,pos);
+//}
 
 void Controller::requestFilePage(QString path)
 {
@@ -685,22 +686,22 @@ void Controller::connectProfile(int index)
     connectToServer();
 }
 
-void Controller::incVolume()
-{
-    emit setVolume((mVolume+3>100 ? 100 : mVolume+3));
-    mVolume =(mVolume+3>100 ? 100 : mVolume+3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
-}
+//void Controller::incVolume()
+//{
+//    emit setVolume((mVolume+3>100 ? 100 : mVolume+3));
+//    mVolume =(mVolume+3>100 ? 100 : mVolume+3);
+//    QString popup = "Volume: "+ QString::number(mVolume)+"%";
+//    emit sendPopup(popup);
+//}
 
-void Controller::decVolume()
-{
-    emit setVolume((mVolume-3<0 ? 0 : mVolume-3));
-    mVolume = (mVolume-3<0 ? 0 : mVolume-3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
+//void Controller::decVolume()
+//{
+//    emit setVolume((mVolume-3<0 ? 0 : mVolume-3));
+//    mVolume = (mVolume-3<0 ? 0 : mVolume-3);
+//    QString popup = "Volume: "+ QString::number(mVolume)+"%";
+//    emit sendPopup(popup);
 
-}
+//}
 
 
 void Controller::focusChanged(QObject *now){

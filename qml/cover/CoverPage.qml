@@ -84,12 +84,12 @@ CoverBackground {
 
         CoverAction {
             iconSource: playbuttoniconsourcecover //"image://theme/icon-cover-pause"
-            onTriggered: play()
+            onTriggered: ctl.player.play()
         }
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next-song"
-            onTriggered: next()
+            onTriggered: ctl.player.next()
         }
     }
 }

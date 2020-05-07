@@ -405,34 +405,9 @@ Page {
                     }
                 }
 
-                Slider {
-                    anchors.fill: parent
-
+                VolumeSlider {
                     id: volumeSlider
-                    stepSize: 1
-                    maximumValue: 100
-                    minimumValue: 0
-                    value: mVolume
-                    valueText: value + "%"
-                    label: qsTr("Volume")
-                    onPressedChanged: {
-                        if (!pressed) {
-                            volumeChanging = false
-                            setVolume(value)
-                            value = Qt.binding(function () {
-                                return mVolume
-                            })
-                            volumeControl.state = "sliderInvisible"
-                        } else {
-                            volumeChanging = true
-                            volumeSliderFadeOutTimer.stop()
-                        }
-                    }
-                    onValueChanged: {
-                        if (pressed)
-                            setVolume(value)
-                        // valueText = value+"%";
-                    }
+                    anchors.fill: parent
                 }
 
                 Timer {
@@ -445,35 +420,11 @@ Page {
                 }
             }
 
-            Slider {
+            PositionSlider {
                 id: positionSlider
                 width: parent.width
-                stepSize: 1.0
-                maximumValue: (mLength > 0) ? mLength : 1.0
-                minimumValue: 0.0
-                value: mPosition
-                valueText: formatLength(value)
-                label: qsTr("Position")
-                Label {
-                    id: lengthTextcomplete
-                    text: mLengthText
-                    color: Theme.primaryColor
-                    font.pixelSize: fontsizegrey
-                    wrapMode: "WordWrap"
-                    anchors {
-                        right: parent.right
-                        rightMargin: Theme.paddingLarge
-                        bottom: parent.bottom
-                    }
-                }
                 onPressedChanged: {
                     mPositionSliderActive = pressed
-                    if (!pressed) {
-                        seek(value)
-                        value = Qt.binding(function () {
-                            return mPosition
-                        })
-                    }
                 }
             }
 
@@ -487,9 +438,6 @@ Page {
         if ((status === PageStatus.Activating)
                 || (status === PageStatus.Active)) {
             pageactive = true
-            //            positionSlider.handleVisible = false;
-            //            positionSlider.handleVisible = true;
-            //            positionSlider.valueText = Qt.binding(function () {return formatLength(positionSlider.value);})
             quickControlPanel.hideControl = true
         } else {
             quickControlPanel.hideControl = false

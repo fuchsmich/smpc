@@ -46,10 +46,10 @@ signals:
     void next();
     void previous();
     void setVolume(int value);
-    void seek(int value);
     void setShuffle(bool value);
     void setRepeat(bool value);
     void setConsume(bool value);
+    void seek(int pos);
 
 public slots:
 };

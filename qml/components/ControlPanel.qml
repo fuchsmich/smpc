@@ -97,30 +97,9 @@ DockedPanel {
 
         PlaybackControls {}
 
-        Slider {
+        VolumeSlider {
             id: volumeSlider
             width: parent.width
-            stepSize: 1
-            maximumValue: 100
-            minimumValue: 0
-            value: mVolume
-            valueText: value + "%"
-            label: qsTr("Volume")
-            onPressedChanged: {
-                if (!pressed) {
-                    volumeChanging = false
-                    setVolume(value)
-                    value = Qt.binding(function () {
-                        return mVolume
-                    })
-                } else {
-                    volumeChanging = true
-                }
-            }
-            onValueChanged: {
-                if (pressed) setVolume(value)
-                // valueText = value+"%";
-            }
         }
     }
 }

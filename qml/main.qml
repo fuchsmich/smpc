@@ -12,7 +12,7 @@ ApplicationWindow {
     signal setHostname(string hostname)
     signal setPort(int port)
     signal setPassword(string password)
-    signal setVolume(int volume)
+    //signal setVolume(int volume)
     signal setCurrentArtist(string artist)
     signal connectToServer
 
@@ -64,13 +64,13 @@ ApplicationWindow {
     signal disableOutput(int nr)
 
     // Control signals
-    signal play
-    signal next
-    signal prev
-    signal stop
-    signal seek(int position)
-    signal setRepeat(bool rep)
-    signal setShuffle(bool shfl)
+    //signal play
+    //signal next
+    //signal prev
+    //signal stop
+    //signal seek(int position)
+    //signal setRepeat(bool rep)
+    //signal setShuffle(bool shfl)
 
     //Playlist signals
     signal savePlaylist(string name)
@@ -139,7 +139,7 @@ ApplicationWindow {
     property string mTitle: mpd_status.title
     property string mArtist: mpd_status.artist
     property string mAlbum: mpd_status.album
-    property int mVolume: mpd_status.volume
+    //property int mVolume: mpd_status.volume
     property int mLength: mpd_status.length
     property int mPosition: mpd_status.currentTime
     property int mPlaylistlength: mpd_status.playlistSize

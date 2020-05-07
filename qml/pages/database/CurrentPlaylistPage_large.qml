@@ -526,34 +526,10 @@ Page {
                             }
                         }
 
-                        Slider {
+                        VolumeSlider {
                             id: volumeSlider
                             width: parent.width
                             anchors.verticalCenter: parent.verticalCenter
-                            stepSize: 1
-                            maximumValue: 100
-                            minimumValue: 0
-                            value: mVolume
-                            valueText: value + "%"
-                            label: qsTr("Volume")
-                            onPressedChanged: {
-                                if (!pressed) {
-                                    volumeChanging = false
-                                    setVolume(value)
-                                    value = Qt.binding(function () {
-                                        return mVolume
-                                    })
-                                    volumeControl.state = "sliderInvisible"
-                                } else {
-                                    volumeChanging = true
-                                    volumeSliderFadeOutTimer.stop()
-                                }
-                            }
-                            onValueChanged: {
-                                if (pressed)
-                                    setVolume(value)
-                                // valueText = value+"%";
-                            }
                         }
 
                         Timer {
@@ -566,35 +542,11 @@ Page {
                         }
                     }
 
-                    Slider {
+                    PositionSlider {
                         id: positionSlider
                         width: parent.width
-                        stepSize: 1.0
-                        maximumValue: (mLength > 0) ? mLength : 1.0
-                        minimumValue: 0.0
-                        value: mPosition
-                        valueText: formatLength(value)
-                        label: qsTr("position")
-                        Label {
-                            id: lengthTextcomplete
-                            text: mLengthText
-                            color: Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeSmall
-                            wrapMode: "WordWrap"
-                            anchors {
-                                right: parent.right
-                                rightMargin: Theme.paddingLarge
-                                bottom: parent.bottom
-                            }
-                        }
                         onPressedChanged: {
                             mPositionSliderActive = pressed
-                            if (!pressed) {
-                                seek(value)
-                                value = Qt.binding(function () {
-                                    return mPosition
-                                })
-                            }
                         }
                     }
 

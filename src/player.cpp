@@ -24,23 +24,3 @@ Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
     connect(this, &Player::setShuffle, m_netAccess, &NetworkAccess::setRandom);
     connect(this, &Player::setRepeat, m_netAccess, &NetworkAccess::setRepeat);
 }
-
-//void Player::play()
-//{
-//    qDebug() << "play";
-//}
-
-//void Player::stop()
-//{
-//    qDebug() << "stop";
-//}
-
-//void Player::next()
-//{
-//    qDebug() << "next";
-//}
-
-//void Player::previous()
-//{
-//    qDebug() << "previous";
-//}
