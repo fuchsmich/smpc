@@ -72,6 +72,7 @@ HEADERS += \
 
 DISTFILES += \
     harbour-smpc.desktop \
+    qml/components/SMPCMprisPlayer.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
     translations/*.ts

@@ -12,7 +12,6 @@ Row {
         id: shuffleButton
         icon.source: "image://theme/icon-m-shuffle"
         automaticCheck: false
-        //checked: mpd_status.shuffle
         checked: ctl.player.playbackStatus.shuffle
         onClicked: ctl.player.setShuffle(!checked)
     }

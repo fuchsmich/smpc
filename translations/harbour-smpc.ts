@@ -1324,17 +1324,17 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="150"/>
+        <location filename="../qml/main.qml" line="149"/>
         <source>bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="151"/>
+        <location filename="../qml/main.qml" line="150"/>
         <source>channels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="154"/>
+        <location filename="../qml/main.qml" line="153"/>
         <source>kbps</source>
         <translation type="unfinished"></translation>
     </message>
