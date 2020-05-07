@@ -27,8 +27,6 @@
 #include <mpd/serverprofilemodel.h>
 #include <mpd/mpdplaybackstatus.h>
 
-#include <streamplayer.h>
-
 #include <player.h>
 
 
@@ -154,10 +152,6 @@ private:
     int mArtistsViewUseAlbumArtist;
     int mCoverInNowPlaying;
     int mShowModeLandscape;
-
-    // Streaming playback
-    //StreamPlayer *mStreamPlayer;
-
 
     void readSettings();
     void writeSettings();
