@@ -22,7 +22,7 @@ MprisPlayer {
     property string message: ""
     onMessageChanged: {
         console.debug("MPRIS Message: ", message)
-        console.debug(ctl.player.playbackStatus.playlistSize, ctl.player.playbackStatus.trackNo)
+        //console.debug(ctl.player.playbackStatus.playlistSize, ctl.player.playbackStatus.trackNo)
     }
 
     serviceName: (connected ? "smpc" : "") //this (un)registers the service due to connection to mpd_server
@@ -35,9 +35,9 @@ MprisPlayer {
     //Mpris2 Player Interface
     canControl: true
     canGoNext: playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo < ctl.player.playbackStatus.playlistSize
-    onCanGoNextChanged: console.debug(canGoNext)
+    //onCanGoNextChanged: console.debug(canGoNext)
     canGoPrevious: playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo > 1
-    onCanGoPreviousChanged: console.debug(canGoPrevious, ctl.player.playbackStatus.trackNo)
+    //onCanGoPreviousChanged: console.debug(canGoPrevious, ctl.player.playbackStatus.trackNo)
     canPause: true //got to be always true for MprisController::playPause to work!
     canPlay: true //mprisPlayer.playbackStatus !== Mpris.Playing
     //onCanPlayChanged: console.debug("canPlay", canPlay)
