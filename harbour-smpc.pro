@@ -72,6 +72,7 @@ DISTFILES += \
     harbour-smpc.desktop \
     qml/components/PositionSlider.qml \
     qml/components/SMPCMprisPlayer.qml \
+    qml/components/TrackDelegate.qml \
     qml/components/VolumeSlider.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \

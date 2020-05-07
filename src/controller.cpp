@@ -56,7 +56,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     mQuickView->rootContext()->setContextProperty("albumsModel",0);
     mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",0);
     mQuickView->rootContext()->setContextProperty("outputsModel",0);
-    mQuickView->rootContext()->setContextProperty("playlistModel",mPlaylist);
+    mQuickView->rootContext()->setContextProperty("playlistModel", mPlaylist);
     mQuickView->rootContext()->setContextProperty("tracksModel",mOtherTracks);
 
 

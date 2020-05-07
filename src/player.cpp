@@ -23,4 +23,10 @@ Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
 
     connect(this, &Player::setShuffle, m_netAccess, &NetworkAccess::setRandom);
     connect(this, &Player::setRepeat, m_netAccess, &NetworkAccess::setRepeat);
+
+    //playlist
+    m_playlist = new PlaylistModel(m_imgDB, this);
+    connect(m_netAccess, &NetworkAccess::currentPlaylistReady, m_playlist, &PlaylistModel::receiveNewTrackList);
+    connect(m_playbackStatus, &MPDPlaybackStatus::idChanged, m_playlist, &PlaylistModel::onTrackNoChanged);
+    connect(m_playbackStatus, &MPDPlaybackStatus::playbackStatusChanged, m_playlist, &PlaylistModel::onPlaybackStateChanged);
 }
