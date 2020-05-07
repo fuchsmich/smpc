@@ -35,20 +35,23 @@ public:
         return m_playbackStatus;
     }
 
-    //Q_INVOKABLE void setShuffle(bool value);
 
 signals:
 
     void playlistChanged();
-
     void playbackStatusChanged(MPDPlaybackStatus* playbackStatus);
-    void setShuffle(bool value);
 
-public slots:
     void play();
     void stop();
     void next();
     void previous();
+    void setVolume(int value);
+    void seek(int value);
+    void setShuffle(bool value);
+    void setRepeat(bool value);
+    void setConsume(bool value);
+
+public slots:
 };
 
 #endif // PLAYER_H

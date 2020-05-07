@@ -21,7 +21,7 @@ Row {
         id: prevButton
         icon.source: "image://theme/icon-m-previous"
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: ctl.player.prev()
+        onClicked: ctl.player.previous()
     }
 
     IconButton {
@@ -37,7 +37,7 @@ Row {
 
     IconButton {
         id: playButton
-        icon.source: mpd_status.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
+        icon.source: ctl.player.playbackStatus.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
         width: Theme.iconSizeLarge
         height: Theme.iconSizeLarge
         anchors.verticalCenter: parent.verticalCenter
@@ -55,7 +55,7 @@ Row {
         id: repeatButton
         icon.source: "image://theme/icon-m-repeat"
         automaticCheck: false
-        checked: mpd_status.repeat
+        checked: ctl.player.playbackStatus.repeat
         onClicked: ctl.player.setRepeat(!checked)
     }
 }

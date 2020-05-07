@@ -230,10 +230,10 @@ void Controller::connectSignals()
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
     connect(this,SIGNAL(requestAlbum(QVariant)),mNetAccess,SLOT(getAlbumTracks(QVariant)));
-    connect(item,SIGNAL(stop()),mNetAccess,SLOT(stop()));
-    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
-    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
-    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
+//    connect(item,SIGNAL(stop()),mNetAccess,SLOT(stop()));
+//    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
+//    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
+//    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
     connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
     // WORKAROUND
     connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
@@ -242,8 +242,8 @@ void Controller::connectSignals()
     connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
 
     connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
-    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
+//    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
+//    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
     connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
     connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
@@ -271,7 +271,7 @@ void Controller::connectSignals()
     connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
     connect(item,SIGNAL(playPlaylist(QString)),mNetAccess,SLOT(playPlaylist(QString)));
     //connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
-    connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
+//    connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
     connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));
     connect(item,SIGNAL(cleanFileStack()),this,SLOT(cleanFileStack()));
