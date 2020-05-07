@@ -126,7 +126,7 @@ private:
     //QTimer volDecTimer,volIncTimer;
     AlbumModel *mOldAlbumModel;
     ArtistModel *mOldArtistModel;
-    PlaylistModel *mPlaylist;
+    //PlaylistModel *mPlaylist;
     PlaylistModel *mOtherTracks;
     QStringList *mSavedPlaylists;
     QList<MPDOutput*> *mOutputs;

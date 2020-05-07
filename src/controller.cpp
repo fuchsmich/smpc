@@ -24,7 +24,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     mDBThread->start();
     m_player = new Player(mNetAccess, mImgDB);
 
-    mPlaylist = new PlaylistModel(mImgDB, this);
+    //mPlaylist = new PlaylistModel(mImgDB, this);
     mOtherTracks = new PlaylistModel(mImgDB, this);
 
 //    mStreamPlayer = new StreamPlayer(this);
@@ -102,8 +102,8 @@ Controller::~Controller()
         delete(mOldAlbumModel);
     if(mOldArtistModel)
         delete(mOldArtistModel);
-    if(mPlaylist)
-        delete(mPlaylist);
+    //if(mPlaylist)
+    //    delete(mPlaylist);
     if(mOtherTracks)
         delete(mOtherTracks);
 
