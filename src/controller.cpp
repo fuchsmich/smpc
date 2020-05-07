@@ -56,7 +56,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     mQuickView->rootContext()->setContextProperty("albumsModel",0);
     mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",0);
     mQuickView->rootContext()->setContextProperty("outputsModel",0);
-    mQuickView->rootContext()->setContextProperty("playlistModel", mPlaylist);
+    //mQuickView->rootContext()->setContextProperty("playlistModel", mPlaylist);
     mQuickView->rootContext()->setContextProperty("tracksModel",mOtherTracks);
 
 
@@ -370,9 +370,9 @@ void Controller::connectSignals()
     connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
 
     /* new playlist model connects */
-    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
-    connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
-    connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
+//    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
+//    connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
+//    connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
 
     /* new saved tracks model connects */
     connect(mNetAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));

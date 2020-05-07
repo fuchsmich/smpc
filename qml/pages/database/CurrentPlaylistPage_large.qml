@@ -31,7 +31,7 @@ Page {
 
             width: parent.width / 2
 
-            model: playlistModel
+            model: ctl.player.playlist
             delegate: TrackDelegate {
                 number: "%1.".arg(model.index + 1)
                 title: (model.title === "" ? model.filename + " " : model.title + " ")
