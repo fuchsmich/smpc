@@ -5,8 +5,8 @@ import "../../components"
 Page {
     id: currentPlaylistPage
     allowedOrientations: Orientation.All
-    property int lastIndex: lastsongid
-    property bool mDeleteRemorseRunning: false
+    //FIXME what for?
+    //property int lastIndex: lastsongid
 
     RemorsePopup {
         id: remorse
@@ -18,25 +18,34 @@ Page {
 
     SilicaListView {
         id: playlistView
+        property bool mDeleteRemorseRunning: false
+
+        function scrollToCurrentItem() {
+            playlistView.positionViewAtIndex(ctl.player.playbackStatus.id, ListView.Center)
+        }
+
         anchors {
             fill: parent
         }
         clip: true
-        currentIndex: lastsongid
-        cacheBuffer: 0
+        //cacheBuffer: 0
+
+        currentIndex: ctl.player.playbackStatus.id //lastsongid
+        highlightFollowsCurrentItem: true
+        highlightMoveDuration: 0
 
         model: ctl.player.playlist
         delegate: TrackDelegate {
+            index: model.index
             number: "%1.".arg(model.index + 1)
             title: (model.title === "" ? model.filename + " " : model.title + " ")
             length: (model.length === 0 ? "" : " (" + lengthformated + ")")
             artist: (model.artist !== "" ? model.artist + " - " : "")
                     + (model.album !== "" ? model.album : "")
+            album: model.album
         }
 
         quickScrollEnabled: jollaQuickscroll
-        highlightFollowsCurrentItem: true
-        highlightMoveDuration: 0
         header: PageHeader {
             title: qsTr("Playlist")
         }
@@ -52,7 +61,7 @@ Page {
                 text: qsTr("Delete playlist")
                 onClicked: {
                     remorse.execute("Deleting playlist", function () {
-                        deletePlaylist()
+                        ctl.player.deletePlaylist()
                     })
                 }
             }
@@ -72,8 +81,9 @@ Page {
             MenuItem {
                 text: qsTr("Jump to playing song")
                 onClicked: {
-                    playlistView.currentIndex = -1
-                    playlistView.currentIndex = lastsongid
+//                    playlistView.currentIndex = -1
+//                    playlistView.currentIndex = ctl.player.playbackStatus.id //lastsongid
+                    playlistView.scrollToCurrentItem()
                 }
             }
         }
@@ -107,7 +117,8 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
-            playlistView.positionViewAtIndex(lastsongid, ListView.Center)
+            //playlistView.positionViewAtIndex(ctl.player.playbackStatus.id, ListView.Center)
+            playlistView.scrollToCurrentItem()
         } else if (status === PageStatus.Active) {
             //            pageStack.pushAttached(Qt.resolvedUrl("CurrentSong.qml"));
             if (mCurrentSongPage == undefined) {
@@ -124,14 +135,15 @@ Page {
     }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {
-            playlistView.currentIndex = -1
-            playlistView.currentIndex = lastsongid
+//            playlistView.currentIndex = -1
+//            playlistView.currentIndex = ctl.player.playbackStatus.id
+            playlistView.scrollToCurrentItem()
         }
     }
-    onLastIndexChanged: {
-        playlistView.currentIndex = -1
-        playlistView.currentIndex = lastIndex
-    }
+//    onLastIndexChanged: {
+//        playlistView.currentIndex = -1
+//        playlistView.currentIndex = lastIndex
+//    }
 
 
     /* FIXME really bad workaround for segmentation fault.

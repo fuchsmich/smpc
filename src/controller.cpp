@@ -31,11 +31,11 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
 
     //mCurrentSongID=0;
     mPlaylistVersion = 0;
-    mOutputs = 0;
-    mOldArtistModel = 0;
-    mOldAlbumModel = 0;
-    mSavedPlaylists = 0;
-    mServerProfiles = 0;
+    mOutputs = nullptr;
+    mOldArtistModel = nullptr;
+    mOldAlbumModel = nullptr;
+    mSavedPlaylists = nullptr;
+    mServerProfiles = nullptr;
     mLastPlaybackState = MPD_STOP;
     connectSignals();
     readSettings();
@@ -52,10 +52,10 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     mQuickView->rootContext()->setContextProperty("coverstring","");
     mQuickView->rootContext()->setContextProperty("artistInfoText","");
     mQuickView->rootContext()->setContextProperty("albumInfoText","");
-    mQuickView->rootContext()->setContextProperty("artistsModel",0);
-    mQuickView->rootContext()->setContextProperty("albumsModel",0);
-    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",0);
-    mQuickView->rootContext()->setContextProperty("outputsModel",0);
+    mQuickView->rootContext()->setContextProperty("artistsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("albumsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("outputsModel",nullptr);
     //mQuickView->rootContext()->setContextProperty("playlistModel", mPlaylist);
     mQuickView->rootContext()->setContextProperty("tracksModel",mOtherTracks);
 
@@ -73,7 +73,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
             break;
         }
     }
-    mDBStatistic = 0;
+    mDBStatistic = nullptr;
     mApplicationActive = true;
 
     emit requestDBStatistic();
@@ -226,7 +226,7 @@ void Controller::connectSignals()
     connect(item,SIGNAL(requestFilesPage(QString)),this,SLOT(requestFilePage(QString)));
     //  connect(item,SIGNAL(requestCurrentPlaylist()),this,SLOT(requestCurrentPlaylist()));
     connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
-    connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
+    //connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
     connect(this,SIGNAL(requestAlbum(QVariant)),mNetAccess,SLOT(getAlbumTracks(QVariant)));
@@ -234,7 +234,7 @@ void Controller::connectSignals()
 //    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
 //    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
 //    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
-    connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
+    //connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
     // WORKAROUND
     connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
     connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));

@@ -29,4 +29,6 @@ Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
     connect(m_netAccess, &NetworkAccess::currentPlaylistReady, m_playlist, &PlaylistModel::receiveNewTrackList);
     connect(m_playbackStatus, &MPDPlaybackStatus::idChanged, m_playlist, &PlaylistModel::onTrackNoChanged);
     connect(m_playbackStatus, &MPDPlaybackStatus::playbackStatusChanged, m_playlist, &PlaylistModel::onPlaybackStateChanged);
+    connect(this, &Player::deletePlaylist, m_netAccess, &NetworkAccess::clearPlaylist);
+    connect(this, &Player::deletePlaylistTrack, m_netAccess, &NetworkAccess::deleteTrackByNumer);
 }

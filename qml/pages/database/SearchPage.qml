@@ -97,7 +97,7 @@ Page {
                     text: qsTr("Add all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
-                        deletePlaylist()
+                        ctl.player.deletePlaylist()
                         addlastsearch()
                     }
                 }
@@ -105,7 +105,7 @@ Page {
                     text: qsTr("Play all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
-                        deletePlaylist()
+                        ctl.player.deletePlaylist()
                         addlastsearch()
                         playPlaylistTrack(0)
                     }

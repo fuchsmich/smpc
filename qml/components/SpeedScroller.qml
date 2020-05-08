@@ -74,7 +74,7 @@ Item {
         onMouseYChanged: {
             if (pressed) {
                 listviewCache = listview.cacheBuffer
-                listview.cacheBuffer = -1
+                listview.cacheBuffer = 0
                 var relPos = (mouseY / height) * 100
                 var item = Sections.getItemPositionFromRelative(relPos)
                 if (listview && listview.model) {

@@ -2,19 +2,90 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 ListItem {
+    id: item
+
+    property int index: -1
     property alias number: numberLbl.text
     property alias title: titleLbl.text
     property alias length: lengthLbl.text
     property alias artist: artistLbl.text
+    property string album: ""
+
+    function remove() {
+        remorseAction(qsTr("Deleting"), function () {
+            ctl.player.deletePlaylistTrack(index)
+            item.ListView.view.mDeleteRemorseRunning = false
+        }, mainWindow.remorseTimeout)
+    }
 
     contentHeight: mainColumn.height
+
+    Column {
+        id: mainColumn
+        clip: true
+        height: Math.max(trackRow.height + artistLbl.height, Theme.itemSizeSmall)
+        anchors {
+            right: parent.right
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            leftMargin: listPadding
+            rightMargin: listPadding
+        }
+        Row {
+            id: trackRow
+            Label {
+                id: numberLbl
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+            Label {
+                id: titleLbl
+                clip: true
+                wrapMode: Text.WrapAnywhere
+                elide: Text.ElideRight
+                font.italic: (playing) ? true : false
+                font.bold: (playing) ? true : false
+                color: playing ? Theme.highlightColor : Theme.primaryColor
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+            Label {
+                id: lengthLbl
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+        Label {
+            id: artistLbl
+            color: Theme.secondaryColor
+            font.pixelSize: Theme.fontSizeSmall
+        }
+    }
+    OpacityRampEffect {
+        sourceItem: mainColumn
+        slope: 3.5
+        offset: 0.75
+    }
+
+    onClicked: {
+        ListView.view.currentIndex = index
+        if (!playing) {
+            parseClickedPlaylist(index)
+        } else {
+            pageStack.navigateForward(PageStackAction.Animated)
+        }
+    }
+
     menu: ContextMenu {
         MenuItem {
             text: qsTr("Remove song")
-            visible: !mDeleteRemorseRunning
-            enabled: !mDeleteRemorseRunning
+            visible: !item.ListView.view.mDeleteRemorseRunning
+            enabled: !item.ListView.view.mDeleteRemorseRunning
             onClicked: {
-                mDeleteRemorseRunning = true
+                item.ListView.view.mDeleteRemorseRunning = true
                 remove()
             }
         }
@@ -68,77 +139,5 @@ ListItem {
                             })
             }
         }
-
-    }
-
-    Column {
-        id: mainColumn
-        clip: true
-        height: Math.max(trackRow.height + artistLbl.height, Theme.itemSizeSmall)
-        anchors {
-            right: parent.right
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-            leftMargin: listPadding
-            rightMargin: listPadding
-        }
-        Row {
-            id: trackRow
-            Label {
-                id: numberLbl
-                //text: (index + 1) + ". "
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
-            }
-            Label {
-                id: titleLbl
-                clip: true
-                wrapMode: Text.WrapAnywhere
-                elide: Text.ElideRight
-                //text: (title === "" ? filename + " " : title + " ")
-                font.italic: (playing) ? true : false
-                font.bold: (playing) ? true : false
-                color: playing ? Theme.highlightColor : Theme.primaryColor
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
-            }
-            Label {
-                id: lengthLbl
-                //text: (length === 0 ? "" : " (" + lengthformated + ")")
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
-            }
-        }
-        Label {
-            id: artistLbl
-//            text: (artist !== "" ? artist + " - " : "")
-//                  + (album !== "" ? album : "")
-            color: Theme.secondaryColor
-            font.pixelSize: Theme.fontSizeSmall
-        }
-    }
-    OpacityRampEffect {
-        sourceItem: mainColumn
-        slope: 3.5
-        offset: 0.75
-    }
-
-    onClicked: {
-        ListView.view.currentIndex = index
-        if (!playing) {
-            parseClickedPlaylist(index)
-        } else {
-            pageStack.navigateForward(PageStackAction.Animated)
-        }
-    }
-
-    function remove() {
-        remorseAction(qsTr("Deleting"), function () {
-            deletePlaylistTrack(index)
-            mDeleteRemorseRunning = false
-        }, 3000)
     }
 }

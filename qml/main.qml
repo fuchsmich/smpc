@@ -74,7 +74,7 @@ ApplicationWindow {
 
     //Playlist signals
     signal savePlaylist(string name)
-    signal deletePlaylist
+    //signal deletePlaylist
     signal deleteSavedPlaylist(string name)
     signal playPlaylistTrack(int index)
     signal deletePlaylistTrack(int index)
@@ -158,6 +158,9 @@ ApplicationWindow {
 
     property Page mPlaylistPage
     property Page mCurrentSongPage
+
+    //TODO move to settings
+    property int remorseTimeout: 3000
 
     // JS-functions
     //TODO separation

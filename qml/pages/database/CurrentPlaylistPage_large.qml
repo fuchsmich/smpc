@@ -58,7 +58,7 @@ Page {
                     text: qsTr("Delete playlist")
                     onClicked: {
                         remorse.execute("Deleting playlist", function () {
-                            deletePlaylist()
+                            ctl.player.deletePlaylist()
                         })
                     }
                 }

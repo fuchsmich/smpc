@@ -284,32 +284,32 @@
 <context>
     <name>CurrentPlaylistPage</name>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="41"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="50"/>
         <source>Playlist</source>
         <translation>Spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="46"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="55"/>
         <source>Add url</source>
         <translation>Lägg till URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="52"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="61"/>
         <source>Delete playlist</source>
         <translation>Ta bort spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="60"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="69"/>
         <source>Save playlist</source>
         <translation>Spara spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="66"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="75"/>
         <source>Open playlist</source>
         <translation>Öppna spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="73"/>
+        <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="82"/>
         <source>Jump to playing song</source>
         <translation>Hoppa till spelande låt</translation>
     </message>
@@ -1219,37 +1219,37 @@
 <context>
     <name>TrackDelegate</name>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="13"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="84"/>
         <source>Remove song</source>
         <translation type="unfinished">Ta bort låt</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="23"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="94"/>
         <source>Show artist</source>
         <translation type="unfinished">Visa artist</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="34"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="105"/>
         <source>Show album</source>
         <translation type="unfinished">Visa album</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="46"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="117"/>
         <source>Play as next</source>
         <translation type="unfinished">Spela upp som nästa</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="54"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="125"/>
         <source>Show information</source>
         <translation type="unfinished">Visa information</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="60"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="131"/>
         <source>Add to saved list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="139"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="15"/>
         <source>Deleting</source>
         <translation type="unfinished">Tar bort</translation>
     </message>

@@ -51,6 +51,9 @@ signals:
     void setConsume(bool value);
     void seek(int pos);
 
+    void deletePlaylist();
+    void deletePlaylistTrack(int index);
+
 public slots:
 };
 
