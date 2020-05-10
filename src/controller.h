@@ -100,7 +100,7 @@ signals:
      * Workaround signals for QJSValue->QVariant cast crashes
      */
     void requestAlbum(QVariant);
-    void addAlbum(QVariant);
+    //void addAlbum(QVariant);
     void playAlbum(QVariant);
     void requestSearch(QVariant);
     void requestAlbumInfo(QVariant);
@@ -159,7 +159,6 @@ private:
     Player* m_player;
 
 private slots:
-    void requestCurrentPlaylist();
     void requestFilePage(QString);
     //void seek(int);
     //FIXME what are they for?:
@@ -221,7 +220,7 @@ private slots:
      * Workaround slots for QJSValue->QVariant cast crashes
      */
     void getAlbumTracks(QVariant album);
-    void addArtistAlbumToPlaylist(QVariant album);
+    //void addArtistAlbumToPlaylist(QVariant album);
     void playArtistAlbum(QVariant album);
     void searchTracks(QVariant search);
     void requestAlbumWikiInformation(QVariant album);

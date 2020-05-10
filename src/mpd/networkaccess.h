@@ -362,11 +362,11 @@ public slots:
      * @param album to filter with.
      */
     void addArtistAlbumToPlaylist(QString artist,QString album);
-    /**
-     * @brief addArtistAlbumToPlaylist Adds an artist album to the current playlist.
-     * @param albuminfo [Artist,Album] to filter with.
-     */
-    void addArtistAlbumToPlaylist(QVariant albuminfo);
+//    /**
+//     * @brief addArtistAlbumToPlaylist Adds an artist album to the current playlist.
+//     * @param albuminfo [Artist,Album] to filter with.
+//     */
+//    void addArtistAlbumToPlaylist(QVariant albuminfo);
 
     /**
      * @brief playAlbum Clears the current playlist and adds the specified album and starts playing it.
@@ -409,7 +409,7 @@ public slots:
      * @brief deleteTrackByNumer Deletes one track from the current playlist.
      * @param nr index of track to remove.
      */
-    void deleteTrackByNumer(int nr);
+    void deleteTrackByNumber(int nr);
 
     /**
      * @brief removeTrackFromSavedPlaylist Removes a track from a saved playlist. Useful for playlist management.

@@ -18,8 +18,8 @@ ApplicationWindow {
 
     // Signals for database requests to networkaccess
     //Variant in format [artistname,albumname]
-    signal addAlbum(variant album)
-    signal addArtist(string artist)
+    //signal addAlbum(variant album)
+    //signal addArtist(string artist)
     signal addFiles(string files)
     signal addSong(string uri)
     signal addSongToSaved(variant data)
@@ -28,7 +28,7 @@ ApplicationWindow {
     signal addPlaylist(string name)
     signal playPlaylist(string name)
     signal playAlbum(variant album)
-    signal playArtist(string artist)
+    //signal playArtist(string artist)
     signal playFiles(string uri)
     signal playPlaylistSongNext(int index)
     //appends song to playlist
@@ -43,7 +43,7 @@ ApplicationWindow {
     signal requestArtistAlbums(string artist)
     signal requestFilesPage(string files)
     signal requestFilesModel(string files)
-    signal requestCurrentPlaylist
+    //signal requestCurrentPlaylist
     signal requestOutputs
     signal requestSearch(variant request)
     // Request an MPD database update (remote mpd db)

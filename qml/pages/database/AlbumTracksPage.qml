@@ -10,6 +10,34 @@ Page {
     property string artistname
     property int lastIndex: 0
 
+    Component {
+        id: pullDownComp
+        PullDownMenu {
+            MenuItem {
+                enabled: (artistname !== "")
+                visible: enabled
+                text: qsTr("Show all tracks")
+                onClicked: {
+                    albumClicked("", albumname)
+                    artistname = ""
+                }
+            }
+            MenuItem {
+                text: qsTr("Add album")
+                onClicked: {
+                    ctl.player.queue.addAlbum(artistname, albumname)
+                }
+            }
+            MenuItem {
+                text: qsTr("Play album")
+                onClicked: {
+                    playAlbum([artistname, albumname])
+                }
+            }
+        }
+    }
+
+
     Loader {
         id: portraitLoader
         active: false
@@ -97,29 +125,6 @@ Page {
                         direction: OpacityRamp.TopToBottom
                     }
                 }
-                PullDownMenu {
-                    MenuItem {
-                        enabled: (artistname !== "")
-                        visible: enabled
-                        text: qsTr("Show all tracks")
-                        onClicked: {
-                            albumClicked("", albumname)
-                            artistname = ""
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Add album")
-                        onClicked: {
-                            addAlbum([artistname, albumname])
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Play album")
-                        onClicked: {
-                            playAlbum([artistname, albumname])
-                        }
-                    }
-                }
                 delegate: trackDelegate
             }
         }
@@ -200,29 +205,7 @@ Page {
                         title: albumname
                     }
                     quickScrollEnabled: jollaQuickscroll
-                    PullDownMenu {
-                        MenuItem {
-                            enabled: (artistname !== "")
-                            visible: enabled
-                            text: qsTr("Show all tracks")
-                            onClicked: {
-                                albumClicked("", albumname)
-                                artistname = ""
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Add album")
-                            onClicked: {
-                                addAlbum([artistname, albumname])
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play album")
-                            onClicked: {
-                                playAlbum([artistname, albumname])
-                            }
-                        }
-                    }
+                    pullDownMenu: pullDownComp
 
                     model: tracksModel
                     clip: true

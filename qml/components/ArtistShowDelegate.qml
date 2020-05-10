@@ -176,7 +176,7 @@ BackgroundItem {
                         height: backsideLoader.height / 4
                         width: height
                         onClicked: {
-                            playArtist(artist)
+                            ctl.player.queue.playArtist(artist)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false
@@ -190,7 +190,7 @@ BackgroundItem {
                         height: backsideLoader.height / 4
                         width: height
                         onClicked: {
-                            addArtist(artist)
+                            ctl.player.queue.addArtist(artist)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false

@@ -13,7 +13,7 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function () {
-            ctl.player.deletePlaylistTrack(index)
+            ctl.player.queue.deleteTrack(index)
             item.ListView.view.mDeleteRemorseRunning = false
         }, mainWindow.remorseTimeout)
     }
@@ -44,8 +44,8 @@ ListItem {
                 clip: true
                 wrapMode: Text.WrapAnywhere
                 elide: Text.ElideRight
-                font.italic: (playing) ? true : false
-                font.bold: (playing) ? true : false
+                font.italic: playing
+                font.bold: playing
                 color: playing ? Theme.highlightColor : Theme.primaryColor
                 anchors {
                     verticalCenter: parent.verticalCenter

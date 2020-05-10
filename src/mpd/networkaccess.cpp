@@ -16,9 +16,9 @@ NetworkAccess::NetworkAccess(QObject *parent) :
     mPlaylistversion = -1;
     mPlaybackStatus = new MPDPlaybackStatus();
     //create socket later used for communication
-    mTCPSocket = 0;
+    mTCPSocket = nullptr;
     mStatusTimer = new QTimer(this);
-    mQMLThread = 0;
+    mQMLThread = nullptr;
 
 
     // Status updating/interpolation
@@ -34,7 +34,7 @@ NetworkAccess::NetworkAccess(QObject *parent) :
     /* Reset server capabilities */
     mServerInfo = nullptr;
 
-    mTimeoutTimer = 0;
+    mTimeoutTimer = nullptr;
 }
 
 NetworkAccess::~NetworkAccess()
@@ -175,7 +175,7 @@ QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
                         section = date;
                     }
                     //qDebug() << "adding album" << name << artist << date << mbid << section << skipFirstAlbum << name.isEmpty();
-                    tempalbum = new MpdAlbum(NULL, name, artist, date, mbid, section);
+                    tempalbum = new MpdAlbum(nullptr, name, artist, date, mbid, section);
                     /* This helps with qml Q_PROPERTY accesses */
                     tempalbum->moveToThread(mQMLThread);
                     /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
@@ -210,7 +210,6 @@ QList<MpdAlbum*> *NetworkAccess::getAlbums_prv()
         if (mServerInfo->getListGroupSupported()) {
             //qDebug() << "Getting albums multigroup";
             if (mServerInfo->getListMultiGroupSupported()) {
-                //TODO do we need "group date" here?
                 sendMPDCommand(QString("list album group MUSICBRAINZ_ALBUMID group albumartist\n"));
             } else {
                 sendMPDCommand(QString("list album group albumartist\n"));
@@ -781,16 +780,16 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
 
 
 
-void NetworkAccess::addArtistAlbumToPlaylist(QVariant albuminfo)
-{
-    // New qt 5.4 qml->c++ qvariant cast
-    if (albuminfo.userType() == qMetaTypeId<QJSValue>()) {
-        albuminfo = qvariant_cast<QJSValue>(albuminfo).toVariant();
-    }
+//void NetworkAccess::addArtistAlbumToPlaylist(QVariant albuminfo)
+//{
+//    // New qt 5.4 qml->c++ qvariant cast
+//    if (albuminfo.userType() == qMetaTypeId<QJSValue>()) {
+//        albuminfo = qvariant_cast<QJSValue>(albuminfo).toVariant();
+//    }
 
-    QStringList strings = albuminfo.toStringList();
-    addArtistAlbumToPlaylist(strings[0],strings[1]);
-}
+//    QStringList strings = albuminfo.toStringList();
+//    addArtistAlbumToPlaylist(strings[0],strings[1]);
+//}
 
 void NetworkAccess::playArtistAlbum(QVariant albuminfo)
 {
@@ -799,7 +798,7 @@ void NetworkAccess::playArtistAlbum(QVariant albuminfo)
     if (albuminfo.userType() == qMetaTypeId<QJSValue>()) {
         albuminfo = qvariant_cast<QJSValue>(albuminfo).toVariant();
     }
-    addArtistAlbumToPlaylist(albuminfo);
+//    addArtistAlbumToPlaylist(albuminfo);
     playTrackByNumber(0);
     setRandom(false);
     setRepeat(false);
@@ -1001,7 +1000,7 @@ void NetworkAccess::playTrack(QString fileuri)
 void NetworkAccess::playTrackByNumber(int nr)
 {
     if (connected()) {
-        sendMPDCommand(QString("play ") + QString::number(nr).toUtf8() + "\n");
+        sendMPDCommand(QString("play %1\n").arg(nr));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1016,7 +1015,7 @@ void NetworkAccess::playTrackByNumber(int nr)
     }
 }
 
-void NetworkAccess::deleteTrackByNumer(int nr)
+void NetworkAccess::deleteTrackByNumber(int nr)
 {
     if (connected()) {
         sendMPDCommand(QString("delete " ) + QString::number(nr).toUtf8() + "\n");

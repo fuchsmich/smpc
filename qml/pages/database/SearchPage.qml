@@ -192,7 +192,7 @@ Page {
                 }
                 function addAlbumRemorse() {
                     remorseAction(qsTr("Adding album"), function () {
-                        addAlbum(["", album])
+                        ctl.player.queue.addAlbum("", album)
                     }, 3000)
                 }
                 function addTrackAfterCurrentRemorse() {

@@ -186,7 +186,7 @@ BackgroundItem {
                         id: addButton
                         icon.source: "image://theme/icon-m-add"
                         onClicked: {
-                            addAlbum([artist, title])
+                            ctl.player.queue.addAlbum(artist, title)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false

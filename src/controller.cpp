@@ -218,14 +218,14 @@ void Controller::connectSignals()
     connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
     connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
     connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
-    connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
+    //connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
     connect(item,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
 
     connect(item,SIGNAL(requestArtistAlbums(QString)),mNetAccess,SLOT(getArtistsAlbums(QString)));
     connect(item,SIGNAL(requestAlbums()),mNetAccess,SLOT(getAlbums()));
     connect(item,SIGNAL(requestFilesPage(QString)),this,SLOT(requestFilePage(QString)));
     //  connect(item,SIGNAL(requestCurrentPlaylist()),this,SLOT(requestCurrentPlaylist()));
-    connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
+    //connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
     //connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
@@ -236,16 +236,16 @@ void Controller::connectSignals()
 //    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
     //connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
     // WORKAROUND
-    connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
+//    connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
+//    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
     connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
     connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
 
     connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
 //    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
 //    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
-    connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
-    connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
+    //connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
+    //connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
     connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
     connect(item,SIGNAL(deleteSavedPlaylist(QString)),mNetAccess,SLOT(deletePlaylist(QString)));
     connect(item,SIGNAL(requestSavedPlaylists()),mNetAccess,SLOT(getSavedPlaylists()));
@@ -401,11 +401,6 @@ void Controller::connectToServer()
     emit requestConnect();
     //Try authentication
 
-}
-
-void Controller::requestCurrentPlaylist()
-{
-    //netaccess->getCurrentPlaylistTracks();
 }
 
 void Controller::connectedToServer()
@@ -950,12 +945,12 @@ void Controller::getAlbumTracks(QVariant album) {
     emit requestAlbum(album);
 }
 
-void Controller::addArtistAlbumToPlaylist(QVariant album) {
-    if (album.userType() == qMetaTypeId<QJSValue>()) {
-        album = qvariant_cast<QJSValue>(album).toVariant();
-    }
-    emit addAlbum(album);
-}
+//void Controller::addArtistAlbumToPlaylist(QVariant album) {
+//    if (album.userType() == qMetaTypeId<QJSValue>()) {
+//        album = qvariant_cast<QJSValue>(album).toVariant();
+//    }
+//    emit addAlbum(album);
+//}
 
 void Controller::playArtistAlbum(QVariant album) {
     if (album.userType() == qMetaTypeId<QJSValue>()) {

@@ -14,8 +14,8 @@ class PlaylistModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int count READ rowCount)
 public:
-    explicit PlaylistModel(QObject *parent = 0);
-    PlaylistModel(ImageDatabase *db, QObject *parent = 0);
+    explicit PlaylistModel(QObject *parent = nullptr);
+    PlaylistModel(ImageDatabase *db, QObject *parent = nullptr);
     ~PlaylistModel();
 
     Q_INVOKABLE MpdTrack* get(int index);

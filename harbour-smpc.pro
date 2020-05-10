@@ -34,6 +34,7 @@ SOURCES += main.cpp \
     src/mpd/albummodel.cpp \
     src/controller.cpp \
     src/player.cpp \
+    src/queue.cpp \
     src/mpd/serverprofilemodel.cpp \
     src/mpd/mpdplaybackstatus.cpp \
     src/mpd/serverinfo.cpp
@@ -63,6 +64,7 @@ HEADERS += \
     src/mpd/albummodel.h \
     src/common.h \
     src/player.h \
+    src/queue.h \
     src/mpd/serverprofilemodel.h \
     src/mpd/mpdplaybackstatus.h \
     src/mpd/mpdcommon.h \
@@ -70,10 +72,6 @@ HEADERS += \
 
 DISTFILES += \
     harbour-smpc.desktop \
-    qml/components/PositionSlider.qml \
-    qml/components/SMPCMprisPlayer.qml \
-    qml/components/TrackDelegate.qml \
-    qml/components/VolumeSlider.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
     translations/*.ts

@@ -34,7 +34,7 @@ Page {
         highlightFollowsCurrentItem: true
         highlightMoveDuration: 0
 
-        model: ctl.player.playlist
+        model: ctl.player.queue
         delegate: TrackDelegate {
             index: model.index
             number: "%1.".arg(model.index + 1)
@@ -58,11 +58,11 @@ Page {
                 }
             }
             MenuItem {
-                text: qsTr("Delete playlist")
+                text: qsTr("Clear playlist")
                 onClicked: {
-                    remorse.execute("Deleting playlist", function () {
-                        ctl.player.deletePlaylist()
-                    })
+                    remorse.execute("Clearing playlist", function () {
+                        ctl.player.queue.clear()
+                    }, mainWindow.remorseTimeout)
                 }
             }
             MenuItem {
@@ -89,6 +89,7 @@ Page {
         }
 
         SpeedScroller {
+            //wird das verwendet?
             listview: playlistView
         }
         ScrollDecorator {
