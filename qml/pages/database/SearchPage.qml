@@ -187,7 +187,7 @@ Page {
 
                 function playAlbumRemorse() {
                     remorseAction(qsTr("Playing album"), function () {
-                        playAlbum(["", album])
+                        ctl.player.queue.playAlbum("", album)
                     }, 3000)
                 }
                 function addAlbumRemorse() {
@@ -197,7 +197,7 @@ Page {
                 }
                 function addTrackAfterCurrentRemorse() {
                     remorseAction(qsTr("Adding track"), function () {
-                        addSongAfterCurrent(path)
+                        ctl.player.queue.addTrackAfterCurrent(path)
                     }, 3000)
                 }
                 Component {

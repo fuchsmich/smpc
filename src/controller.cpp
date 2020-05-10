@@ -264,8 +264,8 @@ void Controller::connectSignals()
     connect(item,SIGNAL(connectProfile(int)),this,SLOT(connectProfile(int)));
     connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
     connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
-    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
+//    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
+//    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
     connect(item,SIGNAL(playPlaylistSongNext(int)),mNetAccess,SLOT(playTrackNext(int)));
     connect(item,SIGNAL(requestSavedPlaylist(QString)),mNetAccess,SLOT(getPlaylistTracks(QString)));
     connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
@@ -952,12 +952,12 @@ void Controller::getAlbumTracks(QVariant album) {
 //    emit addAlbum(album);
 //}
 
-void Controller::playArtistAlbum(QVariant album) {
-    if (album.userType() == qMetaTypeId<QJSValue>()) {
-        album = qvariant_cast<QJSValue>(album).toVariant();
-    }
-    emit playAlbum(album);
-}
+//void Controller::playArtistAlbum(QVariant album) {
+//    if (album.userType() == qMetaTypeId<QJSValue>()) {
+//        album = qvariant_cast<QJSValue>(album).toVariant();
+//    }
+//    emit playAlbum(album);
+//}
 
 void Controller::searchTracks(QVariant search) {
     if (search.userType() == qMetaTypeId<QJSValue>()) {

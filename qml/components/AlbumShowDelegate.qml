@@ -174,7 +174,7 @@ BackgroundItem {
                         id: playButton
                         icon.source: "image://theme/icon-m-play"
                         onClicked: {
-                            playAlbum(["", title])
+                            ctl.player.queue.playAlbum("", title)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false
@@ -278,8 +278,8 @@ BackgroundItem {
                         }
 
                         onClicked: {
-                            playAlbum([artist, album])
-                            playPlaylistTrack(index)
+                            ctl.player.queue.playAlbum(artist, album)
+                            playPlaylistTrack(index) //FIXME ???
                         }
                         function playTrackRemorse() {
                             remorseAction(qsTr("playing track"), function () {
@@ -288,7 +288,7 @@ BackgroundItem {
                         }
                         function addTrackRemorse() {
                             remorseAction(qsTr("adding track"), function () {
-                                addSong(path)
+                                ctl.player.queue.addTrack(path)
                             }, 3000)
                         }
                         Component {

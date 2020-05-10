@@ -78,12 +78,12 @@ Component {
 
         function addTrackRemorse() {
             remorseAction(qsTr("adding track"), function () {
-                addSong(path)
+                ctl.player.queue.addTrack(path)
             }, 3000)
         }
         function addTrackAfterCurrentRemorse() {
             remorseAction(qsTr("adding track"), function () {
-                addSongAfterCurrent(path)
+                ctl.player.queue.addTrackAfterCurrent(path)
             }, 3000)
         }
         function addPlaylistRemorse() {
@@ -93,7 +93,7 @@ Component {
         }
         function addFolderRemorse() {
             remorseAction(qsTr("adding directory"), function () {
-                addFiles((prepath == "/" ? "" : prepath + "/") + name)
+                ctl.player.queue.addFiles((prepath == "/" ? "" : prepath + "/") + name)
             }, 3000)
         }
         function playTrackRemorse() {

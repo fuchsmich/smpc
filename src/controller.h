@@ -101,7 +101,7 @@ signals:
      */
     void requestAlbum(QVariant);
     //void addAlbum(QVariant);
-    void playAlbum(QVariant);
+    //void playAlbum(QVariant);
     void requestSearch(QVariant);
     void requestAlbumInfo(QVariant);
     void addSongToSaved(QVariant);
@@ -221,7 +221,7 @@ private slots:
      */
     void getAlbumTracks(QVariant album);
     //void addArtistAlbumToPlaylist(QVariant album);
-    void playArtistAlbum(QVariant album);
+    //void playArtistAlbum(QVariant album);
     void searchTracks(QVariant search);
     void requestAlbumWikiInformation(QVariant album);
     void addTrackToSavedPlaylist(QVariant);

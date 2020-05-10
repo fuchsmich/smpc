@@ -126,12 +126,12 @@ Page {
             }
             function addTrackRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSong(path)
+                    ctl.player.queue.addTrack(path)
                 }, 3000)
             }
             function addTrackAfterCurrentRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSongAfterCurrent(path)
+                    ctl.player.queue.addTrackAfterCurrent(path)
                 }, 3000)
             }
             function removeFromListRemorse() {

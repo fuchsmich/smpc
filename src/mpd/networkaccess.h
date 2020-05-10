@@ -399,11 +399,11 @@ public slots:
      * @param album to filter with
      */
     void playArtistAlbum(QString artist, QString album);
-    /**
-     * @brief playArtistAlbum Replaces & plays the current playlist with an specific artistalbum.
-     * @param albuminfo [Artist,Album] to filter with.
-     */
-    void playArtistAlbum(QVariant albuminfo);
+//    /**
+//     * @brief playArtistAlbum Replaces & plays the current playlist with an specific artistalbum.
+//     * @param albuminfo [Artist,Album] to filter with.
+//     */
+//    void playArtistAlbum(QVariant albuminfo);
 
     /**
      * @brief deleteTrackByNumer Deletes one track from the current playlist.

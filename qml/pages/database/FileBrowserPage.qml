@@ -41,7 +41,7 @@ Page {
             MenuItem {
                 text: qsTr("Add folder")
                 onClicked: {
-                    addFiles(filepath)
+                    ctl.player.queue.addFiles(filepath)
                 }
             }
             MenuItem {

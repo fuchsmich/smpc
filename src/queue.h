@@ -16,12 +16,14 @@ public:
 signals:
     void requestCurrentPlaylist();
     void clear();
-    void deleteTrack(int id);
-    void addArtist(QString artist);
-    void playArtist(QString artist);
-    void playTrackNumber(int nr);
+    void deleteTrack(int);
+    void addArtist(QString);
+    void playArtist(QString);
+    void playTrackNumber(int);
     void addAlbum(QString, QString);
-    void addTrack();
+    void playAlbum(QString, QString);
+    void addTrack(QString);
+    void addTrackAfterCurrent(QString);
 };
 
 #endif // QUEUE_H

@@ -31,7 +31,7 @@ Page {
             MenuItem {
                 text: qsTr("Play album")
                 onClicked: {
-                    playAlbum([artistname, albumname])
+                    ctl.player.queue.playAlbum(artistname, albumname)
                 }
             }
         }
@@ -114,7 +114,7 @@ Page {
                                 MouseArea {
                                     anchors.fill: albumImage
                                     onClicked: {
-                                        playAlbum([artistname, albumname])
+                                        ctl.player.queue.playAlbum(artistname, albumname)
                                     }
                                 }
                             }
@@ -188,7 +188,7 @@ Page {
                         MouseArea {
                             anchors.fill: albumImageLC
                             onClicked: {
-                                playAlbum([artistname, albumname])
+                                ctl.player.queue.playAlbum(artistname, albumname)
                             }
                         }
                     }
@@ -349,12 +349,12 @@ Page {
             }
             function addTrackRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSong(path)
+                    ctl.player.queue.addTrack(path)
                 }, 3000)
             }
             function addTrackAfterCurrentRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSongAfterCurrent(path)
+                    ctl.player.queue.addTrackAfterCurrent(path)
                 }, 3000)
             }
             Component {

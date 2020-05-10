@@ -251,7 +251,7 @@ Dialog {
                             MenuItem {
                                 text: qsTr("Play after current")
                                 onClicked: {
-                                    addSongAfterCurrent(filename)
+                                    ctl.player.queue.addTrackAfterCurrent(filename)
                                     pageStack.navigateBack(
                                                 PageStackAction.Animated)
                                 }
@@ -516,7 +516,7 @@ Dialog {
                         MenuItem {
                             text: qsTr("Play after current")
                             onClicked: {
-                                addSongAfterCurrent(filename)
+                                ctl.player.queue.addTrackAfterCurrent(filename)
                                 pageStack.navigateBack(PageStackAction.Animated)
                             }
                         }
@@ -562,7 +562,7 @@ Dialog {
     }
 
     onAccepted: {
-        addSong(filename)
+        ctl.player.queue.addTrack(filename)
     }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {

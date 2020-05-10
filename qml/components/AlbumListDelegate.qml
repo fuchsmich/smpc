@@ -51,7 +51,7 @@ ListItem {
 
     function playAlbumRemorse() {
         remorseAction(qsTr("Playing album"), function () {
-            playAlbum([artist, title])
+            ctl.player.queue.playAlbum(artist, title)
         }, 3000)
     }
     function addAlbumRemorse() {

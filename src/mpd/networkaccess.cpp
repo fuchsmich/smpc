@@ -791,18 +791,18 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
 //    addArtistAlbumToPlaylist(strings[0],strings[1]);
 //}
 
-void NetworkAccess::playArtistAlbum(QVariant albuminfo)
-{
-    clearPlaylist();
-    // New qt 5.4 qml->c++ qvariant cast
-    if (albuminfo.userType() == qMetaTypeId<QJSValue>()) {
-        albuminfo = qvariant_cast<QJSValue>(albuminfo).toVariant();
-    }
-//    addArtistAlbumToPlaylist(albuminfo);
-    playTrackByNumber(0);
-    setRandom(false);
-    setRepeat(false);
-}
+//void NetworkAccess::playArtistAlbum(QVariant albuminfo)
+//{
+//    clearPlaylist();
+//    // New qt 5.4 qml->c++ qvariant cast
+//    if (albuminfo.userType() == qMetaTypeId<QJSValue>()) {
+//        albuminfo = qvariant_cast<QJSValue>(albuminfo).toVariant();
+//    }
+////    addArtistAlbumToPlaylist(albuminfo);
+//    playTrackByNumber(0);
+//    setRandom(false);
+//    setRepeat(false);
+//}
 
 void NetworkAccess::playArtistAlbum(QString artist, QString album)
 {
@@ -826,7 +826,7 @@ void NetworkAccess::playAlbum(QString album)
 void NetworkAccess::addTrackToPlaylist(QString fileuri)
 {
     if (connected()) {
-        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
+        sendMPDCommand(QString("add \"%1\"\n").arg(escapeCommandArgument(fileuri)));
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
