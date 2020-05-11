@@ -238,10 +238,10 @@ void Controller::connectSignals()
     // WORKAROUND
 //    connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
 //    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
-    connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
+    //connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
+    //connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
 
-    connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
+    //connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
 //    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
 //    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     //connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));

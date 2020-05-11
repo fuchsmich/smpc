@@ -205,7 +205,7 @@ Page {
                         title: albumname
                     }
                     quickScrollEnabled: jollaQuickscroll
-                    pullDownMenu: pullDownComp
+                    //pullDownMenu: pullDownComp
 
                     model: tracksModel
                     clip: true
@@ -217,6 +217,7 @@ Page {
                         }
                     }
                     delegate: trackDelegate
+                    Component.onCompleted: pullDownComp.createObject(listViewLC)
                 }
                 OpacityRampEffect {
                     sourceItem: pictureColumn

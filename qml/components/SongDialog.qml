@@ -19,7 +19,30 @@ Dialog {
 
     Component {
         id: pullDownComp
-
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Add song")
+                onClicked: {
+                    accept()
+                }
+            }
+            MenuItem {
+                text: qsTr("Play after current")
+                onClicked: {
+                    ctl.player.queue.addTrackAfterCurrent(filename)
+                    pageStack.navigateBack(
+                                PageStackAction.Animated)
+                }
+            }
+            MenuItem {
+                text: qsTr("Play song")
+                onClicked: {
+                    ctl.player.queue.playTrack(filename)
+                    pageStack.navigateBack(
+                                PageStackAction.Animated)
+                }
+            }
+        }
     }
 
     Loader {
@@ -247,30 +270,8 @@ Dialog {
                             }
                         }
 
-                        PullDownMenu {
-                            MenuItem {
-                                text: qsTr("Add song")
-                                onClicked: {
-                                    accept()
-                                }
-                            }
-                            MenuItem {
-                                text: qsTr("Play after current")
-                                onClicked: {
-                                    ctl.player.queue.addTrackAfterCurrent(filename)
-                                    pageStack.navigateBack(
-                                                PageStackAction.Animated)
-                                }
-                            }
-                            MenuItem {
-                                text: qsTr("Play song")
-                                onClicked: {
-                                    ctl.player.queue.playTrack(filename)
-                                    pageStack.navigateBack(
-                                                PageStackAction.Animated)
-                                }
-                            }
-                        }
+
+                        Component.onCompleted: pullDownComp.createObject(this)
                     }
                 }
                 Row {
@@ -511,29 +512,7 @@ Dialog {
                             }
                         }
                     }
-
-                    PullDownMenu {
-                        MenuItem {
-                            text: qsTr("Add song")
-                            onClicked: {
-                                accept()
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play after current")
-                            onClicked: {
-                                ctl.player.queue.addTrackAfterCurrent(filename)
-                                pageStack.navigateBack(PageStackAction.Animated)
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play song")
-                            onClicked: {
-                                ctl.player.queue.playTrack(filename)
-                                pageStack.navigateBack(PageStackAction.Animated)
-                            }
-                        }
-                    }
+                    Component.onCompleted: pullDownComp.createObject(this)
                 }
                 Item {
                     id: buttonRowRoot

@@ -71,7 +71,6 @@ Page {
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
-                pullDownMenu: pullDownComp
                 delegate: AlbumGridDelegate {
                     title: model.title === "" ? qsTr("No album tag") : model.title
                     cover: GridView.view.scrolling ? "" : coverURL
@@ -79,6 +78,9 @@ Page {
                         GridView.view.currentIndex = index
                         pushTracksPage(model.artist, model.title)
                     }
+                }
+                Component.onCompleted: {
+                    pullDownComp.createObject(albumGridView)
                 }
             }
         }
@@ -115,7 +117,6 @@ Page {
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
-                pullDownMenu: pullDownComp
                 delegate: AlbumListDelegate {
                     onClicked: {
                         listView.currentIndex = index;
@@ -127,6 +128,9 @@ Page {
                     delegate: SectionHeader {
                         text: section
                     }
+                }
+                Component.onCompleted: {
+                    pullDownComp.createObject(listView)
                 }
             }
         }
