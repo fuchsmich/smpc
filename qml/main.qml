@@ -29,10 +29,10 @@ ApplicationWindow {
     signal playPlaylist(string name)
     //signal playAlbum(variant album)
     //signal playArtist(string artist)
-    signal playFiles(string uri)
+    //signal playFiles(string uri)
     signal playPlaylistSongNext(int index)
     //appends song to playlist
-    signal playSong(string uri)
+    //signal playSong(string uri)
     // Adds all tracks from last search result to playlist
     signal addlastsearch
     signal requestSavedPlaylists

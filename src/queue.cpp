@@ -17,9 +17,11 @@ Queue::Queue(NetworkAccess *netAccess, ImageDatabase *db, QObject *parent) :
     connect(this, &Queue::playArtist, netAccess, &NetworkAccess::playArtist);
     connect(this, &Queue::playTrackNumber, netAccess, &NetworkAccess::playTrackByNumber);
     connect(this, &Queue::addAlbum, netAccess, &NetworkAccess::addArtistAlbumToPlaylist);
-    connect(this, &Queue::addTrack, netAccess, &NetworkAccess::addTrackToPlaylist);
-    connect(this, &Queue::addTrackAfterCurrent, netAccess, &NetworkAccess::addTrackAfterCurrent);
     connect(this, &Queue::playAlbum, netAccess, &NetworkAccess::playArtistAlbum);
+    connect(this, &Queue::addTrack, netAccess, &NetworkAccess::addTrackToPlaylist);
+    connect(this, &Queue::playTrack, netAccess, &NetworkAccess::playTrack);
+    connect(this, &Queue::addPlayTrack, netAccess, &NetworkAccess::addPlayTrack);
+    connect(this, &Queue::addTrackAfterCurrent, netAccess, &NetworkAccess::addTrackAfterCurrent);
 
     emit requestCurrentPlaylist();
 }

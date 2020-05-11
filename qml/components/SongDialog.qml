@@ -16,6 +16,12 @@ Dialog {
     property string trackmbid
     property string albummbid
     property string artistmbid
+
+    Component {
+        id: pullDownComp
+
+    }
+
     Loader {
         id: portraitLoader
         active: false
@@ -259,7 +265,7 @@ Dialog {
                             MenuItem {
                                 text: qsTr("Play song")
                                 onClicked: {
-                                    playSong(filename)
+                                    ctl.player.queue.playTrack(filename)
                                     pageStack.navigateBack(
                                                 PageStackAction.Animated)
                                 }
@@ -278,7 +284,7 @@ Dialog {
                         id: playButton
                         icon.source: "image://theme/icon-m-play"
                         onClicked: {
-                            playSong(filename)
+                            ctl.player.queue.playTrack(filename)
                             pageStack.pop()
                         }
                     }
@@ -523,7 +529,7 @@ Dialog {
                         MenuItem {
                             text: qsTr("Play song")
                             onClicked: {
-                                playSong(filename)
+                                ctl.player.queue.playTrack(filename)
                                 pageStack.navigateBack(PageStackAction.Animated)
                             }
                         }
@@ -544,7 +550,7 @@ Dialog {
                             id: playButton
                             icon.source: "image://theme/icon-m-play"
                             onClicked: {
-                                playSong(filename)
+                                ctl.player.queue.playTrack(filename)
                                 pageStack.pop()
                             }
                         }

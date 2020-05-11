@@ -98,7 +98,7 @@ Component {
         }
         function playTrackRemorse() {
             remorseAction(qsTr("playing track"), function () {
-                playSong(path)
+                ctl.player.queue.playTrack(path)
             }, 3000)
         }
         function playPlaylistRemorse() {
@@ -108,7 +108,7 @@ Component {
         }
         function playFolderRemorse() {
             remorseAction(qsTr("playing directory"), function () {
-                playFiles((prepath == "/" ? "" : prepath + "/") + name)
+                ctl.player.queue.playTrack((prepath == "/" ? "" : prepath + "/") + name)
             }, 3000)
         }
         Component {

@@ -283,7 +283,7 @@ BackgroundItem {
                         }
                         function playTrackRemorse() {
                             remorseAction(qsTr("playing track"), function () {
-                                playSong(path)
+                                ctl.player.queue.playTrack(path)
                             }, 3000)
                         }
                         function addTrackRemorse() {

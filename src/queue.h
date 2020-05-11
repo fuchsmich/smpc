@@ -23,6 +23,8 @@ signals:
     void addAlbum(QString, QString);
     void playAlbum(QString, QString);
     void addTrack(QString);
+    void playTrack(QString);
+    void addPlayTrack(QString);
     void addTrackAfterCurrent(QString);
 };
 

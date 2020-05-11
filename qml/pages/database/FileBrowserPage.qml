@@ -47,7 +47,8 @@ Page {
             MenuItem {
                 text: qsTr("Play folder")
                 onClicked: {
-                    playFiles(filepath)
+                    //FIXME does it work for paths??
+                    ctl.player.queue.playTrack(filepath)
                 }
             }
         }

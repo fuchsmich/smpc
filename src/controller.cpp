@@ -262,8 +262,8 @@ void Controller::connectSignals()
     connect(item,SIGNAL(changeProfile(QVariant)),this,SLOT(changeProfile(QVariant)));
     connect(item,SIGNAL(deleteProfile(int)),this,SLOT(deleteProfile(int)));
     connect(item,SIGNAL(connectProfile(int)),this,SLOT(connectProfile(int)));
-    connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
-    connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
+    //connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
+    //connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
 //    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
 //    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
     connect(item,SIGNAL(playPlaylistSongNext(int)),mNetAccess,SLOT(playTrackNext(int)));

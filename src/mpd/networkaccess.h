@@ -379,15 +379,15 @@ public slots:
      */
     void playArtist(QString artist);
     /**
-     * @brief playFiles Replace playlist with the specific files and plays them.
+     * @brief playTrack Replace playlist with the specific files and plays them.
      * @param fileuri File to play.
      */
-    void playFiles(QString fileuri);
+    void playTrack(QString fileuri);
     /**
      * @brief playTrack Appends the specific file to the playlist and plays it.
      * @param fileuri File to play.
      */
-    void playTrack(QString fileuri);
+    void addPlayTrack(QString fileuri);
     /**
      * @brief playTrackByNumber Jumps to specified playlist position.
      * @param nr Playlist position to play.

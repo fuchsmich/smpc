@@ -121,7 +121,7 @@ Page {
             }
             function playTrackRemorse() {
                 remorseAction(qsTr("Playing track"), function () {
-                    playSong(path)
+                    ctl.player.queue.playTrack(path)
                 }, 3000)
             }
             function addTrackRemorse() {

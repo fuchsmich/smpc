@@ -948,11 +948,11 @@ void NetworkAccess::addTrackAfterCurrent(QString fileuri)
 }
 
 //Replace song with uri and plays it back
-void NetworkAccess::playFiles(QString fileuri)
+void NetworkAccess::playTrack(QString fileuri)
 {
     clearPlaylist();
     if (connected()) {
-        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
+        sendMPDCommand(QString("add \"%1\"\n").arg(escapeCommandArgument(fileuri)));
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -974,10 +974,10 @@ void NetworkAccess::playFiles(QString fileuri)
 
 
 // Append track to playlist and plays it.
-void NetworkAccess::playTrack(QString fileuri)
+void NetworkAccess::addPlayTrack(QString fileuri)
 {
     if (connected()) {
-        sendMPDCommand(QString("add \"") + escapeCommandArgument(fileuri) + "\"\n");
+        sendMPDCommand(QString("add \"%1\"\n").arg(escapeCommandArgument(fileuri)));
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
