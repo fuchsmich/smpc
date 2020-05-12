@@ -13,7 +13,7 @@ NetworkAccess::NetworkAccess(QObject *parent) :
     mPassword = "";
 
     mStatusInterval = 1000;
-    mPlaylistversion = -1;
+    mPlaylistversion = 0;
     mPlaybackStatus = new MPDPlaybackStatus();
     //create socket later used for communication
     mTCPSocket = nullptr;
@@ -99,7 +99,7 @@ void NetworkAccess::disconnectFromServer()
     }
     if (mTCPSocket) {
         mTCPSocket->deleteLater();
-        mTCPSocket = 0;
+        mTCPSocket = nullptr;
     }
     // qDebug() << "Old socket cleared for deletion";
     emit ready();
@@ -122,10 +122,10 @@ void NetworkAccess::getAlbums()
 //    return parseMPDAlbums("");
 //}
 
-QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = NULL)
+QList<MpdAlbum *> *NetworkAccess::parseMPDAlbums(QString listedArtist = nullptr)
 {
 
-    QList<MpdAlbum *> *albums = new QList<MpdAlbum*>();
+    QList<MpdAlbum *> *albums = new QList<MpdAlbum *>();
 
     QString response = "";
     MpdAlbum *tempalbum;
@@ -537,6 +537,7 @@ void NetworkAccess::getStatus()
         }
 
         if ( newSong ) {
+            //FIXME why?
             mPlaybackStatus->clearPlayback();
             response = "";
             sendMPDCommand("currentsong\n");
@@ -1062,7 +1063,7 @@ void NetworkAccess::seek(int pos)
 void NetworkAccess::setRepeat(bool repeat)
 {
     if (connected()) {
-        sendMPDCommand(QString("repeat ") + (repeat ? "1":"0") + "\n");
+        sendMPDCommand(QString("repeat %1\n").arg(repeat ? "1":"0"));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1070,7 +1071,6 @@ void NetworkAccess::setRepeat(bool repeat)
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-
             }
         }
     }
@@ -1079,7 +1079,7 @@ void NetworkAccess::setRepeat(bool repeat)
 void NetworkAccess::setRandom(bool random)
 {
     if (connected()) {
-        sendMPDCommand(QString("random ") + (random ? "1":"0") + "\n");
+        sendMPDCommand(QString("random %1\n").arg(random ? "1":"0"));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1087,19 +1087,16 @@ void NetworkAccess::setRandom(bool random)
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-
             }
         }
         getStatus();
-
     }
-
 }
 
 void NetworkAccess::setVolume(int volume)
 {
     if (connected()) {
-        sendMPDCommand(QString("setvol ") + QString::number(volume).toUtf8() + "\n");
+        sendMPDCommand(QString("setvol %1\n").arg(volume));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1107,10 +1104,9 @@ void NetworkAccess::setVolume(int volume)
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-
             }
         }
-        if( mPlaybackStatus ) {
+        if(mPlaybackStatus) {
             mPlaybackStatus->setVolume(volume);
         }
     }
@@ -1120,8 +1116,7 @@ void NetworkAccess::savePlaylist(QString name)
 {
     emit ready();
     if (connected()) {
-        //TODO escape name??
-        sendMPDCommand(QString("save \"") + name + "\"\n");
+        sendMPDCommand(QString("save \"%1\"\n").arg(escapeCommandArgument(name)));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1129,7 +1124,6 @@ void NetworkAccess::savePlaylist(QString name)
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-
             }
         }
         if (response.startsWith("OK"))
@@ -1141,7 +1135,6 @@ void NetworkAccess::savePlaylist(QString name)
             emit ready();
             return;
         }
-
     }
     emit ready();
     return;
@@ -1150,8 +1143,7 @@ void NetworkAccess::savePlaylist(QString name)
 void NetworkAccess::deletePlaylist(QString name)
 {
     if (connected()) {
-        //TODO escape name??
-        sendMPDCommand(QString("rm \"") + name + "\"\n");
+        sendMPDCommand(QString("rm \"%1\"\n").arg(escapeCommandArgument(name)));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1159,7 +1151,6 @@ void NetworkAccess::deletePlaylist(QString name)
             while (mTCPSocket->canReadLine())
             {
                 response = QString::fromUtf8(mTCPSocket->readLine());
-
             }
         }
         if (response.startsWith("OK"))
@@ -1169,7 +1160,6 @@ void NetworkAccess::deletePlaylist(QString name)
         else {
             return;
         }
-
     }
     return;
 }
@@ -1208,8 +1198,7 @@ void NetworkAccess::addPlaylist(QString name)
 {
     emit busy();
     if (connected()) {
-        //TODO escape name??
-        sendMPDCommand(QString("load \"") + name + "\"\n");
+        sendMPDCommand(QString("load \"%1\"\n").arg(escapeCommandArgument(name)));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {
@@ -1228,20 +1217,7 @@ void NetworkAccess::playPlaylist(QString name)
 {
     emit busy();
     clearPlaylist();
-    if (connected()) {
-        //TODO escape name??
-        sendMPDCommand(QString("load \"") + name + "\"\n");
-        QString response ="";
-        MPD_WHILE_PARSE_LOOP
-        {
-            mTCPSocket->waitForReadyRead(READYREAD);
-            while (mTCPSocket->canReadLine())
-            {
-                response = QString::fromUtf8(mTCPSocket->readLine());
-
-            }
-        }
-    }
+    addPlaylist(name);
     playTrackByNumber(0);
     emit ready();
 }
@@ -1377,8 +1353,8 @@ void NetworkAccess::getDirectory(QString path)
         sendMPDCommand(QString("lsinfo \"") + path + "\"\n");
         QString response ="";
 
-        MpdTrack *temptrack=NULL;
-        MpdFileEntry *tempfile=NULL;
+        MpdTrack *temptrack=nullptr;
+        MpdFileEntry *tempfile=nullptr;
         QString title="";
         QString artist="";
         QString album="";
@@ -1410,7 +1386,7 @@ void NetworkAccess::getDirectory(QString path)
                         tempsplitter = file.split("/");
                         if (tempsplitter.length()>0)
                         {
-                            temptrack = new MpdTrack(NULL,file,title,artist,album,length);
+                            temptrack = new MpdTrack(nullptr,file,title,artist,album,length);
                             temptrack->setYear(datestring);
                             temptrack->setTrackNr(nr);
                             temptrack->setAlbumTracks(albumnrs);
@@ -1427,7 +1403,7 @@ void NetworkAccess::getDirectory(QString path)
                                 }
 
                             }
-                            tempfile = new MpdFileEntry(prepath,tempsplitter.last(),MpdFileEntry::MpdFileType_File,temptrack,NULL);
+                            tempfile = new MpdFileEntry(prepath,tempsplitter.last(),MpdFileEntry::MpdFileType_File,temptrack,nullptr);
                             tempfiles->append(tempfile);
                             temptrack->moveToThread(mQMLThread);
                             tempfile->moveToThread(mQMLThread);
@@ -1507,7 +1483,7 @@ void NetworkAccess::getDirectory(QString path)
                             }
 
                         }
-                        tempfile = new MpdFileEntry(path,tempsplitter.last(),1,NULL,NULL);
+                        tempfile = new MpdFileEntry(path,tempsplitter.last(),1,nullptr,nullptr);
                         tempfiles->append(tempfile);
                         tempfile->moveToThread(mQMLThread);
                         QQmlEngine::setObjectOwnership(tempfile, QQmlEngine::CppOwnership);
@@ -1532,7 +1508,7 @@ void NetworkAccess::getDirectory(QString path)
                             }
 
                         }
-                        tempfile = new MpdFileEntry(path,tempsplitter.last(),MpdFileEntry::MpdFileType_Playlist,NULL,NULL);
+                        tempfile = new MpdFileEntry(path,tempsplitter.last(),MpdFileEntry::MpdFileType_Playlist,nullptr,nullptr);
                         tempfiles->append(tempfile);
                         tempfile->moveToThread(mQMLThread);
                         filename = "";
@@ -1548,7 +1524,7 @@ void NetworkAccess::getDirectory(QString path)
             tempsplitter = file.split("/");
             if (tempsplitter.length()>0)
             {
-                temptrack = new MpdTrack(NULL,file,title,artist,album,length);
+                temptrack = new MpdTrack(nullptr,file,title,artist,album,length);
                 temptrack->setTrackNr(nr);
                 temptrack->setAlbumTracks(albumnrs);
                 temptrack->setYear(datestring);
@@ -1566,7 +1542,7 @@ void NetworkAccess::getDirectory(QString path)
 
                 }
                 // qDebug() << "Last album: " << albumstring;
-                tempfile = new MpdFileEntry(prepath,tempsplitter.last(),MpdFileEntry::MpdFileType_File,temptrack,NULL);
+                tempfile = new MpdFileEntry(prepath,tempsplitter.last(),MpdFileEntry::MpdFileType_File,temptrack,nullptr);
                 tempfiles->append(tempfile);
                 temptrack->moveToThread(mQMLThread);
                 tempfile->moveToThread(mQMLThread);
@@ -1649,7 +1625,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
     if (connected()) {
         QString response ="";
 
-        MpdTrack *temptrack=NULL;
+        MpdTrack *temptrack=nullptr;
         QString title;
         QString artist;
         QString albumartist;
@@ -1674,7 +1650,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
                 // Remove new line
                 response.chop(1);
                 if (response.startsWith("file: ")) {
-                    if (temptrack!=NULL)
+                    if (temptrack!=nullptr)
                     {
                         // Discard track if artist filter mismatches
                         if (albumartist==cartist||artist==cartist||cartist=="") {
@@ -1685,11 +1661,11 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
                         } else {
                             delete(temptrack);
                         }
-                        temptrack=NULL;
+                        temptrack=nullptr;
                     }
-                    if (temptrack==NULL)
+                    if (temptrack==nullptr)
                     {
-                        temptrack = new MpdTrack(NULL);
+                        temptrack = new MpdTrack(nullptr);
                     }
                     file = response.right(response.length()-6);
                     temptrack->setFileUri(file);
@@ -1751,7 +1727,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
             }
 
         }
-        if (temptrack!=NULL)
+        if (temptrack!=nullptr)
         {
             if (albumartist==cartist||artist==cartist||cartist=="") {
                 temptrack->setPlaying(false);
@@ -1761,7 +1737,7 @@ QList<MpdTrack*>* NetworkAccess::parseMPDTracks(QString cartist)
             }
             else {
                 delete(temptrack);
-                temptrack = NULL;
+                temptrack = nullptr;
             }
         }
     }
@@ -1840,7 +1816,7 @@ void NetworkAccess::searchTracks(QVariant request)
 void NetworkAccess::setQMLThread(QThread *thread)
 {
     if (thread) {
-        Q_ASSERT ( mQMLThread == 0 );
+        Q_ASSERT ( mQMLThread == nullptr );
         mQMLThread = thread;
     }
 }
@@ -2127,13 +2103,13 @@ void NetworkAccess::onConnectionStateChanged(QAbstractSocket::SocketState socket
         if ( mTimeoutTimer ) {
             mTimeoutTimer->stop();
             delete(mTimeoutTimer);
-            mTimeoutTimer = 0;
+            mTimeoutTimer = nullptr;
         }
         emit ready();
         break;
     }
     case QAbstractSocket::HostLookupState: {
-        if ( mTimeoutTimer == 0 ) {
+        if ( mTimeoutTimer == nullptr ) {
             mTimeoutTimer = new QTimer(this);
             mTimeoutTimer->setInterval(CONNECTION_TIMEOUT);
             connect(mTimeoutTimer,SIGNAL(timeout()),this,SLOT(onConnectionTimeout()));
@@ -2147,7 +2123,7 @@ void NetworkAccess::onConnectionStateChanged(QAbstractSocket::SocketState socket
         break;
     }
     case QAbstractSocket::ConnectingState : {
-        if ( mTimeoutTimer == 0 ) {
+        if ( mTimeoutTimer == nullptr ) {
             mTimeoutTimer = new QTimer(this);
             mTimeoutTimer->setInterval(CONNECTION_TIMEOUT);
             connect(mTimeoutTimer,SIGNAL(timeout()),this,SLOT(onConnectionTimeout()));
@@ -2164,7 +2140,7 @@ void NetworkAccess::onConnectionStateChanged(QAbstractSocket::SocketState socket
         if ( mTimeoutTimer ) {
             mTimeoutTimer->stop();
             delete(mTimeoutTimer);
-            mTimeoutTimer = 0;
+            mTimeoutTimer = nullptr;
         }
         emit ready();
         break;
@@ -2173,7 +2149,7 @@ void NetworkAccess::onConnectionStateChanged(QAbstractSocket::SocketState socket
         if ( mTimeoutTimer ) {
             mTimeoutTimer->stop();
             delete(mTimeoutTimer);
-            mTimeoutTimer = 0;
+            mTimeoutTimer = nullptr;
         }
         emit busy();
         break;

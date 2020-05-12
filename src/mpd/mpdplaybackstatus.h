@@ -34,8 +34,8 @@ class MPDPlaybackStatus : public QObject
     Q_PROPERTY(quint8 bitDepth READ getBitDepth WRITE setBitDepth NOTIFY bitDepthChanged)
 
 public:
-    explicit MPDPlaybackStatus(QObject *parent = 0);
-    MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent = 0);
+    explicit MPDPlaybackStatus(QObject *parent = nullptr);
+    MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent = nullptr);
 
     quint32 getPlaylistVersion();
     quint32 getID();

@@ -24,7 +24,8 @@ MPDPlaybackStatus::MPDPlaybackStatus(QObject *parent) :
     pBitDepth = 0;
 }
 
-MPDPlaybackStatus::MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent) : QObject(parent)
+MPDPlaybackStatus::MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent) :
+    QObject(parent)
 {
     pPlaylistVersion = copyObject.pPlaylistVersion;
     pID = copyObject.pID;
@@ -224,7 +225,7 @@ void MPDPlaybackStatus::setArtist(QString artist)
 
 void MPDPlaybackStatus::setURI(QString uri)
 {
-    if (pURI != uri ) {
+    if (pURI != uri) {
         pURI = uri;
         emit uriChanged();
     }
