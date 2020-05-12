@@ -1,4 +1,5 @@
 #include "mpdplaybackstatus.h"
+#include <QDebug>
 
 MPDPlaybackStatus::MPDPlaybackStatus(QObject *parent) :
     QObject(parent)
@@ -194,7 +195,8 @@ void MPDPlaybackStatus::setVolume(quint8 volume)
 {
     if (pVolume != volume) {
         pVolume = volume;
-        emit volumeChanged();
+        qDebug() << volume;
+        emit volumeChanged(volume);
     }
 }
 
@@ -247,7 +249,7 @@ void MPDPlaybackStatus::setRepeat(bool repeat)
 {
     if (pRepeat != repeat ) {
         pRepeat = repeat;
-        emit repeatChanged();
+        emit repeatChanged(repeat);
     }
 }
 
@@ -255,7 +257,7 @@ void MPDPlaybackStatus::setShuffle(bool shuffle)
 {
     if(pShuffle != shuffle) {
         pShuffle = shuffle;
-        emit shuffleChanged();
+        emit shuffleChanged(shuffle);
     }
 }
 
@@ -336,10 +338,9 @@ void MPDPlaybackStatus::clearPlayback()
     pBitDepth = 0;
     emit bitDepthChanged();
     pShuffle = false;
-    emit shuffleChanged();
+    emit shuffleChanged(pShuffle);
     pRepeat = false;
-    emit repeatChanged();
+    emit repeatChanged(pRepeat);
     pVolume = 0;
-    emit volumeChanged();
-
+    emit volumeChanged(pVolume);
 }

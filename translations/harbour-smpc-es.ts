@@ -263,12 +263,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="409"/>
+        <location filename="../src/controller.cpp" line="385"/>
         <source>Connected to: </source>
         <translation>Conectado para: </translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="417"/>
+        <location filename="../src/controller.cpp" line="393"/>
         <source>Disconnected from server</source>
         <translation>Desconectado desde el servidor</translation>
     </message>
@@ -1272,17 +1272,17 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="149"/>
+        <location filename="../qml/main.qml" line="127"/>
         <source>bits</source>
         <translation>bits</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="150"/>
+        <location filename="../qml/main.qml" line="128"/>
         <source>channels</source>
         <translation>canales</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="153"/>
+        <location filename="../qml/main.qml" line="131"/>
         <source>kbps</source>
         <translation>kbps</translation>
     </message>

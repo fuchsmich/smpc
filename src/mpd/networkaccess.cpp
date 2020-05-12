@@ -479,6 +479,7 @@ void NetworkAccess::getStatus()
                     mPlaybackStatus->setID(playlistidstring.toUInt());
                 }
                 else if (response.startsWith("volume: ")) {
+                    qDebug() << response.right(response.length()-8);
                     mPlaybackStatus->setVolume(response.right(response.length()-8).toUInt());
                 }
                 else if (response.startsWith("playlist: ")) {
@@ -537,7 +538,7 @@ void NetworkAccess::getStatus()
         }
 
         if ( newSong ) {
-            //FIXME why?
+            //FIXME why clearPlayback?
             mPlaybackStatus->clearPlayback();
             response = "";
             sendMPDCommand("currentsong\n");
@@ -565,13 +566,13 @@ void NetworkAccess::getStatus()
                         tracknrstring = response.right(response.length()-7);
                         //tracknr = tracknrstring.toInt();
                         QStringList tempstrs = tracknrstring.split("/");
-                        if(tempstrs.length()==2)
+                        if (tempstrs.length() == 2)
                         {
                             mPlaybackStatus->setTrackNo(tempstrs.first().toUInt());
                             mPlaybackStatus->setAlbumTrackCount(tempstrs.at(1).toUInt());
 
                         }
-                        else if(tempstrs.length()==1)
+                        else if (tempstrs.length() == 1)
                         {
                             mPlaybackStatus->setTrackNo(tracknrstring.toUInt());
                         }
@@ -580,11 +581,11 @@ void NetworkAccess::getStatus()
             }
         }
 
-        if(mPlaylistversion!=playlistversion)
+        if (mPlaylistversion!=playlistversion)
         {
             getCurrentPlaylistTracks();
         }
-        mPlaylistversion=playlistversion;
+        mPlaylistversion = playlistversion;
         // qDebug() << "::getStatus() return";
     }
 }
@@ -1093,9 +1094,10 @@ void NetworkAccess::setRandom(bool random)
     }
 }
 
-void NetworkAccess::setVolume(int volume)
+void NetworkAccess::setVolume(quint8 volume)
 {
     if (connected()) {
+        qDebug() << volume;
         sendMPDCommand(QString("setvol %1\n").arg(volume));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
@@ -1106,9 +1108,10 @@ void NetworkAccess::setVolume(int volume)
                 response = QString::fromUtf8(mTCPSocket->readLine());
             }
         }
-        if(mPlaybackStatus) {
+        if( mPlaybackStatus ) {
             mPlaybackStatus->setVolume(volume);
         }
+        //getStatus();
     }
 }
 
@@ -1593,7 +1596,6 @@ void NetworkAccess::addArtist(QString artist)
     QList<MpdAlbum*> *albums = getArtistsAlbums_prv(artist);
     for(int i=0;i<albums->length();i++)
     {
-
         addArtistAlbumToPlaylist(artist,albums->at(i)->getTitle());
     }
 }

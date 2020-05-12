@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <playlist.h>
+#include <playbackstate.h>
 #include <mpd/mpdplaybackstatus.h>
 #include <mpd/networkaccess.h>
 #include <localdb/imagedatabase.h>
@@ -11,11 +12,11 @@ class Player : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(Playlist* playlist READ queue NOTIFY queueChanged)
-    Q_PROPERTY(MPDPlaybackStatus* playbackStatus READ playbackStatus CONSTANT)
+    Q_PROPERTY(PlaybackState* playbackStatus READ playbackStatus CONSTANT)
 
     Playlist* m_playlist;
 
-    MPDPlaybackStatus* m_playbackStatus;
+    PlaybackState* m_playbackStatus;
 
     NetworkAccess* m_netAccess;
     ImageDatabase* m_imgDB;
@@ -30,7 +31,7 @@ public:
         return m_playlist;
     }
 
-    MPDPlaybackStatus* playbackStatus() const
+    PlaybackState* playbackStatus() const
     {
         return m_playbackStatus;
     }
@@ -39,20 +40,13 @@ public:
 signals:
 
     void queueChanged();
-    //void playbackStatusChanged(MPDPlaybackStatus* playbackStatus);
 
     void play();
     void stop();
     void next();
     void previous();
-    void setVolume(int value);
-    //void setShuffle(bool value);
-    //void setRepeat(bool value);
-    void setConsume(bool value);
     void seek(int pos);
 
-//    void deletePlaylist();
-//    void deletePlaylistTrack(int index);
 
 public slots:
 };

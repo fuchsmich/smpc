@@ -230,7 +230,7 @@ public slots:
      * @brief setVolume Sets the volume of the server.
      * @param volume 0-100 to set.
      */
-    void setVolume(int volume);
+    void setVolume(quint8 volume);
 
     /**
      * @brief setRandom Enables/disables random function of connected server.

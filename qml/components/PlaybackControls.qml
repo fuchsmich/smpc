@@ -13,7 +13,7 @@ Row {
         icon.source: "image://theme/icon-m-shuffle"
         automaticCheck: false
         checked: ctl.player.playbackStatus.shuffle
-        onClicked: ctl.player.setShuffle(!checked)
+        onClicked: ctl.player.playbackStatus.shuffle = !checked
     }
 
     IconButton {
@@ -55,6 +55,6 @@ Row {
         icon.source: "image://theme/icon-m-repeat"
         automaticCheck: false
         checked: ctl.player.playbackStatus.repeat
-        onClicked: ctl.player.setRepeat(!checked)
+        onClicked: ctl.player.playbackStatus.repeat = !checked
     }
 }

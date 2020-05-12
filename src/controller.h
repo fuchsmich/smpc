@@ -73,7 +73,6 @@ signals:
     void savedPlaylistReady();
     void outputsReady();
     void serverProfilesUpdated();
-    void setVolume(int);
     void setUpdateInterval(int);
     void showWelcome();
     void requestExit();

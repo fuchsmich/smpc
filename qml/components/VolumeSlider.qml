@@ -11,7 +11,7 @@ Slider {
     onPressedChanged: {
         if (!pressed) {
             volumeChanging = false
-            ctl.player.setVolume(value)
+            ctl.player.playbackStatus.volume = value
             value = Qt.binding(function () {
                 return ctl.player.playbackStatus.volume
             })
@@ -20,6 +20,6 @@ Slider {
         }
     }
     onValueChanged: {
-        if (pressed) ctl.player.setVolume(value)
+        if (pressed) ctl.player.playbackStatus.volume = value
     }
 }

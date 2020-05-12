@@ -95,9 +95,9 @@ signals:
     void playlistVersionChanged();
     void idChanged(quint32);
     void bitrateChanged();
-    void trackNoChanged(quint32 trackno);
+    void trackNoChanged(qint32 trackno);
     void albumTrackCountChanged();
-    void volumeChanged();
+    void volumeChanged(quint8 volume);
 
     void titleChanged();
     void albumChanged();
@@ -105,8 +105,8 @@ signals:
     void uriChanged();
 
     void playbackStatusChanged(MPD_PLAYBACK_STATE state);
-    void repeatChanged();
-    void shuffleChanged();
+    void repeatChanged(bool repeat);
+    void shuffleChanged(bool shuffle);
 
     void lengthChanged();
     void currentTimeChanged();

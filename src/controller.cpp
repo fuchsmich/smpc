@@ -224,28 +224,11 @@ void Controller::connectSignals()
     connect(item,SIGNAL(requestArtistAlbums(QString)),mNetAccess,SLOT(getArtistsAlbums(QString)));
     connect(item,SIGNAL(requestAlbums()),mNetAccess,SLOT(getAlbums()));
     connect(item,SIGNAL(requestFilesPage(QString)),this,SLOT(requestFilePage(QString)));
-    //  connect(item,SIGNAL(requestCurrentPlaylist()),this,SLOT(requestCurrentPlaylist()));
-    //connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
-    //connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
+
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
     connect(this,SIGNAL(requestAlbum(QVariant)),mNetAccess,SLOT(getAlbumTracks(QVariant)));
-//    connect(item,SIGNAL(stop()),mNetAccess,SLOT(stop()));
-//    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
-//    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
-//    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
-    //connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
-    // WORKAROUND
-//    connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
-//    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    //connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
-    //connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
 
-    //connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-//    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
-//    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
-    //connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
-    //connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
     connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
     connect(item,SIGNAL(deleteSavedPlaylist(QString)),mNetAccess,SLOT(deletePlaylist(QString)));
     connect(item,SIGNAL(requestSavedPlaylists()),mNetAccess,SLOT(getSavedPlaylists()));
@@ -262,25 +245,18 @@ void Controller::connectSignals()
     connect(item,SIGNAL(changeProfile(QVariant)),this,SLOT(changeProfile(QVariant)));
     connect(item,SIGNAL(deleteProfile(int)),this,SLOT(deleteProfile(int)));
     connect(item,SIGNAL(connectProfile(int)),this,SLOT(connectProfile(int)));
-    //connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
-    //connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
-//    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-//    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
+
     connect(item,SIGNAL(playPlaylistSongNext(int)),mNetAccess,SLOT(playTrackNext(int)));
     connect(item,SIGNAL(requestSavedPlaylist(QString)),mNetAccess,SLOT(getPlaylistTracks(QString)));
     connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
     connect(item,SIGNAL(playPlaylist(QString)),mNetAccess,SLOT(playPlaylist(QString)));
-    //connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
-//    connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
+
     connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));
     connect(item,SIGNAL(cleanFileStack()),this,SLOT(cleanFileStack()));
-    //connect(&volDecTimer,SIGNAL(timeout()),this,SLOT(decVolume()));
-    //connect(&volIncTimer,SIGNAL(timeout()),this,SLOT(incVolume()));
-    //connect(QApplication::instance(),SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(focusChanged(QWidget*,QWidget*)));
+
 
     connect(this,SIGNAL(getFiles(QString)),mNetAccess,SLOT(getDirectory(QString)));
-    //connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(this,SIGNAL(requestConnect()),mNetAccess,SLOT(connectToHost()));
     connect(this,SIGNAL(requestDisconnect()),mNetAccess,SLOT(disconnectFromServer()));
 //    connect(this,SIGNAL(serverProfilesUpdated()),item,SLOT(settingsModelUpdated()));
@@ -670,24 +646,6 @@ void Controller::connectProfile(int index)
     mQuickView->rootContext()->setContextProperty("profilename",QVariant::fromValue(QString(mProfilename)));
     connectToServer();
 }
-
-//void Controller::incVolume()
-//{
-//    emit setVolume((mVolume+3>100 ? 100 : mVolume+3));
-//    mVolume =(mVolume+3>100 ? 100 : mVolume+3);
-//    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-//    emit sendPopup(popup);
-//}
-
-//void Controller::decVolume()
-//{
-//    emit setVolume((mVolume-3<0 ? 0 : mVolume-3));
-//    mVolume = (mVolume-3<0 ? 0 : mVolume-3);
-//    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-//    emit sendPopup(popup);
-
-//}
-
 
 void Controller::focusChanged(QObject *now){
     if(now==0)

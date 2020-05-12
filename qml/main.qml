@@ -12,27 +12,15 @@ ApplicationWindow {
     signal setHostname(string hostname)
     signal setPort(int port)
     signal setPassword(string password)
-    //signal setVolume(int volume)
     signal setCurrentArtist(string artist)
     signal connectToServer
 
     // Signals for database requests to networkaccess
-    //Variant in format [artistname,albumname]
-    //signal addAlbum(variant album)
-    //signal addArtist(string artist)
-    //signal addFiles(string files)
-    //signal addSong(string uri)
     signal addSongToSaved(variant data)
     signal removeSongFromSaved(variant data)
-    //signal addSongAfterCurrent(string uri)
     signal addPlaylist(string name)
     signal playPlaylist(string name)
-    //signal playAlbum(variant album)
-    //signal playArtist(string artist)
-    //signal playFiles(string uri)
     signal playPlaylistSongNext(int index)
-    //appends song to playlist
-    //signal playSong(string uri)
     // Adds all tracks from last search result to playlist
     signal addlastsearch
     signal requestSavedPlaylists
@@ -43,7 +31,6 @@ ApplicationWindow {
     signal requestArtistAlbums(string artist)
     signal requestFilesPage(string files)
     signal requestFilesModel(string files)
-    //signal requestCurrentPlaylist
     signal requestOutputs
     signal requestSearch(variant request)
     // Request an MPD database update (remote mpd db)
@@ -62,15 +49,6 @@ ApplicationWindow {
     // MPD Output controls
     signal enableOutput(int nr)
     signal disableOutput(int nr)
-
-    // Control signals
-    //signal play
-    //signal next
-    //signal prev
-    //signal stop
-    //signal seek(int position)
-    //signal setRepeat(bool rep)
-    //signal setShuffle(bool shfl)
 
     //Playlist signals
     signal savePlaylist(string name)

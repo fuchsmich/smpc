@@ -34,9 +34,9 @@ MprisPlayer {
 
     //Mpris2 Player Interface
     canControl: true
-    canGoNext: playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo < ctl.player.playbackStatus.playlistSize
+    canGoNext: true //playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo < ctl.player.playbackStatus.playlistSize
     //onCanGoNextChanged: console.debug(canGoNext)
-    canGoPrevious: playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo > 1
+    canGoPrevious: true //playbackStatus !== Mpris.Stopped && ctl.player.playbackStatus.trackNo > 1
     //onCanGoPreviousChanged: console.debug(canGoPrevious, ctl.player.playbackStatus.trackNo)
     canPause: true //got to be always true for MprisController::playPause to work!
     canPlay: true //mprisPlayer.playbackStatus !== Mpris.Playing
