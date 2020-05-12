@@ -29,7 +29,7 @@ Dialog {
             MenuItem {
                 text: qsTr("Play after current")
                 onClicked: {
-                    ctl.player.queue.addTrackAfterCurrent(filename)
+                    ctl.player.playlist.addTrackAfterCurrent(filename)
                     pageStack.navigateBack(
                                 PageStackAction.Animated)
                 }
@@ -37,7 +37,7 @@ Dialog {
             MenuItem {
                 text: qsTr("Play song")
                 onClicked: {
-                    ctl.player.queue.playTrack(filename)
+                    ctl.player.playlist.playTrack(filename)
                     pageStack.navigateBack(
                                 PageStackAction.Animated)
                 }
@@ -285,7 +285,7 @@ Dialog {
                         id: playButton
                         icon.source: "image://theme/icon-m-play"
                         onClicked: {
-                            ctl.player.queue.playTrack(filename)
+                            ctl.player.playlist.playTrack(filename)
                             pageStack.pop()
                         }
                     }
@@ -529,7 +529,7 @@ Dialog {
                             id: playButton
                             icon.source: "image://theme/icon-m-play"
                             onClicked: {
-                                ctl.player.queue.playTrack(filename)
+                                ctl.player.playlist.playTrack(filename)
                                 pageStack.pop()
                             }
                         }
@@ -547,7 +547,7 @@ Dialog {
     }
 
     onAccepted: {
-        ctl.player.queue.addTrack(filename)
+        ctl.player.playlist.addTrack(filename)
     }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {

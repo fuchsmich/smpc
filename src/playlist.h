@@ -1,17 +1,17 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef PLAYLIST_H
+#define PLAYLIST_H
 
 #include <mpd/playlistmodel.h>
 #include <mpd/networkaccess.h>
 
 
-class Queue : public PlaylistModel
+class Playlist : public PlaylistModel
 {
     Q_OBJECT
 
 public:
-    explicit Queue(QObject *parent = nullptr);
-    Queue(NetworkAccess* netAccess, ImageDatabase *db, QObject *parent = nullptr);
+    explicit Playlist(QObject *parent = nullptr);
+    Playlist(NetworkAccess* netAccess, ImageDatabase *db, QObject *parent = nullptr);
 
 signals:
     void requestCurrentPlaylist();
@@ -28,4 +28,4 @@ signals:
     void addTrackAfterCurrent(QString);
 };
 
-#endif // QUEUE_H
+#endif // PLAYLIST_H

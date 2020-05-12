@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <QObject>
-#include <queue.h>
+#include <playlist.h>
 #include <mpd/mpdplaybackstatus.h>
 #include <mpd/networkaccess.h>
 #include <localdb/imagedatabase.h>
@@ -10,10 +10,10 @@
 class Player : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Queue* queue READ queue NOTIFY queueChanged)
+    Q_PROPERTY(Playlist* playlist READ queue NOTIFY queueChanged)
     Q_PROPERTY(MPDPlaybackStatus* playbackStatus READ playbackStatus NOTIFY playbackStatusChanged)
 
-    Queue* m_queue;
+    Playlist* m_playlist;
 
     MPDPlaybackStatus* m_playbackStatus;
 
@@ -25,9 +25,9 @@ public:
     Player(NetworkAccess* netAccess, ImageDatabase* imgDB, QObject *parent = nullptr);
 
 
-    Queue* queue() const
+    Playlist* queue() const
     {
-        return m_queue;
+        return m_playlist;
     }
 
     MPDPlaybackStatus* playbackStatus() const

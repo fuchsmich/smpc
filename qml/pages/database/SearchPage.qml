@@ -176,28 +176,28 @@ Page {
                 }
                 function playTrackRemorse() {
                     remorseAction(qsTr("Playing track"), function () {
-                        ctl.player.queue.playTrack(path)
+                        ctl.player.playlist.playTrack(path)
                     }, 3000)
                 }
                 function addTrackRemorse() {
                     remorseAction(qsTr("Adding track"), function () {
-                        ctl.player.queue.addTrack(path)
+                        ctl.player.playlist.addTrack(path)
                     }, 3000)
                 }
 
                 function playAlbumRemorse() {
                     remorseAction(qsTr("Playing album"), function () {
-                        ctl.player.queue.playAlbum("", album)
+                        ctl.player.playlist.playAlbum("", album)
                     }, 3000)
                 }
                 function addAlbumRemorse() {
                     remorseAction(qsTr("Adding album"), function () {
-                        ctl.player.queue.addAlbum("", album)
+                        ctl.player.playlist.addAlbum("", album)
                     }, 3000)
                 }
                 function addTrackAfterCurrentRemorse() {
                     remorseAction(qsTr("Adding track"), function () {
-                        ctl.player.queue.addTrackAfterCurrent(path)
+                        ctl.player.playlist.addTrackAfterCurrent(path)
                     }, 3000)
                 }
                 Component {

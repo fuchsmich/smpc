@@ -34,10 +34,10 @@ SOURCES += main.cpp \
     src/mpd/albummodel.cpp \
     src/controller.cpp \
     src/player.cpp \
-    src/queue.cpp \
     src/mpd/serverprofilemodel.cpp \
     src/mpd/mpdplaybackstatus.cpp \
-    src/mpd/serverinfo.cpp
+    src/mpd/serverinfo.cpp \
+    src/playlist.cpp
 
 # C++ headers
 HEADERS += \
@@ -64,11 +64,11 @@ HEADERS += \
     src/mpd/albummodel.h \
     src/common.h \
     src/player.h \
-    src/queue.h \
     src/mpd/serverprofilemodel.h \
     src/mpd/mpdplaybackstatus.h \
     src/mpd/mpdcommon.h \
-    src/mpd/serverinfo.h
+    src/mpd/serverinfo.h \
+    src/playlist.h
 
 DISTFILES += \
     harbour-smpc.desktop \

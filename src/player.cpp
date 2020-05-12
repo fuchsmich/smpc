@@ -25,7 +25,7 @@ Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
     connect(this, &Player::setRepeat, m_netAccess, &NetworkAccess::setRepeat);
 
     //playlist
-    m_queue = new Queue(m_netAccess, m_imgDB, this);
-    connect(m_playbackStatus, &MPDPlaybackStatus::idChanged, m_queue, &Queue::onTrackNoChanged);
-    connect(m_playbackStatus, &MPDPlaybackStatus::playbackStatusChanged, m_queue, &Queue::onPlaybackStateChanged);
+    m_playlist = new Playlist(m_netAccess, m_imgDB, this);
+    connect(m_playbackStatus, &MPDPlaybackStatus::idChanged, m_playlist, &Playlist::onTrackNoChanged);
+    connect(m_playbackStatus, &MPDPlaybackStatus::playbackStatusChanged, m_playlist, &Playlist::onPlaybackStateChanged);
 }

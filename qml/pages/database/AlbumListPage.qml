@@ -15,13 +15,13 @@ Page {
             MenuItem {
                 text: qsTr("Add albums")
                 onClicked: {
-                    ctl.player.queue.addArtist(artistname)
+                    ctl.player.playlist.addArtist(artistname)
                 }
             }
             MenuItem {
                 text: qsTr("Play albums")
                 onClicked: {
-                    ctl.player.queue.playArtist(artistname)
+                    ctl.player.playlist.playArtist(artistname)
                 }
             }
         }

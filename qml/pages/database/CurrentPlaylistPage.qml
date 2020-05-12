@@ -34,7 +34,7 @@ Page {
         highlightFollowsCurrentItem: true
         highlightMoveDuration: 0
 
-        model: ctl.player.queue
+        model: ctl.player.playlist
         delegate: TrackDelegate {
             index: model.index
             number: "%1.".arg(model.index + 1)
@@ -61,7 +61,7 @@ Page {
                 text: qsTr("Clear playlist")
                 onClicked: {
                     remorse.execute("Clearing playlist", function () {
-                        ctl.player.queue.clear()
+                        ctl.player.playlist.clear()
                     }, mainWindow.remorseTimeout)
                 }
             }

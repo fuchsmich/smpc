@@ -121,17 +121,17 @@ Page {
             }
             function playTrackRemorse() {
                 remorseAction(qsTr("Playing track"), function () {
-                    ctl.player.queue.playTrack(path)
+                    ctl.player.playlist.playTrack(path)
                 }, 3000)
             }
             function addTrackRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    ctl.player.queue.addTrack(path)
+                    ctl.player.playlist.addTrack(path)
                 }, 3000)
             }
             function addTrackAfterCurrentRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    ctl.player.queue.addTrackAfterCurrent(path)
+                    ctl.player.playlist.addTrackAfterCurrent(path)
                 }, 3000)
             }
             function removeFromListRemorse() {

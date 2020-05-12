@@ -51,12 +51,12 @@ ListItem {
 
     function playAlbumRemorse() {
         remorseAction(qsTr("Playing album"), function () {
-            ctl.player.queue.playAlbum(artist, title)
+            ctl.player.playlist.playAlbum(artist, title)
         }, 3000)
     }
     function addAlbumRemorse() {
         remorseAction(qsTr("Adding album"), function () {
-            ctl.player.queue.addAlbum(artist, title)
+            ctl.player.playlist.addAlbum(artist, title)
         }, 3000)
     }
     Component {

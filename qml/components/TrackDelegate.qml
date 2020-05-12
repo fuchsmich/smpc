@@ -13,7 +13,7 @@ ListItem {
 
     function remove() {
         remorseAction(qsTr("Deleting"), function () {
-            ctl.player.queue.deleteTrack(index)
+            ctl.player.playlist.deleteTrack(index)
             item.ListView.view.mDeleteRemorseRunning = false
         }, mainWindow.remorseTimeout)
     }

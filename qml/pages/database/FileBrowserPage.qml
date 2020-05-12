@@ -41,14 +41,14 @@ Page {
             MenuItem {
                 text: qsTr("Add folder")
                 onClicked: {
-                    ctl.player.queue.addFiles(filepath)
+                    ctl.player.playlist.addFiles(filepath)
                 }
             }
             MenuItem {
                 text: qsTr("Play folder")
                 onClicked: {
                     //FIXME does it work for paths??
-                    ctl.player.queue.playTrack(filepath)
+                    ctl.player.playlist.playTrack(filepath)
                 }
             }
         }

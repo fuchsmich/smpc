@@ -78,12 +78,12 @@ Component {
 
         function addTrackRemorse() {
             remorseAction(qsTr("adding track"), function () {
-                ctl.player.queue.addTrack(path)
+                ctl.player.playlist.addTrack(path)
             }, 3000)
         }
         function addTrackAfterCurrentRemorse() {
             remorseAction(qsTr("adding track"), function () {
-                ctl.player.queue.addTrackAfterCurrent(path)
+                ctl.player.playlist.addTrackAfterCurrent(path)
             }, 3000)
         }
         function addPlaylistRemorse() {
@@ -93,12 +93,12 @@ Component {
         }
         function addFolderRemorse() {
             remorseAction(qsTr("adding directory"), function () {
-                ctl.player.queue.addFiles((prepath == "/" ? "" : prepath + "/") + name)
+                ctl.player.playlist.addFiles((prepath == "/" ? "" : prepath + "/") + name)
             }, 3000)
         }
         function playTrackRemorse() {
             remorseAction(qsTr("playing track"), function () {
-                ctl.player.queue.playTrack(path)
+                ctl.player.playlist.playTrack(path)
             }, 3000)
         }
         function playPlaylistRemorse() {
@@ -108,7 +108,7 @@ Component {
         }
         function playFolderRemorse() {
             remorseAction(qsTr("playing directory"), function () {
-                ctl.player.queue.playTrack((prepath == "/" ? "" : prepath + "/") + name)
+                ctl.player.playlist.playTrack((prepath == "/" ? "" : prepath + "/") + name)
             }, 3000)
         }
         Component {
