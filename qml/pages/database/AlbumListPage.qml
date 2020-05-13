@@ -80,7 +80,7 @@ Page {
                     }
                 }
                 Component.onCompleted: {
-                    pullDownComp.createObject(albumGridView)
+                    pullDownComp.createObject(this)
                 }
             }
         }
@@ -130,7 +130,7 @@ Page {
                     }
                 }
                 Component.onCompleted: {
-                    pullDownComp.createObject(listView)
+                    pullDownComp.createObject(this)
                 }
             }
         }

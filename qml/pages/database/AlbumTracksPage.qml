@@ -126,6 +126,7 @@ Page {
                     }
                 }
                 delegate: trackDelegate
+                Component.onCompleted: pullDownComp.createObject(this)
             }
         }
     }
@@ -205,7 +206,6 @@ Page {
                         title: albumname
                     }
                     quickScrollEnabled: jollaQuickscroll
-                    //pullDownMenu: pullDownComp
 
                     model: tracksModel
                     clip: true
@@ -217,7 +217,7 @@ Page {
                         }
                     }
                     delegate: trackDelegate
-                    Component.onCompleted: pullDownComp.createObject(listViewLC)
+                    Component.onCompleted: pullDownComp.createObject(this)
                 }
                 OpacityRampEffect {
                     sourceItem: pictureColumn
