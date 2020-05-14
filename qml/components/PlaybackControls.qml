@@ -25,7 +25,7 @@ Row {
 
     IconButton {
         id: stopButton
-        icon.source: "qrc:images/icon-l-stop.svg"
+        icon.source: "qrc:/images/icon-l-stop.svg"
         icon.sourceSize.width: Theme.iconSizeLarge
         icon.sourceSize.height: Theme.iconSizeLarge
         width: Theme.iconSizeLarge
@@ -56,5 +56,12 @@ Row {
         automaticCheck: false
         checked: ctl.player.playbackStatus.repeat
         onClicked: ctl.player.playbackStatus.repeat = !checked
+    }
+
+    ConsumeSwitch {
+        visible: false
+    }
+    SingleSwitch {
+        visible: false
     }
 }

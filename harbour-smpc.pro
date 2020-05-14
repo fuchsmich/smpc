@@ -74,6 +74,8 @@ HEADERS += \
 
 DISTFILES += \
     harbour-smpc.desktop \
+    qml/components/ConsumeSwitch.qml \
+    qml/components/SingleSwitch.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
     translations/*.ts

@@ -6,5 +6,6 @@
         <file>pictogram.png</file>
         <file>pictogram.svg</file>
         <file alias="icon-l-stop.svg">icons/scalable/icon-l-stop.svg</file>
+        <file alias="icon-l-consume.svg">icons/scalable/icon-l-consume.svg</file>
     </qresource>
 </RCC>
