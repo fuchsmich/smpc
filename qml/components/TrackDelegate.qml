@@ -10,6 +10,8 @@ ListItem {
     property alias length: lengthLbl.text
     property alias artist: artistLbl.text
     property string album: ""
+    property bool playing: false
+    property string path: ""
 
     function remove() {
         remorseAction(qsTr("Deleting"), function () {
@@ -68,76 +70,5 @@ ListItem {
         sourceItem: mainColumn
         slope: 3.5
         offset: 0.75
-    }
-
-    onClicked: {
-        ListView.view.currentIndex = index
-        if (!playing) {
-            parseClickedPlaylist(index)
-        } else {
-            pageStack.navigateForward(PageStackAction.Animated)
-        }
-    }
-
-    menu: ContextMenu {
-        MenuItem {
-            text: qsTr("Remove song")
-            visible: !item.ListView.view.mDeleteRemorseRunning
-            enabled: !item.ListView.view.mDeleteRemorseRunning
-            onClicked: {
-                item.ListView.view.mDeleteRemorseRunning = true
-                remove()
-            }
-        }
-
-        MenuItem {
-            text: qsTr("Show artist")
-            onClicked: {
-                artistClicked(artist)
-                pageStack.push(Qt.resolvedUrl(
-                                   "AlbumListPage.qml"), {
-                                   "artistname": artist
-                               })
-            }
-        }
-
-        MenuItem {
-            text: qsTr("Show album")
-            onClicked: {
-                albumClicked("", album)
-                pageStack.push(Qt.resolvedUrl(
-                                   "AlbumTracksPage.qml"), {
-                                   "artistname": "",
-                                   "albumname": album
-                               })
-            }
-        }
-        MenuItem {
-            visible: !playing
-            text: qsTr("Play as next")
-            onClicked: {
-                playNextWOTimer.windUp(index)
-            }
-        }
-
-        MenuItem {
-            visible: playing
-            text: qsTr("Show information")
-            onClicked: pageStack.navigateForward(
-                           PageStackAction.Animated)
-        }
-
-        MenuItem {
-            text: qsTr("Add to saved list")
-            onClicked: {
-                requestSavedPlaylists()
-                pageStack.push(
-                            Qt.resolvedUrl(
-                                "AddToPlaylistDialog.qml"),
-                            {
-                                "url": path
-                            })
-            }
-        }
     }
 }

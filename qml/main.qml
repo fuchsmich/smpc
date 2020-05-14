@@ -54,7 +54,7 @@ ApplicationWindow {
     signal savePlaylist(string name)
     //signal deletePlaylist
     signal deleteSavedPlaylist(string name)
-    signal playPlaylistTrack(int index)
+    //signal playPlaylistTrack(int index)
     signal deletePlaylistTrack(int index)
 
     // Changes server profile or creates new one
