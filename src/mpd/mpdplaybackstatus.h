@@ -9,6 +9,7 @@ class MPDPlaybackStatus : public QObject
 {
     friend class NetworkAccess;
     Q_OBJECT
+    //TODO check, which properties are readonly for qml!
     Q_PROPERTY(quint32 playlistVersion READ getPlaylistVersion WRITE setPlaylistVersion NOTIFY playlistVersionChanged)
     Q_PROPERTY(quint32 id READ getID WRITE setID NOTIFY idChanged)
     Q_PROPERTY(quint32 bitrate READ getBitrate WRITE setBitrate NOTIFY bitrateChanged)
@@ -24,6 +25,8 @@ class MPDPlaybackStatus : public QObject
     Q_PROPERTY(quint8 playbackStatus READ getPlaybackStatus WRITE setPlaybackStatus NOTIFY playbackStatusChanged)
     Q_PROPERTY(bool repeat READ getRepeat WRITE setRepeat NOTIFY repeatChanged)
     Q_PROPERTY(bool shuffle READ getShuffle WRITE setShuffle NOTIFY shuffleChanged)
+    Q_PROPERTY(bool consume READ getConsume WRITE setConsume NOTIFY consumeChanged)
+    Q_PROPERTY(quint8 single READ getSingle WRITE setSingle NOTIFY singleChanged)
 
     Q_PROPERTY(quint32 length READ getLength WRITE setLength NOTIFY lengthChanged)
     Q_PROPERTY(quint32 currentTime READ getCurrentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
@@ -52,6 +55,8 @@ public:
     quint8 getPlaybackStatus();
     bool getRepeat();
     bool getShuffle();
+    bool getConsume();
+    quint8 getSingle();
 
     quint32 getLength();
     quint32 getCurrentTime();
@@ -77,6 +82,9 @@ public:
     void setPlaybackStatus(quint8 playbackStatus);
     void setRepeat(bool repeat);
     void setShuffle(bool shuffle);
+    void setConsume(bool consume);
+    Q_ENUMS(MPD_PLAYBACK_SINGLE)
+    void setSingle(quint8 single);
 
     void setLength(quint32 length);
     void setCurrentTime(quint32 currentTime);
@@ -107,6 +115,8 @@ signals:
     void playbackStatusChanged(MPD_PLAYBACK_STATE state);
     void repeatChanged(bool repeat);
     void shuffleChanged(bool shuffle);
+    void consumeChanged(bool consume);
+    void singleChanged(quint8 single);
 
     void lengthChanged();
     void currentTimeChanged();
@@ -132,6 +142,8 @@ private:
     MPD_PLAYBACK_STATE pPlaybackStatus;
     bool pRepeat;
     bool pShuffle;
+    bool pConsume;
+    quint8 pSingle;
     quint32 pLength;
     quint32 pCurrentTime;
     quint32 pPlaylistSize;

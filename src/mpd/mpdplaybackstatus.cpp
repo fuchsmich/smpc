@@ -118,6 +118,16 @@ bool MPDPlaybackStatus::getShuffle()
     return pShuffle;
 }
 
+bool MPDPlaybackStatus::getConsume()
+{
+    return pConsume;
+}
+
+quint8 MPDPlaybackStatus::getSingle()
+{
+    return pSingle;
+}
+
 
 quint32 MPDPlaybackStatus::getLength()
 {
@@ -258,6 +268,22 @@ void MPDPlaybackStatus::setShuffle(bool shuffle)
     if(pShuffle != shuffle) {
         pShuffle = shuffle;
         emit shuffleChanged(shuffle);
+    }
+}
+
+void MPDPlaybackStatus::setConsume(bool consume)
+{
+    if (pConsume != consume) {
+        pConsume = consume;
+        emit consumeChanged(consume);
+    }
+}
+
+void MPDPlaybackStatus::setSingle(quint8 single)
+{
+    if (pSingle != single) {
+        pSingle = single;
+        emit singleChanged(single);
     }
 }
 

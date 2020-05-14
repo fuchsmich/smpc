@@ -242,6 +242,16 @@ public slots:
      * @param repeat Set means enable
      */
     void setRepeat(bool repeat);
+    /**
+     * @brief setConsume Enables/disables consume function of connected server.
+     * @param consume Set means enable
+     */
+    void setConsume(bool consume);
+    /**
+     * @brief setSingle Sets single mode of connected server to 0/1/oneshot
+     * @param consume Set means enable
+     */
+    void setSingle(quint8 single);
 
     /*
      * Database request/query slots

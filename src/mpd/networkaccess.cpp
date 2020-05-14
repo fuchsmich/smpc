@@ -519,6 +519,20 @@ void NetworkAccess::getStatus()
                         mPlaybackStatus->setRepeat(response.right(response.length()-8) == "1" ? true : false);
                     }
                 }
+                else if (response.startsWith("consume: ")) {
+                    {
+                        // qDebug() << response;
+                        mPlaybackStatus->setConsume(response.right(response.length()-9) == "1" ? true : false);
+                    }
+                }
+                else if (response.startsWith("single: ")) {
+                    {
+                        // qDebug() << response;
+                        QString r = response.right(response.length()-8);
+                        mPlaybackStatus->setConsume(r == "1" ? MPD_SINGLE_ON :
+                                                               r == "3" ? MPD_SINGLE_ONESHOT : MPD_SINGLE_OFF);
+                    }
+                }
                 else if (response.startsWith("random: ")) {
                     {
                         // qDebug() << response;
@@ -1077,6 +1091,44 @@ void NetworkAccess::setRepeat(bool repeat)
     }
 }
 
+void NetworkAccess::setConsume(bool consume)
+{
+    if (connected()) {
+        sendMPDCommand(QString("consume %1\n").arg(consume ? "1":"0"));
+        QString response ="";
+        MPD_WHILE_PARSE_LOOP
+        {
+            mTCPSocket->waitForReadyRead(READYREAD);
+            while (mTCPSocket->canReadLine())
+            {
+                response = QString::fromUtf8(mTCPSocket->readLine());
+            }
+        }
+    }
+}
+
+void NetworkAccess::setSingle(quint8 single)
+{
+    if (connected()) {
+//        QString arg;
+//        if (single == 0 || single == 1) {
+//            arg = QString(single);
+//        } else if (single == 3) {
+//            arg = QString("oneshot");
+//        } else return;
+        sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : QString(single))));
+        QString response ="";
+        MPD_WHILE_PARSE_LOOP
+        {
+            mTCPSocket->waitForReadyRead(READYREAD);
+            while (mTCPSocket->canReadLine())
+            {
+                response = QString::fromUtf8(mTCPSocket->readLine());
+            }
+        }
+    }
+}
+
 void NetworkAccess::setRandom(bool random)
 {
     if (connected()) {
@@ -1090,6 +1142,7 @@ void NetworkAccess::setRandom(bool random)
                 response = QString::fromUtf8(mTCPSocket->readLine());
             }
         }
+        //TODO do we need this at all?
         getStatus();
     }
 }
@@ -1108,6 +1161,7 @@ void NetworkAccess::setVolume(quint8 volume)
                 response = QString::fromUtf8(mTCPSocket->readLine());
             }
         }
+        //TODO do we need this at all?
         if( mPlaybackStatus ) {
             mPlaybackStatus->setVolume(volume);
         }
