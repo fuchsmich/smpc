@@ -17,7 +17,7 @@ DockedPanel {
         id: progressBarItem
         width: parent.width
         height: Theme.paddingSmall
-        visible: mTitle !== "" && mArtist !== ""
+        visible: ctl.player.playbackStatus.title !== "" && mArtist !== ""
 
         Rectangle {
             id: progressBar
@@ -46,7 +46,7 @@ DockedPanel {
 
     Label {
         id: notPlayingLabel
-        visible: mTitle == "" && mArtist == ""
+        visible: ctl.player.playbackStatus.title == "" && mArtist == ""
         text: qsTr("Not playing")
         anchors.centerIn: parent
         color: Theme.primaryColor
@@ -65,7 +65,7 @@ DockedPanel {
 
         ScrollLabel {
             id: titleText
-            text: mTitle
+            text: ctl.player.playbackStatus.title
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeSmall
             font.bold: false

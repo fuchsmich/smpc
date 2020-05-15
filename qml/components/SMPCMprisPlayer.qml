@@ -49,7 +49,7 @@ MprisPlayer {
 
     loopStatus: (ctl.player.playbackStatus.repeat ? 1 : 0)
     shuffle: ctl.player.playbackStatus.shuffle
-    volume: 1
+    volume: ctl.player.playbackStatus.volume
 
     onPauseRequested: {
         message = "Pause requested"

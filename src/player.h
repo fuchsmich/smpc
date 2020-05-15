@@ -11,7 +11,7 @@
 class Player : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Playlist* playlist READ queue NOTIFY queueChanged)
+    Q_PROPERTY(Playlist* playlist READ queue CONSTANT)
     Q_PROPERTY(PlaybackState* playbackStatus READ playbackStatus CONSTANT)
 
     Playlist* m_playlist;
@@ -39,13 +39,15 @@ public:
 
 signals:
 
-    void queueChanged();
+    //void queueChanged();
 
     void play();
     void stop();
     void next();
     void previous();
     void seek(int pos);
+
+    void setVolume(quint8 volume);
 
 
 public slots:

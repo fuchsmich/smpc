@@ -1297,7 +1297,7 @@
 <context>
     <name>VolumeSlider</name>
     <message>
-        <location filename="../qml/components/VolumeSlider.qml" line="10"/>
+        <location filename="../qml/components/VolumeSlider.qml" line="12"/>
         <source>Volume</source>
         <translation type="unfinished">Lautstärke</translation>
     </message>
@@ -1305,17 +1305,17 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="127"/>
+        <location filename="../qml/main.qml" line="124"/>
         <source>bits</source>
         <translation>bits</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="128"/>
+        <location filename="../qml/main.qml" line="125"/>
         <source>channels</source>
         <translation>Kanäle</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="131"/>
+        <location filename="../qml/main.qml" line="128"/>
         <source>kbps</source>
         <translation>kbps</translation>
     </message>

@@ -103,7 +103,7 @@ QString MPDPlaybackStatus::getURI()
     return pURI;
 }
 
-quint8 MPDPlaybackStatus::getPlaybackStatus()
+MPD_PLAYBACK_STATE MPDPlaybackStatus::getPlaybackStatus()
 {
     return pPlaybackStatus;
 }
@@ -247,8 +247,9 @@ void MPDPlaybackStatus::setURI(QString uri)
 void MPDPlaybackStatus::setPlaybackStatus(quint8 playbackStatus)
 {
     if ( pPlaybackStatus != playbackStatus ) {
-        pPlaybackStatus = (MPD_PLAYBACK_STATE)playbackStatus;
+        pPlaybackStatus = static_cast<MPD_PLAYBACK_STATE>(playbackStatus);
         if (pPlaybackStatus == MPD_STOP) {
+            //FIXME: why clear everything??
             clearPlayback();
         }
         emit playbackStatusChanged(pPlaybackStatus);

@@ -20,6 +20,7 @@ signals:
     void addArtist(QString);
     void playArtist(QString);
     void playTrackNumber(int);
+    void playTrackNext(int);
     void addAlbum(QString, QString);
     void playAlbum(QString, QString);
     void addTrack(QString);

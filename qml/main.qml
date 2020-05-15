@@ -52,10 +52,7 @@ ApplicationWindow {
 
     //Playlist signals
     signal savePlaylist(string name)
-    //signal deletePlaylist
     signal deleteSavedPlaylist(string name)
-    //signal playPlaylistTrack(int index)
-    signal deletePlaylistTrack(int index)
 
     // Changes server profile or creates new one
     signal changeProfile(variant profile)
@@ -92,8 +89,8 @@ ApplicationWindow {
     property string password
     property int listfontsize: 12
     property int liststretch: 20
-    property int lastsongid: mpd_status.id
-    property string playbuttoniconsourcecover: mpd_status.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+    property int lastsongid: ctl.player.playbackStatus.id
+    property string playbuttoniconsourcecover: ctl.player.playbackStatus.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
     property string volumebuttoniconsource
     property string lastpath
     property string artistname
@@ -111,26 +108,26 @@ ApplicationWindow {
     property real listPadding: Theme.paddingLarge
     property int populateDuration: 500
 
-    property bool volumeChanging: false
+    //property bool volumeChanging: false
 
     // current song information
-    property string mTitle: mpd_status.title
-    property string mArtist: mpd_status.artist
-    property string mAlbum: mpd_status.album
-    //property int mVolume: mpd_status.volume
-    property int mLength: mpd_status.length
-    property int mPosition: mpd_status.currentTime
-    property int mPlaylistlength: mpd_status.playlistSize
+    property string mTitle: ctl.player.playbackStatus.title
+    property string mArtist: ctl.player.playbackStatus.artist
+    property string mAlbum: ctl.player.playbackStatus.album
+    property int mVolume: ctl.player.playbackStatus.volume
+    property int mLength: ctl.player.playbackStatus.length
+    property int mPosition: ctl.player.playbackStatus.currentTime
+    property int mPlaylistlength: ctl.player.playbackStatus.playlistSize
     property bool mDebugEnabled
     property bool mPositionSliderActive: false
-    property string mAudioProperties: mpd_status.samplerate + " Hz "
-                                      + mpd_status.bitDepth + " " + qsTr(
-                                          "bits") + " " + mpd_status.channelCount + " " + qsTr(
+    property string mAudioProperties: ctl.player.playbackStatus.samplerate + " Hz "
+                                      + ctl.player.playbackStatus.bitDepth + " " + qsTr(
+                                          "bits") + " " + ctl.player.playbackStatus.channelCount + " " + qsTr(
                                           "channels")
-    property string mTrackNr: mpd_status.trackNo
-    property string mBitrate: mpd_status.bitrate + " " + qsTr("kbps")
-    property string mUri: mpd_status.uri
-    property string mLengthText: formatLength(mpd_status.length)
+    property string mTrackNr: ctl.player.playbackStatus.trackNo
+    property string mBitrate: ctl.player.playbackStatus.bitrate + " " + qsTr("kbps")
+    property string mUri: ctl.player.playbackStatus.uri
+    property string mLengthText: formatLength(ctl.player.playbackStatus.length)
 
     property bool jollaQuickscroll: false
 

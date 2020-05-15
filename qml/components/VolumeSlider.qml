@@ -2,6 +2,8 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Slider {
+    //property bool volumeChanging: false
+
     stepSize: 1
     maximumValue: 100
     minimumValue: 0
@@ -10,16 +12,16 @@ Slider {
     label: qsTr("Volume")
     onPressedChanged: {
         if (!pressed) {
-            volumeChanging = false
-            ctl.player.playbackStatus.volume = value
-            value = Qt.binding(function () {
-                return ctl.player.playbackStatus.volume
-            })
+        //    volumeChanging = false
+            ctl.player.setVolume(value)
+//            value = Qt.binding(function () {
+//                return ctl.player.playbackStatus.volume
+//            })
         } else {
-            volumeChanging = true
+      //      volumeChanging = true
         }
     }
     onValueChanged: {
-        if (pressed) ctl.player.playbackStatus.volume = value
+        if (pressed) ctl.player.setVolume(value)
     }
 }

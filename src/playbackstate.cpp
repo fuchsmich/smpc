@@ -6,6 +6,11 @@ PlaybackState::PlaybackState(QObject *parent) :
 
 }
 
+PlaybackState::PlaybackState(MPDPlaybackStatus state)
+{
+
+}
+
 //PlaybackState::PlaybackState(NetworkAccess *netAccess, QObject *parent) :
 //    MPDPlaybackStatus (parent)
 //{
@@ -16,5 +21,6 @@ void PlaybackState::setNetworkAccess(NetworkAccess *netAccess)
     connect(this, &PlaybackState::shuffleChanged, netAccess, &NetworkAccess::setRandom);
     connect(this, &PlaybackState::repeatChanged, netAccess, &NetworkAccess::setRepeat);
     //connect(this, &PlaybackState::volumeChanged, netAccess, &NetworkAccess::setVolume);
+    //connect(this, &PlaybackState::setVolumeFromGui, netAccess, &NetworkAccess::setVolume);
 }
 

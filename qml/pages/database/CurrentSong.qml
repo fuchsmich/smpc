@@ -4,7 +4,7 @@ import "../../components"
 
 Page {
     id: currentsong_page
-    property string title: mTitle
+    property string title: ctl.player.playbackStatus.title
     property string album: mAlbum
     property string artist: mArtist
     //property int lengthtextcurrent:lengthTextcurrent.text;

@@ -52,7 +52,7 @@ public:
     QString getArtist();
     QString getURI();
 
-    quint8 getPlaybackStatus();
+    MPD_PLAYBACK_STATE getPlaybackStatus();
     bool getRepeat();
     bool getShuffle();
     bool getConsume();

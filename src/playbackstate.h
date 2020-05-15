@@ -9,7 +9,7 @@ class PlaybackState : public MPDPlaybackStatus
     Q_OBJECT
 public:
     explicit PlaybackState(QObject *parent = nullptr);
-    //PlaybackState(NetworkAccess* netAccess, QObject *parent = nullptr);
+    PlaybackState(MPDPlaybackStatus state);
 
     void setNetworkAccess(NetworkAccess* netAccess);
 

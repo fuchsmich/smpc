@@ -13,11 +13,11 @@ class MpdAlbum : public QObject
     Q_PROPERTY(QString date READ getDate CONSTANT)
     Q_PROPERTY(QString section READ getSection CONSTANT)
 public:
-    explicit MpdAlbum(QObject *parent = 0);
+    explicit MpdAlbum(QObject *parent = nullptr);
 
     MpdAlbum(QObject *parent, QString title, QString artist = "", QString date = "", QString mbid = "", QString section = "");
 
-    MpdAlbum(const MpdAlbum &copyObject, QObject *parent = 0);
+    MpdAlbum(const MpdAlbum &copyObject, QObject *parent = nullptr);
 
     QString getTitle() const;
     QString getSection() const;

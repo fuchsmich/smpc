@@ -14,7 +14,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
 
     mNetAccess = new NetworkAccess(nullptr);
     mNetAccess->setUpdateInterval(1000);
-    mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
+    //mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
 
     mNetworkThread = new QThread(this);
     mDBThread = new QThread(this);
@@ -60,7 +60,7 @@ Controller::Controller(QQuickView *viewer, QObject *parent) :
     mQuickView->rootContext()->setContextProperty("tracksModel",mOtherTracks);
 
 
-    mQuickView->rootContext()->setContextProperty("mpd_status",mPlaybackStatus);
+    //mQuickView->rootContext()->setContextProperty("mpd_status",mPlaybackStatus);
 
     viewer->engine()->addImageProvider("imagedbprovider",mQMLImgProvider);
     mNetAccess->setQMLThread(viewer->thread());
@@ -205,7 +205,7 @@ void Controller::updateOutputsModel(QList<QObject*>* list)
 void Controller::connectSignals()
 {
     QObject *item = (QObject *)mQuickView->rootObject();
-    qRegisterMetaType<MPDPlaybackStatus*>("MPDPlaybackStatus*");
+    //qRegisterMetaType<MPDPlaybackStatus*>("MPDPlaybackStatus*");
     qRegisterMetaType<QList<MpdTrack*>*>("QList<MpdTrack*>*");
     qRegisterMetaType<QList<MpdAlbum*>*>("QList<MpdAlbum*>*");
     qRegisterMetaType<QList<MpdArtist*>*>("QList<MpdArtist*>*");
@@ -342,8 +342,8 @@ void Controller::connectSignals()
     connect(item,SIGNAL(wakeUpServer(int)),this,SLOT(wakeUpHost(int)));
 
     /* New status object connection */
-    connect(mPlaybackStatus,SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
-    connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
+//    connect(mPlaybackStatus,SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
+//    connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
 
     /* new playlist model connects */
 //    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
@@ -398,36 +398,36 @@ void Controller::disconnectedToServer()
      }
 }
 
-void Controller::onNewAlbum()
-{
-    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-        // Request cover/artist art if song has changed
-        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-        emit requestCoverArt(tmpAlbum);
-    } else {
-        // Clear cover/artist image by requesting empty images
-        MpdAlbum tmpAlbum(this,"","");
-        emit requestCoverArt(tmpAlbum);
-    }
-}
+//void Controller::onNewAlbum()
+//{
+//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
+//        // Request cover/artist art if song has changed
+//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
+//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+//        emit requestCoverArt(tmpAlbum);
+//    } else {
+//        // Clear cover/artist image by requesting empty images
+//        MpdAlbum tmpAlbum(this,"","");
+//        emit requestCoverArt(tmpAlbum);
+//    }
+//}
 
-void Controller::onNewArtist()
-{
-    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-        // Request cover/artist art if song has changed
-        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-        emit requestCoverArt(tmpAlbum);
+//void Controller::onNewArtist()
+//{
+//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
+//        // Request cover/artist art if song has changed
+//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
+//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+//        emit requestCoverArt(tmpAlbum);
 
-        MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
-        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
-        emit requestCoverArtistArt(tmpArtist);
-    } else {
-        MpdArtist tmpArtist(this,"");
-        emit requestCoverArtistArt(tmpArtist);
-    }
-}
+//        MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
+//        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
+//        emit requestCoverArtistArt(tmpArtist);
+//    } else {
+//        MpdArtist tmpArtist(this,"");
+//        emit requestCoverArtistArt(tmpArtist);
+//    }
+//}
 
 //void Controller::seek(int pos)
 //{

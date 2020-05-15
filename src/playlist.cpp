@@ -16,6 +16,7 @@ Playlist::Playlist(NetworkAccess *netAccess, ImageDatabase *db, QObject *parent)
     connect(this, &Playlist::addArtist, netAccess, &NetworkAccess::addArtist);
     connect(this, &Playlist::playArtist, netAccess, &NetworkAccess::playArtist);
     connect(this, &Playlist::playTrackNumber, netAccess, &NetworkAccess::playTrackByNumber);
+    connect(this, &Playlist::playTrackNext, netAccess, &NetworkAccess::playTrackNext);
     connect(this, &Playlist::addAlbum, netAccess, &NetworkAccess::addArtistAlbumToPlaylist);
     connect(this, &Playlist::playAlbum, netAccess, &NetworkAccess::playArtistAlbum);
     connect(this, &Playlist::addTrack, netAccess, &NetworkAccess::addTrackToPlaylist);

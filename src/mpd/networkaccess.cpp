@@ -263,7 +263,7 @@ QList<MpdArtist *> *NetworkAccess::getArtists_prv()
                 if (response.startsWith(tagName))
                 {
                     name = response.split(tagName).takeLast().trimmed();
-                    tempartist = new MpdArtist(NULL, name);
+                    tempartist = new MpdArtist(nullptr, name);
                     /* This helps with qml Q_PROPERTY accesses */
                     tempartist->moveToThread(mQMLThread);
                     /* Set ownership to CppOwnership to guarantee that the GC of qml never deletes this */
@@ -302,9 +302,6 @@ bool NetworkAccess::authenticate(QString password)
         {
             return true;
         }
-        else {
-            return false;
-        }
         return false;
     }
     return false;
@@ -312,6 +309,7 @@ bool NetworkAccess::authenticate(QString password)
 
 QString NetworkAccess::escapeCommandArgument(const QString arg)
 {
+    //FIXME fooxl: is this enough? Do we need to escape backslashes themselves?
     return QString(arg).replace("\"","\\\"").replace("\'","\\\'");
 }
 
@@ -397,7 +395,7 @@ QList<MpdTrack*>*  NetworkAccess::getAlbumTracks_prv(QString album, QString cart
         return getAlbumTracks_prv(album);
     }
     if (connected()) {
-        sendMPDCommand(QString("find album \"") + escapeCommandArgument(album) + "\"\n");
+        sendMPDCommand(QString("find album \"%1\"\n").arg(escapeCommandArgument(album)));
     }
     return parseMPDTracks(cartist);
 }
@@ -479,7 +477,7 @@ void NetworkAccess::getStatus()
                     mPlaybackStatus->setID(playlistidstring.toUInt());
                 }
                 else if (response.startsWith("volume: ")) {
-                    qDebug() << response.right(response.length()-8);
+                    //qDebug() << response.right(response.length()-8);
                     mPlaybackStatus->setVolume(response.right(response.length()-8).toUInt());
                 }
                 else if (response.startsWith("playlist: ")) {
@@ -621,13 +619,12 @@ void NetworkAccess::pause()
 
                 }
             }
-            getStatus();
+            //getStatus();
         }
         else {
             playTrackByNumber(getPlaybackID());
         }
-    }
-    
+    }   
 }
 
 void NetworkAccess::stop()
@@ -644,7 +641,7 @@ void NetworkAccess::stop()
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -681,6 +678,7 @@ void NetworkAccess::disableOutput(int nr)
         }
     }
 }
+
 void NetworkAccess::updateDB()
 {
     if (connected()) {
@@ -695,7 +693,7 @@ void NetworkAccess::updateDB()
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -713,7 +711,7 @@ void NetworkAccess::next()
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -731,7 +729,7 @@ void NetworkAccess::previous()
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -777,7 +775,7 @@ void NetworkAccess::addArtistAlbumToPlaylist(QString artist, QString album)
         sendMPDCommand("command_list_begin\n");
         for (int i=0;i<temptracks->length();i++)
         {
-            sendMPDCommand(QString("add \"") + escapeCommandArgument(temptracks->at(i)->getFileUri()) + "\"\n");
+            sendMPDCommand(QString("add \"%1\"\n").arg(escapeCommandArgument(temptracks->at(i)->getFileUri())));
         }
         sendMPDCommand("command_list_end\n");
         MPD_WHILE_PARSE_LOOP
@@ -855,7 +853,7 @@ void NetworkAccess::addTrackToPlaylist(QString fileuri)
             }
         }
     }
-    getStatus();
+    //getStatus();
 }
 
 // Format [URI,playlistName]
@@ -885,7 +883,7 @@ void NetworkAccess::addTrackToSavedPlaylist(QVariant data)
             }
         }
     }
-    getStatus();
+    //getStatus();
 }
 
 // Format [index,playlistName]
@@ -914,18 +912,17 @@ void NetworkAccess::removeTrackFromSavedPlaylist(QVariant data)
             }
         }
     }
-    getStatus();
+    //getStatus();
 }
 
 void NetworkAccess::playTrackNext(int index)
 {
     quint32 currentPosition = getPlaybackID();
     if (connected()) {
-        if ( (quint32) index < currentPosition) {
-            sendMPDCommand(QString("move ") + QString::number(index) + " " + QString::number(currentPosition) + "\n");
-        } else {
-            sendMPDCommand(QString("move ") + QString::number(index) + " " + QString::number(currentPosition + 1) + "\n");
+        if (!(static_cast<quint32>(index) < currentPosition)) {
+            index++;
         }
+        sendMPDCommand(QString("move %1 %2\n").arg(index).arg(currentPosition));
         QString response ="";
         //Clear read buffer
         MPD_WHILE_PARSE_LOOP
@@ -938,9 +935,6 @@ void NetworkAccess::playTrackNext(int index)
             }
         }
     }
-    //TODO Workaround
-    // qDebug() << "Track moved";
-//    getStatus();
 }
 
 void NetworkAccess::addTrackAfterCurrent(QString fileuri)
@@ -960,7 +954,7 @@ void NetworkAccess::addTrackAfterCurrent(QString fileuri)
             }
         }
     }
-    getStatus();
+    //getStatus();
 }
 
 //Replace song with uri and plays it back
@@ -985,7 +979,7 @@ void NetworkAccess::playTrack(QString fileuri)
 
         playTrackByNumber(0);
     }
-    getStatus();
+    //getStatus();
 }
 
 
@@ -1010,7 +1004,7 @@ void NetworkAccess::addPlayTrack(QString fileuri)
         
         playTrackByNumber(getPlaylistLength() - 1);
     }
-    getStatus();
+    //getStatus();
 }
 
 void NetworkAccess::playTrackByNumber(int nr)
@@ -1027,7 +1021,7 @@ void NetworkAccess::playTrackByNumber(int nr)
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -1045,7 +1039,7 @@ void NetworkAccess::deleteTrackByNumber(int nr)
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -1064,7 +1058,7 @@ void NetworkAccess::seekPosition(int id, int pos)
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -1143,7 +1137,7 @@ void NetworkAccess::setRandom(bool random)
             }
         }
         //TODO do we need this at all?
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -1162,9 +1156,9 @@ void NetworkAccess::setVolume(quint8 volume)
             }
         }
         //TODO do we need this at all?
-        if( mPlaybackStatus ) {
-            mPlaybackStatus->setVolume(volume);
-        }
+//        if( mPlaybackStatus ) {
+//            mPlaybackStatus->setVolume(volume);
+//        }
         //getStatus();
     }
 }
@@ -1293,7 +1287,7 @@ void NetworkAccess::clearPlaylist()
 
             }
         }
-        getStatus();
+        //getStatus();
     }
 }
 
@@ -1369,7 +1363,7 @@ void NetworkAccess::onServerConnected() {
     }
     mIdling = false;
 
-    getStatus();
+    //getStatus();
 
     mStatusTimer->start(mStatusInterval);
 }
@@ -1987,80 +1981,87 @@ int NetworkAccess::useAlbumArtist()
 
 MPD_PLAYBACK_STATE NetworkAccess::getPlaybackState()
 {
-    MPD_PLAYBACK_STATE playbackState = MPD_STOP;
-    if (connected()) {
-        sendMPDCommand("status\n");
-        QString response;
-        MPD_WHILE_PARSE_LOOP
-        {
-            mTCPSocket->waitForReadyRead(READYREAD);
-            while (mTCPSocket->canReadLine())
-            {
-                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-                if (response.startsWith("state: ")) {
-                    {
-                        response = response.right(response.length()-7);
-                        if (response == "play")
-                        {
-                            playbackState = MPD_PLAYING;
-                        }
-                        else if (response == "pause") {
-                            playbackState = MPD_PAUSE;
-                        }
-                        else if (response == "stop") {
-                            playbackState = MPD_STOP;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return playbackState;
+    //FIXME fooxl: what for???
+
+//    MPD_PLAYBACK_STATE playbackState = MPD_STOP;
+//    if (connected()) {
+//        sendMPDCommand("status\n");
+//        QString response;
+//        MPD_WHILE_PARSE_LOOP
+//        {
+//            mTCPSocket->waitForReadyRead(READYREAD);
+//            while (mTCPSocket->canReadLine())
+//            {
+//                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
+//                if (response.startsWith("state: ")) {
+//                    {
+//                        response = response.right(response.length()-7);
+//                        if (response == "play")
+//                        {
+//                            playbackState = MPD_PLAYING;
+//                        }
+//                        else if (response == "pause") {
+//                            playbackState = MPD_PAUSE;
+//                        }
+//                        else if (response == "stop") {
+//                            playbackState = MPD_STOP;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    return playbackState;
+    return mPlaybackStatus->getPlaybackStatus();
 }
 
 quint32 NetworkAccess::getPlaybackID()
 {
+    //FIXME fooxl: what for???
     // qDebug() << "::getPlaybackID";
-    quint32 playbackID = 0;
-    if (connected()) {
-        sendMPDCommand("status\n");
-        QString response = "";
-        MPD_WHILE_PARSE_LOOP
-        {
-            // qDebug() << response;
-            mTCPSocket->waitForReadyRead(READYREAD);
-            while (mTCPSocket->canReadLine())
-            {
-                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-                if (response.startsWith("song: ")) {
-                    playbackID = response.right(response.length()-6).toUInt();
-                }
-            }
-        }
-    }
-    // qDebug() << "ID: " << playbackID;
-    return playbackID;
+//    quint32 playbackID = 0;
+//    if (connected()) {
+//        sendMPDCommand("status\n");
+//        QString response = "";
+//        MPD_WHILE_PARSE_LOOP
+//        {
+//            // qDebug() << response;
+//            mTCPSocket->waitForReadyRead(READYREAD);
+//            while (mTCPSocket->canReadLine())
+//            {
+//                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
+//                if (response.startsWith("song: ")) {
+//                    playbackID = response.right(response.length()-6).toUInt();
+//                }
+//            }
+//        }
+//    }
+//    // qDebug() << "ID: " << playbackID;
+//    return playbackID;
+    return mPlaybackStatus->getID();
 }
 
 quint32 NetworkAccess::getPlaylistLength()
 {
-    quint32 playlistLength = 0;
-    if (connected()) {
-        sendMPDCommand("status\n");
-        QString response = "";
-        MPD_WHILE_PARSE_LOOP
-        {
-            mTCPSocket->waitForReadyRead(READYREAD);
-            while (mTCPSocket->canReadLine())
-            {
-                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
-                if (response.startsWith("playlistlength: ")) {
-                    playlistLength = response.right(response.length()-16).toUInt();
-                }
-            }
-        }
-    }
-    return playlistLength;
+    //FIXME fooxl: what for???
+//    quint32 playlistLength = 0;
+//    if (connected()) {
+//        sendMPDCommand("status\n");
+//        QString response = "";
+//        MPD_WHILE_PARSE_LOOP
+//        {
+//            mTCPSocket->waitForReadyRead(READYREAD);
+//            while (mTCPSocket->canReadLine())
+//            {
+//                response = QString::fromUtf8(mTCPSocket->readLine()).trimmed();
+//                if (response.startsWith("playlistlength: ")) {
+//                    playlistLength = response.right(response.length()-16).toUInt();
+//                }
+//            }
+//        }
+//    }
+//    return playlistLength;
+    return mPlaybackStatus->getLength();
 }
 
 
@@ -2145,7 +2146,6 @@ void NetworkAccess::onNewNetworkData()
         }
         response = "";
     }
-
 }
 
 /*

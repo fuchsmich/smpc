@@ -275,7 +275,7 @@ Page {
 
                             ScrollLabel {
                                 id: titleText
-                                text: mTitle
+                                text: ctl.player.playbackStatus.title
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 anchors {
