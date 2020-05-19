@@ -18,9 +18,5 @@ PlaybackState::PlaybackState(MPDPlaybackStatus state)
 
 void PlaybackState::setNetworkAccess(NetworkAccess *netAccess)
 {
-    connect(this, &PlaybackState::shuffleChanged, netAccess, &NetworkAccess::setRandom);
-    connect(this, &PlaybackState::repeatChanged, netAccess, &NetworkAccess::setRepeat);
-    //connect(this, &PlaybackState::volumeChanged, netAccess, &NetworkAccess::setVolume);
-    //connect(this, &PlaybackState::setVolumeFromGui, netAccess, &NetworkAccess::setVolume);
 }
 

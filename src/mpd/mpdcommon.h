@@ -9,7 +9,9 @@ struct MPD_version_t {
 };
 
 enum MPD_PLAYBACK_STATE {
-    MPD_PAUSE,MPD_PLAYING,MPD_STOP
+    MPD_PAUSE,
+    MPD_PLAYING,
+    MPD_STOP
 };
 
 enum MPD_PLAYBACK_SINGLE {

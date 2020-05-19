@@ -47,7 +47,7 @@ NetworkAccess::~NetworkAccess()
 }
 
 /** connects to host and return true if successful, false if not. Takes an string as hostname and int as port */
-void NetworkAccess::connectToHost(QString hostname, quint16 port,QString password)
+void NetworkAccess::connectToHost(QString hostname, quint16 port, QString password)
 {
     emit busy();
     mHostname = hostname;
@@ -551,7 +551,7 @@ void NetworkAccess::getStatus()
 
         if ( newSong ) {
             //FIXME why clearPlayback?
-            mPlaybackStatus->clearPlayback();
+            //mPlaybackStatus->clearPlayback();
             response = "";
             sendMPDCommand("currentsong\n");
             MPD_WHILE_PARSE_LOOP
@@ -1352,18 +1352,18 @@ void NetworkAccess::onServerConnected() {
         }
         checkServerCapabilities();
         emit ready();
+        getStatus();
         emit connectionEstablished();
         // qDebug() << "Handshake with server done";
     }
 
 
-    mPlaylistversion = 0;
-    if (mPlaybackStatus) {
-        mPlaybackStatus->clearPlayback();
-    }
-    mIdling = false;
+//    mPlaylistversion = 0;
+//    if (mPlaybackStatus) {
+//        mPlaybackStatus->clearPlayback();
+//    }
+//    mIdling = false;
 
-    //getStatus();
 
     mStatusTimer->start(mStatusInterval);
 }
@@ -2220,8 +2220,9 @@ void NetworkAccess::onConnectionTimeout() {
     mTCPSocket->abort();
 }
 
-void NetworkAccess::sendMPDCommand(QString cmd)
+NetworkAccess::Response NetworkAccess::sendMPDCommand(QString cmd)
 {
+    NetworkAccess::Response response;
     if (connected()) {
         /* It is important to cancel the idle command first
          * otherwise MPD disconnects the client */
@@ -2233,4 +2234,55 @@ void NetworkAccess::sendMPDCommand(QString cmd)
         outstream << cmd;
         outstream.flush();
     }
+    response=readReply(*mTCPSocket, READYREAD);
+    return response;
+}
+
+
+QByteArray NetworkAccess::readFromSocket(QTcpSocket &socket, int timeout=READYREAD)
+{
+    //while (Q_LIKELY((mTCPSocket->state()==QTcpSocket::ConnectedState)&&(!response.startsWith("OK"))&&(!response.startsWith("ACK"))))
+    QByteArray data;
+    int attempt=0;
+    while (QAbstractSocket::ConnectedState==socket.state()) {
+        while (0==socket.bytesAvailable() && QAbstractSocket::ConnectedState==socket.state()) {
+            //qDebug() << (void *)(&socket) << "Waiting for read data, attempt" << attempt;
+            if (socket.waitForReadyRead(timeout)) {
+                break;
+            }
+            //qDebug() << (void *)(&socket) << "Wait for read failed - " << socket.errorString();
+            if (++attempt>=CONNECTION_READ_ATTEMPTS) {
+                //qDebug() << "ERROR: Timedout waiting for response";
+                socket.close();
+                return QByteArray();
+            }
+        }
+
+        data.append(socket.readAll());
+
+        if (data.endsWith("OK\n") || data.startsWith("OK") || data.startsWith("ACK")) {
+            break;
+        }
+    }
+    //qDebug() << (void *)(&socket) << "Read:" << log(data) << ", socket state:" << socket.state();
+
+    return data;
+}
+
+NetworkAccess::Response NetworkAccess::readReply(QTcpSocket &socket, int timeout=READYREAD)
+{
+    QByteArray data = readFromSocket(socket, timeout);
+    return NetworkAccess::Response(data.endsWith("OK\n"), data);
+}
+
+NetworkAccess::Response::Response(bool o, const QByteArray &d)
+    : ok(o)
+    , data(d)
+{
+
+}
+
+QString NetworkAccess::Response::getError(const QByteArray &command)
+{
+
 }
