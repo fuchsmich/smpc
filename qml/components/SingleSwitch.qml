@@ -8,7 +8,8 @@ Switch {
     automaticCheck: false
     checked: ctl.player.playbackStatus.single
     onClicked: {
-        if (ctl.player.playbackStatus.single < 2) ctl.player.playbackStatus.single++
-        else ctl.player.playbackStatus.single = 0
+        if (ctl.player.playbackStatus.single < 2)
+            ctl.player.setSingle(ctl.player.playbackStatus.single + 1)
+        else ctl.player.setSingle(0)
     }
 }

@@ -14,7 +14,13 @@
 
 #include <QString>
 
-struct serverprofile { QString profilename; QString hostname; QString password; quint16 port; bool defaultprofile;};
+struct serverprofile {
+    QString profilename;
+    QString hostname;
+    QString password;
+    quint16 port;
+    bool defaultprofile;
+};
 
 
 #endif // COMMON_H

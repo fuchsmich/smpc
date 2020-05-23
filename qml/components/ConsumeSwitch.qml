@@ -5,5 +5,5 @@ Switch {
     icon.source: "qrc:/images/icon-l-consume.svg"
     automaticCheck: false
     checked: ctl.player.playbackStatus.consume
-    onClicked: ctl.player.playbackStatus.consume = !checked
+    onClicked: ctl.player.setConsume(!checked)
 }

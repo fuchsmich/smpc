@@ -551,7 +551,7 @@ void NetworkAccess::getStatus()
 
         if ( newSong ) {
             //FIXME why clearPlayback?
-            mPlaybackStatus->clearPlayback();
+            //mPlaybackStatus->clearPlayback();
             response = "";
             sendMPDCommand("currentsong\n");
             MPD_WHILE_PARSE_LOOP

@@ -9,14 +9,12 @@ Player::Player(QObject *parent) : QObject(parent)
 Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
     : QObject(parent)
 {
-    qRegisterMetaType<PlaybackState *>("PlaybackState*");
+    qRegisterMetaType<MPDPlaybackStatus *>("MPDPlaybackStatus*");
 
     m_netAccess = netAccess;
     m_imgDB = imgDB;
     //PlaybackState
-    m_playbackStatus = (PlaybackState *) m_netAccess->getMPDPlaybackStatus();
-    m_playbackStatus->setNetworkAccess(netAccess);
-
+    m_playbackStatus = m_netAccess->getMPDPlaybackStatus();
 
     connect(this, &Player::play, m_netAccess, &NetworkAccess::pause);
     connect(this, &Player::stop, m_netAccess, &NetworkAccess::stop);
@@ -28,6 +26,11 @@ Player::Player(NetworkAccess *netAccess, ImageDatabase *imgDB, QObject *parent)
 
     //playlist
     m_playlist = new Playlist(m_netAccess, m_imgDB, this);
-    connect(m_playbackStatus, &PlaybackState::idChanged, m_playlist, &Playlist::onTrackNoChanged);
-    connect(m_playbackStatus, &PlaybackState::playbackStatusChanged, m_playlist, &Playlist::onPlaybackStateChanged);
+    connect(m_playbackStatus, &MPDPlaybackStatus::idChanged, m_playlist, &Playlist::onTrackNoChanged);
+    connect(m_playbackStatus, &MPDPlaybackStatus::playbackStatusChanged, m_playlist, &Playlist::onPlaybackStateChanged);
+
+    connect(this, &Player::setRepeat, m_netAccess, &NetworkAccess::setRepeat);
+    connect(this, &Player::setShuffle, m_netAccess, &NetworkAccess::setRandom);
+    connect(this, &Player::setConsume, m_netAccess, &NetworkAccess::setConsume);
+    connect(this, &Player::setSingle, m_netAccess, &NetworkAccess::setSingle);
 }
