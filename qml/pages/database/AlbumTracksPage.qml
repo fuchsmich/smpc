@@ -10,6 +10,34 @@ Page {
     property string artistname
     property int lastIndex: 0
 
+    Component {
+        id: pullDownComp
+        PullDownMenu {
+            MenuItem {
+                enabled: (artistname !== "")
+                visible: enabled
+                text: qsTr("Show all tracks")
+                onClicked: {
+                    albumClicked("", albumname)
+                    artistname = ""
+                }
+            }
+            MenuItem {
+                text: qsTr("Add album")
+                onClicked: {
+                    ctl.player.playlist.addAlbum(artistname, albumname)
+                }
+            }
+            MenuItem {
+                text: qsTr("Play album")
+                onClicked: {
+                    ctl.player.playlist.playAlbum(artistname, albumname)
+                }
+            }
+        }
+    }
+
+
     Loader {
         id: portraitLoader
         active: false
@@ -86,7 +114,7 @@ Page {
                                 MouseArea {
                                     anchors.fill: albumImage
                                     onClicked: {
-                                        playAlbum([artistname, albumname])
+                                        ctl.player.playlist.playAlbum(artistname, albumname)
                                     }
                                 }
                             }
@@ -97,30 +125,8 @@ Page {
                         direction: OpacityRamp.TopToBottom
                     }
                 }
-                PullDownMenu {
-                    MenuItem {
-                        enabled: (artistname !== "")
-                        visible: enabled
-                        text: qsTr("Show all tracks")
-                        onClicked: {
-                            albumClicked("", albumname)
-                            artistname = ""
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Add album")
-                        onClicked: {
-                            addAlbum([artistname, albumname])
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Play album")
-                        onClicked: {
-                            playAlbum([artistname, albumname])
-                        }
-                    }
-                }
                 delegate: trackDelegate
+                Component.onCompleted: pullDownComp.createObject(this)
             }
         }
     }
@@ -183,7 +189,7 @@ Page {
                         MouseArea {
                             anchors.fill: albumImageLC
                             onClicked: {
-                                playAlbum([artistname, albumname])
+                                ctl.player.playlist.playAlbum(artistname, albumname)
                             }
                         }
                     }
@@ -200,29 +206,6 @@ Page {
                         title: albumname
                     }
                     quickScrollEnabled: jollaQuickscroll
-                    PullDownMenu {
-                        MenuItem {
-                            enabled: (artistname !== "")
-                            visible: enabled
-                            text: qsTr("Show all tracks")
-                            onClicked: {
-                                albumClicked("", albumname)
-                                artistname = ""
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Add album")
-                            onClicked: {
-                                addAlbum([artistname, albumname])
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play album")
-                            onClicked: {
-                                playAlbum([artistname, albumname])
-                            }
-                        }
-                    }
 
                     model: tracksModel
                     clip: true
@@ -234,6 +217,7 @@ Page {
                         }
                     }
                     delegate: trackDelegate
+                    Component.onCompleted: pullDownComp.createObject(this)
                 }
                 OpacityRampEffect {
                     sourceItem: pictureColumn
@@ -361,17 +345,17 @@ Page {
             }
             function playTrackRemorse() {
                 remorseAction(qsTr("Playing track"), function () {
-                    playSong(path)
+                    ctl.player.playlist.playTrack(path)
                 }, 3000)
             }
             function addTrackRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSong(path)
+                    ctl.player.playlist.addTrack(path)
                 }, 3000)
             }
             function addTrackAfterCurrentRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
-                    addSongAfterCurrent(path)
+                    ctl.player.playlist.addTrackAfterCurrent(path)
                 }, 3000)
             }
             Component {

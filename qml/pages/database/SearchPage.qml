@@ -97,7 +97,7 @@ Page {
                     text: qsTr("Add all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
-                        deletePlaylist()
+                        ctl.player.deletePlaylist()
                         addlastsearch()
                     }
                 }
@@ -105,7 +105,7 @@ Page {
                     text: qsTr("Play all results")
                     visible: searchsongListView.model !== undefined
                     onClicked: {
-                        deletePlaylist()
+                        ctl.player.deletePlaylist()
                         addlastsearch()
                         playPlaylistTrack(0)
                     }
@@ -176,28 +176,28 @@ Page {
                 }
                 function playTrackRemorse() {
                     remorseAction(qsTr("Playing track"), function () {
-                        playSong(path)
+                        ctl.player.playlist.playTrack(path)
                     }, 3000)
                 }
                 function addTrackRemorse() {
                     remorseAction(qsTr("Adding track"), function () {
-                        addSong(path)
+                        ctl.player.playlist.addTrack(path)
                     }, 3000)
                 }
 
                 function playAlbumRemorse() {
                     remorseAction(qsTr("Playing album"), function () {
-                        playAlbum(["", album])
+                        ctl.player.playlist.playAlbum("", album)
                     }, 3000)
                 }
                 function addAlbumRemorse() {
                     remorseAction(qsTr("Adding album"), function () {
-                        addAlbum(["", album])
+                        ctl.player.playlist.addAlbum("", album)
                     }, 3000)
                 }
                 function addTrackAfterCurrentRemorse() {
                     remorseAction(qsTr("Adding track"), function () {
-                        addSongAfterCurrent(path)
+                        ctl.player.playlist.addTrackAfterCurrent(path)
                     }, 3000)
                 }
                 Component {

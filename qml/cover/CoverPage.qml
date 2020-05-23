@@ -56,7 +56,7 @@ CoverBackground {
     }
     Image {
         id: logo
-        visible: ((!coverimg.ready) && (mTitle == ""))
+        visible: ((!coverimg.ready) && (ctl.player.playbackStatus.title == ""))
         source: "qrc:images/pictogram.png"
         anchors.centerIn: parent
     }
@@ -76,7 +76,7 @@ CoverBackground {
         style: Text.Raised
         styleColor: Theme.secondaryColor
         horizontalAlignment: Text.AlignHCenter
-        text: (mTitle == "" ? "SMPC" : mTitle)
+        text: (ctl.player.playbackStatus.title == "" ? "SMPC" : ctl.player.playbackStatus.title)
     }
 
     CoverActionList {
@@ -84,12 +84,12 @@ CoverBackground {
 
         CoverAction {
             iconSource: playbuttoniconsourcecover //"image://theme/icon-cover-pause"
-            onTriggered: play()
+            onTriggered: ctl.player.play()
         }
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next-song"
-            onTriggered: next()
+            onTriggered: ctl.player.next()
         }
     }
 }

@@ -174,7 +174,7 @@ BackgroundItem {
                         id: playButton
                         icon.source: "image://theme/icon-m-play"
                         onClicked: {
-                            playAlbum(["", title])
+                            ctl.player.playlist.playAlbum("", title)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false
@@ -186,7 +186,7 @@ BackgroundItem {
                         id: addButton
                         icon.source: "image://theme/icon-m-add"
                         onClicked: {
-                            addAlbum([artist, title])
+                            ctl.player.playlist.addAlbum(artist, title)
                             if (flipped) {
                                 rotateOut.running = true
                                 flipped = false
@@ -278,17 +278,17 @@ BackgroundItem {
                         }
 
                         onClicked: {
-                            playAlbum([artist, album])
-                            playPlaylistTrack(index)
+                            ctl.player.playlist.playAlbum(artist, album)
+                            playPlaylistTrack(index) //FIXME ???
                         }
                         function playTrackRemorse() {
                             remorseAction(qsTr("playing track"), function () {
-                                playSong(path)
+                                ctl.player.playlist.playTrack(path)
                             }, 3000)
                         }
                         function addTrackRemorse() {
                             remorseAction(qsTr("adding track"), function () {
-                                addSong(path)
+                                ctl.player.playlist.addTrack(path)
                             }, 3000)
                         }
                         Component {

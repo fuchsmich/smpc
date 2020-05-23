@@ -16,6 +16,35 @@ Dialog {
     property string trackmbid
     property string albummbid
     property string artistmbid
+
+    Component {
+        id: pullDownComp
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Add song")
+                onClicked: {
+                    accept()
+                }
+            }
+            MenuItem {
+                text: qsTr("Play after current")
+                onClicked: {
+                    ctl.player.playlist.addTrackAfterCurrent(filename)
+                    pageStack.navigateBack(
+                                PageStackAction.Animated)
+                }
+            }
+            MenuItem {
+                text: qsTr("Play song")
+                onClicked: {
+                    ctl.player.playlist.playTrack(filename)
+                    pageStack.navigateBack(
+                                PageStackAction.Animated)
+                }
+            }
+        }
+    }
+
     Loader {
         id: portraitLoader
         active: false
@@ -241,30 +270,8 @@ Dialog {
                             }
                         }
 
-                        PullDownMenu {
-                            MenuItem {
-                                text: qsTr("Add song")
-                                onClicked: {
-                                    accept()
-                                }
-                            }
-                            MenuItem {
-                                text: qsTr("Play after current")
-                                onClicked: {
-                                    addSongAfterCurrent(filename)
-                                    pageStack.navigateBack(
-                                                PageStackAction.Animated)
-                                }
-                            }
-                            MenuItem {
-                                text: qsTr("Play song")
-                                onClicked: {
-                                    playSong(filename)
-                                    pageStack.navigateBack(
-                                                PageStackAction.Animated)
-                                }
-                            }
-                        }
+
+                        Component.onCompleted: pullDownComp.createObject(this)
                     }
                 }
                 Row {
@@ -278,7 +285,7 @@ Dialog {
                         id: playButton
                         icon.source: "image://theme/icon-m-play"
                         onClicked: {
-                            playSong(filename)
+                            ctl.player.playlist.playTrack(filename)
                             pageStack.pop()
                         }
                     }
@@ -505,29 +512,7 @@ Dialog {
                             }
                         }
                     }
-
-                    PullDownMenu {
-                        MenuItem {
-                            text: qsTr("Add song")
-                            onClicked: {
-                                accept()
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play after current")
-                            onClicked: {
-                                addSongAfterCurrent(filename)
-                                pageStack.navigateBack(PageStackAction.Animated)
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Play song")
-                            onClicked: {
-                                playSong(filename)
-                                pageStack.navigateBack(PageStackAction.Animated)
-                            }
-                        }
-                    }
+                    Component.onCompleted: pullDownComp.createObject(this)
                 }
                 Item {
                     id: buttonRowRoot
@@ -544,7 +529,7 @@ Dialog {
                             id: playButton
                             icon.source: "image://theme/icon-m-play"
                             onClicked: {
-                                playSong(filename)
+                                ctl.player.playlist.playTrack(filename)
                                 pageStack.pop()
                             }
                         }
@@ -562,7 +547,7 @@ Dialog {
     }
 
     onAccepted: {
-        addSong(filename)
+        ctl.player.playlist.addTrack(filename)
     }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {

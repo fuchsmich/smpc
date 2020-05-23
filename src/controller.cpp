@@ -1,17 +1,20 @@
 #include "controller.h"
-Controller::Controller(QObject *parent) : QObject(parent)
+Controller::Controller(QObject *parent) :
+    QObject(parent)
 {
 
 }
 
-Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQuickView(viewer),mHostname(""),mPassword(""),mPort(6600)
+Controller::Controller(QQuickView *viewer, QObject *parent) :
+    QObject(parent), mQuickView(viewer), mHostname(""), mPassword(""), mPort(6600)
 {
+
     mImgDB = new ImageDatabase();
     mQMLImgProvider = new QMLImageProvider(mImgDB);
 
-    mNetAccess = new NetworkAccess(0);
+    mNetAccess = new NetworkAccess(nullptr);
     mNetAccess->setUpdateInterval(1000);
-    mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
+    //mPlaybackStatus = mNetAccess->getMPDPlaybackStatus();
 
     mNetworkThread = new QThread(this);
     mDBThread = new QThread(this);
@@ -19,19 +22,20 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     mNetAccess->moveToThread(mNetworkThread);
     mNetworkThread->start();
     mDBThread->start();
+    m_player = new Player(mNetAccess, mImgDB);
 
-    mPlaylist = new PlaylistModel(mImgDB,this);
-    mOtherTracks = new PlaylistModel(mImgDB,this);
+    //mPlaylist = new PlaylistModel(mImgDB, this);
+    mOtherTracks = new PlaylistModel(mImgDB, this);
 
 //    mStreamPlayer = new StreamPlayer(this);
 
-    mCurrentSongID=0;
+    //mCurrentSongID=0;
     mPlaylistVersion = 0;
-    mOutputs = 0;
-    mOldArtistModel = 0;
-    mOldAlbumModel = 0;
-    mSavedPlaylists = 0;
-    mServerProfiles = 0;
+    mOutputs = nullptr;
+    mOldArtistModel = nullptr;
+    mOldAlbumModel = nullptr;
+    mSavedPlaylists = nullptr;
+    mServerProfiles = nullptr;
     mLastPlaybackState = MPD_STOP;
     connectSignals();
     readSettings();
@@ -40,23 +44,23 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
     qmlRegisterType<ServerProfile>();
     qRegisterMetaType<MpdAlbum>("MpdAlbum");
     qRegisterMetaType<MpdArtist>("MpdArtist");
-    volIncTimer.setInterval(250);
-    volDecTimer.setInterval(250);
+    //volIncTimer.setInterval(250);
+    //volDecTimer.setInterval(250);
     mWasConnected = false;
     mFileModels = new QStack<FileModel*>();
     // Set empty qml properties for later usage
     mQuickView->rootContext()->setContextProperty("coverstring","");
     mQuickView->rootContext()->setContextProperty("artistInfoText","");
     mQuickView->rootContext()->setContextProperty("albumInfoText","");
-    mQuickView->rootContext()->setContextProperty("artistsModel",0);
-    mQuickView->rootContext()->setContextProperty("albumsModel",0);
-    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",0);
-    mQuickView->rootContext()->setContextProperty("outputsModel",0);
-    mQuickView->rootContext()->setContextProperty("playlistModel",mPlaylist);
+    mQuickView->rootContext()->setContextProperty("artistsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("albumsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",nullptr);
+    mQuickView->rootContext()->setContextProperty("outputsModel",nullptr);
+    //mQuickView->rootContext()->setContextProperty("playlistModel", mPlaylist);
     mQuickView->rootContext()->setContextProperty("tracksModel",mOtherTracks);
 
 
-    mQuickView->rootContext()->setContextProperty("mpd_status",mPlaybackStatus);
+    //mQuickView->rootContext()->setContextProperty("mpd_status",mPlaybackStatus);
 
     viewer->engine()->addImageProvider("imagedbprovider",mQMLImgProvider);
     mNetAccess->setQMLThread(viewer->thread());
@@ -69,7 +73,7 @@ Controller::Controller(QQuickView *viewer,QObject *parent) : QObject(parent),mQu
             break;
         }
     }
-    mDBStatistic = 0;
+    mDBStatistic = nullptr;
     mApplicationActive = true;
 
     emit requestDBStatistic();
@@ -98,8 +102,8 @@ Controller::~Controller()
         delete(mOldAlbumModel);
     if(mOldArtistModel)
         delete(mOldArtistModel);
-    if(mPlaylist)
-        delete(mPlaylist);
+    //if(mPlaylist)
+    //    delete(mPlaylist);
     if(mOtherTracks)
         delete(mOtherTracks);
 
@@ -201,7 +205,7 @@ void Controller::updateOutputsModel(QList<QObject*>* list)
 void Controller::connectSignals()
 {
     QObject *item = (QObject *)mQuickView->rootObject();
-    qRegisterMetaType<MPDPlaybackStatus*>("MPDPlaybackStatus*");
+    //qRegisterMetaType<MPDPlaybackStatus*>("MPDPlaybackStatus*");
     qRegisterMetaType<QList<MpdTrack*>*>("QList<MpdTrack*>*");
     qRegisterMetaType<QList<MpdAlbum*>*>("QList<MpdAlbum*>*");
     qRegisterMetaType<QList<MpdArtist*>*>("QList<MpdArtist*>*");
@@ -214,34 +218,17 @@ void Controller::connectSignals()
     connect(item,SIGNAL(setPassword(QString)),this,SLOT(setPassword(QString)));
     connect(item,SIGNAL(setPort(int)),this,SLOT(setPort(int)));
     connect(item,SIGNAL(connectToServer()),this,SLOT(connectToServer()));
-    connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
+    //connect(item,SIGNAL(requestCurrentPlaylist()),mNetAccess,SLOT(getCurrentPlaylistTracks()));
     connect(item,SIGNAL(requestArtists()),mNetAccess,SLOT(getArtists()));
 
     connect(item,SIGNAL(requestArtistAlbums(QString)),mNetAccess,SLOT(getArtistsAlbums(QString)));
     connect(item,SIGNAL(requestAlbums()),mNetAccess,SLOT(getAlbums()));
     connect(item,SIGNAL(requestFilesPage(QString)),this,SLOT(requestFilePage(QString)));
-    //  connect(item,SIGNAL(requestCurrentPlaylist()),this,SLOT(requestCurrentPlaylist()));
-    connect(item,SIGNAL(playPlaylistTrack(int)),mNetAccess,SLOT(playTrackByNumber(int)));
-    connect(item,SIGNAL(deletePlaylistTrack(int)),mNetAccess,SLOT(deleteTrackByNumer(int)));
+
     // WORKAROUND
     connect(item,SIGNAL(requestAlbum(QVariant)),this,SLOT(getAlbumTracks(QVariant)));
     connect(this,SIGNAL(requestAlbum(QVariant)),mNetAccess,SLOT(getAlbumTracks(QVariant)));
-    connect(item,SIGNAL(stop()),mNetAccess,SLOT(stop()));
-    connect(item,SIGNAL(play()),mNetAccess,SLOT(pause()));
-    connect(item,SIGNAL(next()),mNetAccess,SLOT(next()));
-    connect(item,SIGNAL(prev()),mNetAccess,SLOT(previous()));
-    connect(item,SIGNAL(deletePlaylist()),mNetAccess,SLOT(clearPlaylist()));
-    // WORKAROUND
-    connect(item,SIGNAL(addAlbum(QVariant)),this,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    connect(this,SIGNAL(addAlbum(QVariant)),mNetAccess,SLOT(addArtistAlbumToPlaylist(QVariant)));
-    connect(item,SIGNAL(playAlbum(QVariant)),this,SLOT(playArtistAlbum(QVariant)));
-    connect(this,SIGNAL(playAlbum(QVariant)),mNetAccess,SLOT(playArtistAlbum(QVariant)));
 
-    connect(item,SIGNAL(addFiles(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(seek(int)),mNetAccess,SLOT(seek(int)));
-    connect(item,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
-    connect(item,SIGNAL(addArtist(QString)),mNetAccess,SLOT(addArtist(QString)));
-    connect(item,SIGNAL(playArtist(QString)),mNetAccess,SLOT(playArtist(QString)));
     connect(item,SIGNAL(savePlaylist(QString)),mNetAccess,SLOT(savePlaylist(QString)));
     connect(item,SIGNAL(deleteSavedPlaylist(QString)),mNetAccess,SLOT(deletePlaylist(QString)));
     connect(item,SIGNAL(requestSavedPlaylists()),mNetAccess,SLOT(getSavedPlaylists()));
@@ -258,25 +245,18 @@ void Controller::connectSignals()
     connect(item,SIGNAL(changeProfile(QVariant)),this,SLOT(changeProfile(QVariant)));
     connect(item,SIGNAL(deleteProfile(int)),this,SLOT(deleteProfile(int)));
     connect(item,SIGNAL(connectProfile(int)),this,SLOT(connectProfile(int)));
-    connect(item,SIGNAL(playSong(QString)),mNetAccess,SLOT(playTrack(QString)));
-    connect(item,SIGNAL(playFiles(QString)),mNetAccess,SLOT(playFiles(QString)));
-    connect(item,SIGNAL(addSong(QString)),mNetAccess,SLOT(addTrackToPlaylist(QString)));
-    connect(item,SIGNAL(addSongAfterCurrent(QString)),mNetAccess,SLOT(addTrackAfterCurrent(QString)));
+
     connect(item,SIGNAL(playPlaylistSongNext(int)),mNetAccess,SLOT(playTrackNext(int)));
     connect(item,SIGNAL(requestSavedPlaylist(QString)),mNetAccess,SLOT(getPlaylistTracks(QString)));
     connect(item,SIGNAL(addPlaylist(QString)),mNetAccess,SLOT(addPlaylist(QString)));
     connect(item,SIGNAL(playPlaylist(QString)),mNetAccess,SLOT(playPlaylist(QString)));
-    connect(item,SIGNAL(setShuffle(bool)),mNetAccess,SLOT(setRandom(bool)));
-    connect(item,SIGNAL(setRepeat(bool)),mNetAccess,SLOT(setRepeat(bool)));
+
     connect(item,SIGNAL(updateDB()),mNetAccess,SLOT(updateDB()));
     connect(item,SIGNAL(popfilemodelstack()),this,SLOT(fileStackPop()));
     connect(item,SIGNAL(cleanFileStack()),this,SLOT(cleanFileStack()));
-    connect(&volDecTimer,SIGNAL(timeout()),this,SLOT(decVolume()));
-    connect(&volIncTimer,SIGNAL(timeout()),this,SLOT(incVolume()));
-    //connect(QApplication::instance(),SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(focusChanged(QWidget*,QWidget*)));
+
 
     connect(this,SIGNAL(getFiles(QString)),mNetAccess,SLOT(getDirectory(QString)));
-    connect(this,SIGNAL(setVolume(int)),mNetAccess,SLOT(setVolume(int)));
     connect(this,SIGNAL(requestConnect()),mNetAccess,SLOT(connectToHost()));
     connect(this,SIGNAL(requestDisconnect()),mNetAccess,SLOT(disconnectFromServer()));
 //    connect(this,SIGNAL(serverProfilesUpdated()),item,SLOT(settingsModelUpdated()));
@@ -362,13 +342,13 @@ void Controller::connectSignals()
     connect(item,SIGNAL(wakeUpServer(int)),this,SLOT(wakeUpHost(int)));
 
     /* New status object connection */
-    connect(mPlaybackStatus,SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
-    connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
+//    connect(mPlaybackStatus,SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
+//    connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
 
     /* new playlist model connects */
-    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
-    connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
-    connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
+//    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
+//    connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
+//    connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
 
     /* new saved tracks model connects */
     connect(mNetAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
@@ -399,11 +379,6 @@ void Controller::connectToServer()
 
 }
 
-void Controller::requestCurrentPlaylist()
-{
-    //netaccess->getCurrentPlaylistTracks();
-}
-
 void Controller::connectedToServer()
 {
     mReconnectTimer.stop();
@@ -412,16 +387,6 @@ void Controller::connectedToServer()
     mWasConnected = true;
     emit sendPopup(popupString);
     emit connected(mProfilename);
-
-//    QUrl streamurl("http://"+mHostname + ":" + "8081");
-//    //QUrl streamurl("http://uwstream2.somafm.com:2666");
-//    //QUrl streamurl = QUrl::fromLocalFile("/usr/share/sounds/jolla-ringtones/stereo/jolla-ringtone.wav");
-//    qDebug() << "start playback of url: " << streamurl.toString();
-
-//    mStreamPlayer->setURL(streamurl);
-//    mStreamPlayer->startPlayback();
-
-    // emit requestArtistAlbumMap();
 }
 
 void Controller::disconnectedToServer()
@@ -433,41 +398,42 @@ void Controller::disconnectedToServer()
      }
 }
 
-void Controller::onNewAlbum()
-{
-    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-        // Request cover/artist art if song has changed
-        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-        emit requestCoverArt(tmpAlbum);
-    } else {
-        // Clear cover/artist image by requesting empty images
-        MpdAlbum tmpAlbum(this,"","");
-        emit requestCoverArt(tmpAlbum);
-    }
-}
+//void Controller::onNewAlbum()
+//{
+//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
+//        // Request cover/artist art if song has changed
+//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
+//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+//        emit requestCoverArt(tmpAlbum);
+//    } else {
+//        // Clear cover/artist image by requesting empty images
+//        MpdAlbum tmpAlbum(this,"","");
+//        emit requestCoverArt(tmpAlbum);
+//    }
+//}
 
-void Controller::onNewArtist()
-{
-    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-        // Request cover/artist art if song has changed
-        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-        emit requestCoverArt(tmpAlbum);
+//void Controller::onNewArtist()
+//{
+//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
+//        // Request cover/artist art if song has changed
+//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
+//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+//        emit requestCoverArt(tmpAlbum);
 
-        MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
-        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
-        emit requestCoverArtistArt(tmpArtist);
-    } else {
-        MpdArtist tmpArtist(this,"");
-        emit requestCoverArtistArt(tmpArtist);
-    }
-}
+//        MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
+//        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
+//        emit requestCoverArtistArt(tmpArtist);
+//    } else {
+//        MpdArtist tmpArtist(this,"");
+//        emit requestCoverArtistArt(tmpArtist);
+//    }
+//}
 
-void Controller::seek(int pos)
-{
-    mNetAccess->seekPosition(mCurrentSongID,pos);
-}
+//void Controller::seek(int pos)
+//{
+//    //FIXME wo wird mCurrentSongID gesetzt??
+//    mNetAccess->seekPosition(mCurrentSongID,pos);
+//}
 
 void Controller::requestFilePage(QString path)
 {
@@ -680,24 +646,6 @@ void Controller::connectProfile(int index)
     mQuickView->rootContext()->setContextProperty("profilename",QVariant::fromValue(QString(mProfilename)));
     connectToServer();
 }
-
-void Controller::incVolume()
-{
-    emit setVolume((mVolume+3>100 ? 100 : mVolume+3));
-    mVolume =(mVolume+3>100 ? 100 : mVolume+3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
-}
-
-void Controller::decVolume()
-{
-    emit setVolume((mVolume-3<0 ? 0 : mVolume-3));
-    mVolume = (mVolume-3<0 ? 0 : mVolume-3);
-    QString popup = "Volume: "+ QString::number(mVolume)+"%";
-    emit sendPopup(popup);
-
-}
-
 
 void Controller::focusChanged(QObject *now){
     if(now==0)
@@ -955,19 +903,19 @@ void Controller::getAlbumTracks(QVariant album) {
     emit requestAlbum(album);
 }
 
-void Controller::addArtistAlbumToPlaylist(QVariant album) {
-    if (album.userType() == qMetaTypeId<QJSValue>()) {
-        album = qvariant_cast<QJSValue>(album).toVariant();
-    }
-    emit addAlbum(album);
-}
+//void Controller::addArtistAlbumToPlaylist(QVariant album) {
+//    if (album.userType() == qMetaTypeId<QJSValue>()) {
+//        album = qvariant_cast<QJSValue>(album).toVariant();
+//    }
+//    emit addAlbum(album);
+//}
 
-void Controller::playArtistAlbum(QVariant album) {
-    if (album.userType() == qMetaTypeId<QJSValue>()) {
-        album = qvariant_cast<QJSValue>(album).toVariant();
-    }
-    emit playAlbum(album);
-}
+//void Controller::playArtistAlbum(QVariant album) {
+//    if (album.userType() == qMetaTypeId<QJSValue>()) {
+//        album = qvariant_cast<QJSValue>(album).toVariant();
+//    }
+//    emit playAlbum(album);
+//}
 
 void Controller::searchTracks(QVariant search) {
     if (search.userType() == qMetaTypeId<QJSValue>()) {

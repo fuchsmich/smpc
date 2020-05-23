@@ -17,7 +17,7 @@ DockedPanel {
         id: progressBarItem
         width: parent.width
         height: Theme.paddingSmall
-        visible: mTitle !== "" && mArtist !== ""
+        visible: ctl.player.playbackStatus.title !== "" && mArtist !== ""
 
         Rectangle {
             id: progressBar
@@ -46,7 +46,7 @@ DockedPanel {
 
     Label {
         id: notPlayingLabel
-        visible: mTitle == "" && mArtist == ""
+        visible: ctl.player.playbackStatus.title == "" && mArtist == ""
         text: qsTr("Not playing")
         anchors.centerIn: parent
         color: Theme.primaryColor
@@ -65,7 +65,7 @@ DockedPanel {
 
         ScrollLabel {
             id: titleText
-            text: mTitle
+            text: ctl.player.playbackStatus.title
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeSmall
             font.bold: false
@@ -97,30 +97,9 @@ DockedPanel {
 
         PlaybackControls {}
 
-        Slider {
+        VolumeSlider {
             id: volumeSlider
             width: parent.width
-            stepSize: 1
-            maximumValue: 100
-            minimumValue: 0
-            value: mVolume
-            valueText: value + "%"
-            label: qsTr("Volume")
-            onPressedChanged: {
-                if (!pressed) {
-                    volumeChanging = false
-                    setVolume(value)
-                    value = Qt.binding(function () {
-                        return mVolume
-                    })
-                } else {
-                    volumeChanging = true
-                }
-            }
-            onValueChanged: {
-                if (pressed) setVolume(value)
-                // valueText = value+"%";
-            }
         }
     }
 }

@@ -21,7 +21,6 @@ Page {
         SilicaListView {
             id: playlistView
             clip: true
-            delegate: trackDelegate
             currentIndex: lastsongid
 
             cacheBuffer: 0
@@ -30,27 +29,90 @@ Page {
                 bottom: parent.bottom
             }
 
-            //            Connections {
-            //                target: playlistModel
-            //                onClearModel: {
-            //                    console.debug("Clear model requested");
-            //                    playlistView.currentIndex = -1;
-            //                    playlistView.model = dummyModel
-            //                    playlistView.forceLayout();
-            //                }
-            //                onModelReset: {
-            //                    playlistView.model = Qt.binding(function() { return playlistModel;})
-            //                    playlistView.currentIndex = -1
-            //                    playlistView.currentIndex = lastsongid
-            //                }
-            //            }
             width: parent.width / 2
 
-            model: playlistModel
-            ListModel {
-                id: dummyModel
-            }
+            model: ctl.player.playlist
+            delegate: TrackDelegate {
+                index: model.index
+                number: "%1. ".arg(model.index + 1)
+                title: (model.title === "" ? model.filename + " " : model.title + " ")
+                length: (model.length === 0 ? "" : " (" + lengthformated + ")")
+                artist: (model.artist !== "" ? model.artist + " - " : "")
+                        + (model.album !== "" ? model.album : "")
+                album: model.album
+                playing: model.playing
+                path: model.path
 
+                onClicked: {
+                    ListView.view.currentIndex = index
+                    if (!playing) {
+                        ctl.player.playlist.playTrackNumber(index)
+                    } else {
+                        pageStack.navigateForward(PageStackAction.Animated)
+                    }
+                }
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Remove song")
+                        visible: !playlistView.mDeleteRemorseRunning
+                        enabled: !playlistView.mDeleteRemorseRunning
+                        onClicked: {
+                            playlistView.mDeleteRemorseRunning = true
+                            remove()
+                        }
+                    }
+
+                    MenuItem {
+                        text: qsTr("Show artist")
+                        onClicked: {
+                            artistClicked(artist)
+                            pageStack.push(Qt.resolvedUrl(
+                                               "AlbumListPage.qml"), {
+                                               "artistname": artist
+                                           })
+                        }
+                    }
+
+                    MenuItem {
+                        text: qsTr("Show album")
+                        onClicked: {
+                            albumClicked("", album)
+                            pageStack.push(Qt.resolvedUrl(
+                                               "AlbumTracksPage.qml"), {
+                                               "artistname": "",
+                                               "albumname": album
+                                           })
+                        }
+                    }
+                    MenuItem {
+                        visible: !playing
+                        text: qsTr("Play as next")
+                        onClicked: {
+                            playNextWOTimer.windUp(index)
+                        }
+                    }
+
+                    MenuItem {
+                        visible: playing
+                        text: qsTr("Show information")
+                        onClicked: pageStack.navigateForward(
+                                       PageStackAction.Animated)
+                    }
+
+                    MenuItem {
+                        text: qsTr("Add to saved list")
+                        onClicked: {
+                            requestSavedPlaylists()
+                            pageStack.push(
+                                        Qt.resolvedUrl(
+                                            "AddToPlaylistDialog.qml"),
+                                        {
+                                            "url": path
+                                        })
+                        }
+                    }
+                }
+            }
             quickScrollEnabled: jollaQuickscroll
             highlightFollowsCurrentItem: true
             highlightMoveDuration: 0
@@ -69,7 +131,7 @@ Page {
                     text: qsTr("Delete playlist")
                     onClicked: {
                         remorse.execute("Deleting playlist", function () {
-                            deletePlaylist()
+                            ctl.player.deletePlaylist()
                         })
                     }
                 }
@@ -99,145 +161,6 @@ Page {
                 listview: playlistView
             }
             ScrollDecorator {
-            }
-            Component {
-                id: trackDelegate
-                ListItem {
-                    contentHeight: mainColumn.height
-                    menu: contextMenu
-                    Component {
-                        id: contextMenu
-                        ContextMenu {
-                            MenuItem {
-                                text: qsTr("Remove song")
-                                visible: !mDeleteRemorseRunning
-                                enabled: !mDeleteRemorseRunning
-                                onClicked: {
-                                    mDeleteRemorseRunning = true
-                                    remove()
-                                }
-                            }
-
-                            MenuItem {
-                                text: qsTr("Show artist")
-                                onClicked: {
-                                    artistClicked(artist)
-                                    pageStack.push(Qt.resolvedUrl(
-                                                       "AlbumListPage.qml"), {
-                                                       "artistname": artist
-                                                   })
-                                }
-                            }
-
-                            MenuItem {
-                                text: qsTr("Show album")
-                                onClicked: {
-                                    albumClicked("", album)
-                                    pageStack.push(Qt.resolvedUrl(
-                                                       "AlbumTracksPage.qml"), {
-                                                       "artistname": "",
-                                                       "albumname": album
-                                                   })
-                                }
-                            }
-                            MenuItem {
-                                visible: !playing
-                                text: qsTr("Play as next")
-                                onClicked: {
-                                    playNextWOTimer.windUp(index)
-                                }
-                            }
-
-                            MenuItem {
-                                visible: playing
-                                text: qsTr("Show information")
-                                onClicked: pageStack.navigateForward(
-                                               PageStackAction.Animated)
-                            }
-
-                            MenuItem {
-                                text: qsTr("Add to saved list")
-                                onClicked: {
-                                    requestSavedPlaylists()
-                                    pageStack.push(
-                                                Qt.resolvedUrl(
-                                                    "AddToPlaylistDialog.qml"),
-                                                {
-                                                    "url": path
-                                                })
-                                }
-                            }
-                        }
-                    }
-
-                    Column {
-                        id: mainColumn
-                        clip: true
-                        height: (trackRow + artistLabel >= Theme.itemSizeSmall ? trackRow + artistLabel : Theme.itemSizeSmall)
-                        anchors {
-                            right: parent.right
-                            left: parent.left
-                            verticalCenter: parent.verticalCenter
-                            leftMargin: listPadding
-                            rightMargin: listPadding
-                        }
-                        Row {
-                            id: trackRow
-                            Label {
-                                text: (index + 1) + ". "
-                                anchors {
-                                    verticalCenter: parent.verticalCenter
-                                }
-                            }
-                            Label {
-                                clip: true
-                                wrapMode: Text.WrapAnywhere
-                                elide: Text.ElideRight
-                                text: (title === "" ? filename + " " : title + " ")
-                                font.italic: (playing) ? true : false
-                                font.bold: (playing) ? true : false
-                                color: playing ? Theme.highlightColor : Theme.primaryColor
-                                anchors {
-                                    verticalCenter: parent.verticalCenter
-                                }
-                            }
-                            Label {
-                                text: (length === 0 ? "" : " (" + lengthformated + ")")
-                                anchors {
-                                    verticalCenter: parent.verticalCenter
-                                }
-                            }
-                        }
-                        Label {
-                            id: artistLabel
-                            text: (artist !== "" ? artist + " - " : "")
-                                  + (album !== "" ? album : "")
-                            color: Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeSmall
-                        }
-                    }
-                    OpacityRampEffect {
-                        sourceItem: mainColumn
-                        slope: 3.5
-                        offset: 0.75
-                    }
-
-                    onClicked: {
-                        playlistView.currentIndex = index
-                        if (!playing) {
-                            parseClickedPlaylist(index)
-                        } else {
-                            pageStack.navigateForward(PageStackAction.Animated)
-                        }
-                    }
-
-                    function remove() {
-                        remorseAction(qsTr("Deleting"), function () {
-                            deletePlaylistTrack(index)
-                            mDeleteRemorseRunning = false
-                        }, 3000)
-                    }
-                }
             }
 
             section {
@@ -352,7 +275,7 @@ Page {
 
                             ScrollLabel {
                                 id: titleText
-                                text: mTitle
+                                text: ctl.player.playbackStatus.title
                                 color: Theme.primaryColor
                                 font.pixelSize: Theme.fontSizeMedium
                                 anchors {
@@ -526,34 +449,10 @@ Page {
                             }
                         }
 
-                        Slider {
+                        VolumeSlider {
                             id: volumeSlider
                             width: parent.width
                             anchors.verticalCenter: parent.verticalCenter
-                            stepSize: 1
-                            maximumValue: 100
-                            minimumValue: 0
-                            value: mVolume
-                            valueText: value + "%"
-                            label: qsTr("Volume")
-                            onPressedChanged: {
-                                if (!pressed) {
-                                    volumeChanging = false
-                                    setVolume(value)
-                                    value = Qt.binding(function () {
-                                        return mVolume
-                                    })
-                                    volumeControl.state = "sliderInvisible"
-                                } else {
-                                    volumeChanging = true
-                                    volumeSliderFadeOutTimer.stop()
-                                }
-                            }
-                            onValueChanged: {
-                                if (pressed)
-                                    setVolume(value)
-                                // valueText = value+"%";
-                            }
                         }
 
                         Timer {
@@ -566,35 +465,11 @@ Page {
                         }
                     }
 
-                    Slider {
+                    PositionSlider {
                         id: positionSlider
                         width: parent.width
-                        stepSize: 1.0
-                        maximumValue: (mLength > 0) ? mLength : 1.0
-                        minimumValue: 0.0
-                        value: mPosition
-                        valueText: formatLength(value)
-                        label: qsTr("position")
-                        Label {
-                            id: lengthTextcomplete
-                            text: mLengthText
-                            color: Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeSmall
-                            wrapMode: "WordWrap"
-                            anchors {
-                                right: parent.right
-                                rightMargin: Theme.paddingLarge
-                                bottom: parent.bottom
-                            }
-                        }
                         onPressedChanged: {
                             mPositionSliderActive = pressed
-                            if (!pressed) {
-                                seek(value)
-                                value = Qt.binding(function () {
-                                    return mPosition
-                                })
-                            }
                         }
                     }
 
@@ -630,9 +505,9 @@ Page {
         }
     }
 
-    function parseClickedPlaylist(index) {
-        playPlaylistTrack(index)
-    }
+//    function parseClickedPlaylist(index) {
+//        playPlaylistTrack(index)
+//    }
     onOrientationTransitionRunningChanged: {
         if (!orientationTransitionRunning) {
             playlistView.currentIndex = -1

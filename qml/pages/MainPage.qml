@@ -158,7 +158,8 @@ Page {
     function parseClickedMainMenu(ident) {
         if (ident === "playlist") {
             if (connected) {
-                pageStack.navigateForward(PageStackAction.Animated)
+                //pageStack.navigateForward(PageStackAction.Animated)
+                pageStack.push(Qt.resolvedUrl("database/CurrentPlaylistPage.qml"))
             }
         } else if (ident === "settings") {
             pageStack.push(Qt.resolvedUrl("settings/SettingsPage.qml"))

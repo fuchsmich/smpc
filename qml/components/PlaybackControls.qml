@@ -12,49 +12,56 @@ Row {
         id: shuffleButton
         icon.source: "image://theme/icon-m-shuffle"
         automaticCheck: false
-        checked: mpd_status.shuffle
-        onClicked: setShuffle(!checked)
+        checked: ctl.player.playbackStatus.shuffle
+        onClicked: ctl.player.setShuffle(!checked)
     }
 
     IconButton {
         id: prevButton
         icon.source: "image://theme/icon-m-previous"
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: prev()
+        onClicked: ctl.player.previous()
     }
 
     IconButton {
         id: stopButton
-        icon.source: "qrc:images/icon-l-stop.svg"
+        icon.source: "qrc:/images/icon-l-stop.svg"
         icon.sourceSize.width: Theme.iconSizeLarge
         icon.sourceSize.height: Theme.iconSizeLarge
         width: Theme.iconSizeLarge
         height: Theme.iconSizeLarge
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: stop()
+        onClicked: ctl.player.stop()
     }
 
     IconButton {
         id: playButton
-        icon.source: mpd_status.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
+        icon.source: ctl.player.playbackStatus.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
         width: Theme.iconSizeLarge
         height: Theme.iconSizeLarge
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: play()
+        onClicked: ctl.player.play()
     }
 
     IconButton {
         id: nextButton
         icon.source: "image://theme/icon-m-next"
         anchors.verticalCenter: parent.verticalCenter
-        onClicked: next()
+        onClicked: ctl.player.next()
     }
 
     Switch {
         id: repeatButton
         icon.source: "image://theme/icon-m-repeat"
         automaticCheck: false
-        checked: mpd_status.repeat
-        onClicked: setRepeat(!checked)
+        checked: ctl.player.playbackStatus.repeat
+        onClicked: ctl.player.setRepeat(!checked)
+    }
+
+    ConsumeSwitch {
+        visible: false
+    }
+    SingleSwitch {
+        visible: false
     }
 }

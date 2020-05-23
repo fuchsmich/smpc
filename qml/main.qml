@@ -1,7 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "pages"
-import org.nemomobile.mpris 1.0
 
 // FIXME to harbour.smpc.components.whatever import
 import "components"
@@ -13,27 +12,15 @@ ApplicationWindow {
     signal setHostname(string hostname)
     signal setPort(int port)
     signal setPassword(string password)
-    signal setVolume(int volume)
     signal setCurrentArtist(string artist)
     signal connectToServer
 
     // Signals for database requests to networkaccess
-    //Variant in format [artistname,albumname]
-    signal addAlbum(variant album)
-    signal addArtist(string artist)
-    signal addFiles(string files)
-    signal addSong(string uri)
     signal addSongToSaved(variant data)
     signal removeSongFromSaved(variant data)
-    signal addSongAfterCurrent(string uri)
     signal addPlaylist(string name)
     signal playPlaylist(string name)
-    signal playAlbum(variant album)
-    signal playArtist(string artist)
-    signal playFiles(string uri)
     signal playPlaylistSongNext(int index)
-    //appends song to playlist
-    signal playSong(string uri)
     // Adds all tracks from last search result to playlist
     signal addlastsearch
     signal requestSavedPlaylists
@@ -44,7 +31,6 @@ ApplicationWindow {
     signal requestArtistAlbums(string artist)
     signal requestFilesPage(string files)
     signal requestFilesModel(string files)
-    signal requestCurrentPlaylist
     signal requestOutputs
     signal requestSearch(variant request)
     // Request an MPD database update (remote mpd db)
@@ -64,21 +50,9 @@ ApplicationWindow {
     signal enableOutput(int nr)
     signal disableOutput(int nr)
 
-    // Control signals
-    signal play
-    signal next
-    signal prev
-    signal stop
-    signal seek(int position)
-    signal setRepeat(bool rep)
-    signal setShuffle(bool shfl)
-
     //Playlist signals
     signal savePlaylist(string name)
-    signal deletePlaylist
     signal deleteSavedPlaylist(string name)
-    signal playPlaylistTrack(int index)
-    signal deletePlaylistTrack(int index)
 
     // Changes server profile or creates new one
     signal changeProfile(variant profile)
@@ -115,8 +89,8 @@ ApplicationWindow {
     property string password
     property int listfontsize: 12
     property int liststretch: 20
-    property int lastsongid: mpd_status.id
-    property string playbuttoniconsourcecover: mpd_status.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+    property int lastsongid: ctl.player.playbackStatus.id
+    property string playbuttoniconsourcecover: ctl.player.playbackStatus.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
     property string volumebuttoniconsource
     property string lastpath
     property string artistname
@@ -134,31 +108,34 @@ ApplicationWindow {
     property real listPadding: Theme.paddingLarge
     property int populateDuration: 500
 
-    property bool volumeChanging: false
+    //property bool volumeChanging: false
 
     // current song information
-    property string mTitle: mpd_status.title
-    property string mArtist: mpd_status.artist
-    property string mAlbum: mpd_status.album
-    property int mVolume: mpd_status.volume
-    property int mLength: mpd_status.length
-    property int mPosition: mpd_status.currentTime
-    property int mPlaylistlength: mpd_status.playlistSize
+    property string mTitle: ctl.player.playbackStatus.title
+    property string mArtist: ctl.player.playbackStatus.artist
+    property string mAlbum: ctl.player.playbackStatus.album
+    property int mVolume: ctl.player.playbackStatus.volume
+    property int mLength: ctl.player.playbackStatus.length
+    property int mPosition: ctl.player.playbackStatus.currentTime
+    property int mPlaylistlength: ctl.player.playbackStatus.playlistSize
     property bool mDebugEnabled
     property bool mPositionSliderActive: false
-    property string mAudioProperties: mpd_status.samplerate + " Hz "
-                                      + mpd_status.bitDepth + " " + qsTr(
-                                          "bits") + " " + mpd_status.channelCount + " " + qsTr(
+    property string mAudioProperties: ctl.player.playbackStatus.samplerate + " Hz "
+                                      + ctl.player.playbackStatus.bitDepth + " " + qsTr(
+                                          "bits") + " " + ctl.player.playbackStatus.channelCount + " " + qsTr(
                                           "channels")
-    property string mTrackNr: mpd_status.trackNo
-    property string mBitrate: mpd_status.bitrate + " " + qsTr("kbps")
-    property string mUri: mpd_status.uri
-    property string mLengthText: formatLength(mpd_status.length)
+    property string mTrackNr: ctl.player.playbackStatus.trackNo
+    property string mBitrate: ctl.player.playbackStatus.bitrate + " " + qsTr("kbps")
+    property string mUri: ctl.player.playbackStatus.uri
+    property string mLengthText: formatLength(ctl.player.playbackStatus.length)
 
     property bool jollaQuickscroll: false
 
     property Page mPlaylistPage
     property Page mCurrentSongPage
+
+    //TODO move to settings
+    property int remorseTimeout: 3000
 
     // JS-functions
     //TODO separation
@@ -279,81 +256,7 @@ ApplicationWindow {
         enabled: false
     }
 
-    MprisPlayer {
-        id: mprisPlayer
-
-        property string artist: mpd_status.artist
-        property string song: mpd_status.title
-
-        property string message: ""
-        onMessageChanged: console.debug("MPRIS Message: ", message)
-
-        serviceName: (connected ? "smpc" : "") //this (un)registers the service due to connection to mpd_server
-        //            serviceName: "smpc"
-
-        //Mpris2 Root Interface
-        identity: "SMPC"
-        //        supportedUriSchemes: ["file"]
-        //        supportedMimeTypes: ["audio/x-wav", "audio/x-vorbis+ogg"]
-
-        //Mpris2 Player Interface
-        canControl: true
-        canGoNext: mTrackNr < mPlaylistlength
-        canGoPrevious: true
-        canPause: true //got to be always true for MprisController::playPause to work!
-        canPlay: playbackStatus !== Mpris.Playing
-        onCanPlayChanged: console.debug("canPlay", canPlay)
-        canSeek: false
-
-        playbackStatus: (mpd_status.playbackStatus
-                         === 0 ? Mpris.Paused : (mpd_status.playbackStatus
-                                                 === 1 ? Mpris.Playing : Mpris.Stopped))
-        onPlaybackStatusChanged: console.debug("mpd_status.playbackStatus",
-                                               mpd_status.playbackStatus,
-                                               playbackStatus, "canPlay",
-                                               canPlay, "canPause", canPause)
-
-        loopStatus: (mpd_status.repeat ? 1 : 0)
-        shuffle: mpd_status.shuffle
-        volume: 1
-
-        onPauseRequested: {
-            message = "Pause requested"
-            play()
-        }
-        onPlayRequested: {
-            message = "Play requested"
-            play()
-        }
-        onPlayPauseRequested: message = "Play/Pause requested"
-        onStopRequested: message = "Stop requested"
-        onNextRequested: {
-            message = "Next requested"
-            next()
-            console.debug(canGoNext, mTrackNr, mPlaylistlength)
-        }
-        onPreviousRequested: {
-            message = "Previous requested"
-            prev()
-        }
-
-        onArtistChanged: {
-            var metadata = mprisPlayer.metadata
-
-            metadata[Mpris.metadataToString(
-                         Mpris.Artist)] = [artist] // List of strings
-
-            mprisPlayer.metadata = metadata
-        }
-
-        onSongChanged: {
-            var metadata = mprisPlayer.metadata
-
-            metadata[Mpris.metadataToString(Mpris.Title)] = song // String
-
-            mprisPlayer.metadata = metadata
-        }
-    }
+    SMPCMprisPlayer { }
 
     ControlPanel {
         id: quickControlPanel

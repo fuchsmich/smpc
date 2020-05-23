@@ -2,8 +2,11 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 ListItem {
-    width: albumGridView.cellWidth
-    contentHeight: albumGridView.cellHeight
+    property alias title: titleLbl.text
+    property alias cover: albumImage.source
+
+    width: GridView.view.cellWidth
+    contentHeight: GridView.view.cellHeight
 
     layer.enabled: true
     layer.effect: ShaderEffect {
@@ -17,7 +20,7 @@ ListItem {
         Image {
             id: albumImage
             anchors.fill: parent
-            source: albumGridView.scrolling ? "" : coverURL
+            //source: GridView.view.scrolling ? "" : coverURL
             cache: false
             asynchronous: true
             fillMode: Image.PreserveAspectCrop
@@ -44,6 +47,7 @@ ListItem {
             }
         }
         Label {
+            id: titleLbl
             anchors {
                 bottom: albumImage.bottom
                 horizontalCenter: albumImage.horizontalCenter
@@ -57,17 +61,7 @@ ListItem {
             styleColor: Theme.secondaryColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
-            text: title === "" ? qsTr("No album tag") : title
+            //text: title === "" ? qsTr("No album tag") : title
         }
-    }
-
-    onClicked: {
-        albumGridView.currentIndex = index
-        albumClicked(artist, title)
-        pageStack.push(Qt.resolvedUrl("../pages/database/AlbumTracksPage.qml"),
-                       {
-                           "artistname": artist,
-                           "albumname": title
-                       })
     }
 }

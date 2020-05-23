@@ -33,10 +33,11 @@ SOURCES += main.cpp \
     src/mpd/artistmodel.cpp \
     src/mpd/albummodel.cpp \
     src/controller.cpp \
-    src/streamplayer.cpp \
+    src/player.cpp \
     src/mpd/serverprofilemodel.cpp \
     src/mpd/mpdplaybackstatus.cpp \
-    src/mpd/serverinfo.cpp
+    src/mpd/serverinfo.cpp \
+    src/playlist.cpp
 
 # C++ headers
 HEADERS += \
@@ -62,14 +63,17 @@ HEADERS += \
     src/mpd/artistmodel.h \
     src/mpd/albummodel.h \
     src/common.h \
-    src/streamplayer.h \
+    src/player.h \
     src/mpd/serverprofilemodel.h \
     src/mpd/mpdplaybackstatus.h \
     src/mpd/mpdcommon.h \
-    src/mpd/serverinfo.h
+    src/mpd/serverinfo.h \
+    src/playlist.h
 
 DISTFILES += \
     harbour-smpc.desktop \
+    qml/components/ConsumeSwitch.qml \
+    qml/components/SingleSwitch.qml \
     rpm/harbour-smpc.changes \
     rpm/harbour-smpc.spec \
     translations/*.ts

@@ -1,14 +1,40 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
-//import harbour.smpc.components 1.0
 import "../../components"
 
 Page {
     id: albumslistPage
-    allowedOrientations: Orientation.All
     property string artistname
     property int lastIndex
     property int lastOrientation
+    allowedOrientations: Orientation.All
+    Component {
+        id: pullDownComp
+        PullDownMenu {
+            visible: artistname !== ""
+            MenuItem {
+                text: qsTr("Add albums")
+                onClicked: {
+                    ctl.player.playlist.addArtist(artistname)
+                }
+            }
+            MenuItem {
+                text: qsTr("Play albums")
+                onClicked: {
+                    ctl.player.playlist.playArtist(artistname)
+                }
+            }
+        }
+    }
+    function pushTracksPage(artist, title) {
+        albumClicked(artist, title)
+        pageStack.push(Qt.resolvedUrl("AlbumTracksPage.qml"),
+                       {
+                           "artistname": artist,
+                           "albumname": title
+                       })
+    }
+
     Loader {
         id: gridViewLoader
         active: false
@@ -45,22 +71,16 @@ Page {
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
-                PullDownMenu {
-                    visible: artistname !== ""
-                    MenuItem {
-                        text: qsTr("Add albums")
-                        onClicked: {
-                            addArtist(artistname)
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Play albums")
-                        onClicked: {
-                            playArtist(artistname)
-                        }
+                delegate: AlbumGridDelegate {
+                    title: model.title === "" ? qsTr("No album tag") : model.title
+                    cover: GridView.view.scrolling ? "" : coverURL
+                    onClicked: {
+                        GridView.view.currentIndex = index
+                        pushTracksPage(model.artist, model.title)
                     }
                 }
-                delegate: AlbumDelegate {
+                Component.onCompleted: {
+                    pullDownComp.createObject(this)
                 }
             }
         }
@@ -71,7 +91,6 @@ Page {
         active: false
         anchors.fill: albumslistPage
 
-        //        anchors.bottomMargin: quickControlPanel.visibleSize
         sourceComponent: Component {
             SilicaListView {
                 id: listView
@@ -98,28 +117,20 @@ Page {
                     width: parent.width
                     height: Theme.itemSizeMedium
                 }
-                PullDownMenu {
-                    enabled: artistname !== ""
-                    MenuItem {
-                        text: qsTr("Add albums")
-                        onClicked: {
-                            addArtist(artistname)
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Play albums")
-                        onClicked: {
-                            playArtist(artistname)
-                        }
-                    }
-                }
                 delegate: AlbumListDelegate {
+                    onClicked: {
+                        listView.currentIndex = index;
+                        pushTracksPage(model.artist, model.title)
+                    }
                 }
                 section {
                     property: 'sectionprop'
                     delegate: SectionHeader {
                         text: section
                     }
+                }
+                Component.onCompleted: {
+                    pullDownComp.createObject(this)
                 }
             }
         }
@@ -129,7 +140,6 @@ Page {
         id: showViewLoader
         active: false
         anchors.fill: parent
-        //        anchors.rightMargin: quickControlPanel.visibleSize
         sourceComponent: Component {
             PathView {
                 id: showView

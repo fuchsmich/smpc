@@ -38,7 +38,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         qDebug() << path;
     }
 
-    Controller *control = new Controller(view,0);
+    Controller *control = new Controller(view, nullptr);
+    view->rootContext()->setContextProperty("ctl", control);
     view->show();
     return app->exec();
 }

@@ -1,4 +1,5 @@
 #include "mpdplaybackstatus.h"
+#include <QDebug>
 
 MPDPlaybackStatus::MPDPlaybackStatus(QObject *parent) :
     QObject(parent)
@@ -24,7 +25,8 @@ MPDPlaybackStatus::MPDPlaybackStatus(QObject *parent) :
     pBitDepth = 0;
 }
 
-MPDPlaybackStatus::MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent) : QObject(parent)
+MPDPlaybackStatus::MPDPlaybackStatus(const MPDPlaybackStatus &copyObject, QObject *parent) :
+    QObject(parent)
 {
     pPlaylistVersion = copyObject.pPlaylistVersion;
     pID = copyObject.pID;
@@ -101,7 +103,7 @@ QString MPDPlaybackStatus::getURI()
     return pURI;
 }
 
-quint8 MPDPlaybackStatus::getPlaybackStatus()
+MPD_PLAYBACK_STATE MPDPlaybackStatus::getPlaybackStatus()
 {
     return pPlaybackStatus;
 }
@@ -114,6 +116,16 @@ bool MPDPlaybackStatus::getRepeat()
 bool MPDPlaybackStatus::getShuffle()
 {
     return pShuffle;
+}
+
+bool MPDPlaybackStatus::getConsume()
+{
+    return pConsume;
+}
+
+quint8 MPDPlaybackStatus::getSingle()
+{
+    return pSingle;
 }
 
 
@@ -193,7 +205,8 @@ void MPDPlaybackStatus::setVolume(quint8 volume)
 {
     if (pVolume != volume) {
         pVolume = volume;
-        emit volumeChanged();
+        qDebug() << volume;
+        emit volumeChanged(volume);
     }
 }
 
@@ -224,7 +237,7 @@ void MPDPlaybackStatus::setArtist(QString artist)
 
 void MPDPlaybackStatus::setURI(QString uri)
 {
-    if (pURI != uri ) {
+    if (pURI != uri) {
         pURI = uri;
         emit uriChanged();
     }
@@ -234,8 +247,9 @@ void MPDPlaybackStatus::setURI(QString uri)
 void MPDPlaybackStatus::setPlaybackStatus(quint8 playbackStatus)
 {
     if ( pPlaybackStatus != playbackStatus ) {
-        pPlaybackStatus = (MPD_PLAYBACK_STATE)playbackStatus;
+        pPlaybackStatus = static_cast<MPD_PLAYBACK_STATE>(playbackStatus);
         if (pPlaybackStatus == MPD_STOP) {
+            //FIXME: why clear everything??
             clearPlayback();
         }
         emit playbackStatusChanged(pPlaybackStatus);
@@ -246,7 +260,7 @@ void MPDPlaybackStatus::setRepeat(bool repeat)
 {
     if (pRepeat != repeat ) {
         pRepeat = repeat;
-        emit repeatChanged();
+        emit repeatChanged(repeat);
     }
 }
 
@@ -254,7 +268,23 @@ void MPDPlaybackStatus::setShuffle(bool shuffle)
 {
     if(pShuffle != shuffle) {
         pShuffle = shuffle;
-        emit shuffleChanged();
+        emit shuffleChanged(shuffle);
+    }
+}
+
+void MPDPlaybackStatus::setConsume(bool consume)
+{
+    if (pConsume != consume) {
+        pConsume = consume;
+        emit consumeChanged(consume);
+    }
+}
+
+void MPDPlaybackStatus::setSingle(quint8 single)
+{
+    if (pSingle != single) {
+        pSingle = single;
+        emit singleChanged(single);
     }
 }
 
@@ -335,10 +365,9 @@ void MPDPlaybackStatus::clearPlayback()
     pBitDepth = 0;
     emit bitDepthChanged();
     pShuffle = false;
-    emit shuffleChanged();
+    emit shuffleChanged(pShuffle);
     pRepeat = false;
-    emit repeatChanged();
+    emit repeatChanged(pRepeat);
     pVolume = 0;
-    emit volumeChanged();
-
+    emit volumeChanged(pVolume);
 }

@@ -21,7 +21,7 @@ Dialog {
     }
     onDone: {
         if (result === DialogResult.Accepted) {
-            addSong(urlInputField.text)
+            ctl.player.playlist.addTrack(urlInputField.text)
         }
         urlInputField.text = ""
         urlInputField.focus = false

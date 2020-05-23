@@ -7,10 +7,11 @@ PlaylistModel::PlaylistModel(QObject *parent) :
 {
 }
 
-PlaylistModel::PlaylistModel(ImageDatabase *db, QObject *parent) : QAbstractListModel(parent)
+PlaylistModel::PlaylistModel(ImageDatabase *db, QObject *parent) :
+    QAbstractListModel(parent)
 {
     mDB = db;
-    mEntries = 0;
+    mEntries = nullptr;
     mPlaybackState = MPD_STOP;
     mTrackNo = 0;
 }
@@ -21,7 +22,7 @@ PlaylistModel::~PlaylistModel(){
         qDeleteAll(*mEntries);
         mEntries->clear();
         delete(mEntries);
-        mEntries = 0;
+        mEntries = nullptr;
     }
 }
 
@@ -160,9 +161,9 @@ QHash<int, QByteArray> PlaylistModel::roleNames() const {
 }
 
 void PlaylistModel::setPlaying(quint32 position, bool playing) {
-    if(position< (quint32) rowCount()) {
+    if(position < (quint32) rowCount()) {
         mEntries->at((int)position)->setPlaying(playing);
-        emit dataChanged(createIndex(position,0),createIndex(position,0),QVector<int>(1,playingRole));
+        emit dataChanged(createIndex(position, 0), createIndex(position, 0), QVector<int>(1, playingRole));
     }
 }
 
@@ -180,7 +181,7 @@ MpdTrack* PlaylistModel::get(int index) {
         QQmlEngine::setObjectOwnership(retTrack,QQmlEngine::CppOwnership);
         return retTrack;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -196,7 +197,7 @@ void PlaylistModel::receiveNewTrackList(QList<MpdTrack *>* tracks)
     if ( mPlaybackState != MPD_STOP ) {
         setPlaying(mTrackNo,true);
     }
-    if ( tmpPointer != 0 ) {
+    if ( tmpPointer != nullptr ) {
 //       qDeleteAll(*tmpPointer);
         QList<MpdTrack*>::Iterator it;
         for ( it = tmpPointer->begin(); it != tmpPointer->end() ; ++it ) {
@@ -211,7 +212,7 @@ void PlaylistModel::onPlaybackStateChanged(MPD_PLAYBACK_STATE state)
     mPlaybackState = state;
     if ( mPlaybackState == MPD_STOP ) {
         // Unset playing flag for last track played
-        setPlaying(mTrackNo,false);
+        setPlaying(mTrackNo, false);
     } else {
         setPlaying(mTrackNo, true);
     }

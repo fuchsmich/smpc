@@ -27,8 +27,7 @@
 #include <mpd/serverprofilemodel.h>
 #include <mpd/mpdplaybackstatus.h>
 
-#include <streamplayer.h>
-
+#include <player.h>
 
 
 class Controller : public QObject
@@ -43,11 +42,19 @@ class Controller : public QObject
     };
 
     Q_OBJECT
+    Q_PROPERTY(Player* player READ player CONSTANT)
+
 public:
-    explicit Controller(QObject *parent = 0);
-    Controller(QQuickView *mQuickView,QObject *parent = 0);
+    explicit Controller(QObject *parent = nullptr);
+    Controller(QQuickView *mQuickView, QObject *parent = nullptr);
     ~Controller();
     void connectSignals();
+
+    Player* player() const
+    {
+        return m_player;
+    }
+
 public slots:
 
 signals:
@@ -66,7 +73,6 @@ signals:
     void savedPlaylistReady();
     void outputsReady();
     void serverProfilesUpdated();
-    void setVolume(int);
     void setUpdateInterval(int);
     void showWelcome();
     void requestExit();
@@ -93,8 +99,8 @@ signals:
      * Workaround signals for QJSValue->QVariant cast crashes
      */
     void requestAlbum(QVariant);
-    void addAlbum(QVariant);
-    void playAlbum(QVariant);
+    //void addAlbum(QVariant);
+    //void playAlbum(QVariant);
     void requestSearch(QVariant);
     void requestAlbumInfo(QVariant);
     void addSongToSaved(QVariant);
@@ -109,16 +115,17 @@ private:
     bool mWasConnected;
     QTimer mReconnectTimer;
     quint32 mPlaylistVersion;
-    int mCurrentSongID;
+    //int mCurrentSongID;
     int mVolume;
     int mLastPlaybackState;
     QThread *mNetworkThread;
     QThread *mDBThread;
     ServerProfileModel *mServerProfiles;
-    QTimer volDecTimer,volIncTimer;
+    //FIXME what are they for?:
+    //QTimer volDecTimer,volIncTimer;
     AlbumModel *mOldAlbumModel;
     ArtistModel *mOldArtistModel;
-    PlaylistModel *mPlaylist;
+    //PlaylistModel *mPlaylist;
     PlaylistModel *mOtherTracks;
     QStringList *mSavedPlaylists;
     QList<MPDOutput*> *mOutputs;
@@ -127,7 +134,7 @@ private:
     QMLImageProvider *mQMLImgProvider;
     bool mApplicationActive;
 
-    MPDPlaybackStatus *mPlaybackStatus;
+    //MPDPlaybackStatus *mPlaybackStatus;
 
     //DB
     DatabaseStatistic *mDBStatistic;
@@ -145,19 +152,17 @@ private:
     int mCoverInNowPlaying;
     int mShowModeLandscape;
 
-    // Streaming playback
-    //StreamPlayer *mStreamPlayer;
-
-
     void readSettings();
     void writeSettings();
 
+    Player* m_player;
+
 private slots:
-    void requestCurrentPlaylist();
     void requestFilePage(QString);
-    void seek(int);
-    void incVolume();
-    void decVolume();
+    //void seek(int);
+    //FIXME what are they for?:
+    //void incVolume();
+    //void decVolume();
     /*Privates*/
     void connectedToServer();
     void disconnectedToServer();
@@ -207,15 +212,15 @@ private slots:
 
     void wakeUpHost(int index);
 
-    void onNewAlbum();
-    void onNewArtist();
+//    void onNewAlbum();
+//    void onNewArtist();
 
     /*
      * Workaround slots for QJSValue->QVariant cast crashes
      */
     void getAlbumTracks(QVariant album);
-    void addArtistAlbumToPlaylist(QVariant album);
-    void playArtistAlbum(QVariant album);
+    //void addArtistAlbumToPlaylist(QVariant album);
+    //void playArtistAlbum(QVariant album);
     void searchTracks(QVariant search);
     void requestAlbumWikiInformation(QVariant album);
     void addTrackToSavedPlaylist(QVariant);

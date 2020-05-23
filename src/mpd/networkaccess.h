@@ -230,7 +230,7 @@ public slots:
      * @brief setVolume Sets the volume of the server.
      * @param volume 0-100 to set.
      */
-    void setVolume(int volume);
+    void setVolume(quint8 volume);
 
     /**
      * @brief setRandom Enables/disables random function of connected server.
@@ -242,6 +242,16 @@ public slots:
      * @param repeat Set means enable
      */
     void setRepeat(bool repeat);
+    /**
+     * @brief setConsume Enables/disables consume function of connected server.
+     * @param consume Set means enable
+     */
+    void setConsume(bool consume);
+    /**
+     * @brief setSingle Sets single mode of connected server to 0/1/oneshot
+     * @param consume Set means enable
+     */
+    void setSingle(quint8 single);
 
     /*
      * Database request/query slots
@@ -362,11 +372,11 @@ public slots:
      * @param album to filter with.
      */
     void addArtistAlbumToPlaylist(QString artist,QString album);
-    /**
-     * @brief addArtistAlbumToPlaylist Adds an artist album to the current playlist.
-     * @param albuminfo [Artist,Album] to filter with.
-     */
-    void addArtistAlbumToPlaylist(QVariant albuminfo);
+//    /**
+//     * @brief addArtistAlbumToPlaylist Adds an artist album to the current playlist.
+//     * @param albuminfo [Artist,Album] to filter with.
+//     */
+//    void addArtistAlbumToPlaylist(QVariant albuminfo);
 
     /**
      * @brief playAlbum Clears the current playlist and adds the specified album and starts playing it.
@@ -379,15 +389,15 @@ public slots:
      */
     void playArtist(QString artist);
     /**
-     * @brief playFiles Replace playlist with the specific files and plays them.
+     * @brief playTrack Replace playlist with the specific files and plays them.
      * @param fileuri File to play.
      */
-    void playFiles(QString fileuri);
+    void playTrack(QString fileuri);
     /**
      * @brief playTrack Appends the specific file to the playlist and plays it.
      * @param fileuri File to play.
      */
-    void playTrack(QString fileuri);
+    void addPlayTrack(QString fileuri);
     /**
      * @brief playTrackByNumber Jumps to specified playlist position.
      * @param nr Playlist position to play.
@@ -399,17 +409,17 @@ public slots:
      * @param album to filter with
      */
     void playArtistAlbum(QString artist, QString album);
-    /**
-     * @brief playArtistAlbum Replaces & plays the current playlist with an specific artistalbum.
-     * @param albuminfo [Artist,Album] to filter with.
-     */
-    void playArtistAlbum(QVariant albuminfo);
+//    /**
+//     * @brief playArtistAlbum Replaces & plays the current playlist with an specific artistalbum.
+//     * @param albuminfo [Artist,Album] to filter with.
+//     */
+//    void playArtistAlbum(QVariant albuminfo);
 
     /**
      * @brief deleteTrackByNumer Deletes one track from the current playlist.
      * @param nr index of track to remove.
      */
-    void deleteTrackByNumer(int nr);
+    void deleteTrackByNumber(int nr);
 
     /**
      * @brief removeTrackFromSavedPlaylist Removes a track from a saved playlist. Useful for playlist management.

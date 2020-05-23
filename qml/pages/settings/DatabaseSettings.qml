@@ -124,7 +124,7 @@ Page {
                 }
                 Label {
                     id: artistsRemaining
-                    text: dbStatistic.getArtistQueueSize()
+                    text: dbStatistic.getArtistplaylistSize()
                     horizontalAlignment: Text.AlignRight
                     width: parent.width - (Theme.paddingLarge * 2)
                     color: Theme.secondaryColor
@@ -140,7 +140,7 @@ Page {
                 }
                 Label {
                     id: albumRemaining
-                    text: dbStatistic.getAlbumQueueSize()
+                    text: dbStatistic.getAlbumplaylistSize()
                     horizontalAlignment: Text.AlignRight
                     width: parent.width - (Theme.paddingLarge * 2)
                     color: Theme.secondaryColor
@@ -213,7 +213,7 @@ Page {
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 4
                                               })
-                    enabled: dbStatistic.getArtistQueueSize() === 0
+                    enabled: dbStatistic.getArtistplaylistSize() === 0
                              && lastfmEnabled
                 }
                 Button {
@@ -224,7 +224,7 @@ Page {
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 5
                                               })
-                    enabled: dbStatistic.getAlbumQueueSize() === 0
+                    enabled: dbStatistic.getAlbumplaylistSize() === 0
                              && lastfmEnabled
                 }
                 Button {
@@ -235,8 +235,8 @@ Page {
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 0
                                               })
-                    enabled: dbStatistic.getArtistQueueSize() === 0
-                             && dbStatistic.getAlbumQueueSize() === 0
+                    enabled: dbStatistic.getArtistplaylistSize() === 0
+                             && dbStatistic.getAlbumplaylistSize() === 0
                 }
                 Button {
                     id: clearArtistBtn
@@ -246,8 +246,8 @@ Page {
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 1
                                               })
-                    enabled: dbStatistic.getArtistQueueSize() === 0
-                             && dbStatistic.getAlbumQueueSize() === 0
+                    enabled: dbStatistic.getArtistplaylistSize() === 0
+                             && dbStatistic.getAlbumplaylistSize() === 0
                 }
                 Button {
                     id: clearAlbumBtn
@@ -266,8 +266,8 @@ Page {
                     onClicked: pageStack.push(dialogComponent, {
                                                   "confirmationRole": 3
                                               })
-                    enabled: dbStatistic.getArtistQueueSize() === 0
-                             && dbStatistic.getAlbumQueueSize() === 0
+                    enabled: dbStatistic.getArtistplaylistSize() === 0
+                             && dbStatistic.getAlbumplaylistSize() === 0
                 }
             }
         }
