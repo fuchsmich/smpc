@@ -342,13 +342,8 @@ void Controller::connectSignals()
     connect(item,SIGNAL(wakeUpServer(int)),this,SLOT(wakeUpHost(int)));
 
     /* New status object connection */
-//    connect(mPlaybackStatus,SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
-//    connect(mPlaybackStatus,SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
-
-    /* new playlist model connects */
-//    connect(mNetAccess,SIGNAL(currentPlaylistReady(QList<MpdTrack*>*)),mPlaylist,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
-//    connect(mPlaybackStatus,SIGNAL(idChanged(quint32)),mPlaylist,SLOT(onTrackNoChanged(quint32)));
-//    connect(mPlaybackStatus,SIGNAL(playbackStatusChanged(MPD_PLAYBACK_STATE)),mPlaylist,SLOT(onPlaybackStateChanged(MPD_PLAYBACK_STATE)));
+    connect(m_player->playbackStatus(),SIGNAL(albumChanged()),this,SLOT(onNewAlbum()));
+    connect(m_player->playbackStatus(),SIGNAL(artistChanged()),this,SLOT(onNewArtist()));
 
     /* new saved tracks model connects */
     connect(mNetAccess,SIGNAL(trackListReady(QList<MpdTrack*>*)),mOtherTracks,SLOT(receiveNewTrackList(QList<MpdTrack*>*)));
@@ -398,42 +393,36 @@ void Controller::disconnectedToServer()
      }
 }
 
-//void Controller::onNewAlbum()
-//{
-//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-//        // Request cover/artist art if song has changed
-//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-//        emit requestCoverArt(tmpAlbum);
-//    } else {
-//        // Clear cover/artist image by requesting empty images
-//        MpdAlbum tmpAlbum(this,"","");
-//        emit requestCoverArt(tmpAlbum);
-//    }
-//}
+void Controller::onNewAlbum()
+{
+    if ( m_player->playbackStatus()->getPlaybackStatus() != MPD_STOP ) {
+        // Request cover/artist art if song has changed
+        MpdAlbum tmpAlbum(this,m_player->playbackStatus()->getAlbum(),m_player->playbackStatus()->getArtist());
+        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+        emit requestCoverArt(tmpAlbum);
+    } else {
+        // Clear cover/artist image by requesting empty images
+        MpdAlbum tmpAlbum(this,"","");
+        emit requestCoverArt(tmpAlbum);
+    }
+}
 
-//void Controller::onNewArtist()
-//{
-//    if ( mPlaybackStatus->getPlaybackStatus() != MPD_STOP ) {
-//        // Request cover/artist art if song has changed
-//        MpdAlbum tmpAlbum(this,mPlaybackStatus->getAlbum(),mPlaybackStatus->getArtist());
-//        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
-//        emit requestCoverArt(tmpAlbum);
+void Controller::onNewArtist()
+{
+    if ( m_player->playbackStatus()->getPlaybackStatus() != MPD_STOP ) {
+        // Request cover/artist art if song has changed
+        MpdAlbum tmpAlbum(this,m_player->playbackStatus()->getAlbum(),m_player->playbackStatus()->getArtist());
+        // qDebug()  << "Requesting cover Image for currently playing album: " << tmpAlbum.getTitle() << tmpAlbum.getArtist();
+        emit requestCoverArt(tmpAlbum);
 
-//        MpdArtist tmpArtist(this,mPlaybackStatus->getArtist());
-//        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
-//        emit requestCoverArtistArt(tmpArtist);
-//    } else {
-//        MpdArtist tmpArtist(this,"");
-//        emit requestCoverArtistArt(tmpArtist);
-//    }
-//}
-
-//void Controller::seek(int pos)
-//{
-//    //FIXME wo wird mCurrentSongID gesetzt??
-//    mNetAccess->seekPosition(mCurrentSongID,pos);
-//}
+        MpdArtist tmpArtist(this,m_player->playbackStatus()->getArtist());
+        // qDebug() << "Requesting cover artist Image for currently playing title: " << tmpArtist.getName();
+        emit requestCoverArtistArt(tmpArtist);
+    } else {
+        MpdArtist tmpArtist(this,"");
+        emit requestCoverArtistArt(tmpArtist);
+    }
+}
 
 void Controller::requestFilePage(QString path)
 {
