@@ -41,7 +41,7 @@ Page {
             MenuItem {
                 text: qsTr("Add folder")
                 onClicked: {
-                    ctl.player.playlist.addFiles(filepath)
+                    ctl.player.playlist.addTrack(filepath)
                 }
             }
             MenuItem {

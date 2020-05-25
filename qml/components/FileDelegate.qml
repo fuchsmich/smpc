@@ -93,7 +93,7 @@ Component {
         }
         function addFolderRemorse() {
             remorseAction(qsTr("adding directory"), function () {
-                ctl.player.playlist.addFiles((prepath == "/" ? "" : prepath + "/") + name)
+                ctl.player.playlist.addTrack((prepath == "/" ? "" : prepath + "/") + name)
             }, 3000)
         }
         function playTrackRemorse() {
