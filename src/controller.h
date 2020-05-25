@@ -212,8 +212,8 @@ private slots:
 
     void wakeUpHost(int index);
 
-//    void onNewAlbum();
-//    void onNewArtist();
+    void onNewAlbum();
+    void onNewArtist();
 
     /*
      * Workaround slots for QJSValue->QVariant cast crashes
