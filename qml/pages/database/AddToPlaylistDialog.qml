@@ -4,7 +4,6 @@ import Sailfish.Silica 1.0
 Dialog {
     id: saveToList
     property string url
-    allowedOrientations: Orientation.All
     canAccept: false
 
     SilicaListView {

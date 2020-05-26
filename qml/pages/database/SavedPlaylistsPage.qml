@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: savedPlaylistPage
-    allowedOrientations: Orientation.All
     property string artistname
     SilicaListView {
         id: savedPlaylistsListView

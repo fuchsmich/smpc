@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: settingsPage
-    allowedOrientations: Orientation.All
     SilicaListView {
         id: settingsListView
         anchors.fill: parent

@@ -134,6 +134,11 @@ ApplicationWindow {
     property Page mPlaylistPage
     property Page mCurrentSongPage
 
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape
+                         | Orientation.LandscapeInverted
+    _defaultPageOrientations: Orientation.Portrait | Orientation.Landscape
+                              | Orientation.LandscapeInverted
+
     //TODO move to settings
     property int remorseTimeout: 3000
 

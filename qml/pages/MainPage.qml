@@ -4,7 +4,6 @@ import "../components"
 
 Page {
     id: mainPage
-    allowedOrientations: Orientation.All
     PageHeader {
         id: mainHeader
         title: "SMPC"

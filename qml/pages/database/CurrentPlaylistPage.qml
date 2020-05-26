@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: currentPlaylistPage
-    allowedOrientations: Orientation.All
     //FIXME what for?
     //property int lastIndex: lastsongid
 
@@ -150,13 +149,13 @@ Page {
         interval: 250
         repeat: false
         onTriggered: {
-            console.debug("Send signal: " + playNextWOTimer.index)
-            playPlaylistSongNext(playNextWOTimer.index)
+            console.debug("Send signal: " + index)
+            playPlaylistSongNext(index)
         }
 
         function windUp(pIndex) {
             console.debug("Workaround timer windup")
-            playNextWOTimer.index = pIndex
+            index = pIndex
             start()
         }
     }

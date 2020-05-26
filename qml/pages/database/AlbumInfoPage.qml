@@ -3,7 +3,6 @@ import Sailfish.Silica 1.0
 
 Page {
     id: albumInfoPage
-    allowedOrientations: Orientation.All
     property string albumname
     PageHeader {
         id: header

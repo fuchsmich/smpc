@@ -20,8 +20,6 @@ Page {
         mCurrentSongPage = null
     }
 
-    allowedOrientations: Orientation.All
-
     Drawer {
         id: mainDrawer
         dock: (orientation === Orientation.Portrait

@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon May 25 2020 Arno Dekker <jack.tar@example.com> 1.3.12-1
+- Disable Orientation.PortraitInverted mode
+- Minor layout improvements in "Add url" and "Save playlist" pages
+- Lots of internal restructuring by Fuchsmich
 * Tue Apr 28 2020 Arno Dekker <jack.tar@example.com> 1.3.11-1
 - Reduce textfade effect, so it more resembles the default textfade
 - Replaced red text by bold text and exclamation mark on database page

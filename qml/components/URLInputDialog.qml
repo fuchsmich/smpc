@@ -2,7 +2,6 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Dialog {
-    allowedOrientations: Orientation.All
     Column {
         width: parent.width
         spacing: Theme.paddingMedium
@@ -11,12 +10,16 @@ Dialog {
             acceptText: qsTr("Add url")
         }
         Label {
+            x: Theme.paddingLarge
             text: qsTr("Enter url:")
         }
         TextField {
             id: urlInputField
             width: parent.width
-            placeholderText: qsTr("Input url (http://, file://, etc)")
+            label: qsTr("Input url (http://, file://, etc)")
+            placeholderText: label
+            inputMethodHints: Qt.ImhNoPredictiveText
+            focus: true
         }
     }
     onDone: {
@@ -27,6 +30,6 @@ Dialog {
         urlInputField.focus = false
     }
     onOpened: {
-        urlInputField.focus = true
+        urlInputField.forceActiveFocus()
     }
 }

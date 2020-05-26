@@ -6,7 +6,6 @@ Page {
     id: searchpage
     property int currentindex: -1
     property string selectedsearch
-    allowedOrientations: Orientation.All
 
     Drawer {
         id: mainDrawer

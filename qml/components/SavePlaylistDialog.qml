@@ -2,7 +2,6 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Dialog {
-    allowedOrientations: Orientation.All
     Column {
         width: parent.width
         spacing: Theme.paddingMedium
@@ -11,12 +10,15 @@ Dialog {
             acceptText: qsTr("Save playlist")
         }
         Label {
+            x: Theme.paddingLarge
             text: qsTr("Playlist name:")
         }
         TextField {
             id: playlistNameField
             width: parent.width
-            placeholderText: qsTr("Input playlist name")
+            label: qsTr("Input playlist name")
+            placeholderText: label
+            inputMethodHints: Qt.ImhNoPredictiveText
         }
     }
     onDone: {

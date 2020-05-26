@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: connectPage
-    allowedOrientations: Orientation.All
     SilicaListView {
         id: connectListView
         model: serverList

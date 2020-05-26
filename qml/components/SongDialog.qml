@@ -3,7 +3,6 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: songDialog
-    allowedOrientations: Orientation.All
     property string title
     property string album
     property string artist

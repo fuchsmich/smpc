@@ -4,7 +4,6 @@ import "../../components"
 
 Dialog {
     id: serverEditPage
-    allowedOrientations: Orientation.All
     property alias name: profilenameInputField.text
     property alias hostname: hostnameInputField.text
     property alias password: passwordInputField.text

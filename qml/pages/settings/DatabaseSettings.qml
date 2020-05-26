@@ -2,7 +2,6 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
-    allowedOrientations: Orientation.All
 
     PageHeader {
         id: header
@@ -278,7 +277,6 @@ Page {
 
         Dialog {
             id: confirmationDialog
-            allowedOrientations: Orientation.All
             property int confirmationRole
             property string headerText
             property string questionText

@@ -6,7 +6,6 @@ Page {
     id: artistlistPage
     property int lastIndex
     property int lastOrientation
-    allowedOrientations: Orientation.All
 
     Loader {
         id: gridViewLoader

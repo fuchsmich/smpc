@@ -7,7 +7,6 @@ Page {
     property string artistname
     property int lastIndex
     property int lastOrientation
-    allowedOrientations: Orientation.All
     Component {
         id: pullDownComp
         PullDownMenu {

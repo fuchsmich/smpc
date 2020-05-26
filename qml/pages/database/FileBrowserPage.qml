@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: filePage
-    allowedOrientations: Orientation.All
     property string filepath
     property var listmodel
     property int lastContentPosY: 0

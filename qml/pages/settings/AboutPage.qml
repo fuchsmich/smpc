@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: aboutPage
-    allowedOrientations: Orientation.All
     SilicaFlickable {
         id: aboutFlickable
         anchors.fill: parent

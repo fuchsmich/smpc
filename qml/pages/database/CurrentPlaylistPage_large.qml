@@ -4,7 +4,6 @@ import "../../components"
 
 Page {
     id: currentPlaylistPage
-    allowedOrientations: Orientation.All
     property int lastIndex: lastsongid
     property bool mDeleteRemorseRunning: false
 
