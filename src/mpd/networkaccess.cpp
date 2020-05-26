@@ -920,7 +920,7 @@ void NetworkAccess::playTrackNext(int index)
     quint32 currentPosition = getPlaybackID();
     if (connected()) {
         if (!(static_cast<quint32>(index) < currentPosition)) {
-            index++;
+            currentPosition++;
         }
         sendMPDCommand(QString("move %1 %2\n").arg(index).arg(currentPosition));
         QString response ="";
