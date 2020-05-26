@@ -205,7 +205,7 @@ Page {
         }
     }
 
-    Component.onDestruction: {
-        clearPlaylistTracks()
-    }
+//    Component.onDestruction: {
+//        clearPlaylistTracks()
+//    }
 }
