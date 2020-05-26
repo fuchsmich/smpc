@@ -36,85 +36,6 @@ Page {
 
         model: ctl.player.playlist
         delegate: TrackDelegate {
-            index: model.index
-            number: "%1. ".arg(model.index + 1)
-            title: (model.title === "" ? model.filename + " " : model.title + " ")
-            length: (model.length === 0 ? "" : " (" + lengthformated + ")")
-            artist: (model.artist !== "" ? model.artist + " - " : "")
-                    + (model.album !== "" ? model.album : "")
-            album: model.album
-            playing: model.playing
-            path: model.path
-
-            onClicked: {
-                ListView.view.currentIndex = index
-                if (!playing) {
-                    ctl.player.playlist.playTrackNumber(index)
-                } else {
-                    pageStack.navigateForward(PageStackAction.Animated)
-                }
-            }
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Remove song")
-                    visible: !playlistView.mDeleteRemorseRunning
-                    enabled: !playlistView.mDeleteRemorseRunning
-                    onClicked: {
-                        playlistView.mDeleteRemorseRunning = true
-                        remove()
-                    }
-                }
-
-                MenuItem {
-                    text: qsTr("Show artist")
-                    onClicked: {
-                        artistClicked(artist)
-                        pageStack.push(Qt.resolvedUrl(
-                                           "AlbumListPage.qml"), {
-                                           "artistname": artist
-                                       })
-                    }
-                }
-
-                MenuItem {
-                    text: qsTr("Show album")
-                    onClicked: {
-                        albumClicked("", album)
-                        pageStack.push(Qt.resolvedUrl(
-                                           "AlbumTracksPage.qml"), {
-                                           "artistname": "",
-                                           "albumname": album
-                                       })
-                    }
-                }
-                MenuItem {
-                    visible: !playing
-                    text: qsTr("Play as next")
-                    onClicked: {
-                        playNextWOTimer.windUp(index)
-                    }
-                }
-
-                MenuItem {
-                    visible: playing
-                    text: qsTr("Show information")
-                    onClicked: pageStack.navigateForward(
-                                   PageStackAction.Animated)
-                }
-
-                MenuItem {
-                    text: qsTr("Add to saved list")
-                    onClicked: {
-                        requestSavedPlaylists()
-                        pageStack.push(
-                                    Qt.resolvedUrl(
-                                        "AddToPlaylistDialog.qml"),
-                                    {
-                                        "url": path
-                                    })
-                    }
-                }
-            }
         }
 
         quickScrollEnabled: jollaQuickscroll
@@ -229,13 +150,13 @@ Page {
         interval: 250
         repeat: false
         onTriggered: {
-            console.debug("Send signal: " + index)
-            playPlaylistSongNext(index)
+            console.debug("Send signal: " + playNextWOTimer.index)
+            playPlaylistSongNext(playNextWOTimer.index)
         }
 
         function windUp(pIndex) {
             console.debug("Workaround timer windup")
-            index = pIndex
+            playNextWOTimer.index = pIndex
             start()
         }
     }

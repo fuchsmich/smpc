@@ -137,10 +137,10 @@ void Controller::updateFilesModel(QList<QObject*>* list)
 
 void Controller::updateSavedPlaylistsModel(QStringList *list)
 {
-    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",0);
+    mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",nullptr);
     if ( mSavedPlaylists ) {
         delete(mSavedPlaylists);
-        mSavedPlaylists = 0;
+        mSavedPlaylists = nullptr;
     }
     mQuickView->rootContext()->setContextProperty("savedPlaylistsModel",QVariant::fromValue(*list));
     mSavedPlaylists = list;

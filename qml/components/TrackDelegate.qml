@@ -4,18 +4,9 @@ import Sailfish.Silica 1.0
 ListItem {
     id: item
 
-    property int index: -1
-    property alias number: numberLbl.text
-    property alias title: titleLbl.text
-    property alias length: lengthLbl.text
-    property alias artist: artistLbl.text
-    property string album: ""
-    property bool playing: false
-    property string path: ""
-
     function remove() {
         remorseAction(qsTr("Deleting"), function () {
-            ctl.player.playlist.deleteTrack(index)
+            ctl.player.playlist.deleteTrack(model.index)
             item.ListView.view.mDeleteRemorseRunning = false
         }, mainWindow.remorseTimeout)
     }
@@ -37,33 +28,35 @@ ListItem {
             id: trackRow
             Label {
                 id: numberLbl
+                text: "%1. ".arg(model.index + 1)
                 anchors {
                     verticalCenter: parent.verticalCenter
                 }
             }
             Label {
                 id: titleLbl
+                anchors.verticalCenter: parent.verticalCenter
                 clip: true
                 wrapMode: Text.WrapAnywhere
                 elide: Text.ElideRight
-                font.italic: playing
-                font.bold: playing
-                color: playing ? Theme.highlightColor : Theme.primaryColor
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
+                font.italic: model.playing
+                font.bold: model.playing
+                color: model.playing ? Theme.highlightColor : Theme.primaryColor
+                text: (model.title === "" ? model.filename + " " : model.title + " ")
             }
             Label {
                 id: lengthLbl
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                }
+                anchors.verticalCenter: parent.verticalCenter
+                text: (model.length === 0 ? "" : " (" + lengthformated + ")")
             }
         }
         Label {
             id: artistLbl
             color: Theme.secondaryColor
             font.pixelSize: Theme.fontSizeSmall
+            text: (model.artist !== "" ? model.artist + " - " : "")
+                            + (model.album !== "" ? model.album : "")
+
         }
     }
     OpacityRampEffect {
@@ -71,4 +64,75 @@ ListItem {
         slope: 3.5
         offset: 0.75
     }
+
+    menu: ContextMenu {
+        MenuItem {
+            text: qsTr("Remove song")
+            visible: !playlistView.mDeleteRemorseRunning
+            enabled: !playlistView.mDeleteRemorseRunning
+            onClicked: {
+                playlistView.mDeleteRemorseRunning = true
+                remove()
+            }
+        }
+
+        MenuItem {
+            text: qsTr("Show artist")
+            onClicked: {
+                artistClicked(model.artist)
+                pageStack.push(Qt.resolvedUrl(
+                                   "../pages/database/AlbumListPage.qml"), {
+                                   "artistname": model.artist
+                               })
+            }
+        }
+
+        MenuItem {
+            text: qsTr("Show album")
+            onClicked: {
+                albumClicked("", model.album)
+                pageStack.push(Qt.resolvedUrl(
+                                   "../pages/database/AlbumTracksPage.qml"), {
+                                   "artistname": "",
+                                   "albumname": model.album
+                               })
+            }
+        }
+        MenuItem {
+            visible: !model.playing
+            text: qsTr("Play as next")
+            onClicked: {
+                playNextWOTimer.windUp(model.index)
+            }
+        }
+
+        MenuItem {
+            visible: model.playing
+            text: qsTr("Show information")
+            onClicked: pageStack.navigateForward(
+                           PageStackAction.Animated)
+        }
+
+        MenuItem {
+            text: qsTr("Add to saved list")
+            onClicked: {
+                requestSavedPlaylists()
+                pageStack.push(
+                            Qt.resolvedUrl(
+                                "../pages/database/AddToPlaylistDialog.qml"),
+                            {
+                                "url": model.path
+                            })
+            }
+        }
+    }
+    onClicked: {
+        ListView.view.currentIndex = model.index
+        if (!model.playing) {
+            ctl.player.playlist.playTrackNumber(model.index)
+        } else {
+            pageStack.navigateForward(PageStackAction.Animated)
+        }
+    }
+
 }
