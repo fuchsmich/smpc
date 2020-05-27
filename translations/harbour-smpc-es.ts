@@ -750,49 +750,49 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Connected to: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Disconnected</source>
         <translation>Desconectado</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="52"/>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
         <source>Playlist</source>
-        <translation>Listas</translation>
+        <translation type="unfinished">Lista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="58"/>
+        <location filename="../qml/pages/MainPage.qml" line="60"/>
         <source>Artists</source>
-        <translation>Artistas</translation>
+        <translation type="unfinished">Artistas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="72"/>
         <source>Albums</source>
-        <translation>Álbumes</translation>
+        <translation type="unfinished">Álbumes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="84"/>
+        <location filename="../qml/pages/MainPage.qml" line="86"/>
         <source>Files</source>
-        <translation>Archivos</translation>
+        <translation type="unfinished">Archivos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="90"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation type="unfinished">Buscar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="96"/>
+        <location filename="../qml/pages/MainPage.qml" line="98"/>
         <source>Connect</source>
-        <translation>Conectar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="101"/>
+        <location filename="../qml/pages/MainPage.qml" line="103"/>
         <source>Settings</source>
-        <translation>Ajustes</translation>
+        <translation type="unfinished">Ajustes</translation>
     </message>
 </context>
 <context>

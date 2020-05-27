@@ -753,49 +753,49 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Connected to: %1</source>
         <translation>Verbunden mit: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Disconnected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="52"/>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
         <source>Playlist</source>
-        <translation>Wiedergabeliste</translation>
+        <translation type="unfinished">Wiedergabeliste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="58"/>
+        <location filename="../qml/pages/MainPage.qml" line="60"/>
         <source>Artists</source>
-        <translation>Interpreten</translation>
+        <translation type="unfinished">Interpreten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="72"/>
         <source>Albums</source>
-        <translation>Alben</translation>
+        <translation type="unfinished">Alben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="84"/>
+        <location filename="../qml/pages/MainPage.qml" line="86"/>
         <source>Files</source>
-        <translation>Dateien</translation>
+        <translation type="unfinished">Dateien</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="90"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation type="unfinished">Suchen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="96"/>
+        <location filename="../qml/pages/MainPage.qml" line="98"/>
         <source>Connect</source>
-        <translation>Verbinden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="101"/>
+        <location filename="../qml/pages/MainPage.qml" line="103"/>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation type="unfinished">Einstellungen</translation>
     </message>
 </context>
 <context>

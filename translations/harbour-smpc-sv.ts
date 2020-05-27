@@ -750,49 +750,49 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Connected to: %1</source>
         <translation>Ansluten till: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="41"/>
         <source>Disconnected</source>
         <translation>Nerkopplad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="52"/>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
         <source>Playlist</source>
-        <translation>Spelningslista</translation>
+        <translation type="unfinished">Spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="58"/>
+        <location filename="../qml/pages/MainPage.qml" line="60"/>
         <source>Artists</source>
-        <translation>Artister</translation>
+        <translation type="unfinished">Artister</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="72"/>
         <source>Albums</source>
-        <translation>Album</translation>
+        <translation type="unfinished">Album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="84"/>
+        <location filename="../qml/pages/MainPage.qml" line="86"/>
         <source>Files</source>
-        <translation>Filer</translation>
+        <translation type="unfinished">Filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="90"/>
+        <location filename="../qml/pages/MainPage.qml" line="92"/>
         <source>Search</source>
-        <translation>Sök</translation>
+        <translation type="unfinished">Sök</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="96"/>
+        <location filename="../qml/pages/MainPage.qml" line="98"/>
         <source>Connect</source>
-        <translation>Anslut</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="101"/>
+        <location filename="../qml/pages/MainPage.qml" line="103"/>
         <source>Settings</source>
-        <translation>Inställningar</translation>
+        <translation type="unfinished">Inställningar</translation>
     </message>
 </context>
 <context>
