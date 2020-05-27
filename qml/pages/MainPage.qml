@@ -5,49 +5,38 @@ import QtQml.Models 2.2
 
 Page {
     id: mainPage
-//    PageHeader {
-//        id: mainHeader
-//        title: "SMPC"
-//        anchors {
-//            top: parent.top
-//            right: parent.right
-//            left: parent.left
-//        }
-//    }
-//    Label {
-//        id: connectedLabel
-//        anchors {
-//            top: mainHeader.bottom
-//            right: parent.right
-//            left: parent.left
-//        }
-//        horizontalAlignment: Text.AlignHCenter
-//        color: Theme.highlightColor
-//        text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
-//                              "Disconnected")
-//    }
+
+    Column {
+        id: col
+        width: mainPage.width
+        PageHeader {
+            id: pageHeader
+            title: "SMPC"
+        }
+        Label {
+            //parent: pageHeader.extraContent
+            width: mainPage.width
+            //anchors.horizontalCenter: col.horizontalCenter
+            horizontalAlignment: Text.AlignHCenter
+            text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
+                                  "Disconnected")
+            color: Theme.highlightColor
+        }
+    }
 
     SilicaGridView {
         id: gridView
-        anchors.fill: parent
-        header: PageHeader {
-            id: pageHeader
-            width: gridView.width
-            title: "SMPC"
-            Label {
-                parent: pageHeader.extraContent
-                width: gridView.width
-                horizontalAlignment: Text.AlignHCenter
-                text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
-                                      "Disconnected")
-                color: Theme.highlightColor
-            }
-        }
+        property int columns:
+            Screen.sizeCategory >= Screen.Large ?
+                3 : (orientation === Orientation.Landscape || orientation === Orientation.LandscapeInverted) ?
+                    4 : 2
+        anchors.top: col.bottom
+        anchors.bottom: mainPage.bottom
+        width: columns*cellWidth
+        anchors.horizontalCenter: parent.horizontalCenter
 
         cellHeight: Theme.itemSizeHuge
         cellWidth: cellHeight
-        //contentHeight: count*Theme.itemSizeHuge/2
-        //contentWidth: 100
 
         model: ObjectModel {
             MainMenuItem {
@@ -104,92 +93,15 @@ Page {
                 iconSource: "image://theme/icon-m-developer-mode"
                 onClicked: pageStack.push(Qt.resolvedUrl("settings/SettingsPage.qml"))
             }
+            MainMenuItem {
+                text: qsTr("Shuffle all")
+                iconSource: "image://theme/icon-m-shuffle"
+                onClicked: {
+
+                }
+            }
         }
     }
-
-//    SilicaFlickable {
-//        anchors {
-//            top: connectedLabel.bottom
-//            bottom: parent.bottom
-//            right: parent.right
-//            left: parent.left
-//        }
-//        contentHeight: mainGrid.height
-//        clip: true
-//        Item {
-//            height: mainGrid.height
-//            width: parent.width
-//            Grid {
-//                id: mainGrid
-
-//                columns: Screen.sizeCategory
-//                         >= Screen.Large ? 3 : (orientation === Orientation.Landscape
-//                                                || orientation
-//                                                === Orientation.LandscapeInverted) ? 4 : 2
-//                anchors.horizontalCenter: parent.horizontalCenter
-//                Repeater {
-//                    model: ObjectModel {
-//                        MainMenuItem {
-//                            text: qsTr("Playlist")
-//                            iconSource: "image://theme/icon-m-document"
-//                            onClicked: if (connected)
-//                                           pageStack.push(Qt.resolvedUrl("database/CurrentPlaylistPage.qml"))
-//                        }
-//                        MainMenuItem {
-//                            text: qsTr("Artists")
-//                            iconSource: "image://theme/icon-m-mic"
-//                            enabled: connected
-//                            onClicked:{
-//                                if (connected) {
-//                                    requestArtists()
-//                                    pageStack.push(Qt.resolvedUrl("database/ArtistListPage.qml"))
-//                                }
-//                            }
-//                        }
-
-//                        MainMenuItem {
-//                            text: qsTr("Albums")
-//                            iconSource: "image://theme/icon-m-music"
-//                            onClicked: {
-//                                artistname = ""
-//                                if (connected) {
-//                                    requestAlbums()
-//                                    pageStack.push(Qt.resolvedUrl("database/AlbumListPage.qml"), {
-//                                                       "artistname": artistname
-//                                                   })
-//                                }
-//                            }
-//                        }
-
-//                        MainMenuItem {
-//                            text: qsTr("Files")
-//                            iconSource: "image://theme/icon-m-folder"
-//                            onClicked: if (connected) filesClicked("/")
-//                        }
-
-//                        MainMenuItem {
-//                            text: qsTr("Search")
-//                            iconSource: "image://theme/icon-m-search"
-//                            onClicked: if (connected) pageStack.push(Qt.resolvedUrl("database/SearchPage.qml"))
-//                        }
-
-//                        MainMenuItem {
-//                            text: qsTr("Connect")
-//                            iconSource: "image://theme/icon-m-computer"
-//                            onClicked: pageStack.push(Qt.resolvedUrl("settings/ConnectServerPage.qml"))
-//                        }
-//                        MainMenuItem {
-//                            text: qsTr("Settings")
-//                            iconSource: "image://theme/icon-m-developer-mode"
-//                            onClicked: pageStack.push(Qt.resolvedUrl("settings/SettingsPage.qml"))
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-
 
     Timer {
         id: showCurrentSongTimer
