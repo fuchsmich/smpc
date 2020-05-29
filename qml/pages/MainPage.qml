@@ -119,6 +119,14 @@ Page {
             Loader {
                 sourceComponent: mainMenuBtn[settings.gui.mainMenuButton]
             }
+            Loader {
+                active: gridView.columns = 3
+                MainMenuItem {
+                    text: qsTr("About")
+                    iconSource: "image://theme/icon-m-about"
+                    onClicked: pageStack.push(Qt.resolvedUrl("settings/AboutPage.qml"))
+                }
+            }
         }
     }
 

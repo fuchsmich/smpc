@@ -810,6 +810,11 @@
         <translation type="unfinished">Inställningar</translation>
     </message>
     <message>
+        <location filename="../qml/pages/MainPage.qml" line="125"/>
+        <source>About</source>
+        <translation type="unfinished">Om</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/MainPage.qml" line="11"/>
         <source>Saved playlists</source>
         <translation type="unfinished"></translation>
