@@ -5,25 +5,6 @@ import QtQml.Models 2.2
 
 Page {
     id: mainPage
-
-    Column {
-        id: col
-        width: mainPage.width
-        PageHeader {
-            id: pageHeader
-            title: "SMPC"
-        }
-        Label {
-            //parent: pageHeader.extraContent
-            width: mainPage.width
-            //anchors.horizontalCenter: col.horizontalCenter
-            horizontalAlignment: Text.AlignHCenter
-            text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
-                                  "Disconnected")
-            color: Theme.highlightColor
-        }
-    }
-
     property list<Component> mainMenuBtn: [
         Component {
             MainMenuItem {
@@ -51,10 +32,31 @@ Page {
             Screen.sizeCategory >= Screen.Large ?
                 3 : (orientation === Orientation.Landscape || orientation === Orientation.LandscapeInverted) ?
                     4 : 2
-        anchors.top: col.bottom
+        anchors.top: mainPage.top
         anchors.bottom: mainPage.bottom
-        width: columns*cellWidth
         anchors.horizontalCenter: parent.horizontalCenter
+        width: columns*cellWidth
+
+        header: Item {
+            width: GridView.view.width
+            height: headerCol.height
+            Column {
+                id: headerCol
+                width: mainPage.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                PageHeader {
+                    title: "SMPC"
+                }
+                Label {
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
+                                          "Disconnected")
+                    color: Theme.highlightColor
+                }
+            }
+        }
+
 
         cellHeight: Theme.itemSizeHuge
         cellWidth: cellHeight

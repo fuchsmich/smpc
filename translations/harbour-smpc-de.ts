@@ -768,57 +768,57 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="21"/>
+        <location filename="../qml/pages/MainPage.qml" line="53"/>
         <source>Connected to: %1</source>
         <translation>Verbunden mit: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="21"/>
+        <location filename="../qml/pages/MainPage.qml" line="53"/>
         <source>Disconnected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="64"/>
+        <location filename="../qml/pages/MainPage.qml" line="66"/>
         <source>Playlist</source>
         <translation type="unfinished">Wiedergabeliste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="72"/>
         <source>Artists</source>
         <translation type="unfinished">Interpreten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="82"/>
+        <location filename="../qml/pages/MainPage.qml" line="84"/>
         <source>Albums</source>
         <translation type="unfinished">Alben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="96"/>
+        <location filename="../qml/pages/MainPage.qml" line="98"/>
         <source>Files</source>
         <translation type="unfinished">Dateien</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="102"/>
+        <location filename="../qml/pages/MainPage.qml" line="104"/>
         <source>Search</source>
         <translation type="unfinished">Suchen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="108"/>
+        <location filename="../qml/pages/MainPage.qml" line="110"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="113"/>
+        <location filename="../qml/pages/MainPage.qml" line="115"/>
         <source>Settings</source>
         <translation type="unfinished">Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="30"/>
+        <location filename="../qml/pages/MainPage.qml" line="11"/>
         <source>Saved playlists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="39"/>
+        <location filename="../qml/pages/MainPage.qml" line="20"/>
         <source>Shuffle all</source>
         <translation type="unfinished"></translation>
     </message>
