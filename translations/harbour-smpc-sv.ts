@@ -810,7 +810,7 @@
         <translation type="unfinished">Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="125"/>
+        <location filename="../qml/pages/MainPage.qml" line="126"/>
         <source>About</source>
         <translation type="unfinished">Om</translation>
     </message>
