@@ -25,13 +25,12 @@ Page {
             }
 
             ComboBox {
-                id: albumViewCB
                 label: qsTr("Album view:")
                 anchors {
                     right: parent.right
                     left: parent.left
                 }
-                currentIndex: albumView
+                currentIndex: settings.gui.albumViewMode
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Grid")
@@ -39,25 +38,17 @@ Page {
                     MenuItem {
                         text: qsTr("List")
                     }
-                }
-
-                onValueChanged: {
-                    if (currentIndex == 0) {
-                        newSettingKey(["albumView", "0"])
-                    } else if (currentIndex == 1) {
-                        newSettingKey(["albumView", "1"])
-                    }
+                    onActivated: settings.gui.albumViewMode = index
                 }
             }
 
             ComboBox {
-                id: artistviewCB
                 label: qsTr("Artist view:")
                 anchors {
                     right: parent.right
                     left: parent.left
                 }
-                currentIndex: artistView
+                currentIndex: settings.gui.artistViewMode
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Grid")
@@ -65,14 +56,7 @@ Page {
                     MenuItem {
                         text: qsTr("List")
                     }
-                }
-
-                onValueChanged: {
-                    if (currentIndex == 0) {
-                        newSettingKey(["artistView", "0"])
-                    } else if (currentIndex == 1) {
-                        newSettingKey(["artistView", "1"])
-                    }
+                    onActivated: settings.gui.artistViewMode = index
                 }
             }
 

@@ -673,94 +673,94 @@
         <translation>Oberfläche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="29"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="28"/>
         <source>Album view:</source>
         <translation>Albendarstellung:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="37"/>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="63"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="36"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="54"/>
         <source>Grid</source>
         <translation>Gitter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="40"/>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="66"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="39"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="57"/>
         <source>List</source>
         <translation>Liste</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="55"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="46"/>
         <source>Artist view:</source>
         <translation>Interpretendarstellung:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="81"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="65"/>
         <source>List image size:</source>
         <translation>Listenbildgröße:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="89"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="73"/>
         <source>Disabled</source>
         <translation>Deaktiviert</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="92"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="76"/>
         <source>Small</source>
         <translation>Klein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="95"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="79"/>
         <source>Medium</source>
         <translation>Mittel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="98"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="82"/>
         <source>Large</source>
         <translation>Groß</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="116"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="100"/>
         <source>Sort albums of one artist by year</source>
         <translation>Alben eines Interpreten nach Jahr sortieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="128"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="112"/>
         <source>Use albumartist in artists view</source>
         <translation>Albuminterpreten in der Interpretenansicht verwenden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="140"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="124"/>
         <source>Show cover in now playing</source>
         <translation>Zeige Bilder für aktuelles Lied</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="153"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="137"/>
         <source>Show sections in playlists</source>
         <translation>Zeige Sektionen in Wiedergabelisten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="166"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="150"/>
         <source>Show sections in search</source>
         <translation>Zeige Sektionen in Suche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="178"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="162"/>
         <source>Use show mode in landscape</source>
         <translation>Verwende Show-Modus in horizontaler Ausrichtung</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="191"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="175"/>
         <source>Main Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="199"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="183"/>
         <source>Show saved playlists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="202"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="186"/>
         <source>Shuffle all tracks</source>
         <translation type="unfinished"></translation>
     </message>

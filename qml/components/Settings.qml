@@ -8,5 +8,7 @@ ConfigurationGroup {
         id: guiSettings
         path: "/gui"
         property int mainMenuButton: 0
+        property int albumViewMode: 0 //albumView
+        property int artistViewMode: 0 //artistView
     }
 }

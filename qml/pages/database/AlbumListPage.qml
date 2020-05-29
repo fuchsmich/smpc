@@ -257,9 +257,9 @@ Page {
                 showViewLoader.active = false
                 if ((orientation === Orientation.Portrait)
                         || (orientation === Orientation.PortraitInverted)) {
-                    if (albumView === 0) {
+                    if (settings.gui.albumViewMode === 0) {
                         gridViewLoader.active = true
-                    } else if (albumView === 1) {
+                    } else if (settings.gui.albumViewMode === 1) {
                         listviewLoader.active = true
                     }
                 } else if ((orientation === Orientation.Landscape)
@@ -299,9 +299,9 @@ Page {
         if (!orientationTransitionRunning) {
             if ((orientation === Orientation.Portrait)
                     || (orientation === Orientation.PortraitInverted)) {
-                if (albumView === 0) {
+                if (settings.gui.albumViewMode === 0) {
                     gridViewLoader.active = true
-                } else if (albumView === 1) {
+                } else if (settings.gui.albumViewMode === 1) {
                     listviewLoader.active = true
                 }
             } else if ((orientation === Orientation.Landscape)
