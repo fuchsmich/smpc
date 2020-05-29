@@ -24,6 +24,27 @@ Page {
         }
     }
 
+    property list<Component> mainMenuBtn: [
+        Component {
+            MainMenuItem {
+                text: qsTr("Saved playlists")
+                iconSource: "image://theme/icon-m-document"
+                onClicked: {
+
+                }
+            }
+        },
+        Component {
+            MainMenuItem {
+                text: qsTr("Shuffle all")
+                iconSource: "image://theme/icon-m-shuffle"
+                onClicked: {
+
+                }
+            }
+        }
+    ]
+
     SilicaGridView {
         id: gridView
         property int columns:
@@ -93,12 +114,8 @@ Page {
                 iconSource: "image://theme/icon-m-developer-mode"
                 onClicked: pageStack.push(Qt.resolvedUrl("settings/SettingsPage.qml"))
             }
-            MainMenuItem {
-                text: qsTr("Shuffle all")
-                iconSource: "image://theme/icon-m-shuffle"
-                onClicked: {
-
-                }
+            Loader {
+                sourceComponent: mainMenuBtn[settings.gui.mainMenuButton]
             }
         }
     }

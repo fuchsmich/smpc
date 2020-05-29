@@ -746,6 +746,21 @@
         <source>Use show mode in landscape</source>
         <translation>Använd visningsläge i liggande</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="191"/>
+        <source>Main Menu Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="199"/>
+        <source>Show saved playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="202"/>
+        <source>Shuffle all tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainPage</name>
@@ -760,42 +775,47 @@
         <translation>Nerkopplad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="43"/>
+        <location filename="../qml/pages/MainPage.qml" line="64"/>
         <source>Playlist</source>
         <translation type="unfinished">Spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="49"/>
+        <location filename="../qml/pages/MainPage.qml" line="70"/>
         <source>Artists</source>
         <translation type="unfinished">Artister</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="61"/>
+        <location filename="../qml/pages/MainPage.qml" line="82"/>
         <source>Albums</source>
         <translation type="unfinished">Album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="75"/>
+        <location filename="../qml/pages/MainPage.qml" line="96"/>
         <source>Files</source>
         <translation type="unfinished">Filer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="81"/>
+        <location filename="../qml/pages/MainPage.qml" line="102"/>
         <source>Search</source>
         <translation type="unfinished">Sök</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="87"/>
+        <location filename="../qml/pages/MainPage.qml" line="108"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="92"/>
+        <location filename="../qml/pages/MainPage.qml" line="113"/>
         <source>Settings</source>
         <translation type="unfinished">Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="97"/>
+        <location filename="../qml/pages/MainPage.qml" line="30"/>
+        <source>Saved playlists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="39"/>
         <source>Shuffle all</source>
         <translation type="unfinished"></translation>
     </message>

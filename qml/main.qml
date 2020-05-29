@@ -246,6 +246,10 @@ ApplicationWindow {
         artistimageurl = url
     }
 
+    Settings {
+        id: settings
+    }
+
     // Notifies user about ongoing action in netaccess
     BusyIndicator {
         id: busyIndicator

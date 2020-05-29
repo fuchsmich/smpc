@@ -185,6 +185,25 @@ Page {
                     }
                 }
             }
+
+            ComboBox {
+                //id: imageSizeCB
+                label: qsTr("Main Menu Button")
+                anchors {
+                    right: parent.right
+                    left: parent.left
+                }
+                currentIndex: settings.gui.mainMenuButton
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Show saved playlists")
+                    }
+                    MenuItem {
+                        text: qsTr("Shuffle all tracks")
+                    }
+                    onActivated: settings.gui.mainMenuButton = index
+                }
+            }
         }
     }
 }
