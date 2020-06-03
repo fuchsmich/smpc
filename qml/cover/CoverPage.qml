@@ -83,6 +83,11 @@ CoverBackground {
         id: coverAction
 
         CoverAction {
+            iconSource: "image://theme/icon-cover-previous-song"
+            onTriggered: ctl.player.previous()
+        }
+
+        CoverAction {
             iconSource: playbuttoniconsourcecover //"image://theme/icon-cover-pause"
             onTriggered: ctl.player.play()
         }
