@@ -9,17 +9,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/AboutPage.qml" line="49"/>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="47"/>
         <source>Version: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/AboutPage.qml" line="94"/>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="104"/>
         <source>Licensed under GPLv3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/AboutPage.qml" line="105"/>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="116"/>
         <source>Fetches metadata from last.fm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1135,7 +1135,7 @@
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="61"/>
-        <source>garbage collection</source>
+        <source>Garbage collection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

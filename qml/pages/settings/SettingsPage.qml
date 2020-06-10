@@ -58,7 +58,7 @@ Page {
         // Debug-only
         if (mDebugEnabled) {
             settingsMenuModel.append({
-                                         "name": qsTr("garbage collection"),
+                                         "name": qsTr("Garbage collection"),
                                          "ident": "gc"
                                      })
         }

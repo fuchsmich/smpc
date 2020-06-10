@@ -27,11 +27,9 @@ Page {
                 cache: false
                 BackgroundItem {
                     id: debugEnabled
-                    property int clickcount: 0
-                    onClicked: {
-                        if (clickcount++ >= 5) {
-                            mDebugEnabled = true
-                        }
+                    onPressAndHold: {
+                        mDebugEnabled = !mDebugEnabled
+                        console.log("Debug: ", mDebugEnabled)
                     }
                     anchors.fill: parent
                 }
@@ -53,13 +51,14 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "source code"
                 onClicked: {
-                    Qt.openUrlExternally('https://github.com/djselbeck/smpc')
+                    Qt.openUrlExternally('https://github.com/a-dekker/smpc')
                 }
             }
             Separator {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - Theme.paddingLarge
                 color: Theme.primaryColor
+                horizontalAlignment: Qt.AlignHCenter
             }
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -81,11 +80,22 @@ Page {
                     font.pixelSize: Theme.fontSizeMedium
                 }
             }
-            Button {
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "@djselbeck"
-                onClicked: {
-                    Qt.openUrlExternally('https://twitter.com/djselbeck')
+                Label {
+                    text: "©"
+                    transform: Rotation {
+                        origin.x: copyLeft.width / 2
+                        axis.x: 0
+                        axis.y: 1
+                        axis.z: 0
+                        angle: 180
+                    }
+                }
+
+                Label {
+                    text: " 2016-2020 Michael Fuchs/Arno Dekker"
+                    font.pixelSize: Theme.fontSizeMedium
                 }
             }
 
@@ -98,6 +108,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - Theme.paddingLarge
                 color: Theme.primaryColor
+                horizontalAlignment: Qt.AlignHCenter
             }
             Label {
                 visible: lastfmEnabled
@@ -113,6 +124,7 @@ Page {
             }
         }
     }
+
     onStatusChanged: {
         if ((status === PageStatus.Activating)
                 || (status === PageStatus.Active)) {
