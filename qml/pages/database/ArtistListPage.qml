@@ -15,7 +15,7 @@ Page {
         sourceComponent: Component {
             SilicaGridView {
                 id: artistGridView
-                quickScrollEnabled: jollaQuickscroll
+                quickScroll: jollaQuickscroll
                 model: artistsModel
                 cellWidth: Screen.sizeCategory
                            >= Screen.Large ? ((orientation === Orientation.Landscape)
@@ -60,7 +60,7 @@ Page {
         sourceComponent: Component {
             SilicaListView {
                 id: artistListView
-                quickScrollEnabled: jollaQuickscroll
+                quickScroll: jollaQuickscroll
                 model: artistsModel
                 clip: true
                 populate: Transition {

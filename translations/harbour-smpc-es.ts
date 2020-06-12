@@ -1218,27 +1218,27 @@
         <translation type="unfinished">Quitar canción</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="80"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="81"/>
         <source>Show artist</source>
         <translation type="unfinished">Mostrar artista</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="91"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="92"/>
         <source>Show album</source>
         <translation type="unfinished">Mostrar álbum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="103"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="104"/>
         <source>Play as next</source>
         <translation type="unfinished">Reproducir siguiente</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="111"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="112"/>
         <source>Show information</source>
         <translation type="unfinished">Mostrar detalles</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="117"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="118"/>
         <source>Add to saved list</source>
         <translation type="unfinished">Agregar a lista guardada</translation>
     </message>

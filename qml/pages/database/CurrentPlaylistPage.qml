@@ -37,7 +37,7 @@ Page {
         delegate: TrackDelegate {
         }
 
-        quickScrollEnabled: jollaQuickscroll
+        quickScroll: jollaQuickscroll
         header: PageHeader {
             title: qsTr("Playlist")
         }
@@ -80,10 +80,6 @@ Page {
             }
         }
 
-        SpeedScroller {
-            //wird das verwendet?
-            listview: playlistView
-        }
         ScrollDecorator {
         }
 

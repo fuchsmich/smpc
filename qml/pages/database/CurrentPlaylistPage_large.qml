@@ -33,7 +33,7 @@ Page {
             model: ctl.player.playlist
             delegate: TrackDelegate {
             }
-            quickScrollEnabled: jollaQuickscroll
+            quickScroll: jollaQuickscroll
             highlightFollowsCurrentItem: true
             highlightMoveDuration: 0
             header: PageHeader {

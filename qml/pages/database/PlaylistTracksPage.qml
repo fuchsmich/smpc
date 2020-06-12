@@ -9,7 +9,7 @@ Page {
     SilicaListView {
         id: playlistTracksListView
         model: tracksModel
-        quickScrollEnabled: jollaQuickscroll
+        quickScroll: jollaQuickscroll
         SpeedScroller {
             listview: playlistTracksListView
         }

@@ -68,7 +68,7 @@ Page {
             }
             ScrollDecorator {
             }
-            quickScrollEnabled: jollaQuickscroll
+            quickScroll: jollaQuickscroll
             SpeedScroller {
                 listview: searchsongListView
             }

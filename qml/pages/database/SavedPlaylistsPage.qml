@@ -12,7 +12,7 @@ Page {
         }
         ScrollDecorator {
         }
-        quickScrollEnabled: jollaQuickscroll
+        quickScroll: jollaQuickscroll
         anchors.fill: parent
         contentWidth: width
         header: PageHeader {

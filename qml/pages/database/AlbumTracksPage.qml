@@ -45,7 +45,7 @@ Page {
 
             SilicaListView {
                 id: albumTracksListView
-                quickScrollEnabled: jollaQuickscroll
+                quickScroll: jollaQuickscroll
                 contentWidth: width
                 model: tracksModel
                 clip: true
@@ -204,7 +204,7 @@ Page {
                     header: PageHeader {
                         title: albumname
                     }
-                    quickScrollEnabled: jollaQuickscroll
+                    quickScroll: jollaQuickscroll
 
                     model: tracksModel
                     clip: true

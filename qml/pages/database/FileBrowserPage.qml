@@ -10,7 +10,7 @@ Page {
     SilicaListView {
         id: fileListView
         model: listmodel
-        quickScrollEnabled: jollaQuickscroll
+        quickScroll: jollaQuickscroll
         highlightFollowsCurrentItem: true
         SpeedScroller {
             id: scroller

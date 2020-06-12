@@ -73,6 +73,7 @@ ListItem {
             onClicked: {
                 playlistView.mDeleteRemorseRunning = true
                 remove()
+                playlistView.mDeleteRemorseRunning = false
             }
         }
 
