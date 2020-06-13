@@ -41,6 +41,7 @@ Page {
             }
 
             PullDownMenu {
+                id: pulleyTop
                 MenuItem {
                     text: qsTr("Add url")
                     onClicked: {
@@ -77,9 +78,10 @@ Page {
                 }
             }
 
-            SpeedScroller {
-                listview: playlistView
-            }
+            // SpeedScroller {
+            //     listview: playlistView
+            //     visible: ! pulleyTop.active && ! mDeleteRemorseRunning
+            // }
             ScrollDecorator {
             }
 

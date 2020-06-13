@@ -16,6 +16,7 @@ Page {
             id: scroller
             listview: fileListView
             scrollenabled: fastscrollenabled
+            visible: ! pulleyTop.active
         }
         clip: true
         ScrollDecorator {
@@ -30,6 +31,7 @@ Page {
             title: qsTr("Filebrowser") //(filepath===""? "Files:" : filepath)
         }
         PullDownMenu {
+            id: pulleyTop
             MenuItem {
                 text: qsTr("Home")
                 onClicked: {

@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Jun 13 2020 Arno Dekker <jack.tar@example.com> 1.3.14-1
+- Updated Spanish and Swedish
+- Do not show custom speedscroller when pulley is active
 * Fri Jun 12 2020 Arno Dekker <jack.tar@example.com> 1.3.13-1
 - Added previous song button to coverpage
 - Changes in About page

@@ -71,6 +71,7 @@ Page {
             quickScroll: jollaQuickscroll
             SpeedScroller {
                 listview: searchsongListView
+                visible: ! pulleyTop.active
             }
 
             header: PageHeader {
@@ -84,6 +85,7 @@ Page {
             model: tracksModel
 
             PullDownMenu {
+                id: pulleyTop
                 enabled: searchsongListView.model !== undefined
                 MenuItem {
                     text: qsTr("New search")
