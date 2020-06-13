@@ -26,7 +26,7 @@
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="111"/>
         <source>Licensed under GPLv3</source>
-        <translation>Licenciado bajo GPLv3</translation>
+        <translation>Usa la licencia GPLv3</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="123"/>
@@ -497,7 +497,7 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="233"/>
         <source>Clear blacklisted albums</source>
-        <translation>Borrar álbumes de lista negra</translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="244"/>
@@ -557,7 +557,7 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
         <source>Download artists</source>
-        <translation>bajar artistas</translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="335"/>
@@ -567,7 +567,7 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="340"/>
         <source>Download albums</source>
-        <translation>bajar álbumes</translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="342"/>
@@ -704,7 +704,7 @@
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="81"/>
         <source>List image size:</source>
-        <translation>Tamaño de imagen de la lista:</translation>
+        <translation>Tamaño de imagen de lista:</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="89"/>
@@ -729,12 +729,12 @@
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="116"/>
         <source>Sort albums of one artist by year</source>
-        <translation>Ordenar álbumes de artista por año</translation>
+        <translation>Fijar álbumes de artista por año</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="128"/>
         <source>Use albumartist in artists view</source>
-        <translation>Usar el artista del álbum en la vista de artistas</translation>
+        <translation>Usar artista de álbum en vista de artistas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="140"/>
@@ -941,7 +941,7 @@
     <message>
         <location filename="../qml/pages/database/SearchPage.qml" line="41"/>
         <source>Search for:</source>
-        <translation>Buscar para:</translation>
+        <translation>Buscar por:</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/SearchPage.qml" line="48"/>
@@ -1040,7 +1040,7 @@
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="25"/>
         <source>Remove server profile</source>
-        <translation>Quitar perfil del servidor</translation>
+        <translation>Quitar perfil</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="37"/>
@@ -1116,17 +1116,17 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="35"/>
         <source>Server settings</source>
-        <translation>Ajustes de servidor</translation>
+        <translation>Servidor</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="39"/>
         <source>Database settings</source>
-        <translation>Ajustes de base de datos</translation>
+        <translation>Base de datos</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="43"/>
         <source>Gui settings</source>
-        <translation>Ajustes de interfaz</translation>
+        <translation>Interfaz</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="47"/>
