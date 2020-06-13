@@ -87,7 +87,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="74"/>
         <source>No album tag</source>
-        <translation type="unfinished">Ingen albumtagg</translation>
+        <translation>Ingen albumtagg</translation>
     </message>
 </context>
 <context>
@@ -303,7 +303,7 @@
     <message>
         <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="53"/>
         <source>Clear playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa spelningslistan</translation>
     </message>
 </context>
 <context>
@@ -872,7 +872,7 @@
     <message>
         <location filename="../qml/components/PositionSlider.qml" line="10"/>
         <source>position</source>
-        <translation type="unfinished">Position</translation>
+        <translation>Position</translation>
     </message>
 </context>
 <context>
@@ -1136,7 +1136,7 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="61"/>
         <source>Garbage collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Skräpsamling</translation>
     </message>
 </context>
 <context>
@@ -1210,37 +1210,37 @@
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="8"/>
         <source>Deleting</source>
-        <translation type="unfinished">Tar bort</translation>
+        <translation>Tar bort</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="70"/>
         <source>Remove song</source>
-        <translation type="unfinished">Ta bort låt</translation>
+        <translation>Ta bort låt</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="81"/>
         <source>Show artist</source>
-        <translation type="unfinished">Visa artist</translation>
+        <translation>Visa artist</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="92"/>
         <source>Show album</source>
-        <translation type="unfinished">Visa album</translation>
+        <translation>Visa album</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="104"/>
         <source>Play as next</source>
-        <translation type="unfinished">Spela upp som nästa</translation>
+        <translation>Spela upp som nästa</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="112"/>
         <source>Show information</source>
-        <translation type="unfinished">Visa information</translation>
+        <translation>Visa information</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="118"/>
         <source>Add to saved list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till i sparad lista</translation>
     </message>
 </context>
 <context>
@@ -1253,12 +1253,12 @@
     <message>
         <location filename="../qml/components/URLInputDialog.qml" line="14"/>
         <source>Enter url:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange URL:</translation>
     </message>
     <message>
         <location filename="../qml/components/URLInputDialog.qml" line="19"/>
         <source>Input url (http://, file://, etc)</source>
-        <translation type="unfinished"></translation>
+        <translation>Indata-URL (http://, file://, etc)</translation>
     </message>
 </context>
 <context>
@@ -1266,7 +1266,7 @@
     <message>
         <location filename="../qml/components/VolumeSlider.qml" line="12"/>
         <source>Volume</source>
-        <translation type="unfinished">Volym</translation>
+        <translation>Volym</translation>
     </message>
 </context>
 <context>
