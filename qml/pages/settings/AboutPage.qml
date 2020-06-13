@@ -41,21 +41,18 @@ Page {
                 text: "SMPC"
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
-            
+
             Label {
-            horizontalAlignment: Text.AlignHCenter
-            text: qsTr("A MPD player for Sailfish OS")
-            wrapMode: Text.WordWrap
-            
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("A MPD client for Sailfish OS")
+                color: Theme.secondaryColor
+                wrapMode: Text.WordWrap
             }
-            
-            
-            
+
             Label {
                 id: versionText
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Version: %1").arg(version)
-                font.pixelSize: Theme.fontSizeLarge
             }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter

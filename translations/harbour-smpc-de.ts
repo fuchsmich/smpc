@@ -10,16 +10,26 @@
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="47"/>
+        <source>A MPD client for Sailfish OS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="55"/>
         <source>Version: %1</source>
         <translation>Version: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/AboutPage.qml" line="104"/>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="59"/>
+        <source>source code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="111"/>
         <source>Licensed under GPLv3</source>
         <translation>Lizenziert unter GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/AboutPage.qml" line="116"/>
+        <location filename="../qml/pages/settings/AboutPage.qml" line="123"/>
         <source>Fetches metadata from last.fm</source>
         <translation>Lädt Metadaten von last.fm</translation>
     </message>

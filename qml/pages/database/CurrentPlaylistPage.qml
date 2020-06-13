@@ -37,7 +37,7 @@ Page {
         delegate: TrackDelegate {
         }
 
-        quickScroll: jollaQuickscroll
+        quickScroll: true
         header: PageHeader {
             title: qsTr("Playlist")
         }
