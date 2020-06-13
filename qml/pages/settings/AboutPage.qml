@@ -41,6 +41,16 @@ Page {
                 text: "SMPC"
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
+            
+            Label {
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("A MPD player for Sailfish OS")
+            wrapMode: Text.WordWrap
+            
+            }
+            
+            
+            
             Label {
                 id: versionText
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -49,7 +59,7 @@ Page {
             }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "source code"
+                text: qsTr("source code")
                 onClicked: {
                     Qt.openUrlExternally('https://github.com/a-dekker/smpc')
                 }
