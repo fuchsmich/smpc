@@ -11,7 +11,7 @@
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="47"/>
         <source>A MPD client for Sailfish OS</source>
-        <translation type="unfinished"></translation>
+        <translation>Un cliente MPD para Sailfish SO</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="55"/>
@@ -21,7 +21,7 @@
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="59"/>
         <source>source code</source>
-        <translation type="unfinished"></translation>
+        <translation>Código fuente</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="111"/>
@@ -97,7 +97,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="74"/>
         <source>No album tag</source>
-        <translation type="unfinished">No etiqueta de álbum</translation>
+        <translation>No etiqueta de álbum</translation>
     </message>
 </context>
 <context>
@@ -313,7 +313,7 @@
     <message>
         <location filename="../qml/pages/database/CurrentPlaylistPage.qml" line="53"/>
         <source>Clear playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar listas</translation>
     </message>
 </context>
 <context>
@@ -381,7 +381,7 @@
     <message>
         <location filename="../qml/pages/database/CurrentPlaylistPage_large.qml" line="288"/>
         <source>URI:</source>
-        <translation>IUR:</translation>
+        <translation>URI:</translation>
     </message>
 </context>
 <context>
@@ -437,17 +437,17 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="121"/>
         <source>Artist downloads remaining</source>
-        <translation>Descargas de artistas restantes</translation>
+        <translation>Bajadas de artistas restantes</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="137"/>
         <source>Album downloads remaining</source>
-        <translation>Descargas de álbumes restantes</translation>
+        <translation>Bajadas de álbumes restantes</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="150"/>
         <source>Last.fm Metadata download</source>
-        <translation>Descarga de metadatos de Last.fm</translation>
+        <translation>Bajar metadatos de Last.fm</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="199"/>
@@ -457,7 +457,7 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="163"/>
         <source>Download size:</source>
-        <translation>Tamaño de descarga:</translation>
+        <translation>Tamaño de bajada:</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="167"/>
@@ -487,12 +487,12 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="211"/>
         <source>Download artist images</source>
-        <translation>Descargar imágenes de artista</translation>
+        <translation>Bajar imágenes de artista</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="222"/>
         <source>Download album images</source>
-        <translation>Descargar imágenes de álbum</translation>
+        <translation>Bajar imágenes de álbum</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="233"/>
@@ -557,22 +557,22 @@
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
         <source>Download artists</source>
-        <translation>Descargar artistas</translation>
+        <translation>bajar artistas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="335"/>
         <source>This will download metadata information for all your artists in your MPD database. This action will run in the background but take some time.</source>
-        <translation>Esto descargará información de metadatos para todos los artistas de la base de datos MPD. Esta acción se ejecutará en segundo plano, pero tomará un tiempo.</translation>
+        <translation>Esto bajará metadatos para todos los artistas de la base de datos MPD. Esta acción se ejecutará en segundo plano, pero tomará un tiempo.</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="340"/>
         <source>Download albums</source>
-        <translation>Descargar álbumes</translation>
+        <translation>bajar álbumes</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/DatabaseSettings.qml" line="342"/>
         <source>This will download metadata information for all your albums in your MPD database. This action will run in the background but take some time.</source>
-        <translation>Esto descargará información de metadatos para todos los álbumes de la base de datos MPD. Esta acción se ejecutará en segundo plano, pero tomará un tiempo.</translation>
+        <translation>Esto bajará metadatos para todos los álbumes de la base de datos MPD. Esta acción se ejecutará en segundo plano, pero tomará un tiempo.</translation>
     </message>
 </context>
 <context>
@@ -624,52 +624,52 @@
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="105"/>
         <source>playing playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproduciendo lista</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="110"/>
         <source>playing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproduciendo directorio</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="118"/>
         <source>Play file</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir archivo</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="119"/>
         <source>Play directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir directorio</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="119"/>
         <source>Play playlist</source>
-        <translation type="unfinished">Reproducir lista</translation>
+        <translation>Reproducir lista</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="133"/>
         <source>Add file</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar archivo</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="134"/>
         <source>Add directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar directorio</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="134"/>
         <source>Add playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar lista</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="149"/>
         <source>Play after current</source>
-        <translation type="unfinished">Reproducir enseguida</translation>
+        <translation>Reproducir enseguida</translation>
     </message>
     <message>
         <location filename="../qml/components/FileDelegate.qml" line="157"/>
         <source>Add to saved list</source>
-        <translation type="unfinished">Agregar a lista guardada</translation>
+        <translation>Agregar a lista guardada</translation>
     </message>
 </context>
 <context>
@@ -682,13 +682,13 @@
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="29"/>
         <source>Album view:</source>
-        <translation></translation>
+        <translation>Vista del álbum:</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="37"/>
         <location filename="../qml/pages/settings/GUISettings.qml" line="63"/>
         <source>Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuadrícula</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="40"/>
@@ -699,62 +699,62 @@
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="55"/>
         <source>Artist view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista del artista:</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="81"/>
         <source>List image size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de imagen de la lista:</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="89"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="92"/>
         <source>Small</source>
-        <translation type="unfinished">Pequeño</translation>
+        <translation>Pequeño</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="95"/>
         <source>Medium</source>
-        <translation type="unfinished">Medio</translation>
+        <translation>Medio</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="98"/>
         <source>Large</source>
-        <translation type="unfinished">Largo</translation>
+        <translation>Largo</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="116"/>
         <source>Sort albums of one artist by year</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar álbumes de artista por año</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="128"/>
         <source>Use albumartist in artists view</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar el artista del álbum en la vista de artistas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="140"/>
         <source>Show cover in now playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar portada al reproducir</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="153"/>
         <source>Show sections in playlists</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar secciones en listas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="166"/>
         <source>Show sections in search</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar secciones en búsqueda</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="178"/>
         <source>Use show mode in landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar el modo mostrar en paisaje</translation>
     </message>
 </context>
 <context>
@@ -762,7 +762,7 @@
     <message>
         <location filename="../qml/pages/MainPage.qml" line="25"/>
         <source>Connected to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectado a: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="25"/>
@@ -882,7 +882,7 @@
     <message>
         <location filename="../qml/components/PositionSlider.qml" line="10"/>
         <source>position</source>
-        <translation type="unfinished">posición</translation>
+        <translation>posición</translation>
     </message>
 </context>
 <context>
@@ -895,12 +895,12 @@
     <message>
         <location filename="../qml/components/SavePlaylistDialog.qml" line="14"/>
         <source>Playlist name:</source>
-        <translation>Nombre de la lista:</translation>
+        <translation>Nombre de lista:</translation>
     </message>
     <message>
         <location filename="../qml/components/SavePlaylistDialog.qml" line="19"/>
         <source>Input playlist name</source>
-        <translation>Introducir nombre de la lista</translation>
+        <translation>Introducir nombre de lista</translation>
     </message>
 </context>
 <context>
@@ -1050,12 +1050,12 @@
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="42"/>
         <source>Profile name</source>
-        <translation>Nombre de perfil</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="49"/>
         <source>Hostname or IP address</source>
-        <translation>Nombre de host y IP</translation>
+        <translation>hostname/IP</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="56"/>
@@ -1075,7 +1075,7 @@
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="84"/>
         <source>MAC address for WOL (optional)</source>
-        <translation>Dirección MAC para WOL (opcional)</translation>
+        <translation>Dirección MAC</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ServerEditPage.qml" line="95"/>
@@ -1103,7 +1103,7 @@
     <message>
         <location filename="../qml/pages/settings/ServerListPage.qml" line="47"/>
         <source>Remove server profile</source>
-        <translation>Quitar perfil de servidor</translation>
+        <translation>Quitar perfil</translation>
     </message>
 </context>
 <context>
@@ -1146,7 +1146,7 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="61"/>
         <source>Garbage collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolección de basura</translation>
     </message>
 </context>
 <context>
@@ -1197,7 +1197,7 @@
         <location filename="../qml/components/SongDialog.qml" line="255"/>
         <location filename="../qml/components/SongDialog.qml" line="498"/>
         <source>URI:</source>
-        <translation>IUR:</translation>
+        <translation>URI:</translation>
     </message>
     <message>
         <location filename="../qml/components/SongDialog.qml" line="29"/>
@@ -1220,37 +1220,37 @@
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="8"/>
         <source>Deleting</source>
-        <translation type="unfinished">Borrando</translation>
+        <translation>Borrando</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="70"/>
         <source>Remove song</source>
-        <translation type="unfinished">Quitar canción</translation>
+        <translation>Quitar canción</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="81"/>
         <source>Show artist</source>
-        <translation type="unfinished">Mostrar artista</translation>
+        <translation>Mostrar artista</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="92"/>
         <source>Show album</source>
-        <translation type="unfinished">Mostrar álbum</translation>
+        <translation>Mostrar álbum</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="104"/>
         <source>Play as next</source>
-        <translation type="unfinished">Reproducir siguiente</translation>
+        <translation>Reproducir siguiente</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="112"/>
         <source>Show information</source>
-        <translation type="unfinished">Mostrar detalles</translation>
+        <translation>Mostrar detalles</translation>
     </message>
     <message>
         <location filename="../qml/components/TrackDelegate.qml" line="118"/>
         <source>Add to saved list</source>
-        <translation type="unfinished">Agregar a lista guardada</translation>
+        <translation>Agregar a lista guardada</translation>
     </message>
 </context>
 <context>
@@ -1258,17 +1258,17 @@
     <message>
         <location filename="../qml/components/URLInputDialog.qml" line="10"/>
         <source>Add url</source>
-        <translation>Agregar url</translation>
+        <translation>Agregar uri</translation>
     </message>
     <message>
         <location filename="../qml/components/URLInputDialog.qml" line="14"/>
         <source>Enter url:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir uri:</translation>
     </message>
     <message>
         <location filename="../qml/components/URLInputDialog.qml" line="19"/>
         <source>Input url (http://, file://, etc)</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir uri (http: //, archivo: //, etc.)</translation>
     </message>
 </context>
 <context>
@@ -1276,7 +1276,7 @@
     <message>
         <location filename="../qml/components/VolumeSlider.qml" line="12"/>
         <source>Volume</source>
-        <translation type="unfinished">Volumen</translation>
+        <translation>Volumen</translation>
     </message>
 </context>
 <context>
