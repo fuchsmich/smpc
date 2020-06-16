@@ -79,23 +79,28 @@
 <context>
     <name>AlbumListPage</name>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="69"/>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="115"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="77"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="123"/>
         <source>Albums</source>
         <translation>Álbumes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="15"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="23"/>
         <source>Add albums</source>
         <translation>Agregar álbumes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="21"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="15"/>
+        <source>Replace albums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="29"/>
         <source>Play albums</source>
         <translation>Reproducir álbumes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumListPage.qml" line="74"/>
+        <location filename="../qml/pages/database/AlbumListPage.qml" line="82"/>
         <source>No album tag</source>
         <translation>No etiqueta de álbum</translation>
     </message>
@@ -137,42 +142,47 @@
     </message>
     <message>
         <location filename="../qml/pages/database/AlbumTracksPage.qml" line="25"/>
+        <source>Replace album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="33"/>
         <source>Add album</source>
         <translation>Agregar álbum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="31"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="39"/>
         <source>Play album</source>
         <translation>Reproducir álbum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="346"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="354"/>
         <source>Playing track</source>
         <translation>Reproduciendo pista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="351"/>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="356"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="359"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="364"/>
         <source>Adding track</source>
         <translation>Agregando pista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="368"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="376"/>
         <source>Play track</source>
         <translation>Reproducir pista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="375"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="383"/>
         <source>Add track to list</source>
         <translation>Agregar pista ha lista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="381"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="389"/>
         <source>Play after current</source>
         <translation>Reproducir enseguida</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="387"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="395"/>
         <source>Add to saved list</source>
         <translation>Agregar a lista guardada</translation>
     </message>

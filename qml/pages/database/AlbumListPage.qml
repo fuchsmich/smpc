@@ -12,6 +12,14 @@ Page {
         PullDownMenu {
             visible: artistname !== ""
             MenuItem {
+                text: qsTr("Replace albums")
+                enabled: ctl.player.playbackStatus.title == "" && mArtist == ""
+                onClicked: {
+                    ctl.player.playlist.clear()
+                    ctl.player.playlist.addArtist(artistname)
+                }
+            }
+            MenuItem {
                 text: qsTr("Add albums")
                 onClicked: {
                     ctl.player.playlist.addArtist(artistname)

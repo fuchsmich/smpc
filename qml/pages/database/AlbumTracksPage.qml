@@ -22,6 +22,14 @@ Page {
                 }
             }
             MenuItem {
+                text: qsTr("Replace album")
+                enabled: ctl.player.playbackStatus.title == "" && mArtist == ""
+                onClicked: {
+                    ctl.player.playlist.clear()
+                    ctl.player.playlist.addAlbum(artistname, albumname)
+                }
+            }
+            MenuItem {
                 text: qsTr("Add album")
                 onClicked: {
                     ctl.player.playlist.addAlbum(artistname, albumname)
