@@ -141,48 +141,48 @@
         <translation>Alle Lieder anzeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="25"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="24"/>
         <source>Replace album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="33"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="32"/>
         <source>Add album</source>
         <translation>Album hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="39"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="38"/>
         <source>Play album</source>
         <translation>Album abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="354"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="353"/>
         <source>Playing track</source>
         <translation>Spiele Lied ab</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="359"/>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="364"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="358"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="363"/>
         <source>Adding track</source>
         <translation>Füge Lied hinzu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="376"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="375"/>
         <source>Play track</source>
         <translation>Lied abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="383"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="382"/>
         <source>Add track to list</source>
         <translation>Lied hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="389"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="388"/>
         <source>Play after current</source>
         <translation>Lied als nächstes abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="395"/>
+        <location filename="../qml/pages/database/AlbumTracksPage.qml" line="394"/>
         <source>Add to saved list</source>
         <translation>Zur gespeicherten Liste hinzufügen</translation>
     </message>
@@ -602,11 +602,16 @@
     </message>
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="43"/>
+        <source>Replace folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/database/FileBrowserPage.qml" line="51"/>
         <source>Add folder</source>
         <translation>Ordner hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/FileBrowserPage.qml" line="49"/>
+        <location filename="../qml/pages/database/FileBrowserPage.qml" line="57"/>
         <source>Play folder</source>
         <translation>Ordner abspielen</translation>
     </message>
@@ -614,73 +619,73 @@
 <context>
     <name>FileDelegate</name>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="80"/>
-        <location filename="../qml/components/FileDelegate.qml" line="85"/>
+        <location filename="../qml/components/FileDelegate.qml" line="82"/>
+        <location filename="../qml/components/FileDelegate.qml" line="87"/>
         <source>adding track</source>
         <translation>füge Lied hinzu</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="90"/>
+        <location filename="../qml/components/FileDelegate.qml" line="92"/>
         <source>adding playlist</source>
         <translation>Wiedergabeliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="95"/>
+        <location filename="../qml/components/FileDelegate.qml" line="97"/>
         <source>adding directory</source>
         <translation>Ordner hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="100"/>
+        <location filename="../qml/components/FileDelegate.qml" line="102"/>
         <source>playing track</source>
         <translation>spiele Lied ab</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="105"/>
+        <location filename="../qml/components/FileDelegate.qml" line="107"/>
         <source>playing playlist</source>
         <translation>Wiedergabeliste abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="110"/>
+        <location filename="../qml/components/FileDelegate.qml" line="112"/>
         <source>playing directory</source>
         <translation>Ordner abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="118"/>
+        <location filename="../qml/components/FileDelegate.qml" line="120"/>
         <source>Play file</source>
         <translation>Datei abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="119"/>
+        <location filename="../qml/components/FileDelegate.qml" line="121"/>
         <source>Play directory</source>
         <translation>Ordner abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="119"/>
+        <location filename="../qml/components/FileDelegate.qml" line="121"/>
         <source>Play playlist</source>
         <translation>Wiedergabeliste abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="133"/>
+        <location filename="../qml/components/FileDelegate.qml" line="135"/>
         <source>Add file</source>
         <translation>Datei hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="134"/>
+        <location filename="../qml/components/FileDelegate.qml" line="136"/>
         <source>Add directory</source>
         <translation>Ordner hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="134"/>
+        <location filename="../qml/components/FileDelegate.qml" line="136"/>
         <source>Add playlist</source>
         <translation>Wiedergabeliste hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="149"/>
+        <location filename="../qml/components/FileDelegate.qml" line="151"/>
         <source>Play after current</source>
         <translation>Lied als nächstes abspielen</translation>
     </message>
     <message>
-        <location filename="../qml/components/FileDelegate.qml" line="157"/>
+        <location filename="../qml/components/FileDelegate.qml" line="159"/>
         <source>Add to saved list</source>
         <translation>Zur gespeicherten Liste hinzufügen</translation>
     </message>

@@ -30,6 +30,7 @@ Component {
                 left: fileicon.right
                 right: parent.right
                 rightMargin: listPadding
+                leftMargin: Theme.paddingMedium
             }
         }
         Label {
@@ -44,6 +45,7 @@ Component {
                 left: fileicon.right
                 right: parent.right
                 rightMargin: listPadding
+                leftMargin: Theme.paddingMedium
             }
         }
         OpacityRampEffect {

@@ -40,6 +40,14 @@ Page {
                 }
             }
             MenuItem {
+                text: qsTr("Replace folder")
+                enabled: ctl.player.playbackStatus.title === "" && mArtist === ""
+                onClicked: {
+                    ctl.player.playlist.clear()
+                    ctl.player.playlist.addTrack(filepath)
+                }
+            }
+            MenuItem {
                 text: qsTr("Add folder")
                 onClicked: {
                     ctl.player.playlist.addTrack(filepath)

@@ -23,7 +23,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("Replace album")
-                enabled: ctl.player.playbackStatus.title == "" && mArtist == ""
+                enabled: ctl.player.playbackStatus.title === "" && mArtist === ""
                 onClicked: {
                     ctl.player.playlist.clear()
                     ctl.player.playlist.addAlbum(artistname, albumname)
