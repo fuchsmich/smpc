@@ -11,12 +11,31 @@ ListItem {
         }, mainWindow.remorseTimeout)
     }
 
+    Rectangle {
+        width: parent.width
+        height: parent.height
+        opacity: 0.5
+        radius: 10
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: Theme.rgba(Theme.primaryColor, 0.1)
+            }
+            GradientStop {
+                position: 1.0
+                color: Theme.rgba(Theme.primaryColor, 0.05)
+            }
+        }
+        visible: model.playing
+    }
+
     contentHeight: mainColumn.height
 
     Column {
         id: mainColumn
         clip: true
-        height: Math.max(trackRow.height + artistLbl.height, Theme.itemSizeSmall)
+        height: Math.max(trackRow.height + artistLbl.height,
+                         Theme.itemSizeSmall)
         anchors {
             right: parent.right
             left: parent.left
@@ -55,8 +74,7 @@ ListItem {
             color: Theme.secondaryColor
             font.pixelSize: Theme.fontSizeSmall
             text: (model.artist !== "" ? model.artist + " - " : "")
-                            + (model.album !== "" ? model.album : "")
-
+                  + (model.album !== "" ? model.album : "")
         }
     }
     OpacityRampEffect {
@@ -110,8 +128,7 @@ ListItem {
         MenuItem {
             visible: model.playing
             text: qsTr("Show information")
-            onClicked: pageStack.navigateForward(
-                           PageStackAction.Animated)
+            onClicked: pageStack.navigateForward(PageStackAction.Animated)
         }
 
         MenuItem {
@@ -120,8 +137,7 @@ ListItem {
                 requestSavedPlaylists()
                 pageStack.push(
                             Qt.resolvedUrl(
-                                "../pages/database/AddToPlaylistDialog.qml"),
-                            {
+                                "../pages/database/AddToPlaylistDialog.qml"), {
                                 "url": model.path
                             })
             }
@@ -135,5 +151,4 @@ ListItem {
             pageStack.navigateForward(PageStackAction.Animated)
         }
     }
-
 }

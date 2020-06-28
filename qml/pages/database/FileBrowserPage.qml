@@ -13,7 +13,6 @@ Page {
         quickScroll: jollaQuickscroll
         highlightFollowsCurrentItem: true
         SpeedScroller {
-            id: scroller
             listview: fileListView
             scrollenabled: fastscrollenabled
             visible: ! pulleyTop.active

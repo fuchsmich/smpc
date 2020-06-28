@@ -12,6 +12,7 @@ Page {
         quickScroll: jollaQuickscroll
         SpeedScroller {
             listview: playlistTracksListView
+            visible: ! pulleyTop.active
         }
         ScrollDecorator {
         }
@@ -29,6 +30,7 @@ Page {
             }
         }
         PullDownMenu {
+            id: pulleyTop
             MenuItem {
                 text: qsTr("Delete list")
                 onClicked: {
