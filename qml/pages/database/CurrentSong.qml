@@ -46,6 +46,7 @@ Page {
                 }
             }
             PullDownMenu {
+                visible: album !== "" ? true : artist !== "" ? true : false
                 MenuItem {
                     text: qsTr("Show all tracks from album")
                     visible: album === "" ? false : true

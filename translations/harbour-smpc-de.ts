@@ -400,22 +400,22 @@
 <context>
     <name>CurrentSong</name>
     <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="50"/>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="51"/>
         <source>Show all tracks from album</source>
         <translation>Zeige alle Lieder des Albums</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="61"/>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="62"/>
         <source>Show albums from artist</source>
         <translation>Zeige alle Alben des Interpreten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="293"/>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="294"/>
         <source>Track nr: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/database/CurrentSong.qml" line="302"/>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="303"/>
         <source>Playlist nr: </source>
         <translation type="unfinished"></translation>
     </message>
