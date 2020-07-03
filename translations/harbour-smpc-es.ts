@@ -406,6 +406,16 @@
         <source>Show albums from artist</source>
         <translation>Mostrar álbumes del artista</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="293"/>
+        <source>Track nr: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/database/CurrentSong.qml" line="302"/>
+        <source>Playlist nr: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DatabaseSettings</name>
@@ -1238,27 +1248,27 @@
         <translation>Borrando</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="87"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="88"/>
         <source>Remove song</source>
         <translation>Quitar canción</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="98"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="99"/>
         <source>Show artist</source>
         <translation>Mostrar artista</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="109"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="110"/>
         <source>Show album</source>
         <translation>Mostrar álbum</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="121"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="122"/>
         <source>Play as next</source>
         <translation>Reproducir siguiente</translation>
     </message>
     <message>
-        <location filename="../qml/components/TrackDelegate.qml" line="129"/>
+        <location filename="../qml/components/TrackDelegate.qml" line="130"/>
         <source>Show information</source>
         <translation>Mostrar detalles</translation>
     </message>

@@ -290,7 +290,7 @@ Page {
                         Label {
                             id: nrText
                             width: (parent.width / 2) * 0.95
-                            text: qsTr("Track nr: " + mTrackNr)
+                            text: qsTr("Track nr: ") + mTrackNr
                             color: Theme.primaryColor
                             font.pixelSize: fontsize
                             wrapMode: "WordWrap"
@@ -299,7 +299,7 @@ Page {
                         Label {
                             id: playlistnrText
                             width: (parent.width / 2) * 0.95
-                            text: "Playlist nr: " + (lastsongid + 1) + "/" + mPlaylistlength
+                            text: qsTr("Playlist nr: ") + (lastsongid + 1) + "/" + mPlaylistlength
                             color: Theme.primaryColor
                             font.pixelSize: fontsize
                             wrapMode: "WordWrap"
