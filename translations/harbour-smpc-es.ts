@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="15"/>
         <source>Replace albums</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar álbumes</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="29"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumTracksPage.qml" line="25"/>
         <source>Replace album</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar álbum</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/AlbumTracksPage.qml" line="33"/>
@@ -409,12 +409,12 @@
     <message>
         <location filename="../qml/pages/database/CurrentSong.qml" line="293"/>
         <source>Track nr: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pista: </translation>
     </message>
     <message>
         <location filename="../qml/pages/database/CurrentSong.qml" line="302"/>
         <source>Playlist nr: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lista: </translation>
     </message>
 </context>
 <context>
@@ -610,17 +610,17 @@
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="42"/>
         <source>Replace folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar carpeta</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="50"/>
         <source>Add folder</source>
-        <translation>Agregar folder</translation>
+        <translation>Agregar carpeta</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="56"/>
         <source>Play folder</source>
-        <translation>Reproducir folder</translation>
+        <translation>Reproducir carpeta</translation>
     </message>
 </context>
 <context>
