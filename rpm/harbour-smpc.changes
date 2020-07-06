@@ -8,6 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Jul 06 2020 Arno Dekker <jack.tar@example.com> 1.3.15-1
+- Added replace playlist option
+- Added some space between icon and text in filebrowser
+- Added discrete background bar for now playing item in playlist
+- Fixed error preventing translation for some strings
+- Spanish translation updated
+- Hide pulley menu when empty on current song page
+- Albums and artists with quotes in names should now display their artwork correctly
 * Sat Jun 13 2020 Arno Dekker <jack.tar@example.com> 1.3.14-1
 - Updated Spanish and Swedish
 - Do not show custom speedscroller when pulley is active
