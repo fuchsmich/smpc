@@ -127,21 +127,21 @@ void ImageDatabase::fillDatabase(QMap<MpdArtist*, QList<MpdAlbum*>* > *map)
 bool ImageDatabase::hasAlbumArt(QString album,QString artist)
 {
     QSqlQuery query;
-    if (artist.indexOf('"') == -1) {
+    // add extra double quote for sqlite select
+    album = album.replace("\"", "\"\"");
+    artist = artist.replace("\"", "\"\"");
     query.prepare("SELECT * FROM albums WHERE "
                   "albumname=\"" + album + "\" AND "
                   "artistname=\"" + artist + "\"");
-    } else {
-        query.prepare("SELECT * FROM albums WHERE "
-                "albumname=\"" + album + "\" AND "
-                "artistname=\'" + artist + "\'");
-    }
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
 
+    // remove extra double quote again
+    album = album.replace("\"\"", "\"");
+
     while ( query.next() ) {
         QString albumName = query.value("albumname").toString();
-        if ( albumName == album) {
+        if ( albumName == album ) {
             return true;
         }
     }
@@ -151,6 +151,8 @@ bool ImageDatabase::hasAlbumArt(QString album,QString artist)
 bool ImageDatabase::hasArtistArt(QString artist)
 {
     QSqlQuery query;
+    // add extra double quote for sqlite select
+    artist = artist.replace("\"", "\"\"");
     query.prepare("SELECT * FROM artist WHERE "
                   "artistname=\"" + artist + "\"");
     // qDebug() << "Check for image: " << query.lastQuery();
@@ -338,23 +340,22 @@ int ImageDatabase::imageIDFromHash(QString hashValue)
 
 int ImageDatabase::imageIDFromAlbumArtist(QString album, QString artist)
 {
-    artist = artist.replace("\\", "");
+    // add extra double quote for sqlite select, translate %22 back to double quote
+    album = album.replace("%22", "\"");
+    album = album.replace("\"", "\"\"");
+    artist = artist.replace("%22", "\"");
+    artist = artist.replace("\"", "\"\"");
     QSqlQuery query;
-    if (artist.indexOf('"') == -1) {
-        query.prepare("SELECT * FROM albums WHERE "
-                "albumname=\"" + album + "\" AND "
-                "artistname=\"" + artist + "\"");
-    } else {
-        query.prepare("SELECT * FROM albums WHERE "
-                "albumname=\"" + album + "\" AND "
-                "artistname=\'" + artist + "\'");
-    }
+    query.prepare("SELECT * FROM albums WHERE "
+            "albumname=\"" + album + "\" AND "
+            "artistname=\"" + artist + "\"");
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
+    album = album.replace("\"\"", "\"");
 
     while ( query.next() ) {
         QString albumName = query.value("albumname").toString();
-        if ( albumName == album) {
+        if ( albumName == album ) {
             // qDebug() << "Found album cover ID: " << query.value("imageID").toInt();
             return query.value("imageID").toInt();
         }
@@ -366,16 +367,18 @@ int ImageDatabase::imageIDFromAlbumArtist(QString album, QString artist)
 int ImageDatabase::imageIDFromAlbum(QString album)
 {
     QSqlQuery query;
-    album = album.replace('\"',"\\\"");
+    album = album.replace("\"", "\"\"");
     query.prepare("SELECT * FROM albums WHERE "
                   "albumname=\"" + album + "\" "
                   " AND imageid>=\"0\"");
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
+    // remove extra double quotes again
+    album = album.replace("\"\"", "\"");
 
     while ( query.next() ) {
         QString albumName = query.value("albumname").toString();
-        if ( albumName == album) {
+        if ( albumName == album ) {
             // qDebug() << "Found album cover ID: " << query.value("imageID").toInt();
             return query.value("imageID").toInt();
         }
@@ -387,21 +390,18 @@ int ImageDatabase::imageIDFromAlbum(QString album)
 int ImageDatabase::imageIDFromArtist(QString artist)
 {
     QSqlQuery query;
-    artist = artist.replace('\"', "\\\"");
-    if (artist.indexOf('"') == -1) {
-        query.prepare("SELECT * FROM artists WHERE "
+    // add extra double quote for sqlite select, translate %22 back to double quote
+    artist = artist.replace("%22", "\"");
+    artist = artist.replace("\"", "\"\"");
+    query.prepare("SELECT * FROM artists WHERE "
                 "name=\"" + artist + "\"");
-    } else {
-        artist = artist.replace("\\", "");
-        query.prepare("SELECT * FROM artists WHERE "
-                "name=\'" + artist + "\'");
-    }
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
+    artist = artist.replace("\"\"", "\"");
 
     while ( query.next() ) {
         QString artistName = query.value("name").toString();
-        if ( artistName == artist) {
+        if ( artistName == artist ) {
             // qDebug() << "Found artist cover ID: " << query.value("imageID").toInt();
             return query.value("imageID").toInt();
         }
@@ -545,12 +545,14 @@ QPixmap ImageDatabase::getArtistImage(int artworkID)
 QPixmap ImageDatabase::getArtistImageForAlbum(QString album)
 {
     QSqlQuery query;
-    album = album.replace('\"',"\\\"");
+    album = album.replace("\"", "\"\"");
     query.prepare("SELECT * FROM albums WHERE "
                   "albumname=\"" + album + "\" " );
                   //" AND imageid!=\"-2\"");
     // qDebug() << "Check for image: " << query.lastQuery();
     query.exec();
+
+    album = album.replace("\"\"", "\"");
 
     while ( query.next() ) {
         QString albumName = query.value("albumname").toString();
@@ -833,7 +835,7 @@ QString ImageDatabase::getAlbumWikiInformation(QString album, QString artist)
             QString wikiInfo = QString(uncompressedBlob);
             // Cleanup string for nicer visual representation
             wikiInfo.remove(QRegExp("<[^>]*>"));
-            wikiInfo.replace("&quot;","\"");
+            wikiInfo.replace("&quot;", "\"");
             return wikiInfo;
         }
     }
