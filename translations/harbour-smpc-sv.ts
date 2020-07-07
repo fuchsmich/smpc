@@ -11,7 +11,7 @@
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="47"/>
         <source>A MPD client for Sailfish OS</source>
-        <translation type="unfinished"></translation>
+        <translation>En MPD-klient för Sailfish OS</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="55"/>
@@ -21,7 +21,7 @@
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="59"/>
         <source>source code</source>
-        <translation type="unfinished"></translation>
+        <translation>källkod</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/AboutPage.qml" line="111"/>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="15"/>
         <source>Replace albums</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersätt album</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/AlbumListPage.qml" line="29"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../qml/pages/database/AlbumTracksPage.qml" line="25"/>
         <source>Replace album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersätt album</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/AlbumTracksPage.qml" line="33"/>
@@ -409,12 +409,12 @@
     <message>
         <location filename="../qml/pages/database/CurrentSong.qml" line="294"/>
         <source>Track nr: </source>
-        <translation type="unfinished"></translation>
+        <translation>Spår nr: </translation>
     </message>
     <message>
         <location filename="../qml/pages/database/CurrentSong.qml" line="303"/>
         <source>Playlist nr: </source>
-        <translation type="unfinished"></translation>
+        <translation>Spelningslista nr: </translation>
     </message>
 </context>
 <context>
@@ -610,7 +610,7 @@
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="42"/>
         <source>Replace folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersätt mapp</translation>
     </message>
     <message>
         <location filename="../qml/pages/database/FileBrowserPage.qml" line="50"/>
