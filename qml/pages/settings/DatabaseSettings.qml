@@ -160,6 +160,7 @@ Page {
 
             ComboBox {
                 id: downloadSizeComboBox
+                visible: lastfmEnabled
                 label: qsTr("Download size:")
                 currentIndex: downloadSize
                 menu: ContextMenu {
@@ -186,6 +187,7 @@ Page {
             }
             Row {
                 x: Theme.paddingLarge
+                visible: lastfmEnabled
                 width: parent.width
                 Image {
                     id: infoIcon
@@ -206,6 +208,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 Button {
                     id: downloadArtistImagesBtn
+                    visible: lastfmEnabled
                     width: isPortrait ? mainColumn.width - Theme.paddingLarge
                                         * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Download artist images")
@@ -217,6 +220,7 @@ Page {
                 }
                 Button {
                     id: downloadAlbumImagesBtn
+                    visible: lastfmEnabled
                     width: isPortrait ? mainColumn.width - Theme.paddingLarge
                                         * 2 : (mainColumn.width / 2) * 0.95
                     text: qsTr("Download album images")

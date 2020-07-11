@@ -470,127 +470,127 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="163"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="164"/>
         <source>Download size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="167"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="168"/>
         <source>Small</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="170"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="171"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="173"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="174"/>
         <source>Large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="176"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="177"/>
         <source>Extra large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="179"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="180"/>
         <source>Mega</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="199"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="201"/>
         <source>Although the setting &quot;mega&quot; will look the best, it will require huge amount of local data cached.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="211"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="214"/>
         <source>Download artist images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="222"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="226"/>
         <source>Download album images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="233"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="237"/>
         <source>Clear blacklisted albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="244"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="248"/>
         <source>Clear artist images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="255"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="259"/>
         <source>Clear album images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="264"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="268"/>
         <source>Clear complete database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="305"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="309"/>
         <source>Clear blacklist albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="308"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="312"/>
         <source>Do you really want to delete all albums which are blacklisted from local database cache? There is no turning back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="313"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="317"/>
         <source>Clear artists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="315"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="319"/>
         <source>Do you really want to delete all artists from local database cache? There is no turning back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="320"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="324"/>
         <source>Clear albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="322"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="326"/>
         <source>Do you really want to delete all albums from local database cache? There is no turning back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="327"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="331"/>
         <source>Clear database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="329"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
         <source>Do you really want to delete the complete local database cache? There is no turning back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="337"/>
         <source>Download artists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="335"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="339"/>
         <source>This will download metadata information for all your artists in your MPD database. This action will run in the background but take some time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="340"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="344"/>
         <source>Download albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="342"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="346"/>
         <source>This will download metadata information for all your albums in your MPD database. This action will run in the background but take some time.</source>
         <translation type="unfinished"></translation>
     </message>

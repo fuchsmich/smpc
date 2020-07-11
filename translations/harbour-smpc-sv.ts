@@ -470,127 +470,127 @@
         <translation>Last.fm Metadata-nerladdning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="167"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="168"/>
         <source>Small</source>
         <translation>Liten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="170"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="171"/>
         <source>Medium</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="173"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="174"/>
         <source>Large</source>
         <translation>Stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="176"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="177"/>
         <source>Extra large</source>
         <translation>Extra stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="179"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="180"/>
         <source>Mega</source>
         <translation>Mega</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="199"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="201"/>
         <source>Although the setting &quot;mega&quot; will look the best, it will require huge amount of local data cached.</source>
         <translation>Även om inställningen &quot;Mega&quot; ser bäst ut, så kräver det en enorm mängd lokalt cachelagrad data.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="163"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="164"/>
         <source>Download size:</source>
         <translation>Nerladdningsstorlek:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="211"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="214"/>
         <source>Download artist images</source>
         <translation>Ladda ner artistbilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="222"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="226"/>
         <source>Download album images</source>
         <translation>Ladda ner albumbilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="233"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="237"/>
         <source>Clear blacklisted albums</source>
         <translation>Rensa svartlistade album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="244"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="248"/>
         <source>Clear artist images</source>
         <translation>Rensa artistbilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="255"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="259"/>
         <source>Clear album images</source>
         <translation>Rensa albumbilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="264"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="268"/>
         <source>Clear complete database</source>
         <translation>Rensa hela databasen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="305"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="309"/>
         <source>Clear blacklist albums</source>
         <translation>Rensa svartlistade album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="308"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="312"/>
         <source>Do you really want to delete all albums which are blacklisted from local database cache? There is no turning back!</source>
         <translation>Vill du verkligen ta bort alla svartlistade album från den lokala databasen? Det går inte att ångra!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="313"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="317"/>
         <source>Clear artists</source>
         <translation>Rensa artister</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="315"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="319"/>
         <source>Do you really want to delete all artists from local database cache? There is no turning back!</source>
         <translation>Vill du verkligen ta bort alla artister från den lokala databasen? Det går inte att ångra!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="320"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="324"/>
         <source>Clear albums</source>
         <translation>Rensa album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="322"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="326"/>
         <source>Do you really want to delete all albums from local database cache? There is no turning back!</source>
         <translation>Vill du verkligen ta bort alla album från den lokala databasen? Det går inte att ångra!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="327"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="331"/>
         <source>Clear database</source>
         <translation>Rensa databasen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="329"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
         <source>Do you really want to delete the complete local database cache? There is no turning back!</source>
         <translation>Vill du verkligen ta bort hela den lokala databasen? Det går inte att ångra!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="337"/>
         <source>Download artists</source>
         <translation>Ladda ner artister</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="335"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="339"/>
         <source>This will download metadata information for all your artists in your MPD database. This action will run in the background but take some time.</source>
         <translation>Detta laddar ner metadatainformation för alla artister i din MPD-databas. Denna åtgärd körs i bakgrunden men kommer att ta lite tid.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="340"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="344"/>
         <source>Download albums</source>
         <translation>Ladda ner album</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="342"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="346"/>
         <source>This will download metadata information for all your albums in your MPD database. This action will run in the background but take some time.</source>
         <translation>Detta laddar ner metadatainformation för alla album i din MPD-databas. Denna åtgärd körs i bakgrunden men kommer att ta lite tid.</translation>
     </message>
