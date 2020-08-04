@@ -40,7 +40,7 @@ Page {
             function removeProfileRemorse() {
                 remorseAction(qsTr("Removing server profile"), function () {
                     deleteProfile(index)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             menu: ContextMenu {
                 MenuItem {

@@ -353,17 +353,17 @@ Page {
             function playTrackRemorse() {
                 remorseAction(qsTr("Playing track"), function () {
                     ctl.player.playlist.playTrack(path)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             function addTrackRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
                     ctl.player.playlist.addTrack(path)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             function addTrackAfterCurrentRemorse() {
                 remorseAction(qsTr("Adding track"), function () {
                     ctl.player.playlist.addTrackAfterCurrent(path)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             Component {
                 id: contextMenu

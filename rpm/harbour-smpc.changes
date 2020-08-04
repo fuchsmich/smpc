@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Jul 06 2020 Arno Dekker <jack.tar@example.com> 1.3.16-1
+- hide options in database settings not relevant when not using Last.fm
+- Remorse timer configurable in GUI settings
 * Mon Jul 06 2020 Arno Dekker <jack.tar@example.com> 1.3.15-1
 - Added replace playlist option
 - Added some space between icon and text in filebrowser

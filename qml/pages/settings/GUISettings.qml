@@ -17,6 +17,10 @@ Page {
         anchors.fill: parent
         contentHeight: mainColumn.height
         anchors.topMargin: header.height
+
+        VerticalScrollDecorator {
+        }
+
         Column {
             id: mainColumn
             anchors {
@@ -183,6 +187,24 @@ Page {
                     } else {
                         newSettingKey(["showModeLandscape", "0"])
                     }
+                }
+            }
+
+            SectionHeader {
+                text: qsTr("Remorse options")
+            }
+
+            Slider {
+                width: parent.width
+                label: qsTr("Remorse time")
+                minimumValue: 1
+                maximumValue: 10
+                stepSize: 1
+                value: remorseTimerSecs
+                valueText: value + " " + ((value > 1) ? qsTr("seconds") : qsTr(
+                                                            "second"))
+                onReleased: {
+                    newSettingKey(["remorseTimerSecs", value])
                 }
             }
         }

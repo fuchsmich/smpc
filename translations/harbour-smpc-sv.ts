@@ -705,81 +705,101 @@
         <translation>GUI-inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="29"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="33"/>
         <source>Album view:</source>
         <translation>Albumvy:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="37"/>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="63"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="41"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="67"/>
         <source>Grid</source>
         <translation>Rutor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="40"/>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="66"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="44"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="70"/>
         <source>List</source>
         <translation>Lista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="55"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="59"/>
         <source>Artist view:</source>
         <translation>Artistvy:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="81"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="85"/>
         <source>List image size:</source>
         <translation>Listans bildstorlek:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="89"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="93"/>
         <source>Disabled</source>
         <translation>Avaktiverad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="92"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="96"/>
         <source>Small</source>
         <translation>Liten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="95"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="99"/>
         <source>Medium</source>
         <translation>Medium</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="98"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="102"/>
         <source>Large</source>
         <translation>Stor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="116"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="120"/>
         <source>Sort albums of one artist by year</source>
         <translation>Sortera album av samma artist efter årtal</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="128"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="132"/>
         <source>Use albumartist in artists view</source>
         <translation>Visa albumartist i artistvyn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="140"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="144"/>
         <source>Show cover in now playing</source>
         <translation>Visa skivomslag i spelas nu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="153"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="157"/>
         <source>Show sections in playlists</source>
         <translation>Visa sektioner i spelningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="166"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="170"/>
         <source>Show sections in search</source>
         <translation>Visa sektioner i sök</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/GUISettings.qml" line="178"/>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="182"/>
         <source>Use show mode in landscape</source>
         <translation>Använd visningsläge i liggande</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="194"/>
+        <source>Remorse options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="199"/>
+        <source>Remorse time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="204"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/GUISettings.qml" line="204"/>
+        <source>second</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

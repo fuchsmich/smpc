@@ -458,17 +458,18 @@ void Controller::readSettings()
     settings.endGroup();
 
     settings.beginGroup("general_properties");
-    int dlSize = settings.value("download_size",LASTFM_EXTRALARGE).toInt();
-    mArtistViewSetting = settings.value("artist_view",0).toInt();
-    mAlbumViewSetting = settings.value("album_view",0).toInt();
-    mListImageSize = settings.value("list_image_size",0).toInt();
-    mSectionsInSearch = settings.value("sections_in_search",1).toInt();
-    mSectionsInPlaylist = settings.value("sections_in_playlist",1).toInt();
-    mDownloadEnabled = settings.value("lastfm_download",1).toInt();
-    mNetAccess->setSortAlbumsByYear(settings.value("sort_album_by_year",0).toInt());
-    mNetAccess->setUseAlbumArtist(settings.value("artist_view_albumartist",0).toInt());
-    mCoverInNowPlaying = settings.value("show_covernowplaying",1).toInt();
-    mShowModeLandscape = settings.value("useShowView",1).toInt();
+    int dlSize = settings.value("download_size", LASTFM_EXTRALARGE).toInt();
+    mArtistViewSetting = settings.value("artist_view", 0).toInt();
+    mAlbumViewSetting = settings.value("album_view", 0).toInt();
+    mListImageSize = settings.value("list_image_size", 0).toInt();
+    mSectionsInSearch = settings.value("sections_in_search", 1).toInt();
+    mSectionsInPlaylist = settings.value("sections_in_playlist", 1).toInt();
+    mDownloadEnabled = settings.value("lastfm_download", 1).toInt();
+    mNetAccess->setSortAlbumsByYear(settings.value("sort_album_by_year", 0).toInt());
+    mNetAccess->setUseAlbumArtist(settings.value("artist_view_albumartist", 0).toInt());
+    mCoverInNowPlaying = settings.value("show_covernowplaying", 1).toInt();
+    mShowModeLandscape = settings.value("useShowView", 1).toInt();
+    mRemorseTimerSecs = settings.value("remorse_timer_secs", 3).toInt();
 
     emit newDownloadEnabled(mDownloadEnabled);
 
@@ -483,6 +484,7 @@ void Controller::readSettings()
     mQuickView->rootContext()->setContextProperty("showCoverNowPlaying", mCoverInNowPlaying);
 
     mQuickView->rootContext()->setContextProperty("useShowView", mShowModeLandscape);
+    mQuickView->rootContext()->setContextProperty("remorseTimerSecs", mRemorseTimerSecs);
 
     mQuickView->rootContext()->setContextProperty("downloadSize",dlSize);
     mDownloadSize = dlSize;
@@ -527,6 +529,7 @@ void Controller::writeSettings()
     settings.setValue("artist_view_albumartist",mNetAccess->useAlbumArtist());
     settings.setValue("show_covernowplaying",mCoverInNowPlaying);
     settings.setValue("useShowView",mShowModeLandscape);
+    settings.setValue("remorse_timer_secs",mRemorseTimerSecs);
     settings.endGroup();
 }
 
@@ -824,6 +827,9 @@ void Controller::receiveSettingKey(QVariant setting)
         } else if ( settings.at(0) == "showModeLandscape" ) {
             mShowModeLandscape = settings.at(1).toInt();
             mQuickView->rootContext()->setContextProperty("useShowView", mShowModeLandscape);
+        } else if ( settings.at(0) == "remorseTimerSecs" ) {
+            mRemorseTimerSecs = settings.at(1).toInt();
+            mQuickView->rootContext()->setContextProperty("remorseTimerSecs", mRemorseTimerSecs);
         }
 
     }

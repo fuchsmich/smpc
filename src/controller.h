@@ -151,6 +151,7 @@ private:
     int mArtistsViewUseAlbumArtist;
     int mCoverInNowPlaying;
     int mShowModeLandscape;
+    int mRemorseTimerSecs;
 
     void readSettings();
     void writeSettings();

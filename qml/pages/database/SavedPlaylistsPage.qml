@@ -48,12 +48,12 @@ Page {
             function playListRemorse() {
                 remorseAction(qsTr("Playing list"), function () {
                     playPlaylist(modelData)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             function addListRemorse() {
                 remorseAction(qsTr("Adding list"), function () {
                     addPlaylist(modelData)
-                }, 3000)
+                }, remorseTimerSecs * 1000)
             }
             Component {
 

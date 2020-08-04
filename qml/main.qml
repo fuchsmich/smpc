@@ -139,9 +139,6 @@ ApplicationWindow {
     _defaultPageOrientations: Orientation.Portrait | Orientation.Landscape
                               | Orientation.LandscapeInverted
 
-    //TODO move to settings
-    property int remorseTimeout: 3000
-
     // JS-functions
     //TODO separation
     function slotConnected(profile) {

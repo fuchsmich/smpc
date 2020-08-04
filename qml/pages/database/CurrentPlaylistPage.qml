@@ -55,7 +55,7 @@ Page {
                 onClicked: {
                     remorse.execute("Clearing playlist", function () {
                         ctl.player.playlist.clear()
-                    }, mainWindow.remorseTimeout)
+                    }, remorseTimerSecs * 1000)
                 }
             }
             MenuItem {
