@@ -284,11 +284,9 @@ Page {
             property int confirmationRole
             property string headerText
             property string questionText
-            property string acceptText
 
             DialogHeader {
                 id: confirmationHeader
-                acceptText: confirmationDialog.acceptText
                 title: headerText
             }
             Label {
@@ -308,41 +306,35 @@ Page {
                 case 0:
                     confirmationDialog.headerText = qsTr(
                                 "Clear blacklist albums")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all albums which are blacklisted from local database cache? There is no turning back!")
                     break
                     // Clear artists
                 case 1:
                     confirmationDialog.headerText = qsTr("Clear artists")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all artists from local database cache? There is no turning back!")
                     break
                     // Clear albums
                 case 2:
                     confirmationDialog.headerText = qsTr("Clear albums")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete all albums from local database cache? There is no turning back!")
                     break
                     // Clear all
                 case 3:
                     confirmationDialog.headerText = qsTr("Clear database")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "Do you really want to delete the complete local database cache? There is no turning back!")
                     break
                 case 4:
                     confirmationDialog.headerText = qsTr("Download artists")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "This will download metadata information for all your artists in your MPD database. "
                                 + "This action will run in the background but take some time.")
                     break
                 case 5:
                     confirmationDialog.headerText = qsTr("Download albums")
-                    confirmationDialog.acceptText = confirmationDialog.headerText
                     confirmationDialog.questionText = qsTr(
                                 "This will download metadata information for all your albums in your MPD database. "
                                 + "This action will run in the background but take some time.")

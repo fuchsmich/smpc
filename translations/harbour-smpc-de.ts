@@ -538,62 +538,62 @@
         <translation>Bereinige komplette Datenbank</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="309"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="307"/>
         <source>Clear blacklist albums</source>
         <translation>Bereinige blockierte Alben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="312"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="309"/>
         <source>Do you really want to delete all albums which are blacklisted from local database cache? There is no turning back!</source>
         <translation>Möchten sie wirklich alle Albumdaten, die blockiert sind, aus der lokalen Datenbank entfernen? Diese Aktion ist nicht rückgängig zu machen!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="317"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="314"/>
         <source>Clear artists</source>
         <translation>Bereinige Interpreten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="319"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="315"/>
         <source>Do you really want to delete all artists from local database cache? There is no turning back!</source>
         <translation>Möchten sie wirklich alle Interpretendaten aus der lokalen Datenbank entfernen? Diese Aktion ist nicht rückgängig zu machen!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="324"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="320"/>
         <source>Clear albums</source>
         <translation>Bereinige Alben</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="326"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="321"/>
         <source>Do you really want to delete all albums from local database cache? There is no turning back!</source>
         <translation>Möchten sie wirklich alle Albendaten aus der lokalen Datenbank entfernen? Diese Aktion ist nicht rückgängig zu machen!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="331"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="326"/>
         <source>Clear database</source>
         <translation>Bereinige Datenbank</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="333"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="327"/>
         <source>Do you really want to delete the complete local database cache? There is no turning back!</source>
         <translation>Möchten sie wirklich die gesamte lokale Datenbank entfernen? Diese Aktion ist nicht rückgängig zu machen!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="337"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="331"/>
         <source>Download artists</source>
         <translation>Interpreten herunterladen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="339"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="332"/>
         <source>This will download metadata information for all your artists in your MPD database. This action will run in the background but take some time.</source>
         <translation>Diese Aktion lädt für alle Interpreten in ihrer MPD-Datenbank die Metadaten herunter. Diese Aktion wird im Hintergrund ausgeführt und benötigt einige Zeit.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="344"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="337"/>
         <source>Download albums</source>
         <translation>Alben herunterladen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="346"/>
+        <location filename="../qml/pages/settings/DatabaseSettings.qml" line="338"/>
         <source>This will download metadata information for all your albums in your MPD database. This action will run in the background but take some time.</source>
         <translation>Diese Aktion lädt für alle Alben in ihrer MPD-Datenbank die Metadaten herunter. Diese Aktion wird im Hintergrund ausgeführt und benötigt einige Zeit.</translation>
     </message>
