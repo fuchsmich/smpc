@@ -284,12 +284,12 @@ BackgroundItem {
                         function playTrackRemorse() {
                             remorseAction(qsTr("playing track"), function () {
                                 ctl.player.playlist.playTrack(path)
-                            }, 3000)
+                            }, remorseTimerSecs * 1000)
                         }
                         function addTrackRemorse() {
                             remorseAction(qsTr("adding track"), function () {
                                 ctl.player.playlist.addTrack(path)
-                            }, 3000)
+                            }, remorseTimerSecs * 1000)
                         }
                         Component {
                             id: contextMenu

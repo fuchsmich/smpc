@@ -81,37 +81,37 @@ Component {
         function addTrackRemorse() {
             remorseAction(qsTr("adding track"), function () {
                 ctl.player.playlist.addTrack(path)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function addTrackAfterCurrentRemorse() {
             remorseAction(qsTr("adding track"), function () {
                 ctl.player.playlist.addTrackAfterCurrent(path)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function addPlaylistRemorse() {
             remorseAction(qsTr("adding playlist"), function () {
                 addPlaylist((prepath == "/" ? "" : prepath + "/") + name)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function addFolderRemorse() {
             remorseAction(qsTr("adding directory"), function () {
                 ctl.player.playlist.addTrack((prepath == "/" ? "" : prepath + "/") + name)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function playTrackRemorse() {
             remorseAction(qsTr("playing track"), function () {
                 ctl.player.playlist.playTrack(path)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function playPlaylistRemorse() {
             remorseAction(qsTr("playing playlist"), function () {
                 playPlaylist((prepath == "/" ? "" : prepath + "/") + name)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function playFolderRemorse() {
             remorseAction(qsTr("playing directory"), function () {
                 ctl.player.playlist.playTrack((prepath == "/" ? "" : prepath + "/") + name)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         Component {
             id: contextMenu

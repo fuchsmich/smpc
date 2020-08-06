@@ -54,12 +54,12 @@ Component {
         function playArtistRemorse() {
             remorseAction(qsTr("Playing artist"), function () {
                 ctl.player.playlist.playArtist(artist)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         function addArtistRemorse() {
             remorseAction(qsTr("Adding artist"), function () {
                 ctl.player.playlist.addArtist(artist)
-            }, 3000)
+            }, remorseTimerSecs * 1000)
         }
         Component {
             id: contextMenu
