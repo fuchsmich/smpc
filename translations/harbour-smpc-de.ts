@@ -286,12 +286,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="380"/>
+        <location filename="../src/controller.cpp" line="381"/>
         <source>Connected to: </source>
         <translation>Verbunden zu: </translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="388"/>
+        <location filename="../src/controller.cpp" line="389"/>
         <source>Disconnected from server</source>
         <translation>Getrennt von Server</translation>
     </message>
@@ -862,6 +862,54 @@
     </message>
 </context>
 <context>
+    <name>PlaybackSettings</name>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="8"/>
+        <source>Playback settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="32"/>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="33"/>
+        <source>Play in random order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="40"/>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="42"/>
+        <source>Play in never ending loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="49"/>
+        <source>Consume track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="51"/>
+        <source>Each song played is removed from playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="59"/>
+        <source>Playback is stopped after current song, or song is repeated if the ‘repeat’ mode is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/PlaybackSettings.qml" line="57"/>
+        <source>Single playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PlaylistTracksPage</name>
     <message>
         <location filename="../qml/pages/database/PlaylistTracksPage.qml" line="35"/>
@@ -1177,22 +1225,27 @@
         <translation>Oberflächeneinstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="47"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="51"/>
         <source>Outputs</source>
         <translation>Ausgänge</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="51"/>
-        <source>Update server database</source>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="47"/>
+        <source>Playback settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="55"/>
+        <source>Update server database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="59"/>
         <source>About</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="61"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="65"/>
         <source>Garbage collection</source>
         <translation type="unfinished"></translation>
     </message>

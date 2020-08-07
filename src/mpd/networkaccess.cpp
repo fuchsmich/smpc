@@ -527,7 +527,7 @@ void NetworkAccess::getStatus()
                     {
                         // qDebug() << response;
                         QString r = response.right(response.length()-8);
-                        mPlaybackStatus->setConsume(r == "1" ? MPD_SINGLE_ON :
+                        mPlaybackStatus->setSingle(r == "1" ? MPD_SINGLE_ON :
                                                                r == "3" ? MPD_SINGLE_ONESHOT : MPD_SINGLE_OFF);
                     }
                 }
@@ -1110,7 +1110,9 @@ void NetworkAccess::setSingle(quint8 single)
 //        } else if (single == 3) {
 //            arg = QString("oneshot");
 //        } else return;
-        sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : QString(single))));
+        qDebug() << single;
+        // sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : QString(single))));
+        sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : single == 2 ? "0" : "1")));
         QString response ="";
         MPD_WHILE_PARSE_LOOP
         {

@@ -44,6 +44,10 @@ Page {
                                      "ident": "guisettings"
                                  })
         settingsMenuModel.append({
+                                     "name": qsTr("Playback settings"),
+                                     "ident": "playback"
+                                 })
+        settingsMenuModel.append({
                                      "name": qsTr("Outputs"),
                                      "ident": "outputs"
                                  })
@@ -82,6 +86,9 @@ Page {
         case "outputs":
             requestOutputs()
             pageStack.push(Qt.resolvedUrl("OutputsPage.qml"))
+            break
+        case "playback":
+            pageStack.push(Qt.resolvedUrl("PlaybackSettings.qml"))
             break
         case "database":
             pageStack.push(Qt.resolvedUrl("DatabaseSettings.qml"))

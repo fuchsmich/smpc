@@ -212,6 +212,7 @@ void Controller::connectSignals()
     qRegisterMetaType<QList<MpdFileEntry*>*>("QList<MpdFileEntry*>*");
     qRegisterMetaType<QAbstractSocket::SocketState>("QAbstractSocket::SocketState");
     qRegisterMetaType<MPD_PLAYBACK_STATE>("MPD_PLAYBACK_STATE");
+    qRegisterMetaType<MPD_PLAYBACK_SINGLE>("MPD_PLAYBACK_SINGLE");
 
 
     connect(item,SIGNAL(setHostname(QString)),this,SLOT(setHostname(QString)));
