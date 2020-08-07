@@ -82,6 +82,7 @@ Page {
 
             ComboBox {
                 id: imageSizeCB
+                visible: albumView === 1 || artistView === 1
                 label: qsTr("List image size:")
                 anchors {
                     right: parent.right

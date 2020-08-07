@@ -48,7 +48,7 @@ Page {
                                      "ident": "outputs"
                                  })
         settingsMenuModel.append({
-                                     "name": qsTr("Update MPD database"),
+                                     "name": qsTr("Update server database"),
                                      "ident": "updatedb"
                                  })
         settingsMenuModel.append({
