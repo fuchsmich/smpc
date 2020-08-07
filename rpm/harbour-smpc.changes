@@ -8,7 +8,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Mon Jul 06 2020 Arno Dekker <jack.tar@example.com> 1.3.16-1
+* Fri Aug 07 2020 Arno Dekker <jack.tar@example.com> 1.3.17-1
+- change accept dialog text by default one
+- fixes remorse timers forgotten to make configurable
+- do not show 'List image size' option if albumview and artistview are set to grid
+- New playback setting page, including consume and single
+* Tue Aug 04 2020 Arno Dekker <jack.tar@example.com> 1.3.16-1
 - hide options in database settings not relevant when not using Last.fm
 - Remorse timer configurable in GUI settings
 * Mon Jul 06 2020 Arno Dekker <jack.tar@example.com> 1.3.15-1

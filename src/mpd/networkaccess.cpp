@@ -1110,7 +1110,7 @@ void NetworkAccess::setSingle(quint8 single)
 //        } else if (single == 3) {
 //            arg = QString("oneshot");
 //        } else return;
-        qDebug() << single;
+        // qDebug() << single;
         // sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : QString(single))));
         sendMPDCommand(QString("single %1\n").arg((single == 3 ? "oneshot" : single == 2 ? "0" : "1")));
         QString response ="";
