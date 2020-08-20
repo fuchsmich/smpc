@@ -153,6 +153,8 @@ private:
     int mShowModeLandscape;
     int mRemorseTimerSecs;
 
+    int mUseVolumeRocker;
+
     void readSettings();
     void writeSettings();
 

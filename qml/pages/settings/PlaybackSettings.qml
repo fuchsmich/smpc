@@ -65,6 +65,21 @@ Page {
                         ctl.player.setSingle(0)
                 }
             }
+            TextSwitch {
+                id: volumeRocker
+                text: qsTr("Use hardware volume keys")
+                checked: useVolumeRocker
+                description: qsTr("Claim the volume rocker for MPD volume control when SMPC is active")
+                onClicked: {
+                    if (checked) {
+                        newSettingKey(["useVolumeRocker", "1"])
+                        resourceHandler.acquire()
+                    } else {
+                        newSettingKey(["useVolumeRocker", "0"])
+                        resourceHandler.release()
+                    }
+                }
+            }
         }
     }
 }

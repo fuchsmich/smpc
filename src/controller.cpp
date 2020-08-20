@@ -471,6 +471,7 @@ void Controller::readSettings()
     mCoverInNowPlaying = settings.value("show_covernowplaying", 1).toInt();
     mShowModeLandscape = settings.value("useShowView", 1).toInt();
     mRemorseTimerSecs = settings.value("remorse_timer_secs", 3).toInt();
+    mUseVolumeRocker = settings.value("use_volume_rocker", 0).toInt();
 
     emit newDownloadEnabled(mDownloadEnabled);
 
@@ -486,6 +487,7 @@ void Controller::readSettings()
 
     mQuickView->rootContext()->setContextProperty("useShowView", mShowModeLandscape);
     mQuickView->rootContext()->setContextProperty("remorseTimerSecs", mRemorseTimerSecs);
+    mQuickView->rootContext()->setContextProperty("useVolumeRocker", mUseVolumeRocker);
 
     mQuickView->rootContext()->setContextProperty("downloadSize",dlSize);
     mDownloadSize = dlSize;
@@ -531,6 +533,7 @@ void Controller::writeSettings()
     settings.setValue("show_covernowplaying",mCoverInNowPlaying);
     settings.setValue("useShowView",mShowModeLandscape);
     settings.setValue("remorse_timer_secs",mRemorseTimerSecs);
+    settings.setValue("use_volume_rocker",mUseVolumeRocker);
     settings.endGroup();
 }
 
@@ -831,6 +834,9 @@ void Controller::receiveSettingKey(QVariant setting)
         } else if ( settings.at(0) == "remorseTimerSecs" ) {
             mRemorseTimerSecs = settings.at(1).toInt();
             mQuickView->rootContext()->setContextProperty("remorseTimerSecs", mRemorseTimerSecs);
+        } else if ( settings.at(0) == "useVolumeRocker" ) {
+            mUseVolumeRocker = settings.at(1).toInt();
+            mQuickView->rootContext()->setContextProperty("useVolumeRocker", mUseVolumeRocker);
         }
 
     }

@@ -90,7 +90,9 @@ ApplicationWindow {
     property int listfontsize: 12
     property int liststretch: 20
     property int lastsongid: ctl.player.playbackStatus.id
-    property string playbuttoniconsourcecover: ctl.player.playbackStatus.playbackStatus === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+    property int volStep: 5
+    property string playbuttoniconsourcecover: ctl.player.playbackStatus.playbackStatus
+                                               === 1 ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
     property string volumebuttoniconsource
     property string lastpath
     property string artistname
@@ -122,10 +124,12 @@ ApplicationWindow {
     property bool mPositionSliderActive: false
     property string mAudioProperties: ctl.player.playbackStatus.samplerate + " Hz "
                                       + ctl.player.playbackStatus.bitDepth + " " + qsTr(
-                                          "bits") + " " + ctl.player.playbackStatus.channelCount + " " + qsTr(
+                                          "bits") + " "
+                                      + ctl.player.playbackStatus.channelCount + " " + qsTr(
                                           "channels")
     property string mTrackNr: ctl.player.playbackStatus.trackNo
-    property string mBitrate: ctl.player.playbackStatus.bitrate + " " + qsTr("kbps")
+    property string mBitrate: ctl.player.playbackStatus.bitrate + " " + qsTr(
+                                  "kbps")
     property string mUri: ctl.player.playbackStatus.uri
     property string mLengthText: formatLength(ctl.player.playbackStatus.length)
 
@@ -133,6 +137,7 @@ ApplicationWindow {
 
     property Page mPlaylistPage
     property Page mCurrentSongPage
+    property bool applicationActive: Qt.application.active
 
     allowedOrientations: Orientation.Portrait | Orientation.Landscape
                          | Orientation.LandscapeInverted
@@ -243,6 +248,17 @@ ApplicationWindow {
         artistimageurl = url
     }
 
+    onApplicationActiveChanged: {
+        if (useVolumeRocker) {
+            // resourceHandler.acquire()
+            if (!applicationActive) {
+                resourceHandler.release()
+            } else {
+                resourceHandler.acquire()
+            }
+        }
+    }
+
     // Notifies user about ongoing action in netaccess
     BusyIndicator {
         id: busyIndicator
@@ -258,11 +274,32 @@ ApplicationWindow {
         enabled: false
     }
 
-    SMPCMprisPlayer { }
+    Keys.onVolumeDownPressed: {
+        // value: ctl.player.playbackStatus.volume
+        if (mVolume >= 5) {
+            volStep = 5
+        } else {
+            volStep = mVolume
+        }
+        ctl.player.setVolume(mVolume - volStep)
+    }
+
+    Keys.onVolumeUpPressed: {
+        if (mVolume <= 95) {
+            volStep = 5
+        } else {
+            volStep = 100 - mVolume
+        }
+        ctl.player.setVolume(mVolume + volStep)
+    }
+
+    SMPCMprisPlayer {
+    }
 
     ControlPanel {
         id: quickControlPanel
     }
+
     bottomMargin: quickControlPanel.visibleSize
 
     initialPage: Qt.resolvedUrl("pages/MainPage.qml")

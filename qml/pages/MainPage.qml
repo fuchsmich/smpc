@@ -13,6 +13,7 @@ Page {
             left: parent.left
         }
     }
+
     Label {
         id: connectedLabel
         anchors {
@@ -25,6 +26,7 @@ Page {
         text: connected ? qsTr("Connected to: %1").arg(profilename) : qsTr(
                               "Disconnected")
     }
+
     SilicaFlickable {
         anchors {
             top: connectedLabel.bottom
@@ -75,6 +77,7 @@ Page {
                                     width: gridItem.width - (2 * Theme.paddingSmall)
                                     horizontalAlignment: "AlignHCenter"
                                     scale: paintedWidth > width ? (width / paintedWidth) : 1
+
 
                                     /*     transform: [
                                         Scale {
@@ -158,7 +161,8 @@ Page {
         if (ident === "playlist") {
             if (connected) {
                 //pageStack.navigateForward(PageStackAction.Animated)
-                pageStack.push(Qt.resolvedUrl("database/CurrentPlaylistPage.qml"))
+                pageStack.push(Qt.resolvedUrl(
+                                   "database/CurrentPlaylistPage.qml"))
             }
         } else if (ident === "settings") {
             pageStack.push(Qt.resolvedUrl("settings/SettingsPage.qml"))

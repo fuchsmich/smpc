@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "src/controller.h"
+#include "src/resourcehandler.h"
 
 #include <sailfishapp.h>
 
@@ -27,12 +28,16 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (appinfo.bytesAvailable() > 0) {
         appversion = appinfo.readAll();
     }
+
+    ResourceHandler *resourceHandler = new ResourceHandler();
+
     QLocale::setDefault(QLocale::c());
     QQuickView *view = SailfishApp::createView();
     view->engine()->addImportPath("/usr/share/harbour-smpc/qml/");
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
     view->setDefaultAlphaBuffer(true);
     view->rootContext()->setContextProperty("version", appversion);
+    view->rootContext()->setContextProperty(QLatin1String("resourceHandler"), resourceHandler);
 
     foreach (QString path, view->engine()->importPathList()) {
         qDebug() << path;
