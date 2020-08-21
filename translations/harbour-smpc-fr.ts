@@ -252,24 +252,24 @@
         <translation>Ajouter un serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="45"/>
-        <source>removing server profile</source>
-        <translation>Suppression du serveur</translation>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="52"/>
+        <source>Removing server profile</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="53"/>
-        <source>edit server profile</source>
-        <translation>Éditer le serveur</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="69"/>
-        <source>remove server profile</source>
-        <translation>Supprimer le serveur</translation>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="60"/>
+        <source>Edit server profile</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ConnectServerPage.qml" line="76"/>
-        <source>wake server</source>
-        <translation>Allumer le serveur</translation>
+        <source>Remove server profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="83"/>
+        <source>Wake server</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1199,12 +1199,12 @@
         <translation>Ajouter un serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerListPage.qml" line="41"/>
+        <location filename="../qml/pages/settings/ServerListPage.qml" line="49"/>
         <source>Removing server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ServerListPage.qml" line="47"/>
+        <location filename="../qml/pages/settings/ServerListPage.qml" line="55"/>
         <source>Remove server profile</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1217,42 +1217,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="35"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="57"/>
         <source>Server settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="39"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="62"/>
         <source>Database settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="43"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="67"/>
         <source>Gui settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="51"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="77"/>
         <source>Outputs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="47"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="72"/>
         <source>Playback settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="55"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="82"/>
         <source>Update server database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="59"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="87"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/SettingsPage.qml" line="65"/>
+        <location filename="../qml/pages/settings/SettingsPage.qml" line="94"/>
         <source>Garbage collection</source>
         <translation type="unfinished"></translation>
     </message>

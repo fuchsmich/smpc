@@ -27,9 +27,17 @@ Page {
         }
         delegate: ListItem {
             contentHeight: Theme.itemSizeSmall
+            Image {
+                id: image
+                x: Theme.paddingLarge
+                source: "image://theme/icon-m-computer"
+                anchors.verticalCenter: parent.verticalCenter
+                opacity: parent.enabled ? 1.0 : 0.4
+            }
             Label {
                 x: Theme.paddingLarge
                 anchors {
+                    left: image.right
                     verticalCenter: parent.verticalCenter
                     leftMargin: listPadding
                     rightMargin: listPadding

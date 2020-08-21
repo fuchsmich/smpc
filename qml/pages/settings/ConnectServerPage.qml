@@ -26,10 +26,17 @@ Page {
         }
         delegate: ListItem {
             contentHeight: Theme.itemSizeSmall
+            Image {
+                id: image
+                x: Theme.paddingLarge
+                source: "image://theme/icon-m-computer"
+                anchors.verticalCenter: parent.verticalCenter
+                opacity: parent.enabled ? 1.0 : 0.4
+            }
             Label {
                 clip: true
-                x: Theme.paddingLarge
                 anchors {
+                    left: image.right
                     verticalCenter: parent.verticalCenter
                     leftMargin: listPadding
                     rightMargin: listPadding
@@ -42,7 +49,7 @@ Page {
             }
 
             function removeProfileRemorse() {
-                remorseAction(qsTr("removing server profile"), function () {
+                remorseAction(qsTr("Removing server profile"), function () {
                     deleteProfile(index)
                 }, remorseTimerSecs * 1000)
             }
@@ -50,7 +57,7 @@ Page {
                 id: contextMenu
                 MenuItem {
                     id: editItem
-                    text: qsTr("edit server profile")
+                    text: qsTr("Edit server profile")
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("ServerEditPage.qml"), {
                                            "hostname": hostname,
@@ -66,14 +73,14 @@ Page {
                 }
                 MenuItem {
                     id: removeItem
-                    text: qsTr("remove server profile")
+                    text: qsTr("Remove server profile")
                     onClicked: {
                         removeProfileRemorse()
                     }
                 }
                 MenuItem {
                     id: wakeItem
-                    text: qsTr("wake server")
+                    text: qsTr("Wake server")
                     onClicked: {
                         wakeUpServer(index)
                     }

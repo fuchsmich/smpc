@@ -13,16 +13,38 @@ Page {
             title: qsTr("Settings")
         }
         model: settingsMenuModel
-        delegate: BackgroundItem {
+        delegate: MouseArea {
+
+            width: parent.width
+            height: lbl.height + Theme.paddingLarge * 2
+
+            Image {
+                id: image
+                source: "image://theme/" + img
+                x: Theme.paddingLarge
+                anchors.verticalCenter: parent.verticalCenter
+                fillMode: Image.PreserveAspectFit
+                opacity: parent.enabled ? 1.0 : 0.4
+            }
+
             Label {
+                id: lbl
                 clip: true
                 x: Theme.paddingLarge
                 anchors {
+                    left: image.right
                     verticalCenter: parent.verticalCenter
                     leftMargin: listPadding
                     rightMargin: listPadding
                 }
+                color: parent.pressed ? Theme.highlightColor : Theme.primaryColor
                 text: name
+            }
+            Rectangle {
+                width: parent.width
+                height: parent.height
+                color: Theme.secondaryHighlightColor
+                opacity: parent.pressed ? .25 : 0
             }
             onClicked: {
                 parseClickedSettings(ident)
@@ -33,37 +55,45 @@ Page {
     Component.onCompleted: {
         settingsMenuModel.append({
                                      "name": qsTr("Server settings"),
-                                     "ident": "servers"
+                                     "ident": "servers",
+                                     "img": "icon-m-computer"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("Database settings"),
-                                     "ident": "database"
+                                     "ident": "database",
+                                     "img": "icon-m-levels"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("Gui settings"),
-                                     "ident": "guisettings"
+                                     "ident": "guisettings",
+                                     "img": "icon-m-display"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("Playback settings"),
-                                     "ident": "playback"
+                                     "ident": "playback",
+                                     "img": "icon-m-music"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("Outputs"),
-                                     "ident": "outputs"
+                                     "ident": "outputs",
+                                     "img": "icon-m-accessory-speaker"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("Update server database"),
-                                     "ident": "updatedb"
+                                     "ident": "updatedb",
+                                     "img": "icon-m-refresh"
                                  })
         settingsMenuModel.append({
                                      "name": qsTr("About"),
-                                     "ident": "about"
+                                     "ident": "about",
+                                     "img": "icon-m-about"
                                  })
         // Debug-only
         if (mDebugEnabled) {
             settingsMenuModel.append({
                                          "name": qsTr("Garbage collection"),
-                                         "ident": "gc"
+                                         "ident": "gc",
+                                         "img": "icon-m-diagnostic"
                                      })
         }
     }
