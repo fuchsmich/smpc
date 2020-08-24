@@ -83,11 +83,11 @@ Page {
                                      "ident": "updatedb",
                                      "img": "icon-m-refresh"
                                  })
-        settingsMenuModel.append({
-                                     "name": qsTr("About"),
-                                     "ident": "about",
-                                     "img": "icon-m-about"
-                                 })
+        // settingsMenuModel.append({
+        //                              "name": qsTr("About"),
+        //                              "ident": "about",
+        //                              "img": "icon-m-about"
+        //                          })
         // Debug-only
         if (mDebugEnabled) {
             settingsMenuModel.append({
