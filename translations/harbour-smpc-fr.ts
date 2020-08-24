@@ -252,22 +252,22 @@
         <translation>Ajouter un serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="52"/>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="53"/>
         <source>Removing server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="60"/>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="61"/>
         <source>Edit server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="76"/>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="77"/>
         <source>Remove server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="83"/>
+        <location filename="../qml/pages/settings/ConnectServerPage.qml" line="84"/>
         <source>Wake server</source>
         <translation type="unfinished"></translation>
     </message>

@@ -42,6 +42,7 @@ Page {
                     rightMargin: listPadding
                 }
                 text: name
+                color: name === profilename ? Theme.highlightColor : Theme.primaryColor
             }
             onClicked: {
                 connectProfile(index)
