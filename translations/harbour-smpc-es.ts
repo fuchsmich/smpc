@@ -259,7 +259,7 @@
     <message>
         <location filename="../qml/pages/settings/ConnectServerPage.qml" line="61"/>
         <source>Edit server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar perfil de servidor</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/ConnectServerPage.qml" line="77"/>
@@ -269,7 +269,7 @@
     <message>
         <location filename="../qml/pages/settings/ConnectServerPage.qml" line="84"/>
         <source>Wake server</source>
-        <translation type="unfinished"></translation>
+        <translation>Despertar servidor</translation>
     </message>
 </context>
 <context>
@@ -784,22 +784,22 @@
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="195"/>
         <source>Remorse options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de remordimiento</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="200"/>
         <source>Remorse time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de remordimiento</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="205"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/GUISettings.qml" line="205"/>
         <source>second</source>
-        <translation type="unfinished"></translation>
+        <translation>segundo</translation>
     </message>
 </context>
 <context>
@@ -807,67 +807,67 @@
     <message>
         <location filename="../qml/pages/MainPage.qml" line="11"/>
         <source>Saved playlists</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista guardada</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="20"/>
         <source>Shuffle all</source>
-        <translation type="unfinished"></translation>
+        <translation>Barajiar todo</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="53"/>
         <source>Connected to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectado para: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="53"/>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectado</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="66"/>
         <source>Playlist</source>
-        <translation type="unfinished">Lista</translation>
+        <translation>Lista</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="72"/>
         <source>Artists</source>
-        <translation type="unfinished">Artistas</translation>
+        <translation>Artistas</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="84"/>
         <source>Albums</source>
-        <translation type="unfinished">Álbumes</translation>
+        <translation>Álbumes</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="98"/>
         <source>Files</source>
-        <translation type="unfinished">Archivos</translation>
+        <translation>Archivos</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="104"/>
         <source>Search</source>
-        <translation type="unfinished">Buscar</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="110"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="115"/>
         <source>Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="120"/>
         <source>About</source>
-        <translation type="unfinished">Acerca de</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="128"/>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir</translation>
     </message>
 </context>
 <context>
@@ -883,47 +883,47 @@
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="8"/>
         <source>Playback settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="32"/>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Barajiar</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="33"/>
         <source>Play in random order</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonar in modo aleatorio</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="40"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="42"/>
         <source>Play in never ending loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonar infinitamente</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="49"/>
         <source>Consume track</source>
-        <translation type="unfinished"></translation>
+        <translation>Consumir canción</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="51"/>
         <source>Each song played is removed from playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada canción reproducida se elimina de la lista de reproducción</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="59"/>
         <source>Playback is stopped after current song, or song is repeated if the ‘repeat’ mode is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>La reproducción se detiene después de la canción actual, o la canción se repite si el modo de "repetición" está activado</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="70"/>
         <source>Use hardware volume keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar teclas de volumen fisicas</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="72"/>
@@ -933,7 +933,7 @@
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="57"/>
         <source>Single playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducción única</translation>
     </message>
 </context>
 <context>
@@ -1259,12 +1259,12 @@
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="72"/>
         <source>Playback settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir config</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="82"/>
         <source>Update server database</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar base  de datos</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/SettingsPage.qml" line="94"/>
