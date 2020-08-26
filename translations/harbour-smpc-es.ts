@@ -918,7 +918,7 @@
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="59"/>
         <source>Playback is stopped after current song, or song is repeated if the ‘repeat’ mode is enabled</source>
-        <translation>La reproducción se detiene después de la canción actual, o la canción se repite si el modo de "repetición" está activado</translation>
+        <translation>La reproducción se detiene después de la canción actual, o la canción se repite si el modo de &quot;repetición&quot; está activado</translation>
     </message>
     <message>
         <location filename="../qml/pages/settings/PlaybackSettings.qml" line="70"/>
