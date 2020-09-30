@@ -38,7 +38,8 @@ SOURCES += main.cpp \
     src/mpd/mpdplaybackstatus.cpp \
     src/mpd/serverinfo.cpp \
     src/resourcehandler.cpp \
-    src/playlist.cpp
+    src/playlist.cpp \
+    src/settings.cpp
 
 # C++ headers
 HEADERS += \
@@ -70,7 +71,8 @@ HEADERS += \
     src/mpd/mpdcommon.h \
     src/mpd/serverinfo.h \
     src/resourcehandler.h \
-    src/playlist.h
+    src/playlist.h \
+    src/settings.h
 
 DISTFILES += \
     harbour-smpc.desktop \
