@@ -21,7 +21,7 @@ signals:
 
 public slots:
 private:
-    QSettings settings_;
+    QSettings m_settings;
 };
 
 namespace settingsPublic {
